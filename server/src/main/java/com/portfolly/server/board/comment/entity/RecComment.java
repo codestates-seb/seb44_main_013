@@ -1,5 +1,6 @@
 package com.portfolly.server.board.comment.entity;
 
+import com.portfolly.server.board.entity.RecBoard;
 import com.portfolly.server.member.entity.Member;
 
 import javax.persistence.*;
@@ -16,8 +17,8 @@ public class RecComment {
 
     }
     @ManyToOne
-    @JoinColumn(name = "recBorad_id")
-    private RecComment recComment;
+    @JoinColumn(name = "recBoard_id")
+    private RecBoard recBoard;
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

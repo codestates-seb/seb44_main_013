@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +33,6 @@ public class Member {
     }
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Portfolio> portfolios = new ArrayList<>();
-
     @OneToMany(mappedBy = "member")
     private List<RecBoard> recBoards = new ArrayList<>();
     @OneToMany(mappedBy = "member")

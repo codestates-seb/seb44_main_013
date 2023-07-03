@@ -1,4 +1,4 @@
-package com.portfolly.server.like.entity;
+package com.portfolly.server.likes.entity;
 
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.portfolio.entity.Portfolio;
@@ -6,12 +6,11 @@ import com.portfolly.server.portfolio.entity.Portfolio;
 import javax.persistence.*;
 
 @Entity
-public class Like {
+public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean status;
-
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
