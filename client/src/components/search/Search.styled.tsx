@@ -17,9 +17,10 @@ export const SearchIcon = tw(BsSearchHeart)`
 `;
 
 export const SearchBox = tw.input`
-  pl-10
+  pl-12
   h-9
   w-full
   rounded-full	
   bg-[#ececec]
+  focus:outline-none
 `;
