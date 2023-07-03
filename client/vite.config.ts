@@ -9,11 +9,6 @@ export default defineConfig({
     babel: {
       plugins: [
         "babel-plugin-macros",
-        [
-          "@babel/plugin-transform-react-jsx",
-          { pragma: "__cssprop" },
-          "twin.macro",
-        ],
       ],
     },
   })],
