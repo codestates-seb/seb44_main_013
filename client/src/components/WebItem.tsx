@@ -6,12 +6,18 @@ export const WebItemContainer = tw.div`
   w-80
   relative
   shadow-md
+
+  hover:bg-neutral-500/60
+`;
+
+export const WebItemImg = tw.img`
+  hover:opacity-80
 `;
 
 export default function WebItem() {
   return (
     <WebItemContainer>
-      <img src={WebItem1} alt="웹 아이템1 이미지" />
+      <WebItemImg src={WebItem1} alt="웹 아이템1 이미지" />
       <Bookmark />
     </WebItemContainer>
   );
