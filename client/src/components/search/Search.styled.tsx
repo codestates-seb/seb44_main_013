@@ -4,13 +4,14 @@ import { BsSearchHeart } from 'react-icons/bs';
 export const SearchContainer = tw.div`
   relative
   flex
+  flex-3
+  flex-grow
   items-center
-  space-x-4
 `;
 
 export const SearchIcon = tw(BsSearchHeart)`
   absolute
-  ml-8
+  ml-5
   top-1/2
   transform -translate-y-1/2
 `;
@@ -18,7 +19,7 @@ export const SearchIcon = tw(BsSearchHeart)`
 export const SearchBox = tw.input`
   pl-10
   h-9
-  w-1/3
+  w-full
   rounded-full	
   bg-[#ececec]
 `;
