@@ -8,7 +8,11 @@ import {
   LogoImg,
 } from './Header.styled';
 import LoginBtn from '../buttons/login/LoginBtn';
+import UserImg from '../user/UserImg';
+import { useState } from 'react';
+
 export default function Header() {
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <HeaderContainer>
       <LogoContainer>
@@ -17,7 +21,7 @@ export default function Header() {
       <Search />
       <ItemContainer>
         <CLink>community</CLink>
-        <LoginBtn />
+        {isLogin ? <UserImg /> : <LoginBtn />}
       </ItemContainer>
     </HeaderContainer>
   );

@@ -21,6 +21,7 @@ export const ItemContainer = tw.div`
   flex
   flex-1
   justify-end
+  items-center
 `;
 
 export const CLink = tw.a`
