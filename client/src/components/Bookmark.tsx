@@ -7,6 +7,7 @@ export const BookmarkContainer = tw.div`
   absolute
   top-0
   bottom-0
+  z-1
   `;
 
 export const BookmarkButton = tw(FaBookmark)`
