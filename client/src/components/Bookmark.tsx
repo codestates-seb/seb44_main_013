@@ -5,8 +5,8 @@ export const BookmarkContainer = tw.div`
   inline-block
   bg-transparent
   absolute
-  top-0
-  bottom-0
+  right-5
+  bottom-5
   z-1
   `;
 
