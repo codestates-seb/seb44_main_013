@@ -8,15 +8,6 @@ export const HeaderContainer = tw.div`
   mt-3
 `;
 
-export const LogoContainer = tw.div`
-  flex
-  flex-1
-`;
-
-export const LogoImg = tw.img`
-  w-12
-  h-12
-`;
 
 export const ItemContainer = tw.div`
   flex
