@@ -14,7 +14,8 @@ export const CommunityItemContainer = styled.div`
   }
 
   >h2 {
-    font-size: 40px;
+    font-size: 35px;
+    font-weight: 700;
   }
 
   >p {
