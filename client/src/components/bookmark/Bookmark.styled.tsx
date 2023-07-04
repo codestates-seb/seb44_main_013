@@ -1,5 +1,5 @@
 import { FaBookmark } from 'react-icons/fa';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 export const BookmarkContainer = tw.div`
   inline-block
