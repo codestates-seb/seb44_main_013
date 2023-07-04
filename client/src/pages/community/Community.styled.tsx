@@ -7,3 +7,11 @@ export const SearchContainer = tw.div`
   items-center
   mx-auto
 `;
+
+export const ItemWrapper = tw.div`
+  flex
+  flex-wrap
+  justify-center
+  gap-4
+  mt-20
+`;

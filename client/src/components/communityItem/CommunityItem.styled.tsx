@@ -1,24 +1,24 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const CommunityItemContainer = styled.div`
-  ${
-    tw`
+  ${tw`
       w-2/12
       h-80
       bg-white
       relative
       shadow-md
       p-2
-    `
-  }
+      ml-20
+      mt-10
+    `}
 
   >h2 {
     font-size: 35px;
     font-weight: 700;
   }
 
-  >p {
+  > p {
     font-size: 20px;
   }
 `;
