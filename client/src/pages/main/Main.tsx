@@ -10,13 +10,20 @@ export default function Main() {
       <Header />
       <CategoryNavBar />
       <WebItemsContainer>
+        {Array.from({length:4}).map((_, index) => {
+          return (
+            <WebItem key={index}/>
+          )
+        })}
+      </WebItemsContainer>
+      {/* <WebItemsContainer>
         <WebItem />
         <WebItem />
       </WebItemsContainer>
       <WebItemsContainer>
         <WebItem />
         <WebItem />
-      </WebItemsContainer>
+      </WebItemsContainer> */}
       <Footer />
     </>
   );

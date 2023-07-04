@@ -1,18 +1,28 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
+import { styled } from 'styled-components';
 
-export const WebItemContainer = tw.div`
-  my-6
-  h-96
-  w-85
+export const WebItemContainer = styled.div`
+  ${tw`my-6
+  mx-6
+  h-72
+  w-96
   relative
   shadow-md
-  hover:bg-neutral-500/60
-  position-relative
+  position-relative`}
+  
+  &:hover{
+    ${tw`bg-neutral-500/60`}
+  }
+
 `;
 
-export const WebItemImg = tw.img`
-  w-full
-  h-full
-  object-cover
-  hover:opacity-80
+export const WebItemImg = styled.img`
+  ${tw`
+    w-full
+    h-full
+    object-cover
+  `}
+  &:hover{
+    ${tw`opacity-80`}
+  }
 `;

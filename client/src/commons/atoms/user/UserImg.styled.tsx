@@ -11,7 +11,7 @@ export const ImgContainer = tw.div`
   border-transparent
   transition-all
   hover:border-2
-  hover:border-white-500
+  hover:border-white
 `;
 
 export const UserImage = tw.img`
