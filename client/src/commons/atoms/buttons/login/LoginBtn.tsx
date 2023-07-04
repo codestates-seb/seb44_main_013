@@ -1,5 +1,6 @@
-import { LoginButton } from './LoginBtn.styled';
+import PurpleBtn from "../PurpleBtn";
+
 
 export default function LoginBtn() {
-  return <LoginButton>Login</LoginButton>;
+  return <PurpleBtn>로그인</PurpleBtn>;
 }

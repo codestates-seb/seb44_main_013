@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 export const HeaderContainer = tw.div`
   flex
@@ -8,14 +8,16 @@ export const HeaderContainer = tw.div`
   mt-3
 `;
 
+
 export const ItemContainer = tw.div`
   flex
   flex-1
   justify-end
-  items-center
 `;
 
 export const CLink = tw.a`
-  mr-4
+  mx-4
   hover:underline
+  cursor-pointer
+  whitespace-nowrap
 `;
