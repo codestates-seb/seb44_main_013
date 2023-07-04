@@ -38,7 +38,7 @@ const UserProfile = ({type, username, date}:UserProfileProps)=>{
             { type === 'board' ?
                 <FlexColumnWrapper gap={0}>
                     <Label text={username} size={LabelSizes[type]}/>
-                    <span>{date}</span>
+                    <span>{date}2022.06.30</span>
                 </FlexColumnWrapper>
                 :
                 <Label text={username} size={LabelSizes[type]}/>
