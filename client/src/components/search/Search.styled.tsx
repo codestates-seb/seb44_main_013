@@ -20,12 +20,13 @@ export const SearchIcon = tw(BsSearchHeart)`
 export const SearchBox = styled.input`
   ${tw`
     pl-12
-    h-9
+    h-12
+    
     w-full
     rounded-full	
     bg-[#ececec]
   `}
-  
+
   &:focus {
     ${tw`outline-none`}
   }

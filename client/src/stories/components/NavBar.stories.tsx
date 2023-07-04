@@ -1,4 +1,4 @@
-import CategoryNavBar from '@/commons/atoms/navbar/CategoryNavBar';
+import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import { Meta } from '@storybook/react';
 
 export default {
