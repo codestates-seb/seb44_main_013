@@ -12,7 +12,7 @@ export const GoogleWrapper = styled.span`
         flex-row
         justify-center
         items-center
-        w-fit
+        w-96
         text-BASIC_WHITE
         font-light
         text-lg
