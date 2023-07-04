@@ -1,21 +1,11 @@
-import tw from 'twin.macro';
-import { styled } from 'styled-components';
-import { Button } from './Button.styled';
-
-const Purpletype = styled(Button)`
-  ${tw`bg-POINT_COLOR
-  w-fit
-  whitespace-nowrap`}
-
-  &:hover {
-    ${tw`bg-HOVER_COLOR`}
-  }
-`;
+import { Purpletype } from "./Button.styled";
 
 interface PurpleBtnProps {
   children?: React.ReactNode;
 }
 
+//기본 퍼플 타입 버튼 
+//children 안에 원하는 글자를 작성하면 됩니다. 
 export default function PurpleBtn( {children}: PurpleBtnProps ) {
   return <Purpletype>{children}</Purpletype>;
 }
