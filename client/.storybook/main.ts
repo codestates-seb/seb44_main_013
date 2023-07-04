@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-const TsconfigPathsPlugin  = require('tsconfig-paths-webpack-plugin')
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
