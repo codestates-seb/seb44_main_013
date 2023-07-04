@@ -8,8 +8,8 @@ export const CommunityItemContainer = styled.div`
       h-80
       bg-white
       relative
-      p-2
       shadow-md
+      p-2
     `
   }
 
