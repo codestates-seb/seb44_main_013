@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/portfolly
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 1234
+    password: starstar1722!!
 
   jpa:
     properties:
