@@ -1,5 +1,5 @@
 import { FaBookmark } from 'react-icons/fa';
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 export const BookmarkContainer = tw.div`
   inline-block
@@ -16,5 +16,7 @@ export const BookmarkButton = tw(FaBookmark)`
 `;
 
 export const StyledBookmarkButton = tw(BookmarkButton)`
-  ${(props) => (props.clicked ? 'text-[#ffeb54]' : '')}
+ 
 `;
+ // ${(props) => (props.clicked ? 'text-[#ffeb54]' : '')}
+

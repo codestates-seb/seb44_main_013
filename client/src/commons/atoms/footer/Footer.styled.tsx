@@ -1,4 +1,4 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
 
 export const FooterContainer = tw.div`
   bg-BASIC_GRAY 
@@ -6,8 +6,7 @@ export const FooterContainer = tw.div`
   flex 
   justify-center 
   items-center 
-  h-10
-  botton-0
+  h-14
 `;
 
 export const FooterText = tw.div`

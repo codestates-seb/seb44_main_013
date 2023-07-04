@@ -13,7 +13,7 @@ export default function Header() {
       <Search />
       <ItemContainer>
         <CLink>community</CLink>
-        {isLogin ? <UserImg /> : <LoginBtn />}
+        {isLogin ? <UserImg /> : <LoginBtn/> }
       </ItemContainer>
     </HeaderContainer>
   );

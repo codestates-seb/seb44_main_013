@@ -1,4 +1,4 @@
-import CategoryButton from '@/commons/atoms/buttons/CategoryButton';
+import CategoryButton from '@/commons/atoms/buttons/category/CategoryButton';
 import { FlexContainer } from '@/commons/styles/Containers.styled';
 
 
