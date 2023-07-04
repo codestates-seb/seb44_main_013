@@ -11,9 +11,16 @@ export const CommunityItemContainer = styled.div`
       p-2
       ml-20
       mt-10
+      transition-transform
+      duration-200
+      ease-in-out
     `}
 
-  >h2 {
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  > h2 {
     font-size: 35px;
     font-weight: 700;
   }
