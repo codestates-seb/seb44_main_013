@@ -4,7 +4,7 @@ import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.portfolio.entity.Portfolio;
 
 import javax.persistence.*;
-
+//commit 테스트용
 @Entity
 public class Bookmark {
     @Id
