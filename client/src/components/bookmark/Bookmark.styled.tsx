@@ -16,5 +16,7 @@ export const BookmarkButton = tw(FaBookmark)`
 `;
 
 export const StyledBookmarkButton = tw(BookmarkButton)`
-  ${(props) => (props.clicked ? 'text-[#ffeb54]' : '')}
+ 
 `;
+ // ${(props) => (props.clicked ? 'text-[#ffeb54]' : '')}
+

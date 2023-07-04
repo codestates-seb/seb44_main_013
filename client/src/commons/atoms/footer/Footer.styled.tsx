@@ -7,7 +7,6 @@ export const FooterContainer = tw.div`
   justify-center 
   items-center 
   h-14
-  botton-0
 `;
 
 export const FooterText = tw.div`

@@ -7,8 +7,7 @@ export const WebItemContainer = styled.div`
   h-72
   w-96
   relative
-  shadow-md
-  position-relative`}
+  shadow-md`}
   
   &:hover{
     ${tw`bg-neutral-500/60`}
