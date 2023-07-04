@@ -1,7 +1,8 @@
 import tw from "twin.macro";
 
-export const ViewContainer = tw.p`
+export const ViewContainer = tw.span`
   absolute
-  bottom-5
-  right-5
+  bottom-2
+  right-2
+  text-sm
 `;
