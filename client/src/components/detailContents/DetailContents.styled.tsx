@@ -12,13 +12,13 @@ export const DetailCntContainer = styled.div`
   height: 700px;
   border-radius: 20px;
 
-  >h1 {
+  > h1 {
     font-size: 40px;
     font-weight: 700;
     ${tw`pb-2`}
   }
 
-  >p {
+  > p {
     font-size: 20px;
     ${tw`
       h-5/6
@@ -27,10 +27,17 @@ export const DetailCntContainer = styled.div`
     `}
   }
 
-  >hr {
+  > hr {
     ${tw`
       border
       border-gray-300
     `}
   }
+`;
+
+export const EDBtnContainer = styled.div`
+  ${tw`
+    flex 
+    space-x-4
+    mt-4`}
 `;
