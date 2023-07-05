@@ -21,10 +21,6 @@ const TagBody = styled.div<{ isSelected?: boolean }>`
     &:hover {
         border-color: #dcdcdc;
     }
-    &:active {
-        background-color: white;
-        color: #232428;
-    }
 
     ${(props) => props.isSelected &&
         css`

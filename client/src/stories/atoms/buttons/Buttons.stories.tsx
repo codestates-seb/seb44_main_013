@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryButton, { CategoryBtnProps } from '../../commons/atoms/buttons/category/CategoryButton';
+import CategoryButton, { CategoryBtnProps } from '../../../commons/atoms/buttons/category/CategoryButton';
 import { Meta } from "@storybook/react"
 
 export default {
