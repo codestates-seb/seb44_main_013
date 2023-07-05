@@ -1,3 +1,4 @@
+/* 2023-07-02 메인(카테고리)페이지 카테고리 navBar의 낱개 버튼 - 김다함*/
 import 'styled-components/macro';
 import tw from 'twin.macro';
 import { styled } from 'styled-components';
@@ -23,7 +24,7 @@ const Category = styled.button`
     }
 `
 
-export default function CategoryButton({category}:CategoryBtnProps){
+export default function CategoryButton({ category }: CategoryBtnProps) {
 
     return (
         <Category>{category}</Category>

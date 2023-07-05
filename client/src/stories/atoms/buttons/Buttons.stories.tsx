@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryButton, {CategoryBtnProps} from '../../commons/atoms/buttons/category/CategoryButton';
+import CategoryButton, { CategoryBtnProps } from '../../../commons/atoms/buttons/category/CategoryButton';
 import { Meta } from "@storybook/react"
 
 export default {
@@ -8,10 +8,10 @@ export default {
     argTypes: {
         mode: {
             options: ['DarkMode', 'LightMode'],
-            control: {type: 'radio'}
+            control: { type: 'radio' }
         }
     }
-}as Meta;
+} as Meta;
 
-export const CategoryBtn = (args:CategoryBtnProps) => <CategoryButton {...args}/>
+export const CategoryBtn = (args: CategoryBtnProps) => <CategoryButton {...args} />
 CategoryBtn.args = { category: '웹' };
