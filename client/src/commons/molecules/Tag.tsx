@@ -9,13 +9,13 @@ interface TagProps {
 }
 
 const tagStye = css`
-    ${tw`w-fit py-1.5 px-2.5 rounded-full select-none float-left m-1`}
+    ${tw`w-fit py-1.5 px-2.5 rounded-full select-none flex`}
 `
 
 const TagBody = styled.div<{ isSelected?: boolean }>`
     ${tagStye}
     background-color: #484848;
-    border: 1px solid #C3C3C3;
+    border: 0.9px solid #C3C3C3;
     color: white;
     cursor: pointer;
     &:hover {
@@ -23,6 +23,7 @@ const TagBody = styled.div<{ isSelected?: boolean }>`
     }
     &:active {
         background-color: white;
+        color: #232428;
     }
 
     ${(props) => props.isSelected &&

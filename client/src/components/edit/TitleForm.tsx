@@ -1,11 +1,15 @@
 /* 2023-07-04 포트폴리오 작성/수정 페이지 제목,태그 작성 Form - 김다함 */
-import { SmallText } from '@/commons/atoms/Typography';
+import { TextArea } from '@/commons/styles/Inputs.styled';
+import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
 import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
 import Tag from '@/commons/molecules/Tag';
 import { FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { PortfolioTitleInput } from '@/commons/styles/Inputs.styled';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
+import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
+import { RiArrowGoBackFill } from 'react-icons/ri';
+import { BsCheck2 } from 'react-icons/bs';
 
 interface TitleFormProps {
     isCreated: string;
@@ -26,20 +30,25 @@ const TitleForm = ({ isCreated }: TitleFormProps) => {
                     <ContegroyDropDown />
                     <SmallText color='white' className='pt-2'>{isCreated}</SmallText>
                 </FlexWrapper>
-                <div className='w-[40%] z-0'>
+                <div className='flex gap-1.5 w-[40%] flex-wrap z-0'>
+                    {/* 예시 */}
+                    <Tag value='JavaScript' isSelected={true} />
                     <Tag value='JavaScript' />
                     <Tag value='JavaScript' />
                     <Tag value='JavaScript' />
                     <Tag value='JavaScript' />
-                    <Tag value='JavaScript' />
-                    <Tag value='JavaScript' />
+                    <Tag value='JavaScript' isSelected={true} />
                     <Tag value='JavaScript' />
                     <Tag value='JavaScript' />
                     <Tag value='JavaScript' />
                 </div>
-                <div className='flex items-between'>
-                    <textarea name="" id=""></textarea>
-
+                <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
+                <div className='flex justify-between'>
+                    <TextArea className='w-[42%] h-20' />
+                    <FlexWrapper gap={15}>
+                        <PortfolioEditButton type='light'><RiArrowGoBackFill size='25' color='white' /></PortfolioEditButton>
+                        <PortfolioEditButton type='dark'><BsCheck2 size='25' color='black' /></PortfolioEditButton>
+                    </FlexWrapper>
                 </div>
             </FlexColumnWrapper>
         </TitleFormContainer>
