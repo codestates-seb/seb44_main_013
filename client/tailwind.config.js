@@ -12,6 +12,7 @@ export default {
         BASIC_GRAY: '#A09F9F',
         POINT_COLOR: '#8580E1',
         HOVER_COLOR: '#6A66B4',
+        ITEM_TITLE: '#474646'
       }
     },
   },

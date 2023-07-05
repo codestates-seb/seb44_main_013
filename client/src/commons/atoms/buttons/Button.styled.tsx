@@ -28,3 +28,12 @@ export const Writingtype = styled(Purpletype)`
     py-2
   `}
 `;
+export const BackButton = tw.button`
+  absolute
+  top-5
+  left-5
+  p-2
+  rounded
+  cursor-pointer
+  text-BASIC_WHITE
+`;
