@@ -1,6 +1,6 @@
 import Footer from '@/commons/atoms/footer/Footer';
 import Header from '@/commons/atoms/header/Header';
-import CategoryNavBar from '@/commons/atoms/navbar/CategoryNavBar';
+import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
 import { WebItemsContainer } from './Main.styled';
 
