@@ -17,4 +17,5 @@ export const BackButton = tw.button`
   p-2
   rounded
   cursor-pointer
+  text-BASIC_WHITE
 `;

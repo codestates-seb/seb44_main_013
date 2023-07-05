@@ -7,32 +7,40 @@ import {
   ButtonContainer,
   ContentBox,
   Divider,
+  SignUpWrapper,
+  SingupSection,
+  HorizonLine,
 } from './SignUp.styled';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
+import BackText from '@/commons/atoms/backText/BackText';
+import { ContentSection, TitleSection } from '../login/Login.styled';
+import LoginGoogleForm from '@/components/login/LoginGoogleForm';
 
 export default function SignUp() {
   return (
-    <div className="flex justify-around items-center h-screen">
+    <SignUpWrapper>
+      <BackText>Portfolly</BackText>
       <BackButton>
         <BsArrowReturnLeft size={30} />
       </BackButton>
-      <div className="flex-1 flex flex-col items-center justify-center">
-        <TextContainer>
-          <H1>Choose your account.</H1>
-          <H3>
-            Experience the artistry and ingenuity of diverse portfolios, curated
-            for web
-          </H3>
-        </TextContainer>
+      <SingupSection>
+        <TitleSection>Choose your account.</TitleSection>
+        <ContentSection>
+          Experience the artistry and ingenuity of diverse portfolios, curated
+          for web
+        </ContentSection>
         <ButtonContainer>
           <SignBtn>Client</SignBtn>
           <SignBtn>Partner</SignBtn>
         </ButtonContainer>
-      </div>
-      <Divider />
+        <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+      </SingupSection>
+      <HorizonLine />
       <div className="flex-1">
         <ContentBox>
-          <div>Portfolly와 함께 최고의 파트너를 만나보세요.</div>
+          <div className="text-xl">
+            Portfolly와 함께 최고의 파트너를 만나보세요.
+          </div>
           <div>
             저희 플랫폼은 창의적인 아티스트들과 프로젝트를 공유하고 싶은
             열정적인 클라이언트를 연결하는 곳입니다.
@@ -52,6 +60,6 @@ export default function SignUp() {
           <div>함께 이 창의적인 여행을 시작해 보세요!</div>
         </ContentBox>
       </div>
-    </div>
+    </SignUpWrapper>
   );
 }
