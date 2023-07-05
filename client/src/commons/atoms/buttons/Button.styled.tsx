@@ -9,3 +9,12 @@ export const Button = tw.button`
   transition duration-300 ease-in-out
   max-md:text-xs
 `;
+
+export const BackButton = tw.button`
+  absolute
+  top-5
+  left-5
+  p-2
+  rounded
+  cursor-pointer
+`;
