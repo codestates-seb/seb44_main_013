@@ -1,12 +1,8 @@
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import {
-  H1,
-  H3,
   SignBtn,
-  TextContainer,
   ButtonContainer,
   ContentBox,
-  Divider,
   SignUpWrapper,
   SingupSection,
   HorizonLine,
