@@ -1,6 +1,6 @@
 
 import { MypageItemProps } from "@/types";
-import { ImgInfoSection, ImgSection, SMportItemWrapper } from "./Mypage.styled";
+import { ImgInfoSection, ImgSection, SMportItemWrapper } from "./MypageItem.styled";
 
 
 //07.05 혜진 마이페이지 내 포폴 관리 아이템
