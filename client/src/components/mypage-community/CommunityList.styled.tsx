@@ -9,6 +9,10 @@ export const Wrapper = tw.div`
   rounded-xl
   items-center
   justify-between
+  transition-transform
+  duration-200
+  ease-in-out
+  hover:scale-105
 `;
 
 export const TextContainer = tw.div`
