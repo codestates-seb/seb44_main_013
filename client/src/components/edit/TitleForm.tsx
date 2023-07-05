@@ -1,5 +1,5 @@
 /* 2023-07-04 포트폴리오 작성/수정 페이지 제목,태그 작성 Form - 김다함 */
-import { TextArea } from '@/commons/styles/Inputs.styled';
+import { DarkTextArea } from '@/commons/styles/Inputs.styled';
 import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
 import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
 import Tag from '@/commons/molecules/Tag';
@@ -44,7 +44,7 @@ const TitleForm = ({ isCreated }: TitleFormProps) => {
                 </div>
                 <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
                 <div className='flex justify-between'>
-                    <TextArea className='w-[42%] h-20' />
+                    <DarkTextArea className='w-[42%] h-20' />
                     <FlexWrapper gap={15}>
                         <PortfolioEditButton type='light'><RiArrowGoBackFill size='25' color='white' /></PortfolioEditButton>
                         <PortfolioEditButton type='dark'><BsCheck2 size='25' color='black' /></PortfolioEditButton>

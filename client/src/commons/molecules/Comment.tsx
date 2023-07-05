@@ -1,6 +1,4 @@
-/* 2023-07-05 게시물 카테고리 선택 드롭다운 컴포넌트 - 김다함 */
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+/* 2023-07-05 게시물 댓글(낱개) 컴포넌트 - 김다함 */
 import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
 import UserProfile from './UserProfile';
 import ReviseBtn from '../atoms/buttons/revise-remove/ReviseBtn';
@@ -15,7 +13,7 @@ interface CommentProps {
 
 export default function Comment({ username, content, date }: CommentProps) {
     return (
-        <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-2'>
+        <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-1.5 pt-3'>
             <FlexWrapper gap={0} className='w-full justify-between'>
                 <UserProfile type='comment' username={username} />
                 <FlexWrapper gap={0}>
