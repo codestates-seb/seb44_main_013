@@ -1,23 +1,23 @@
 import CHeader from '@/commons/atoms/header/CHeader';
-import Search from '@/components/search/Search';
-import { ItemWrapper, SearchContainer } from './Community.styled';
-import CommunityItem from '@/components/communityItem/CommunityItem';
-import Footer from '@/commons/atoms/footer/Footer';
+import {
+  EditorContainer,
+  Guide,
+  SaveBtnContainer,
+  TextEditor,
+} from './Community.styled';
+import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 
 export default function Community() {
   return (
     <>
       <CHeader />
-      <SearchContainer>
-        <Search />
-      </SearchContainer>
-
-      <ItemWrapper>
-        {Array.from({ length: 8 }).map((_, index) => {
-          return <CommunityItem key={index} />;
-        })}
-      </ItemWrapper>
-      <Footer />
+      <EditorContainer>
+        <TextEditor></TextEditor>
+        <Guide />
+      </EditorContainer>
+      <SaveBtnContainer>
+        <PurpleBtn>Save</PurpleBtn>
+      </SaveBtnContainer>
     </>
   );
 }
