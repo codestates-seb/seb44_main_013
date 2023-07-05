@@ -36,6 +36,9 @@ export default function MyPage () {
                                 )
                             })}
                         </BoxWrapper>
+
+                        {/* 게시판 목록 부분  */}
+
                     </FlexColumnWrapper>
                 ) 
                 : null }
