@@ -6,7 +6,8 @@ import tempItem from '@/assets/tempItem.png';
 export const SMportItemWrapper = tw.div`
     cursor-pointer
     drop-shadow-lg
-    m-5
+    mr-5
+    whitespace-nowrap
 `;
 
 export const Imgtype = tw.img`
