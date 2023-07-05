@@ -9,7 +9,7 @@ export const BackContentType = styled.span`
         absolute
         bottom-0
         left-24
-        
+        pointer-events-none
     `}
     color: rgb(255, 255, 255, 20%);
 
