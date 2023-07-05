@@ -1,4 +1,5 @@
 import tw from 'twin.macro';
+import { styled } from 'styled-components';
 
 export const Button = tw.button`
   text-sm
@@ -10,6 +11,23 @@ export const Button = tw.button`
   max-md:text-xs
 `;
 
+export const Purpletype = styled(Button)`
+  ${tw`bg-POINT_COLOR
+  w-fit
+  whitespace-nowrap`}
+
+  &:hover {
+    ${tw`bg-HOVER_COLOR`}
+  }
+`;
+
+//writingBtn 커스터마이징 타입
+export const Writingtype = styled(Purpletype)`
+  ${tw`
+    px-10
+    py-2
+  `}
+`;
 export const BackButton = tw.button`
   absolute
   top-5
