@@ -1,8 +1,10 @@
-import { MypageProfileContainer} from "./MypageProfile.styled";
+// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정 
+
+import { MypageProfileContainer, NameEdit} from "./MypageProfile.styled";
 import userImg from "../../assets/userImg.jpg";
 import { BsFillPencilFill } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function MypageProfile () {
   const [isEdit, setIsEdit] = useState(false)
@@ -16,13 +18,18 @@ export default function MypageProfile () {
     setName(e.target.value);
   }
   console.log(isEdit);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (inputRef.current !== null) inputRef.current.focus();
+  });
   
   return (
     <MypageProfileContainer>
       <img src={userImg} alt="userImage" />
       <div>
         {isEdit ?
-           <input type="text" value={name} onChange={handleEditValue} onBlur={hanldeEditState}></input> :
+           <NameEdit type="text" value={name} ref={inputRef} onChange={handleEditValue} onBlur={hanldeEditState}></NameEdit> :
           <>
             <h1>{name}</h1>
             <BsFillPencilFill size={20} className="editBtn" onClick={hanldeEditState} />

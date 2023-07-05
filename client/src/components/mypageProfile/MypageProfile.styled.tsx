@@ -43,3 +43,14 @@ export const MypageProfileContainer = styled.div`
     ${tw`cursor-pointer`}
   }
 `;
+
+export const NameEdit = styled.input`
+  ${tw`
+    text-center
+    outline-neutral-300
+    bg-transparent
+  `}
+  font-size: 25px;
+  width: 200px;
+  height: 45px;
+`;
