@@ -23,6 +23,6 @@ export const Guide = tw(DetailGuide)`
 export const SaveBtnContainer = tw.div`
   flex
   justify-end
+  mr-5
   mt-5
-  mr-[35rem]
 `;
