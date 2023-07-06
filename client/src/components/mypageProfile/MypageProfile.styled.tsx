@@ -8,6 +8,7 @@ export const MypageProfileContainer = styled.div`
     rounded-lg
     text-center
     p-7
+    mr-5
   `}
   width: 350px;
   height: 350px;

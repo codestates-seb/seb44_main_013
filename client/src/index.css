@@ -5,12 +5,12 @@
 /* scroll width */
 ::-webkit-scrollbar {
     width: 5px;
-    height: 4px
+    height: 5px
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255,255,255,20%);
 }
 
 /* Handle */

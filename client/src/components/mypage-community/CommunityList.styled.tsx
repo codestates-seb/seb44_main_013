@@ -1,18 +1,20 @@
 import tw from 'tailwind-styled-components';
 
 export const Wrapper = tw.div`
-  mt-5
-  w-1/2
+  mt-2
+  ml-2
+  w-full
   h-[50px]
   bg-zinc-400	
   flex
-  rounded-xl
+  rounded-md
   items-center
   justify-between
   transition-transform
   duration-200
   ease-in-out
-  hover:scale-105
+  hover:bg-zinc-700
+  cursor-pointer
 `;
 
 export const TextContainer = tw.div`

@@ -25,7 +25,7 @@ export const ImgEx = styled.div`
         py-3
         text-ITEM_TITLE
         relative
-        -translate-y-[75px]
+        -translate-y-[73px]
         w-48
         flex
         flex-col
