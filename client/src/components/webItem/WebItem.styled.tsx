@@ -8,11 +8,10 @@ export const WebItemContainer = styled.div`
   w-96
   relative
   shadow-md`}
-  
-  &:hover{
+
+  &:hover {
     ${tw`bg-neutral-500/60`}
   }
-
 `;
 
 export const WebItemImg = styled.img`
@@ -21,7 +20,7 @@ export const WebItemImg = styled.img`
     h-full
     object-cover
   `}
-  &:hover{
+  &:hover {
     ${tw`opacity-80`}
   }
 `;
