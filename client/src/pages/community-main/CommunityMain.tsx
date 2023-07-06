@@ -13,7 +13,6 @@ export default function CommunityMain() {
       <SearchContainer>
         <Search />
       </SearchContainer>
-
       <ItemWrapper>
         {Array.from({ length: 8 }).map((_, index) => {
           return (
