@@ -14,34 +14,34 @@ import userImg from '@/assets/userImg.jpg';
 // mini, middle, large
 
 interface UserProfileProps {
-    type: string;
+    type: 'board' | 'comment' | 'portfolio';
     username: string;
     date?: string;
 }
 
-const ImageSizes:any = {
+const ImageSizes: any = {
     board: 65,
     comment: 35,
     portfolio: 100,
 }
 
-const LabelSizes:any = {
+const LabelSizes: any = {
     board: 20,
     comment: 12,
     portfolio: 30
 }
 
-const UserProfile = ({type, username, date}:UserProfileProps)=>{
+const UserProfile = ({ type, username, date }: UserProfileProps) => {
     return (
         <FlexContainer gap={15}>
-            <Image url={userImg} shape='circle' size={ImageSizes[type]}/>
-            { type === 'board' ?
+            <Image url={userImg} shape='circle' size={ImageSizes[type]} />
+            {type === 'board' ?
                 <FlexColumnWrapper gap={0}>
-                    <Label text={username} size={LabelSizes[type]}/>
+                    <Label text={username} size={LabelSizes[type]} />
                     <span>{date}2022.06.30</span>
                 </FlexColumnWrapper>
                 :
-                <Label text={username} size={LabelSizes[type]}/>
+                <Label text={username} size={LabelSizes[type]} />
             }
         </FlexContainer>
     )

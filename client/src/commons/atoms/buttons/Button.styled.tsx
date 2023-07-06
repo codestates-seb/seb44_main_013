@@ -37,3 +37,14 @@ export const BackButton = tw.button`
   cursor-pointer
   text-BASIC_WHITE
 `;
+
+//EditBtn & DeleteBtn 커스터마이징 타입
+export const Edittype = styled(Purpletype)`
+  ${tw`
+    bg-zinc-300
+    w-20
+    py-1
+    text-base
+    rounded-lg
+  `}
+`;
