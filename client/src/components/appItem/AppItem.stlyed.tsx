@@ -10,6 +10,12 @@ export const AppItemContainer = styled.div`
 
   border-radius: 20px;
   box-shadow: 0 5px 5px 0 #aaa;
+  width: 300px;
+  height: 500px;
+
+  &:hover {
+    ${tw`bg-neutral-500/60`}
+  }
 
   .iconsWrap {
     ${tw`
@@ -41,8 +47,8 @@ export const AppItemContainer = styled.div`
       w-full
       h-full
     `}
+    &:hover{
+      ${tw`opacity-80`}
+    }
   }
-
-  width: 300px;
-  height: 500px;
 `;
