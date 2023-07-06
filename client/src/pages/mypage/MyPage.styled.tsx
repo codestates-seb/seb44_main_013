@@ -1,29 +1,38 @@
 import tw from 'twin.macro'
+import { styled } from 'styled-components'
 
 export const MainWrapper = tw.div`
   bg-BASIC_BLACK
     w-screen
-    h-screen
+    h-full
     flex
     flex-col
     justify-center
+    p-4
 `;
 
 export const MyItemsWrapper = tw.div`
     h-fit
+    flex
+    flex-col
+    justify-center
+    m-auto
 `;
 
-export const BoxWrapper = tw.div`
-    w-8/12
-    h-[240px]
-    py-3
-    pr-5
-     bg-pink-300
-    flex
-    flex-row
-    overflow-x-scroll
-    mb-5
-    ml-2
+export const BoxWrapper = styled.div< {isRow?: string} >`
+    ${ tw`
+        w-[1050px]
+        h-[240px]
+        py-3
+        pr-5
+        flex
+        mb-5
+        ml-2
+    `}
+    flex-direction:${(props) => (props.isRow ? 'column' : 'row')};
+    overflow: ${(props) => (props.isRow ? 'none' : 'auto')};
+    height: ${(props) => (props.isRow ? '380px' : '240px')}
+   
 `;
 
 export const BoxTitle = tw.div`
@@ -31,4 +40,14 @@ export const BoxTitle = tw.div`
     text-xl
     text-BASIC_WHITE
     ml-4
+    mt-10
+`;
+
+//MyProfile 
+export const MyProfileWrapper = tw.div`
+    flex
+    flex-row
+    justify-center
+    mt-3
+    mb-10
 `;

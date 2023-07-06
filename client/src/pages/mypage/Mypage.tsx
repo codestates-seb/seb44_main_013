@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import MypageItem from "@/components/mypageItem/MypageItem";
-import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper } from "./MyPage.styled";
+import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from "./MyPage.styled";
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
+import MypageProfile from '@/components/mypageProfile/MypageProfile';
+import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
+import CommunityList from '@/components/mypage-community/CommunityList';
 
 
 export default function MyPage () {
@@ -9,12 +12,15 @@ export default function MyPage () {
 
     return(
         <MainWrapper>
+            
             {/* 프로필 부분  */}
+            <MyProfileWrapper>
+                <MypageProfile/>
+                <MypageIntroduce/>
+            </MyProfileWrapper>
 
-
-            {/* {}안에 서버로부터 받아온 정보를 보내주면 됩니다. */}
             <MyItemsWrapper>
-
+                {/* {}안에 서버로부터 받아온 정보를 보내주면 됩니다. */}
                 <FlexColumnWrapper gap={0}>
                     <BoxTitle>게시물</BoxTitle>
                     <BoxWrapper>
@@ -27,7 +33,9 @@ export default function MyPage () {
                 </FlexColumnWrapper>
                 
                 { isUser ? 
-                (   <FlexColumnWrapper gap={0}>
+                (   
+
+                    <FlexColumnWrapper gap={0}>
                         <BoxTitle>북마크</BoxTitle>
                         <BoxWrapper>
                             {Array.from({length:10}).map((_, index) => {
@@ -39,6 +47,14 @@ export default function MyPage () {
 
                         {/* 게시판 목록 부분  */}
 
+                        <BoxTitle>게시판</BoxTitle>
+                        <BoxWrapper isRow="column">
+                            {Array.from({length:5}).map((_, index) => {
+                                return(
+                                    <CommunityList key={index}/>
+                                )
+                            })}
+                        </BoxWrapper>
                     </FlexColumnWrapper>
                 ) 
                 : null }
