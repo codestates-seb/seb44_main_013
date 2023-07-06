@@ -8,6 +8,8 @@ import {
   ButtonsWrapper,
   CenteredContainer,
   PortfollyContainer,
+  TagContainer,
+  TitleContainer,
   UserContainer,
   Wrapper,
 } from './PortfolioDetail.styled';
@@ -27,6 +29,7 @@ export default function PortfolioDetail() {
         <img src={PortfolioImage1} alt="상세포트폴리오 사진 1"></img>
         <img src={PortfolioImage2} alt="상세포트폴리오 사진 2"></img>
       </PortfollyContainer>
+
       <UserContainer>
         <ButtonsWrapper>
           <ButtonContainer>
@@ -34,23 +37,26 @@ export default function PortfolioDetail() {
             <Bookmark />
           </ButtonContainer>
         </ButtonsWrapper>
+
         <CenteredContainer>
           <UserProfile type="portfolio" username="HOHO" />
           <PurpleBtn>의뢰 요청</PurpleBtn>
         </CenteredContainer>
 
-        <>Title</>
-
-        <FlexWrapper gap={8} className='flex-wrap'>
-          <Tag value="sdfsdfsdlkjflksdjfl" />
-          <Tag value="jasdjlfsdjfva" />
-          <Tag value="java" />
-          <Tag value="javfsdfjsldjflksdjflksjdlkfjsda" />
-          <Tag value="java" />
-          <Tag value="jdslfjsdlfava" />
-          <Tag value="java" />
-          <Tag value="jsdflkjkava" />
-        </FlexWrapper>
+        <TitleContainer>Title</TitleContainer>
+        <TagContainer>
+          Tags
+          <FlexWrapper gap={8} className="flex-wrap mt-5">
+            <Tag value="sdfsdfsdlkjflksdjfl" />
+            <Tag value="jasdjlfsdjfva" />
+            <Tag value="java" />
+            <Tag value="javfsdfjsldjflksdjflksjdlkfjsda" />
+            <Tag value="java" />
+            <Tag value="jdslfjsdlfava" />
+            <Tag value="java" />
+            <Tag value="jsdflkjkava" />
+          </FlexWrapper>
+        </TagContainer>
       </UserContainer>
     </Wrapper>
   );
