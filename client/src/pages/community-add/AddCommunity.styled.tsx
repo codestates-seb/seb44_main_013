@@ -10,8 +10,6 @@ export const EditorContainer = tw.div`
 
 export const TextEditor = tw.div`
   flex-2
-  border-4
-  border-gray-200
   w-2/3
   h-[45rem]
 `;
