@@ -1,8 +1,8 @@
+/* 2023-07-02 메인(카테고리)페이지 카테고리 navBar 컴포넌트 - 김다함*/
 import CategoryButton from '@/commons/atoms/buttons/category/CategoryButton';
 import { FlexContainer } from '@/commons/styles/Containers.styled';
 
-
-export default function CategoryNavBar(){
+export default function CategoryNavBar() {
     const Categories = [
         "웹",
         "앱",
@@ -14,8 +14,8 @@ export default function CategoryNavBar(){
     return (
         <FlexContainer gap={20}>
             {
-                Categories.map((category)=>{
-                    return <CategoryButton category={category}/>
+                Categories.map((category) => {
+                    return <CategoryButton category={category} />
                 })
             }
         </FlexContainer>
