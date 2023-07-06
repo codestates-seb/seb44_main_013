@@ -16,7 +16,7 @@ export const BtnContainer = tw.div`
 
 export const RecuitBtn = tw.button`
   cursor-pointer
-  text-xs
+  text-base
   mr-3
   hover:underline
 `;
