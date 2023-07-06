@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 export const CommunityItemContainer = styled.div`
   ${tw`
-      w-2/12
+      w-[280px]
       h-80
       bg-white
       relative
       shadow-md
-      p-2
-      ml-20
+      p-4
+      ml-10
       mt-10
       transition-transform
       duration-200
-      ease-in-out
+      ease-in-out      
     `}
 
   &:hover {
@@ -21,8 +21,9 @@ export const CommunityItemContainer = styled.div`
   }
 
   > h2 {
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 700;
+    margin-top: 10px;
   }
 
   > p {
