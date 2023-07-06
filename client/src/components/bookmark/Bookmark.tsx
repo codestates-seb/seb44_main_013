@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { BookmarkContainer, StyledBookmarkButton } from './Bookmark.styled';
 
-export default function Bookmark() {
-  const [clicked, setClicked] = useState(false);
+const Bookmark: React.FC = () => {
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const BookmarkClick = () => {
-    setClicked(!clicked);
+  const bookmarkClick = () => {
+    setIsClicked(!isClicked);
   };
+
   return (
     <BookmarkContainer>
       <StyledBookmarkButton
         aria-label="bookmark"
-        clicked={clicked}
-        onClick={BookmarkClick}
+        clicked={isClicked}
+        onClick={bookmarkClick}
       />
     </BookmarkContainer>
   );
-}
+};
+
+export default Bookmark;

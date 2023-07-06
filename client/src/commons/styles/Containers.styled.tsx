@@ -15,9 +15,9 @@ export const FlexColumnContainer = styled.div<{ gap: number }>`
 export const FlexWrapper = styled.div<{ gap: number }>`
   ${tw`flex`}
   gap: ${(props) => props.gap}px;
-`
+`;
 
 export const FlexColumnWrapper = styled.div<{ gap: number }>`
-  ${tw`flex flex-col`}
+  ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
-`
+`;
