@@ -6,7 +6,7 @@ export const FlexContainer = styled.div<{ gap: number }>`
   ${tw`flex items-center justify-start`}
   gap: ${(props) => props.gap}px;
 `;
-
+//categorypart 같음 
 export const FlexColumnContainer = styled.div<{ gap: number }>`
   ${tw`flex flex-col items-center justify-center`}
   gap: ${(props) => props.gap}px;
