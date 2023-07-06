@@ -1,19 +1,23 @@
+import { Link } from 'react-router-dom';
 import { CLink, HeaderContainer, ItemContainer } from './Header.styled';
 import LoginBtn from '../buttons/login/LoginBtn';
 import UserImg from '../user/UserImg';
-import { useState } from 'react';
 import Logo from '../logo/Logo';
 import Search from '@/components/search/Search';
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false); -> 전역 관리에서 true/false 관리 
+  const isLogin = true;
+
   return (
     <HeaderContainer>
-      <Logo />
+
+      <Link to="/"><Logo /></Link>
+
       <Search />
       <ItemContainer>
-        <CLink>community</CLink>
-        {isLogin ? <UserImg /> : <LoginBtn/> }
+        <CLink href="/boards">community</CLink>
+        { isLogin ? <UserImg/> : <Link to="/login"><LoginBtn/></Link> }
       </ItemContainer>
     </HeaderContainer>
   );

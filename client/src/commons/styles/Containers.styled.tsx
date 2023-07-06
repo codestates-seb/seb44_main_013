@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
 export const FlexContainer = styled.div<{ gap: number }>`
-  ${tw`flex items-center justify-start`}
+  ${tw`flex items-center justify-center`}
   gap: ${(props) => props.gap}px;
 `;
 //categorypart 같음 
