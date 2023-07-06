@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
 import {
   LoginSection,
@@ -17,9 +18,13 @@ export default function Login() {
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
-      <BackButton>
-        <BsArrowReturnLeft size={30} />
-      </BackButton>
+      
+      <Link to="/">
+        <BackButton>
+          <BsArrowReturnLeft size={30} />
+        </BackButton>
+      </Link>
+      
       <LoginSection>
         <TitleSection>
           Discover artworks <br /> that tell stories, <br /> not just simple
@@ -29,13 +34,19 @@ export default function Login() {
           Experience the artistry and ingenuity of diverse portfolios, <br />
           curated for web, app, and design enthusiasts.
         </ContentSection>
+
         <LoginGoogleForm>Log in with Google</LoginGoogleForm>
+
         <MiddleWrapper>
           <MiddleLine />
           &nbsp; or &nbsp;
           <MiddleLine />
         </MiddleWrapper>
-        <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+
+        <Link to="/signup">
+          <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+        </Link>
+
       </LoginSection>
 
       <HorizonLine />

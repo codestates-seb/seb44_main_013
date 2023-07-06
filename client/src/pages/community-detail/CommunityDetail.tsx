@@ -1,4 +1,3 @@
-import Footer from '@/commons/atoms/footer/Footer';
 import CHeader from '@/commons/atoms/header/CHeader';
 import UserProfile from '@/commons/molecules/UserProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
@@ -28,7 +27,6 @@ export default function CommunityDetail() {
           </CommentWrite>
         </CommentContainer>
       </MainContainer>
-      <Footer />
     </>
   );
 }

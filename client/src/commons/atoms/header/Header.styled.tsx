@@ -5,7 +5,8 @@ export const HeaderContainer = tw.div`
   items-center
   justify-around
   px-10
-  mt-3
+  pt-5
+  pb-10
 `;
 
 

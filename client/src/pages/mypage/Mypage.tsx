@@ -5,7 +5,7 @@ import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import MypageProfile from '@/components/mypageProfile/MypageProfile';
 import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
 import CommunityList from '@/components/mypage-community/CommunityList';
-import { Pagenation } from '@/components/pagenation/pagenation';
+import { Pagenation } from '@/components/pagenation/Pagenation';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 
 

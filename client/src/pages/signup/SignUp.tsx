@@ -1,4 +1,5 @@
 import { BsArrowReturnLeft } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import {
   SignBtn,
   ButtonContainer,
@@ -16,9 +17,13 @@ export default function SignUp() {
   return (
     <SignUpWrapper>
       <BackText>Portfolly</BackText>
-      <BackButton>
-        <BsArrowReturnLeft size={30} />
-      </BackButton>
+
+      <Link to="/">
+        <BackButton>
+          <BsArrowReturnLeft size={30} />
+        </BackButton>
+      </Link>
+
       <SingupSection>
         <TitleSection>Choose your account.</TitleSection>
         <ContentSection>
@@ -29,7 +34,7 @@ export default function SignUp() {
           <SignBtn>Client</SignBtn>
           <SignBtn>Partner</SignBtn>
         </ButtonContainer>
-        <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+          <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
       </SingupSection>
       <HorizonLine />
       <div className="flex-1">
