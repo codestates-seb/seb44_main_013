@@ -1,4 +1,10 @@
-import tw from 'tailwind-styled-components';
+import tw, { styled } from 'twin.macro';
+import communitymainimg from '../../assets/communitymainimg.png';
+
+export const PageWrapper = styled.div(({ theme }) => [
+  tw`w-full h-full min-h-screen bg-center bg-no-repeat bg-cover `,
+  { backgroundImage: `url(${communitymainimg})` },
+]);
 
 export const MainContainer = tw.div`
   flex

@@ -6,13 +6,14 @@ import {
   CommentContainer,
   CommentWrite,
   MainContainer,
+  PageWrapper,
 } from './CommunityDetail.styled';
 import CommentWriteBox from '@/commons/molecules/CommentWriteBox';
 import Comment from '@/commons/molecules/Comment';
 
 export default function CommunityDetail() {
   return (
-    <>
+    <PageWrapper>
       <CHeader />
       <MainContainer>
         <CmDContainer>
@@ -27,6 +28,6 @@ export default function CommunityDetail() {
           </CommentWrite>
         </CommentContainer>
       </MainContainer>
-    </>
+    </PageWrapper>
   );
 }
