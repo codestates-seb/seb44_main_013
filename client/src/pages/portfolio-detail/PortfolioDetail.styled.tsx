@@ -19,7 +19,8 @@ export const UserContainer = tw.div`
   w-1/3
   flex
   flex-col
-  
+  gap-10
+  px-8
 `;
 
 export const ButtonsWrapper = tw.div`
@@ -30,8 +31,6 @@ export const ButtonContainer = tw.div`
   flex
   justify-between
   items-center
-  ml-20
-  mr-20
   `;
 
 export const CenteredContainer = tw.div`
@@ -39,6 +38,6 @@ export const CenteredContainer = tw.div`
   flex-col
   items-center
   justify-center
-  mt-20
   text-white
+  gap-5
 `;

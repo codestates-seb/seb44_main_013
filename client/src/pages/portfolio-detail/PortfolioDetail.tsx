@@ -14,6 +14,8 @@ import {
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/components/bookmark/Bookmark';
 import UserProfile from '@/commons/molecules/UserProfile';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
+import Tag from '@/commons/molecules/Tag';
 
 export default function PortfolioDetail() {
   return (
@@ -39,7 +41,16 @@ export default function PortfolioDetail() {
 
         <>Title</>
 
-        <>tags</>
+        <FlexWrapper gap={8} className='flex-wrap'>
+          <Tag value="sdfsdfsdlkjflksdjfl" />
+          <Tag value="jasdjlfsdjfva" />
+          <Tag value="java" />
+          <Tag value="javfsdfjsldjflksdjflksjdlkfjsda" />
+          <Tag value="java" />
+          <Tag value="jdslfjsdlfava" />
+          <Tag value="java" />
+          <Tag value="jsdflkjkava" />
+        </FlexWrapper>
       </UserContainer>
     </Wrapper>
   );
