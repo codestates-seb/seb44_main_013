@@ -12,7 +12,7 @@ export default function Edit() {
       <LogoHeader />
       <QuillEditor />
       {/* <TitleForm isCreated='' /> */}
-      <PortfolioEditButton type='black' className='absolute bottom-16 right-14'>
+      <PortfolioEditButton type='black' className='absolute bottom-10 right-16'>
         <BsCheck2 size='25' color='white' />
       </PortfolioEditButton>
     </FlexColumnContainer>
