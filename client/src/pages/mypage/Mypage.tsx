@@ -5,6 +5,8 @@ import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import MypageProfile from '@/components/mypageProfile/MypageProfile';
 import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
 import CommunityList from '@/components/mypage-community/CommunityList';
+import { Pagenation } from '@/components/pagenation/pagenation';
+import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 
 
 export default function MyPage () {
@@ -54,6 +56,25 @@ export default function MyPage () {
                                     <CommunityList key={index}/>
                                 )
                             })}
+
+                            <PagenationWrapper>
+                                <Pagenation>&lt;</Pagenation>
+
+                                {Array.from({length: 5}).map((e, i) => {
+                                    if(i === 0){
+                                        return(
+                                            <Pagenation>{i+1}</Pagenation>
+                                        )
+                                    }
+                                    return(
+                                        <Pagenation>{(i+length)+1}</Pagenation>
+                                    )
+
+                                })}
+                                
+                                <Pagenation> &gt;</Pagenation>
+                            </PagenationWrapper>
+
                         </BoxWrapper>
                     </FlexColumnWrapper>
                 ) 
