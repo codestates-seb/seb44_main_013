@@ -22,6 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-quill": "^2.0.0",
+    "quill-plugin-image-upload": "0.0.6",
     "react-router-dom": "^6.14.1",
     "styled-components": "^6.0.2",
     "vite-plugin-babel-macros": "^1.0.6"
