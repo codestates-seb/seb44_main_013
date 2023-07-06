@@ -16,14 +16,6 @@ export default function Main() {
           )
         })}
       </WebItemsContainer>
-      {/* <WebItemsContainer>
-        <WebItem />
-        <WebItem />
-      </WebItemsContainer>
-      <WebItemsContainer>
-        <WebItem />
-        <WebItem />
-      </WebItemsContainer> */}
       <Footer />
     </>
   );

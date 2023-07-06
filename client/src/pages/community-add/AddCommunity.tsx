@@ -4,15 +4,19 @@ import {
   Guide,
   SaveBtnContainer,
   TextEditor,
-} from './Community.styled';
+} from './AddCommunity.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
 
-export default function Community() {
+export default function AddCommunity() {
   return (
     <>
       <CHeader />
       <EditorContainer>
-        <TextEditor></TextEditor>
+        <TextEditor>
+          <ReactQuill theme="snow" style={{ height: '40rem' }} />
+        </TextEditor>
         <Guide />
       </EditorContainer>
       <SaveBtnContainer>
