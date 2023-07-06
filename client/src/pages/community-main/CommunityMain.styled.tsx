@@ -1,4 +1,14 @@
 import tw from 'tailwind-styled-components';
+import communitymainimg from '../../assets/communitymainimg.png';
+
+export const DarkBackground = tw.div`
+  bg-center 
+  bg-no-repeat 
+  bg-cover 
+  h-screen 
+  w-screen
+  ${`background-image: url(${communitymainimg});`}
+`;
 
 export const CommunityWrapper = tw.div`
   w-screen

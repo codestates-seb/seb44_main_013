@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import Search from '@/components/search/Search';
-import { 
+import {
   CommunityWrapper,
-  ItemWrapper, 
-  SearchContainer 
+  ItemWrapper,
+  SearchContainer,
 } from './CommunityMain.styled';
 import CommunityItem from '@/components/communityItem/CommunityItem';
-
 
 export default function CommunityMain() {
   return (
@@ -17,10 +16,13 @@ export default function CommunityMain() {
 
       <ItemWrapper>
         {Array.from({ length: 8 }).map((_, index) => {
-          return <Link to="/boards/detail"><CommunityItem key={index} /></Link>;
+          return (
+            <Link to="/boards/detail">
+              <CommunityItem key={index} />
+            </Link>
+          );
         })}
       </ItemWrapper>
     </CommunityWrapper>
-
   );
 }
