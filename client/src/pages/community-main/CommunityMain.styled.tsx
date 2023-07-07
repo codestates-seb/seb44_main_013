@@ -1,10 +1,14 @@
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
+import { styled } from 'styled-components';
 import communitymainimg from '../../assets/communitymainimg.png';
 
-export const CommunityWrapper = styled.div(({ theme }) => [
-  tw`w-full h-screen flex flex-col justify-center p-4 pb-20 bg-center bg-no-repeat bg-cover`,
-  { backgroundImage: `url(${communitymainimg})` },
-]);
+export const CommunityWrapper = styled.div`
+  ${tw`
+    w-screen h-full flex flex-col justify-center
+    pb-20 bg-center bg-no-repeat bg-cover
+  `}
+  /* background-image: url(${communitymainimg}) */
+`;
 
 export const SearchContainer = tw.div`
   w-1/2

@@ -1,5 +1,5 @@
-import Header from "../atoms/header/Header";
-import Footer from "../atoms/footer/Footer";
+import Header from "../../atoms/header/Header";
+import Footer from "../../atoms/footer/Footer";
 import { Outlet } from 'react-router-dom';
 import tw from 'twin.macro';
 
