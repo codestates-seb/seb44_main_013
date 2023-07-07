@@ -9,10 +9,11 @@ import UserProfile from '@/commons/molecules/UserProfile';
 import Tag from '@/commons/molecules/Tag';
 import { BodyText, HeadingText, LabelText } from '@/commons/atoms/Typography';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { call } from '@/utils/ApiService';
 
 export default function PortfolioDetail() {
+  const navigate = useNavigate();
   // const { portfolioId } = useParams();
   const portfolioId = 1;
   const { data, isSuccess } = useQuery(['portfolio'],
@@ -25,7 +26,9 @@ export default function PortfolioDetail() {
   return (
     <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
-        <BsArrowReturnLeft size={30} color='white' />
+        <button onClick={() => navigate(-1)}>
+          <BsArrowReturnLeft size={30} color='white' />
+        </button>
       </ButtonHeader>
       <ContentContainer>
         <PortfolioContainer>
