@@ -23,7 +23,7 @@ export default function PortfolioDetail() {
   }
 
   return (
-    <FlexColumnContainer gap={10} bg='rgba(16, 16, 21, 1)'>
+    <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
         <BsArrowReturnLeft size={30} color='white' />
       </ButtonHeader>
