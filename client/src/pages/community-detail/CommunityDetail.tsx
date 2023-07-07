@@ -11,7 +11,7 @@ import CommentBox from '@/components/CommentBox';
 export default function CommunityDetail() {
   return (
     <PageWrapper>
-      <UserProfile type={'blackboard'} username={'emma'} />
+      <UserProfile type={'blackboard'} user={{ member_id: 1, name: 'dsf', picture: 'asdf' }} />
       <MainContainer>
         <CmDContainer>
           <DetailContents />

@@ -47,7 +47,7 @@ export default function PortfolioDetail() {
         <UserContainer>
           <UserCard>
             <FlexWrapper gap={0} className='justify-between'>
-              <LikeBtn />
+              <LikeBtn likes={isSuccess && data.likes} />
               <Bookmark />
             </FlexWrapper>
             <UserProfile type="portfolio" user={user} />

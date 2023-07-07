@@ -5,13 +5,13 @@ import { TextArea } from '@/commons/styles/Inputs.styled';
 import SaveBtn from '../atoms/buttons/writing/SaveBtn';
 
 export default function CommentWriteBox() {
-    return (
-        <FlexColumnContainer gap={5} className='w-full bt-[1px] mt-10'>
-            <FlexWrapper gap={0} className='w-full justify-between'>
-                <UserProfile type='comment' username='ehyo' date='39-29-39' />
-                <SaveBtn />
-            </FlexWrapper>
-            <TextArea className="w-full h-20" placeholder="write your comment"/>
-        </FlexColumnContainer>
-    )
+  return (
+    <FlexColumnContainer gap={5} className='w-full bt-[1px] mt-10'>
+      <FlexWrapper gap={0} className='w-full justify-between'>
+        <UserProfile type='comment' user={{ member_id: 1, name: 'dsf', picture: 'asdf' }} />
+        <SaveBtn />
+      </FlexWrapper>
+      <TextArea className="w-full h-20" placeholder="write your comment" />
+    </FlexColumnContainer>
+  )
 } 
