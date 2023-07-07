@@ -4,8 +4,8 @@ import communitymainimg from '../../assets/communitymainimg.png';
 
 export const CommunityWrapper = styled.div`
   ${tw`
-    w-screen h-full flex flex-col justify-center
-    pb-20 bg-center bg-no-repeat bg-cover
+    w-screen h-full flex flex-col justify-between
+    pb-20 bg-center bg-no-repeat bg-cover px-14
   `}
   /* background-image: url(${communitymainimg}) */
 `;
@@ -21,8 +21,13 @@ export const SearchContainer = tw.div`
 
 export const ItemWrapper = tw.div`
   flex
+  flex-col
+  items-end
+`;
+
+export const ListsWrapper = tw.div`
+  flex
   flex-wrap
-  justify-center
+  justify-between
   gap-4
-  mt-20
 `;

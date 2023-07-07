@@ -11,7 +11,7 @@ export default function CommentWriteBox() {
                 <UserProfile type='comment' username='ehyo' date='39-29-39' />
                 <SaveBtn />
             </FlexWrapper>
-            <TextArea className='w-full h-20' />
+            <TextArea className="w-full h-20" placeholder="write your comment"/>
         </FlexColumnContainer>
     )
 } 

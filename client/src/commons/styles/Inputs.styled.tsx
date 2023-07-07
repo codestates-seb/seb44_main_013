@@ -7,10 +7,11 @@ export const Input = styled.input`
 `;
 
 export const TextArea = styled.textarea`
-    ${tw`resize-none rounded-md border-[0.5px]`}
+    ${tw`resize-none rounded-md border-[0.5px] `}
     &:focus {outline: none;}
     border-color: gray;
     font-size: 13px;
+    color:white;
 `
 
 export const PortfolioTitleInput = styled(Input)`
