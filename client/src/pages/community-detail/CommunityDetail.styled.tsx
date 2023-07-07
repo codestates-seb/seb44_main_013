@@ -8,7 +8,6 @@ export const PageWrapper = styled.div(({ theme }) => [
 
 export const MainContainer = tw.div`
   flex
-  mt-10
   ml-20
   mr-20
   mb-10

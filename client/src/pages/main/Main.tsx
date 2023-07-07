@@ -11,9 +11,7 @@ export default function Main() {
       <CategoryNavBar />
       <WebItemsContainer>
         {Array.from({ length: 4 }).map((_, index) => {
-          return (
-            <Link to="portfolio/detail"><WebItem key={index}/></Link>
-          )
+          return <WebItem key={index} />;
         })}
       </WebItemsContainer>
     </StyledBackground>
