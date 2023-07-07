@@ -16,14 +16,14 @@ const RoundedBox = styled.div`
 `
 
 export const PortfolioContainer = tw(RoundedBox)`
-  w-2/3
+  w-3/4
   min-h-screen
   bg-black
 `;
 
 export const UserContainer = tw.div`
   flex flex-col
-  w-1/3
+  w-1/4
   gap-6
 `;
 
