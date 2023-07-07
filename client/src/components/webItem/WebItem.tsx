@@ -11,7 +11,7 @@ import {
 export default function WebItem() {
   return (
     <WebItemContainer>
-      <Link to="portfolio/detail">
+      <Link to="/portfolios/:portfolioId">
         <WebItemImg src={WebItem1} alt="웹 아이템1 이미지" />
       </Link>{' '}
       <BookmarkWrapper>
