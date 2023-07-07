@@ -15,7 +15,7 @@ export default function Comment({ username, content, date }: CommentProps) {
   return (
     <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-1.5 pt-3'>
       <FlexWrapper gap={0} className='w-full justify-between'>
-        <UserProfile type='comment' username={username} />
+        <UserProfile type='comment' user={{ member_id: 1, name: 'dsf', picture: 'asdf' }} />
         <FlexWrapper gap={0}>
           <ReviseBtn color={'black'} />
           <RemoveBtn color={'black'} />
