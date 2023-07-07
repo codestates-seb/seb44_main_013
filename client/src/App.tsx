@@ -6,10 +6,11 @@ import CommunityMain from './pages/community-main/CommunityMain';
 import Login from './pages/login/Login';
 import SignUp from './pages/signup/SignUp';
 import MyPage from './pages/mypage/Mypage';
-import MainLayout from './commons/styles/MainLayout';
-import { GlobalStyle } from './commons/styles/GlobalStyled';
+import MainLayout from './commons/styles/layout/MainLayout';
+// import { GlobalStyle } from './commons/styles/GlobalStyled';
 import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
 import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
+import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 
 
 const queryClient = new QueryClient();
@@ -17,16 +18,19 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       <BrowserRouter>
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Main />} />
-            <Route path="/boards" element={<CommunityMain />} />
             <Route path="/members" element={<MyPage />} />
           </Route>
 
-          <Route path="/boards/detail" element={<CommunityDetail/>}/>
+          <Route element={<CHeaderLayout/>}>
+            <Route path="/boards" element={<CommunityMain />} />
+            <Route path="/boards/detail" element={<CommunityDetail/>}/>
+          </Route>
+
           <Route path="/portfolio/detail" element={<PortfolioDetail/>}/>
           <Route path="/portfolio/edit" element={<PortfolioEdit/>}/>
           <Route path="/login" element={<Login/>}/>

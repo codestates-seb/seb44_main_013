@@ -6,6 +6,8 @@ export const HeaderContainer = tw.div`
   justify-between
   px-10
   py-3
+  bg-transparent
+  z-50
   
 `;
 
