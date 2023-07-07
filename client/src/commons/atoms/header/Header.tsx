@@ -11,9 +11,7 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-
       <Link to="/"><Logo /></Link>
-
       <Search />
       <ItemContainer>
         <CLink href="/boards">community</CLink>
