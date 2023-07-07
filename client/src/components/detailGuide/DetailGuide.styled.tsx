@@ -9,7 +9,7 @@ export const DetailGuideContainer = styled.div`
   `}
 
   width: 300px;
-  height: 400px;
+  height: 370px;
   border-radius: 20px;
   font-size: 14px;
 

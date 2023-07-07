@@ -1,16 +1,20 @@
+import styled from 'styled-components';
 import tw from 'twin.macro';
 
-export const HDropWrapper = tw.div`
+export const HDropWrapper = styled.div`
+  ${tw`
     shadow-md
-    w-44
+    w-40
     rounded-lg
     overflow-hidden
     transition duration-300 ease-in-out
-    bg-BASIC_WHITE
     absolute
-    top-[70px]
-    right-10
+    top-[60px]
+    right-5
     z-50
+  `}
+
+  background-color: rgba(255, 255, 255, 0.9);
 `;
 
 export const HDropSection = tw.ul`
@@ -18,7 +22,8 @@ export const HDropSection = tw.ul`
     divide-zinc-200
 `;
 
-export const ModalLink = tw.li`
+export const ModalLink = styled.li`
+  ${tw`
     py-3
     text-[12px]
     font-semibold
@@ -26,7 +31,20 @@ export const ModalLink = tw.li`
     flex-row
     items-center
     justify-center
-    hover:bg-HOVER_COLOR
-    hover:text-BASIC_WHITE
     cursor-pointer
+  `}
+
+  &:hover {
+    background-color: #cccccc;
+    color: #ffffff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: inherit;
+  }
 `;

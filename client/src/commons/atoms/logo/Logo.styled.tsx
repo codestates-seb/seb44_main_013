@@ -13,4 +13,5 @@ export const LogoImg = tw.img`
 export const SmaLogoImg = tw.img`
   w-7
   h-7
+  
 `;

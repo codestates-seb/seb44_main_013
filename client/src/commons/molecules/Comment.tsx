@@ -17,8 +17,8 @@ export default function Comment({ username, content, date }: CommentProps) {
             <FlexWrapper gap={0} className='w-full justify-between'>
                 <UserProfile type='comment' username={username} />
                 <FlexWrapper gap={0}>
-                    <ReviseBtn />
-                    <RemoveBtn />
+                    <ReviseBtn color={'#d4d4d8'} />
+                    <RemoveBtn color={'#d4d4d8'} />
                 </FlexWrapper>
             </FlexWrapper>
             <FlexWrapper gap={0} className='w-full justify-between'>

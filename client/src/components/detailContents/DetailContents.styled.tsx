@@ -6,6 +6,7 @@ export const DetailCntContainer = styled.div`
     bg-white
     p-5
     shadow-md
+    mt-5
   `}
 
   height: 700px;

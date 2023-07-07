@@ -4,7 +4,8 @@ import { BookmarkContainer, StyledBookmarkButton } from './Bookmark.styled';
 const Bookmark: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const bookmarkClick = () => {
+  const bookmarkClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsClicked(!isClicked);
   };
 

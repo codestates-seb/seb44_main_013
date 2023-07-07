@@ -1,4 +1,3 @@
-import CHeader from '@/commons/atoms/header/CHeader';
 import UserProfile from '@/commons/molecules/UserProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
 import {
@@ -14,10 +13,9 @@ import Comment from '@/commons/molecules/Comment';
 export default function CommunityDetail() {
   return (
     <PageWrapper>
-      <CHeader />
       <MainContainer>
         <CmDContainer>
-          <UserProfile type={'board'} username={'emma'} />
+          <UserProfile type={'blackboard'} username={'emma'} />
           <DetailContents />
         </CmDContainer>
 
