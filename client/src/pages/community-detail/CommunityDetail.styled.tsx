@@ -1,4 +1,5 @@
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
+import { styled } from 'styled-components'
 import communitymainimg from '../../assets/communitymainimg.png';
 
 export const PageWrapper = styled.div(({ theme }) => [

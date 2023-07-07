@@ -21,3 +21,8 @@ export const FlexColumnWrapper = styled.div<{ gap: number }>`
   ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
 `;
+
+export const FlexStartContainer = styled.div<{ gap: number }>`
+    ${tw`flex items-center justify-start`}
+    gap: ${(props) => props.gap}px;
+`;
