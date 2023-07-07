@@ -7,8 +7,7 @@ export const CommunityWrapper = styled.div`
   ${tw`
     w-screen h-full flex flex-col justify-between
     pb-20 bg-center bg-no-repeat bg-cover px-14
-  `}
-  background-image: url(${communitymainimg})
+  `}/* background-image: url(${communitymainimg}) */
 `;
 
 export const SearchContainer = tw.div`
@@ -28,7 +27,7 @@ export const ItemWrapper = tw.div`
 
 export const StyledWritingBtn = styled(WritingBtn)`
   ${tw`
-    mr-4
+    mr-10
   `}
 `;
 
