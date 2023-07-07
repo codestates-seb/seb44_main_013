@@ -29,11 +29,7 @@ export const Writingtype = styled(Purpletype)`
   `}
 `;
 export const BackButton = tw.button`
-  absolute
-  top-5
-  left-5
   p-2
-  rounded
   cursor-pointer
   text-BASIC_WHITE
 `;
@@ -52,11 +48,10 @@ export const Edittype = styled(Purpletype)`
 //게시물 상세 페이지의 의뢰 요청 버튼 
 export const AskCommisionBtn = styled(Purpletype)`
   ${tw`
-    mt-10
+    w-[200px]
     px-5
+    py-2
     rounded-md
     text-base
-    w-[230px]
-    py-2
   `}
 `;

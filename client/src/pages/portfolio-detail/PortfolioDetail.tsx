@@ -1,63 +1,59 @@
-import { Link } from 'react-router-dom';
-import { AskCommisionBtn, BackButton } from '@/commons/atoms/buttons/Button.styled';
+/* 2023-07-07 포트폴리오 상세보기 페이지 - 김다함 */
+import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import { BsArrowReturnLeft } from 'react-icons/bs';
-import PortfolioImage1 from '../../../src/assets/PortfolioImage1.png';
-import PortfolioImage2 from '../../../src/assets/PortfolioImage2.png';
-import {
-  ButtonContainer,
-  ButtonsWrapper,
-  CenteredContainer,
-  PortfollyContainer,
-  TagContainer,
-  TitleContainer,
-  UserContainer,
-  Wrapper,
-} from './PortfolioDetail.styled';
+import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
+import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/components/bookmark/Bookmark';
 import UserProfile from '@/commons/molecules/UserProfile';
-import { FlexWrapper } from '@/commons/styles/Containers.styled';
 import Tag from '@/commons/molecules/Tag';
+import { BodyText, HeadingText, LabelText } from '@/commons/atoms/Typography';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'react-router-dom';
+import { call } from '@/utils/ApiService';
 
 export default function PortfolioDetail() {
+  // const { portfolioId } = useParams();
+  const portfolioId = 1;
+  const { data, isSuccess } = useQuery(['portfolio'],
+    () => call(`/portfolios/${portfolioId}`, 'GET'));
+
+  if (isSuccess) {
+
+  }
+
   return (
-    <Wrapper>
-      <BackButton>
-        <BsArrowReturnLeft size={30} />
-      </BackButton>
-      <PortfollyContainer>
-        <img src={PortfolioImage1} alt="상세포트폴리오 사진 1"></img>
-        <img src={PortfolioImage2} alt="상세포트폴리오 사진 2"></img>
-      </PortfollyContainer>
-
-      <UserContainer>
-        <ButtonsWrapper>
-          <ButtonContainer>
-            <LikeBtn />
-            <Bookmark />
-          </ButtonContainer>
-        </ButtonsWrapper>
-
-        <CenteredContainer>
-          <Link to="/members"><UserProfile type="portfolio" username="HOHO" /></Link>
-          <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
-        </CenteredContainer>
-
-        <TitleContainer>Title</TitleContainer>
-        <TagContainer>
-          Tags
-          <FlexWrapper gap={8} className="flex-wrap mt-5">
-            <Tag value="sdfsdfsdlkjflksdjfl" />
-            <Tag value="jasdjlfsdjfva" />
-            <Tag value="java" />
-            <Tag value="javfsdfjsldjflksdjflksjdlkfjsda" />
-            <Tag value="java" />
-            <Tag value="jdslfjsdlfava" />
-            <Tag value="java" />
-            <Tag value="jsdflkjkava" />
-          </FlexWrapper>
-        </TagContainer>
-      </UserContainer>
-    </Wrapper>
+    <FlexColumnContainer gap={10} bg='rgba(16, 16, 21, 1)'>
+      <ButtonHeader>
+        <BsArrowReturnLeft size={30} color='white' />
+      </ButtonHeader>
+      <ContentContainer>
+        <PortfolioContainer>
+          {isSuccess && data.content}
+        </PortfolioContainer>
+        <UserContainer>
+          <UserCard>
+            <FlexWrapper gap={0} className='justify-between'>
+              <LikeBtn />
+              <Bookmark />
+            </FlexWrapper>
+            <UserProfile type="portfolio" username="HOHO" />
+            <Center>
+              <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
+            </Center>
+            <HeadingText>{isSuccess && data.title}</HeadingText>
+            <BodyText>{isSuccess && data.explain}</BodyText>
+          </UserCard>
+          <UserCard>
+            <LabelText color='white'>Tags</LabelText>
+            <FlexWrapper gap={8}>
+              {isSuccess &&
+                data.tags.map((tag: string) => <Tag value={tag} />)
+              }
+            </FlexWrapper>
+          </UserCard>
+        </UserContainer>
+      </ContentContainer>
+    </FlexColumnContainer>
   );
 }

@@ -30,10 +30,11 @@ const App = () => {
             <Route path="/boards/detail" element={<CommunityDetail />} />
           </Route>
 
-          <Route path="/portfolio/detail" element={<PortfolioDetail />} />
+          <Route path="/portfolios/:portfolioId" element={<PortfolioDetail />} />
           <Route path="/portfolio/edit" element={<PortfolioEdit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

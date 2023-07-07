@@ -4,7 +4,7 @@
 // 댓글 - 프로필, 이름
 // 포트폴리오 상세보기 - 프로필, 이름 (인데 댓글보다는 훨씬 크고 폰트도 굵다)
 
-import { FlexContainer,FlexStartContainer, FlexColumnWrapper } from '../styles/Containers.styled';
+import { FlexColumnWrapper, FlexWrapper } from '../styles/Containers.styled';
 import Image from '@/commons/atoms/Image';
 import Label from '@/commons/atoms/Label';
 import userImg from '@/assets/userImg.jpg';
@@ -27,7 +27,7 @@ const ImageSizes: any = {
 
 const UserProfile = ({ type, username, date }: UserProfileProps) => {
   return (
-    <FlexStartContainer gap={15}>
+    <FlexWrapper gap={15} className='items-center'>
       <Image url={userImg} shape='circle' size={ImageSizes[type]} />
       {type === 'board' ?
         <FlexColumnWrapper gap={0}>
@@ -37,7 +37,7 @@ const UserProfile = ({ type, username, date }: UserProfileProps) => {
         :
         <Label text={username} type={type} />
       }
-    </FlexStartContainer>
+    </FlexWrapper >
   )
 }
 
