@@ -17,7 +17,7 @@ export default function LikeBtn({ likes }: LikeBtnProps) {
   return (
     <div onClick={toggleLike}>
       <FlexWrapper gap={10}>
-        <FaHeart color={liked ? '#e46868' : 'gray'} size={25} />
+        <FaHeart color={liked ? '#e46868' : 'gray'} size={25} className='cursor-pointer' />
         <SmallText color='white'>{likes}</SmallText>
       </FlexWrapper>
     </div>

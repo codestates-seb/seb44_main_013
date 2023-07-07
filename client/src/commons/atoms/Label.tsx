@@ -17,6 +17,7 @@ const LabelSizes: any = {
 const Text = styled.a<{ size: string, type: string }>`
     font-size: ${(props) => props.size}px;
     font-weight: 600;
+    user-select: none;
     color: ${(props) => props.type === 'portfolio' || props.type === 'blackboard'
     ? 'white' : '#232629'}
 `;

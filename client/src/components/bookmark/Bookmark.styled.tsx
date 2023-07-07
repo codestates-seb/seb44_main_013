@@ -9,6 +9,7 @@ export const BookmarkContainer = tw.div`
 const BookmarkButton = tw(FaBookmark)`
   drop-shadow-md
   text-neutral-100
+  cursor-pointer
   w-[22px]
   h-[20px]
 `;
@@ -19,6 +20,6 @@ type StyledBookmarkButtonProps = {
 
 export const StyledBookmarkButton = tw(
   BookmarkButton
-)<StyledBookmarkButtonProps>`
+) <StyledBookmarkButtonProps>`
   ${(props) => (props.clicked ? 'text-[#ffeb54]' : '')}
 `;
