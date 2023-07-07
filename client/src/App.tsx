@@ -12,7 +12,6 @@ import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
 import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
 import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 
-
 const queryClient = new QueryClient();
 
 const App = () => {

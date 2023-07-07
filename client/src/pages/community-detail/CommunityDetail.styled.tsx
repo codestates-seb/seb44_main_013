@@ -1,4 +1,5 @@
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
+import { styled } from 'styled-components'
 import communitymainimg from '../../assets/communitymainimg.png';
 
 export const PageWrapper = styled.div(({ theme }) => [
@@ -8,7 +9,6 @@ export const PageWrapper = styled.div(({ theme }) => [
 
 export const MainContainer = tw.div`
   flex
-  mt-10
   ml-20
   mr-20
   mb-10

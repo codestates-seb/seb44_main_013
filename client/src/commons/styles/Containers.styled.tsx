@@ -20,6 +20,10 @@ export const FlexColumnContainer = styled(Container)`
   ${tw`flex-col items-center justify-center`}
 `;
 
+export const FlexStartContainer = styled(Container)`
+    ${tw`items-center justify-start`}
+`;
+
 export const FlexWrapper = styled.div<{ gap: number }>`
   ${tw`flex w-full flex-wrap`}
   gap: ${(props) => props.gap}px;

@@ -11,7 +11,9 @@ import {
 export default function CHeader() {
   return (
     <HeaderContainer>
-      <Link to="/"><Logo /></Link>
+      <Link to="/">
+        <Logo />
+      </Link>
       <BtnContainer>
         <RecuitBtn>Recruitment</RecuitBtn>|<CooperBtn>Cooperation</CooperBtn>
         <UserImg />

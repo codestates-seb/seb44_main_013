@@ -8,6 +8,7 @@ export const HeaderContainer = tw.div`
   py-3
   bg-transparent
   z-50
+  text-white
   
 `;
 
