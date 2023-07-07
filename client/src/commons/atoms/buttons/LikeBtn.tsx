@@ -1,7 +1,13 @@
 import { FaHeart } from 'react-icons/fa';
 import { useState } from 'react';
+import { SmallText } from '../Typography';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
 
-export default function LikeBtn() {
+interface LikeBtnProps {
+  likes?: number;
+}
+
+export default function LikeBtn({ likes }: LikeBtnProps) {
   const [liked, setLiked] = useState(false);
 
   const toggleLike = () => {
@@ -10,7 +16,10 @@ export default function LikeBtn() {
 
   return (
     <div onClick={toggleLike}>
-      <FaHeart color={liked ? '#e46868' : 'gray'} size={25} />
+      <FlexWrapper gap={10}>
+        <FaHeart color={liked ? '#e46868' : 'gray'} size={25} />
+        <SmallText color='white'>{likes}</SmallText>
+      </FlexWrapper>
     </div>
   );
 }
