@@ -19,6 +19,9 @@ export const PortfolioContainer = tw(RoundedBox)`
   w-3/4
   min-h-screen
   bg-black
+  text-white
+  py-10
+  px-14
 `;
 
 export const UserContainer = tw.div`

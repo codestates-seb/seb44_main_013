@@ -29,7 +29,9 @@ export default function PortfolioDetail() {
       </ButtonHeader>
       <ContentContainer>
         <PortfolioContainer>
-          {isSuccess && data.content}
+          {isSuccess &&
+            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          }
         </PortfolioContainer>
         <UserContainer>
           <UserCard>
@@ -41,8 +43,8 @@ export default function PortfolioDetail() {
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
-            <HeadingText>{isSuccess && data.title}</HeadingText>
-            <BodyText>{isSuccess && data.explain}</BodyText>
+            <HeadingText color='white'>{isSuccess && data.title}</HeadingText>
+            <BodyText color='white'>{isSuccess && data.explain}</BodyText>
           </UserCard>
           <UserCard>
             <LabelText color='white'>Tags</LabelText>
