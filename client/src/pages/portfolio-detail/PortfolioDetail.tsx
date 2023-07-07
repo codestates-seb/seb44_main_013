@@ -26,9 +26,9 @@ export default function PortfolioDetail() {
   return (
     <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
-        <button onClick={() => navigate(-1)}>
-          <BsArrowReturnLeft size={30} color='white' />
-        </button>
+        <BsArrowReturnLeft size={30} color='white'
+          className='cursor-pointer'
+          onClick={() => navigate(-1)} />
       </ButtonHeader>
       <ContentContainer>
         <PortfolioContainer>
