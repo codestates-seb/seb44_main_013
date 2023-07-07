@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
 import { StyledBackground, WebItemsContainer } from './Main.styled';
