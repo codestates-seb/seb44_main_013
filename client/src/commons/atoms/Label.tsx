@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 interface LabelProps {
   text: string;
   type: string;
+  url?: string;
 }
 
 const LabelSizes: any = {
@@ -13,16 +14,16 @@ const LabelSizes: any = {
   blackboard: 20
 }
 
-const Text = styled.label<{ size: string, type: string }>`
+const Text = styled.a<{ size: string, type: string }>`
     font-size: ${(props) => props.size}px;
     font-weight: 600;
     color: ${(props) => props.type === 'portfolio' || props.type === 'blackboard'
     ? 'white' : '#232629'}
 `;
 
-const Label = ({ type, text }: LabelProps) => {
+const Label = ({ type, text, url }: LabelProps) => {
   return (
-    <Text size={LabelSizes[type]} type={type}>{text}</Text>
+    <Text size={LabelSizes[type]} type={type} href={url}>{text}</Text>
   )
 }
 
