@@ -30,27 +30,15 @@ const UserProfile = ({ type, username, date }: UserProfileProps) => {
   return (
     <FlexWrapper gap={15} className='items-center'>
       <Image url={userImg} shape='circle' size={ImageSizes[type]} />
-      {(() => {
-        if (type === 'board') {
-          return (
-            <FlexColumnWrapper gap={0}>
-              <Label text={username} type={type} />
-              <span>{date}2022.06.30</span>
-            </FlexColumnWrapper>
-          );
-        } else if (type === 'blackboard') {
-          return (
-            <FlexColumnWrapper gap={0}>
-              <Label text={username} type={type} />
-              <span className="text-zinc-200">{date}2022.06.30</span>
-            </FlexColumnWrapper>
-          );
-        } else {
-          return <Label text={username} type={type} />;
-        }
-      })()}
+      {type === 'portfolio' ?
+        <Label text={username} type={type} />
+        :
+        <FlexColumnWrapper gap={0}>
+          <Label text={username} type={type} />
+          <span className={type === 'blackboard' ? 'text-zinc-200' : ''}>{date}2022.06.30</span>
+        </FlexColumnWrapper>
+      }
     </FlexWrapper >
-
   )
 }
 
