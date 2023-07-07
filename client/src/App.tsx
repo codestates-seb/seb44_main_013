@@ -12,7 +12,6 @@ import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
 import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
 import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 
-
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -26,15 +25,15 @@ const App = () => {
             <Route path="/members" element={<MyPage />} />
           </Route>
 
-          <Route element={<CHeaderLayout/>}>
+          <Route element={<CHeaderLayout />}>
             <Route path="/boards" element={<CommunityMain />} />
-            <Route path="/boards/detail" element={<CommunityDetail/>}/>
+            <Route path="/boards/detail" element={<CommunityDetail />} />
           </Route>
 
-          <Route path="/portfolio/detail" element={<PortfolioDetail/>}/>
-          <Route path="/portfolio/edit" element={<PortfolioEdit/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<SignUp/>}/> 
+          <Route path="/portfolios/:portfolioId" element={<PortfolioDetail />} />
+          <Route path="/portfolio/edit" element={<PortfolioEdit />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
 
         </Routes>
       </BrowserRouter>
