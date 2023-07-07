@@ -1,17 +1,20 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 
-export const HDropWrapper = tw.div`
+export const HDropWrapper = styled.div`
+  ${tw`
     shadow-md
-    w-44
+    w-40
     rounded-lg
     overflow-hidden
     transition duration-300 ease-in-out
-    bg-BASIC_WHITE
     absolute
-    top-[70px]
-    right-10
+    top-[60px]
+    right-5
     z-50
+  `}
+
+  background-color: rgba(255, 255, 255, 0.9);
 `;
 
 export const HDropSection = tw.ul`
