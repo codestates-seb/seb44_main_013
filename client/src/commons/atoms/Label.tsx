@@ -9,13 +9,15 @@ interface LabelProps {
 const LabelSizes: any = {
   board: 20,
   comment: 12,
-  portfolio: 30
+  portfolio: 30,
+  blackboard: 20
 }
 
 const Text = styled.label<{ size: string, type: string }>`
     font-size: ${(props) => props.size}px;
     font-weight: 600;
-    color: ${(props) => props.type === 'portfolio' ? 'white' : '#232629'}
+    color: ${(props) => props.type === 'portfolio' || props.type === 'comment' || props.type === 'blackboard'
+      ? 'white' : '#232629'}
 `;
 
 const Label = ({ type, text }: LabelProps) => {

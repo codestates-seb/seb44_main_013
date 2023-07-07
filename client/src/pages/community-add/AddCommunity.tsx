@@ -9,7 +9,6 @@ import {
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { type } from './../../types/StyleType';
 import { useState, useRef } from 'react';
 
 export default function AddCommunity() {
@@ -40,7 +39,6 @@ export default function AddCommunity() {
 
   return (
     <>
-      {/* <CHeader /> */}
       <EditorContainer>
         <TextEditorContainer>
           <h1 className='addTitle'>Edit Your Forum</h1>

@@ -1,6 +1,6 @@
 // type 모아두는 곳
 
-import { EventHandler } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps, EventHandler } from "react";
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
@@ -15,4 +15,10 @@ export interface MypageItemProps extends childrenProps {
     src: string;
 }
 
+
+//0707 혜진 styled props 관련 type
+export interface Styledprops 
+    extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+        color: string;
+}
 

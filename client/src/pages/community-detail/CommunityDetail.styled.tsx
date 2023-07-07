@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import communitymainimg from '../../assets/communitymainimg.png';
 
 export const PageWrapper = styled.div(({ theme }) => [
-  tw`w-full h-full min-h-screen bg-center bg-no-repeat bg-cover `,
+  tw`w-full h-full min-h-screen bg-center bg-no-repeat bg-cover py-5`,
   { backgroundImage: `url(${communitymainimg})` },
 ]);
 
