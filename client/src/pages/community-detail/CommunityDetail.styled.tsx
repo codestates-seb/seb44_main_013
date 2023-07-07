@@ -3,26 +3,20 @@ import { styled } from 'styled-components'
 import communitymainimg from '../../assets/communitymainimg.png';
 
 export const PageWrapper = styled.div(({ theme }) => [
-  tw`w-full h-full min-h-screen bg-center bg-no-repeat bg-cover py-5`,
+  tw`flex flex-col gap-8 w-full h-full min-h-screen bg-center bg-no-repeat bg-cover pt-10 px-8`,
   { backgroundImage: `url(${communitymainimg})` },
 ]);
 
 export const MainContainer = tw.div`
   flex
-  ml-20
-  mr-20
-  mb-10
+  gap-10
 `;
 
 export const CmDContainer = tw.div`
   w-2/3
-  mr-10
 `;
 
 export const CommentContainer = tw.div`
-  flex
-  flex-col
-  justify-between
   w-1/3
 `;
 

@@ -3,27 +3,21 @@ import DetailContents from '@/components/detailContents/DetailContents';
 import {
   CmDContainer,
   CommentContainer,
-  CommentWrite,
   MainContainer,
   PageWrapper,
 } from './CommunityDetail.styled';
-import CommentWriteBox from '@/commons/molecules/CommentWriteBox';
-import Comment from '@/commons/molecules/Comment';
+import CommentBox from '@/components/CommentBox';
 
 export default function CommunityDetail() {
   return (
     <PageWrapper>
+      <UserProfile type={'blackboard'} username={'emma'} />
       <MainContainer>
         <CmDContainer>
-          <UserProfile type={'blackboard'} username={'emma'} />
           <DetailContents />
         </CmDContainer>
-
         <CommentContainer>
-          <Comment username={'ac'} content="adfads" date="2023.07.06" />
-          <CommentWrite>
-            <CommentWriteBox />
-          </CommentWrite>
+          <CommentBox comment='CommentType' />
         </CommentContainer>
       </MainContainer>
     </PageWrapper>

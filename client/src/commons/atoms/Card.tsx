@@ -4,11 +4,11 @@ import tw from 'twin.macro';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 interface CardProps extends ComponentPropsWithoutRef<'div'> {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 const CardContainer = styled.div`
-    ${tw`flex flex-col w-full h-full p-5 box-border rounded-lg`}
+    ${tw`flex flex-col w-full h-full p-5 box-border rounded-2xl`}
 
     background-color: white;
     box-sizing: inherit;
@@ -17,9 +17,9 @@ const CardContainer = styled.div`
 `;
 
 export default function Card({ children }: CardProps) {
-    return (
-        <CardContainer>
-            {children}
-        </CardContainer>
-    )
+  return (
+    <CardContainer>
+      {children}
+    </CardContainer>
+  )
 }

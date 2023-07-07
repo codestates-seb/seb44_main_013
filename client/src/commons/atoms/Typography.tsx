@@ -24,8 +24,7 @@ export const LabelText = tw(H)`
 `;
 
 // 본문 텍스트 스타일 컴포넌트
-export const BodyText = styled.span`
-    color:#ffff;
+export const BodyText = styled(Span)`
     font-weight:200;
 `;
 

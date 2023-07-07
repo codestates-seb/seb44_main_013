@@ -25,7 +25,7 @@ export const FlexStartContainer = styled(Container)`
 `;
 
 export const FlexWrapper = styled.div<{ gap: number }>`
-  ${tw`flex w-full flex-wrap`}
+  ${tw`flex flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
