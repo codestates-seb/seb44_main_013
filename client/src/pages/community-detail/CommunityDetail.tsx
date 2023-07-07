@@ -14,7 +14,6 @@ import Comment from '@/commons/molecules/Comment';
 export default function CommunityDetail() {
   return (
     <PageWrapper>
-      <CHeader />
       <MainContainer>
         <CmDContainer>
           <UserProfile type={'board'} username={'emma'} />
