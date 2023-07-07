@@ -8,6 +8,7 @@ import { FlexColumnWrapper, FlexWrapper } from '../styles/Containers.styled';
 import Image from '@/commons/atoms/Image';
 import Label from '@/commons/atoms/Label';
 import userImg from '@/assets/userImg.jpg';
+import { SmallText } from '../atoms/Typography';
 
 // props
 // 게시판 용이냐 아니냐에 따라 날짜 기입
@@ -35,7 +36,7 @@ const UserProfile = ({ type, username, date }: UserProfileProps) => {
         :
         <FlexColumnWrapper gap={0}>
           <Label text={username} type={type} />
-          <span className={type === 'blackboard' || 'comment' ? 'text-zinc-200 text-white' : ''}>{date}2022.06.30</span>
+          <SmallText className={type === 'blackboard' ? 'text-zinc-200 text-white' : ''}>{date}2022.06.30</SmallText>
         </FlexColumnWrapper>
       }
     </FlexWrapper >
