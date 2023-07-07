@@ -48,3 +48,15 @@ export const Edittype = styled(Purpletype)`
     rounded-lg
   `}
 `;
+
+//게시물 상세 페이지의 의뢰 요청 버튼 
+export const AskCommisionBtn = styled(Purpletype)`
+  ${tw`
+    mt-10
+    px-5
+    rounded-md
+    text-base
+    w-[230px]
+    py-2
+  `}
+`;

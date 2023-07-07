@@ -1,4 +1,4 @@
-import TitleForm from '@/components/edit/TitleForm';
+import TitleForm from '@/components/editor/TitleForm';
 import { Meta } from '@storybook/react';
 
 export default {

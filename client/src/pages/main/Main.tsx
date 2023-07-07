@@ -1,22 +1,21 @@
-import Footer from '@/commons/atoms/footer/Footer';
-import Header from '@/commons/atoms/header/Header';
+import { Link } from 'react-router-dom';
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
-import { WebItemsContainer } from './Main.styled';
+import { StyledBackground, WebItemsContainer } from './Main.styled';
+//import { WholeWrapper } from '@/commons/styles/MainLayout';
+import '../../index.css';
 
 export default function Main() {
   return (
-    <>
-      <Header />
+    <StyledBackground>
       <CategoryNavBar />
       <WebItemsContainer>
-        {Array.from({length:4}).map((_, index) => {
+        {Array.from({ length: 4 }).map((_, index) => {
           return (
-            <WebItem key={index}/>
+            <Link to="portfolio/detail"><WebItem key={index}/></Link>
           )
         })}
       </WebItemsContainer>
-      <Footer />
-    </>
+    </StyledBackground>
   );
 }

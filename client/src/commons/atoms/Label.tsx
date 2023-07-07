@@ -2,20 +2,26 @@
 import { styled } from 'styled-components';
 
 interface LabelProps {
-    text: string;
-    size: number;
+  text: string;
+  type: string;
 }
 
-const Text = styled.label<{ size: number }>`
+const LabelSizes: any = {
+  board: 20,
+  comment: 12,
+  portfolio: 30
+}
+
+const Text = styled.label<{ size: string, type: string }>`
     font-size: ${(props) => props.size}px;
     font-weight: 600;
-    color: #232629;
+    color: ${(props) => props.type === 'portfolio' ? 'white' : '#232629'}
 `;
 
-const Label = ({ size, text }: LabelProps) => {
-    return (
-        <Text size={size}>{text}</Text>
-    )
+const Label = ({ type, text }: LabelProps) => {
+  return (
+    <Text size={LabelSizes[type]} type={type}>{text}</Text>
+  )
 }
 
 export default Label;

@@ -7,7 +7,9 @@ export default function WebItem() {
   return (
     <WebItemContainer>
       <WebItemImg src={WebItem1} alt="웹 아이템1 이미지" />
-      <Bookmark />
+      <>
+        <Bookmark />
+      </>
     </WebItemContainer>
   );
 }

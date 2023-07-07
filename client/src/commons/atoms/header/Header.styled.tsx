@@ -3,16 +3,15 @@ import tw from 'twin.macro';
 export const HeaderContainer = tw.div`
   flex
   items-center
-  justify-around
+  justify-between
   px-10
-  mt-3
+  py-3
 `;
 
 
 export const ItemContainer = tw.div`
   flex
-  flex-1
-  justify-end
+  flex-row
 `;
 
 export const CLink = tw.a`
@@ -20,4 +19,5 @@ export const CLink = tw.a`
   hover:underline
   cursor-pointer
   whitespace-nowrap
+  mt-3
 `;

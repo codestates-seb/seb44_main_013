@@ -6,6 +6,8 @@ export const HeaderContainer = tw.div`
   justify-between
   px-10
   py-3
+  bg-transparent
+  z-50
   
 `;
 
@@ -16,7 +18,7 @@ export const BtnContainer = tw.div`
 
 export const RecuitBtn = tw.button`
   cursor-pointer
-  text-xs
+  text-base
   mr-3
   hover:underline
 `;
