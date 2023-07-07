@@ -1,13 +1,16 @@
-import CHeader from '@/commons/atoms/header/CHeader';
 import {
   EditorContainer,
+  TextEditorContainer,
   Guide,
   SaveBtnContainer,
   TextEditor,
+  TitleAdd,
 } from './AddCommunity.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
+import { type } from './../../types/StyleType';
+import { useState, useRef } from 'react';
 
 export default function AddCommunity() {
   const modules = {
@@ -28,23 +31,35 @@ export default function AddCommunity() {
     ],
   };
 
+  const [title, setTitle] = useState("");
+
+  const handleTitle = (e: any) => {
+    setTitle(e.target.value);
+  };
+  console.log(title);
+
   return (
     <>
-      <CHeader />
+      {/* <CHeader /> */}
       <EditorContainer>
-        <TextEditor>
-          <ReactQuill
-            theme="snow"
-            style={{
-              height: '40rem',
-            }}
-            modules={modules}
-          />
-          <SaveBtnContainer>
-            <PurpleBtn>Save</PurpleBtn>
-          </SaveBtnContainer>
-        </TextEditor>
-        <Guide />
+        <TextEditorContainer>
+          <h1 className='addTitle'>Edit Your Forum</h1>
+          <TextEditor>
+            <TitleAdd type="text" onChange={(e: any) => handleTitle(e)} />
+            <hr />
+            <ReactQuill
+              theme="snow"
+              modules={modules}
+              className='reactQuillContainer'
+            />
+            <SaveBtnContainer>
+              <PurpleBtn>Save</PurpleBtn>
+            </SaveBtnContainer>
+          </TextEditor>
+        </TextEditorContainer>
+        <div className='guideContainer'>
+          <Guide />
+        </div>
       </EditorContainer>
     </>
   );
