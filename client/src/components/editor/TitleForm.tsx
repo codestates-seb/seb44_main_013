@@ -1,4 +1,5 @@
 /* 2023-07-04 포트폴리오 작성/수정 페이지 제목,태그 작성 Form - 김다함 */
+import { useState } from 'react';
 import { DarkTextArea } from '@/commons/styles/Inputs.styled';
 import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
 import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
@@ -9,10 +10,11 @@ import { styled } from 'styled-components';
 import tw from 'twin.macro';
 import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { BsCheck2 } from 'react-icons/bs';
+import { BsCheck2 } from 'react-icons/bs';   
 
 interface TitleFormProps {
   isCreated: string;
+  handleTitle: () => void;
 }
 
 const TitleFormContainer = styled.div`
@@ -21,7 +23,9 @@ const TitleFormContainer = styled.div`
     box-shadow: 0 -8px 10px -1px #a9a9a9;
 `;
 
-const TitleForm = ({ isCreated }: TitleFormProps) => {
+const TitleForm = ({ isCreated, handleTitle }: TitleFormProps) => {
+
+
   return (
     <TitleFormContainer>
       <FlexColumnWrapper gap={15}>
@@ -46,7 +50,7 @@ const TitleForm = ({ isCreated }: TitleFormProps) => {
         <div className='flex justify-between'>
           <DarkTextArea className='w-[42%] h-20' />
           <FlexWrapper gap={15}>
-            <PortfolioEditButton type='dark'><RiArrowGoBackFill size='25' color='white' /></PortfolioEditButton>
+            <PortfolioEditButton type='dark' onClick={handleTitle}><RiArrowGoBackFill size='25' color='white' /></PortfolioEditButton>
             <PortfolioEditButton type='light'><BsCheck2 size='25' color='black' /></PortfolioEditButton>
           </FlexWrapper>
         </div>

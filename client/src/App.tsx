@@ -8,6 +8,9 @@ import SignUp from './pages/signup/SignUp';
 import MyPage from './pages/mypage/Mypage';
 import MainLayout from './commons/styles/MainLayout';
 import { GlobalStyle } from './commons/styles/GlobalStyled';
+import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
+import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
+
 
 const queryClient = new QueryClient();
 
@@ -23,9 +26,12 @@ const App = () => {
             <Route path="/members" element={<MyPage />} />
           </Route>
 
-          <Route path="/boards/detail" element={<CommunityDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/boards/detail" element={<CommunityDetail/>}/>
+          <Route path="/portfolio/detail" element={<PortfolioDetail/>}/>
+          <Route path="/portfolio/edit" element={<PortfolioEdit/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<SignUp/>}/> 
+
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

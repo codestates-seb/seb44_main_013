@@ -8,7 +8,7 @@ export default function HeaderDropwdown () {
             <HDropSection>
                 <ModalLink><div className="mr-1"><VscBell size="10"/></div>Alarm</ModalLink>
                 <Link to="/members"><ModalLink>My Page</ModalLink></Link>
-                <Link to="/"><ModalLink>New Portfolio</ModalLink></Link>
+                <Link to="/portfolio/edit"><ModalLink>New Portfolio</ModalLink></Link>
                 <Link to="/"><ModalLink>Log Out</ModalLink></Link>
             </HDropSection>
 

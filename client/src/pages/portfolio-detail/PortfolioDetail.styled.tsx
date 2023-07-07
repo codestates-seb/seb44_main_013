@@ -7,19 +7,21 @@ export const Wrapper = tw.div`
   flex
   flex-row
   text-white
-
+  h-full
+  w-scren
+  pb-20
 `;
 
 export const PortfollyContainer = tw.div`
   w-2/3
-
+  mt-6
 `;
 
 export const UserContainer = tw.div`
   w-1/3
   flex
   flex-col
-  
+  pt-7
 `;
 
 export const ButtonsWrapper = tw.div`
@@ -32,6 +34,7 @@ export const ButtonContainer = tw.div`
   items-center
   ml-20
   mr-20
+
   `;
 
 export const CenteredContainer = tw.div`
@@ -39,7 +42,7 @@ export const CenteredContainer = tw.div`
   flex-col
   items-center
   justify-center
-  mt-20
+  mt-6
   text-white
 `;
 
@@ -51,6 +54,7 @@ export const TitleContainer = tw.div`
   text-bold
   text-xl
 `;
+
 export const TagContainer = tw.div`
   ml-20
   text-bold 
