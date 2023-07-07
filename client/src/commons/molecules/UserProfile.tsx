@@ -35,7 +35,7 @@ const UserProfile = ({ type, username, date }: UserProfileProps) => {
         :
         <FlexColumnWrapper gap={0}>
           <Label text={username} type={type} />
-          <span className={type === 'blackboard' ? 'text-zinc-200' : ''}>{date}2022.06.30</span>
+          <span className={type === 'blackboard' || 'comment' ? 'text-zinc-200 text-white' : ''}>{date}2022.06.30</span>
         </FlexColumnWrapper>
       }
     </FlexWrapper >
