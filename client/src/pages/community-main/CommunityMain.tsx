@@ -4,7 +4,8 @@ import {
   ItemWrapper,
   SearchContainer,
   CommunityWrapper,
-  ListsWrapper
+  ListsWrapper,
+  StyledWritingBtn,
 } from './CommunityMain.styled';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
@@ -14,13 +15,14 @@ import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 export default function CommunityMain() {
   return (
     <CommunityWrapper>
-
       <SearchContainer>
         <Search />
       </SearchContainer>
 
       <ItemWrapper>
-        <WritingBtn/>
+        <StyledWritingBtn>
+          <WritingBtn />
+        </StyledWritingBtn>
         <ListsWrapper>
           {Array.from({ length: 8 }).map((_, index) => {
             return (
