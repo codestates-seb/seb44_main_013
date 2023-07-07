@@ -1,8 +1,8 @@
-import { BackButton } from '@/commons/atoms/buttons/Button.styled';
+import { Link } from 'react-router-dom';
+import { AskCommisionBtn, BackButton } from '@/commons/atoms/buttons/Button.styled';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import PortfolioImage1 from '../../../src/assets/PortfolioImage1.png';
 import PortfolioImage2 from '../../../src/assets/PortfolioImage2.png';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import {
   ButtonContainer,
   ButtonsWrapper,
@@ -39,8 +39,8 @@ export default function PortfolioDetail() {
         </ButtonsWrapper>
 
         <CenteredContainer>
-          <UserProfile type="portfolio" username="HOHO" />
-          <PurpleBtn>의뢰 요청</PurpleBtn>
+          <Link to="/members"><UserProfile type="portfolio" username="HOHO" /></Link>
+          <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
         </CenteredContainer>
 
         <TitleContainer>Title</TitleContainer>
