@@ -2,18 +2,26 @@
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-export const FlexContainer = styled.div<{ gap: number }>`
-  ${tw`flex items-center justify-center`}
+const Container = styled.div<{ gap: number, bg?: string }>`
+  ${tw`flex`}
   gap: ${(props) => props.gap}px;
+  background-color: ${(props) => props.bg};
+`
+
+export const Center = tw.div`
+  flex justify-center items-center
+`
+
+export const FlexContainer = styled(Container)`
+  ${tw`items-center justify-center`}
 `;
 //categorypart 같음 
-export const FlexColumnContainer = styled.div<{ gap: number }>`
-  ${tw`flex flex-col items-center justify-center`}
-  gap: ${(props) => props.gap}px;
+export const FlexColumnContainer = styled(Container)`
+  ${tw`flex-col items-center justify-center`}
 `;
 
 export const FlexWrapper = styled.div<{ gap: number }>`
-  ${tw`flex`}
+  ${tw`flex w-full flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
