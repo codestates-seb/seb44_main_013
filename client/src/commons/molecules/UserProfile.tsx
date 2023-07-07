@@ -14,7 +14,7 @@ import userImg from '@/assets/userImg.jpg';
 // mini, middle, large
 
 interface UserProfileProps {
-  type: 'board' | 'comment' | 'portfolio';
+  type: 'board' | 'comment' | 'portfolio' | 'blackboard';
   username: string;
   date?: string;
 }
@@ -23,21 +23,34 @@ const ImageSizes: any = {
   board: 65,
   comment: 35,
   portfolio: 100,
+  blackboard: 65
 }
 
 const UserProfile = ({ type, username, date }: UserProfileProps) => {
   return (
     <FlexWrapper gap={15} className='items-center'>
       <Image url={userImg} shape='circle' size={ImageSizes[type]} />
-      {type === 'board' ?
-        <FlexColumnWrapper gap={0}>
-          <Label text={username} type={type} />
-          <span>{date}2022.06.30</span>
-        </FlexColumnWrapper>
-        :
-        <Label text={username} type={type} />
-      }
+      {(() => {
+        if (type === 'board') {
+          return (
+            <FlexColumnWrapper gap={0}>
+              <Label text={username} type={type} />
+              <span>{date}2022.06.30</span>
+            </FlexColumnWrapper>
+          );
+        } else if (type === 'blackboard') {
+          return (
+            <FlexColumnWrapper gap={0}>
+              <Label text={username} type={type} />
+              <span className="text-zinc-200">{date}2022.06.30</span>
+            </FlexColumnWrapper>
+          );
+        } else {
+          return <Label text={username} type={type} />;
+        }
+      })()}
     </FlexWrapper >
+
   )
 }
 

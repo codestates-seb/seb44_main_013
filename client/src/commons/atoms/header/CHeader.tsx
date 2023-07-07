@@ -15,7 +15,7 @@ export default function CHeader() {
         <Logo />
       </Link>
       <BtnContainer>
-        <RecuitBtn>Recruitment</RecuitBtn>|<CooperBtn>Cooperation</CooperBtn>
+        <RecuitBtn>Recruitment</RecuitBtn>&nbsp;&nbsp;|<CooperBtn>Cooperation</CooperBtn>
         <UserImg />
       </BtnContainer>
     </HeaderContainer>

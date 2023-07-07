@@ -15,7 +15,7 @@ export default function CommunityDetail() {
     <PageWrapper>
       <MainContainer>
         <CmDContainer>
-          <UserProfile type={'board'} username={'emma'} />
+          <UserProfile type={'blackboard'} username={'emma'} />
           <DetailContents />
         </CmDContainer>
 

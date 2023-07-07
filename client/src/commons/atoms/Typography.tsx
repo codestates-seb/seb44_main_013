@@ -24,15 +24,16 @@ export const LabelText = tw(H)`
 `;
 
 // 본문 텍스트 스타일 컴포넌트
-export const BodyText = tw(Span)`
-  text-base
+export const BodyText = styled.span`
+    color:#ffff;
+    font-weight:200;
 `;
 
 export const InputLabelText = styled(Span)`
   font-size: 16px;
   font-weight: 600;
-`
+`;
 
 export const SmallText = styled(Span)`
   font-size: 13px;
-`
+`;

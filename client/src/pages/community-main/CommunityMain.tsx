@@ -9,8 +9,6 @@ import {
 } from './CommunityMain.styled';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
-// import CHeader from '@/commons/atoms/header/CHeader';
-// import { BackImgControl } from '@/commons/styles/layout/Layout.styled';
 
 export default function CommunityMain() {
   return (
@@ -20,9 +18,11 @@ export default function CommunityMain() {
       </SearchContainer>
 
       <ItemWrapper>
-        <StyledWritingBtn>
+        <Link to="/boards/edit">
+          <StyledWritingBtn>
           <WritingBtn />
-        </StyledWritingBtn>
+          </StyledWritingBtn>
+        </Link>
         <ListsWrapper>
           {Array.from({ length: 8 }).map((_, index) => {
             return (
