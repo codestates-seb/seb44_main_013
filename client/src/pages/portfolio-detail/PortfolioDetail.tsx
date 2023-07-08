@@ -23,13 +23,15 @@ export default function PortfolioDetail() {
   }
 
   return (
-    <FlexColumnContainer gap={10} bg='rgba(16, 16, 21, 1)'>
+    <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
         <BsArrowReturnLeft size={30} color='white' />
       </ButtonHeader>
       <ContentContainer>
         <PortfolioContainer>
-          {isSuccess && data.content}
+          {isSuccess &&
+            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          }
         </PortfolioContainer>
         <UserContainer>
           <UserCard>
@@ -41,8 +43,8 @@ export default function PortfolioDetail() {
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
-            <HeadingText>{isSuccess && data.title}</HeadingText>
-            <BodyText>{isSuccess && data.explain}</BodyText>
+            <HeadingText color='white'>{isSuccess && data.title}</HeadingText>
+            <BodyText color='white'>{isSuccess && data.explain}</BodyText>
           </UserCard>
           <UserCard>
             <LabelText color='white'>Tags</LabelText>

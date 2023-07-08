@@ -8,7 +8,7 @@ export const ContentContainer = tw.div`
 `
 
 export const ButtonHeader = tw.div`
-  w-full py-3 px-4 pt-3.5
+  w-full py-5 px-8
 `
 
 const RoundedBox = styled.div`
@@ -17,9 +17,11 @@ const RoundedBox = styled.div`
 
 export const PortfolioContainer = tw(RoundedBox)`
   w-3/4
-  p-8
   min-h-screen
   bg-black
+  text-white
+  py-10
+  px-14
 `;
 
 export const UserContainer = tw.div`

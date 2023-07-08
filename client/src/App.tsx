@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Main from './pages/main/Main';
 import CommunityDetail from './pages/community-detail/CommunityDetail';
 import CommunityMain from './pages/community-main/CommunityMain';
@@ -28,8 +29,8 @@ const App = () => {
 
           <Route element={<CHeaderLayout />}>
             <Route path="/boards" element={<CommunityMain />} />
-            <Route path="/boards/detail" element={<CommunityDetail/>}/>
-            <Route path="/boards/edit" element={<AddCommunity/>}/>
+            <Route path="/boards/detail" element={<CommunityDetail />} />
+            <Route path="/boards/edit" element={<AddCommunity />} />
           </Route>
 
           <Route path="/portfolios/:portfolioId" element={<PortfolioDetail />} />
@@ -39,6 +40,7 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-left' />
     </QueryClientProvider>
   );
 };
