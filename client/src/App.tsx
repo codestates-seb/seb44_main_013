@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/boards/edit" element={<AddCommunity />} />
           </Route>
 
-          <Route path="/portfolios/:portfolioId" element={<PortfolioDetail />} />
+          <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />
           <Route path="/portfolio/edit" element={<PortfolioEdit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
