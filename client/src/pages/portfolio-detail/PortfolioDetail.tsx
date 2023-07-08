@@ -22,7 +22,7 @@ export default function PortfolioDetail() {
     name: '',
     picture: ''
   }
-  const { data, isSuccess } = useQuery(['portfolio'],
+  const { data, isSuccess } = useQuery(['portfolio', portfolio_id],
     () => call(`/portfolios/${portfolio_id}`, 'GET'));
   if (isSuccess) {
     user = {
@@ -47,7 +47,7 @@ export default function PortfolioDetail() {
         <UserContainer>
           <UserCard>
             <FlexWrapper gap={0} className='justify-between'>
-              <LikeBtn likes={isSuccess && data.likes} />
+              <LikeBtn portfolio_id={isSuccess && data.portfolio_id} lastestLikes={isSuccess && data.likes} nowIsLike={isSuccess && data.isLike} />
               <Bookmark />
             </FlexWrapper>
             <UserProfile type="portfolio" user={user} />
