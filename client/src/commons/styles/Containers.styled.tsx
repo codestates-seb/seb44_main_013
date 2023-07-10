@@ -2,10 +2,10 @@
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-const Container = styled.div<{ gap: number, bg?: string }>`
+const Container = styled.div<{ gap?: number, bg?: string }>`
   ${tw`flex`}
-  gap: ${(props) => props.gap}px;
-  background-color: ${(props) => props.bg};
+  gap: ${(props) => props.gap || 0}px;
+  background-color: ${(props) => props.bg || 'white'};
 `
 
 export const Center = tw.div`

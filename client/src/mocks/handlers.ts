@@ -12,25 +12,23 @@ const DaHamHandlers = [
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
     const portfolio_id = Number(req.params.portfolio_id);
-    let likes = 0;
+    let response = { likes: 0 };
     portfolios.map((p) => {
       if (p.portfolio_id === portfolio_id) {
-        likes = ++p.likes;
-        p.isLike = true
+        response = { likes: ++p.likes }
       }
     })
-    return res(ctx.status(200), ctx.json({ likes: likes }));
+    return res(ctx.status(200), ctx.json(response));
   }),
-  rest.post('/likes/:portfolio_id', (req, res, ctx) => {
+  rest.delete('/likes/:portfolio_id', (req, res, ctx) => {
     const portfolio_id = Number(req.params.portfolio_id);
-    let likes = 0;
+    let response = { likes: 0 };
     portfolios.map((p) => {
       if (p.portfolio_id === portfolio_id) {
-        likes = --p.likes;
-        p.isLike = false
+        response = { likes: --p.likes }
       }
     })
-    return res(ctx.status(200), ctx.json({ likes: likes }));
+    return res(ctx.status(200), ctx.json(response));
   })
 ];
 
