@@ -10,7 +10,8 @@ interface LikeBtnProps {
 }
 
 export default function LikeBtn({ portfolio_id, lastestLikes, nowIsLike }: LikeBtnProps) {
-  const [isLike, likes, onClick] = useLikeBtn({
+  const initialColor = nowIsLike ? '#e46868' : 'gray';
+  const [likes, color, onClick] = useLikeBtn({
     portfolio_id: portfolio_id,
     initailLikes: lastestLikes,
     initialIsLike: nowIsLike,
@@ -18,8 +19,8 @@ export default function LikeBtn({ portfolio_id, lastestLikes, nowIsLike }: LikeB
 
   return (
     <FlexWrapper gap={10}>
-      <FaHeart color={isLike ? '#e46868' : 'gray'} size={25} className='cursor-pointer' onClick={onClick} />
-      <SmallText color='white'>{likes}</SmallText>
+      <FaHeart color={color ? color : initialColor} size={25} className='cursor-pointer' onClick={onClick} />
+      <SmallText color='white'>{likes ? likes : lastestLikes}</SmallText>
     </FlexWrapper>
   );
 }

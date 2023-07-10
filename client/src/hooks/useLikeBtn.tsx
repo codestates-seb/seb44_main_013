@@ -1,7 +1,7 @@
 /* 2023-07-07 좋아요 버튼 커스텀훅 - 김다함 */
 import { portfolios } from '@/mocks/data';
 import { call } from '@/utils/ApiService';
-import { MouseEventHandler, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface LikeBtnProps {
   portfolio_id: number;
@@ -10,22 +10,26 @@ interface LikeBtnProps {
 }
 
 export default function useLikeBtn({ portfolio_id, initailLikes, initialIsLike }: LikeBtnProps) {
+  const [url, setUrl] = useState(`/likes/${portfolio_id}`);
   const [isLike, setIsLike] = useState(initialIsLike);
   const [likes, setLikes] = useState(initailLikes);
+  const [color, setColor] = useState('');
 
   const onClick = useCallback(() => {
     if (!isLike)
-      call(`/likes/${portfolio_id}`, 'POST')
+      call(url, 'POST')
         .then((res) => {
           setLikes(res.likes);
+          setColor('#e46868');
         });
     else
-      call(`/likes/${portfolio_id}`, 'DELETE')
+      call(url, 'DELETE')
         .then((res) => {
           setLikes(res.likes);
+          setColor('gray');
         });
     setIsLike(!isLike);
   }, [])
 
-  return [isLike, likes, onClick] as const;
+  return [likes, color, onClick] as const;
 };
