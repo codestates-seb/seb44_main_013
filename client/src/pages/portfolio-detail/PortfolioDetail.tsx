@@ -2,12 +2,12 @@
 import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
-import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { Center, FlexColumnContainer, FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import UserProfile from '@/commons/molecules/UserProfile';
 import Tag from '@/commons/molecules/Tag';
-import { BodyText, HeadingText, LabelText } from '@/commons/atoms/Typography';
+import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typography';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { call } from '@/utils/ApiService';
@@ -45,29 +45,37 @@ export default function PortfolioDetail() {
           className='cursor-pointer'
           onClick={() => navigate(-1)} />
       </ButtonHeader>
+
       <ContentContainer>
         <PortfolioContainer>
           {isSuccess &&
             <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
           }
         </PortfolioContainer>
+
         <UserContainer>
           <UserCard>
             <FlexWrapper gap={0} className='justify-between'>
               {isSuccess &&
                 <>
                   <LikeBtn portfolio_id={data.portfolio_id} initialLikes={data.likes} initialIsLiked={data.isLiked} />
-                  <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
+                  <FlexWrapper gap={20}>
+                    <SmallText color='white'>views · {isSuccess && data.view}</SmallText>
+                    <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
+                  </FlexWrapper>
                 </>
               }
             </FlexWrapper>
             <UserProfile type="portfolio" user={user} />
+
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
+
             <HeadingText color='white'>{isSuccess && data.title}</HeadingText>
             <BodyText color='white'>{isSuccess && data.explain}</BodyText>
           </UserCard>
+
           <UserCard>
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
