@@ -5,7 +5,7 @@ import UserProfile from '@/commons/molecules/UserProfile';
 export default function CommunityItem() {
   return (
     <CommunityItemContainer>
-      <UserProfile type={'board'} username={'emma'} />
+      <UserProfile type={'board'} user={{ member_id: 1, name: 'dsf', picture: 'asdf' }} />
       <h2>Title</h2>
       <p>contents</p>
       <Views />
