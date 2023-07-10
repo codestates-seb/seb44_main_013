@@ -50,7 +50,7 @@ export default function PortfolioDetail() {
             <FlexWrapper gap={0} className='justify-between'>
               {isSuccess &&
                 <>
-                  <LikeBtn portfolio_id={data.portfolio_id} lastestLikes={data.likes} nowIsLike={data.isLike} />
+                  <LikeBtn portfolio_id={data.portfolio_id} initialLikes={data.likes} initialIsLiked={data.isLiked} />
                   <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
                 </>
               }
