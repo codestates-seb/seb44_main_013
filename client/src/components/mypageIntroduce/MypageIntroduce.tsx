@@ -1,4 +1,5 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { MdDone } from 'react-icons/md';
 import {
@@ -12,24 +13,44 @@ import { UserData } from '@/mocks/data';
 
 interface MypageIntroduceProps {
   userData: UserData | null;
+  deleteInfo: () => void;
 }
 
 const useInput = (
   initial: string
-): [string, (e: ChangeEvent<HTMLInputElement>) => void] => {
+): [
+  string,
+  (e: ChangeEvent<HTMLInputElement>) => void,
+  React.Dispatch<React.SetStateAction<string>>
+] => {
   const [value, setValue] = useState(initial);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value);
-  return [value, handleChange];
+  return [value, handleChange, setValue];
 };
 
-export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
-  const [isEdit, setIsEdit] = useState(false);
-  const [job, handleJobEdit] = useInput(userData?.job || '');
-  const [career, handleCareerEdit] = useInput(userData?.career || '');
-  const [awards, handleAwardsEdit] = useInput(userData?.awards || '');
+export default function MypageIntroduce({
+  userData,
+  deleteInfo,
+}: MypageIntroduceProps) {
+  const initialJob = userData?.job || 'What is your job?';
+  const initialCareer = userData?.career || 'Career 1';
+  const initialAwards = userData?.awards || 'Awards 1';
 
-  const Toggle = () => {
+  const [job, handleJobEdit, setJob] = useInput(
+    localStorage.getItem('job') || initialJob
+  );
+  const [career, handleCareerEdit, setCareer] = useInput(
+    localStorage.getItem('career') || initialCareer
+  );
+  const [awards, handleAwardsEdit, setAwards] = useInput(
+    localStorage.getItem('awards') || initialAwards
+  );
+
+  const [isEdit, setIsEdit] = useState(false);
+  const navigate = useNavigate();
+
+  const toggleEdit = () => {
     setIsEdit(!isEdit);
   };
 
@@ -41,23 +62,15 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
     localStorage.setItem('awards', awards);
   };
 
-  useEffect(() => {
-    const storedJob = localStorage.getItem('job');
-    const storedCareer = localStorage.getItem('career');
-    const storedAwards = localStorage.getItem('awards');
-    if (storedJob)
-      handleJobEdit({
-        target: { value: storedJob },
-      } as ChangeEvent<HTMLInputElement>);
-    if (storedCareer)
-      handleCareerEdit({
-        target: { value: storedCareer },
-      } as ChangeEvent<HTMLInputElement>);
-    if (storedAwards)
-      handleAwardsEdit({
-        target: { value: storedAwards },
-      } as ChangeEvent<HTMLInputElement>);
-  }, []);
+  const handleDelete = () => {
+    if (window.confirm('정말로 탈퇴하시겠습니까?')) {
+      deleteInfo();
+      setJob(initialJob);
+      setCareer(initialCareer);
+      setAwards(initialAwards);
+      navigate('/');
+    }
+  };
 
   return (
     <MypageIntroWrap>
@@ -94,10 +107,10 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
       {isEdit ? (
         <MdDone className="editBtn" onClick={handleSave} size={24} />
       ) : (
-        <BsFillPencilFill className="editBtn" onClick={Toggle} />
+        <BsFillPencilFill className="editBtn" onClick={toggleEdit} />
       )}
       <BtnStyleContainer>
-        <PurpleBtn>회원 탈퇴</PurpleBtn>
+        <PurpleBtn onClick={handleDelete}>회원 탈퇴</PurpleBtn>
       </BtnStyleContainer>
     </MypageIntroWrap>
   );

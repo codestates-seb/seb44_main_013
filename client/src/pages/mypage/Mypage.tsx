@@ -31,6 +31,12 @@ export default function MyPage() {
       });
   }, []);
 
+  const deleteInfo = () => {
+    localStorage.removeItem('job');
+    localStorage.removeItem('career');
+    localStorage.removeItem('awards');
+  };
+
   return (
     <MainWrapper>
       {/* 프로필 부분  */}
@@ -38,7 +44,7 @@ export default function MyPage() {
         {/* 정보 조회, 수정 기능 추가 - 위정연 */}
         <MypageProfile userData={userData} />
         {/* 탈퇴버튼 추가 - 위정연 */}
-        <MypageIntroduce userData={userData} />
+        <MypageIntroduce userData={userData} deleteInfo={deleteInfo} />
       </MyProfileWrapper>
 
       <MyItemsWrapper>

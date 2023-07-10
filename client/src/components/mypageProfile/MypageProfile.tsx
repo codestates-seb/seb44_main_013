@@ -1,5 +1,3 @@
-// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정
-
 import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
 import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
@@ -7,48 +5,47 @@ import { BiMap } from 'react-icons/bi';
 import { useState, useRef, useEffect } from 'react';
 import { UserData } from '@/mocks/data';
 
-export default function MypageProfile({
-  userData,
-}: {
+interface MypageProfileProps {
   userData: UserData | null;
-}) {
-  const [isEditing, setIsEditing] = useState(false);
+}
+
+export default function MypageProfile({ userData }: MypageProfileProps) {
+  const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState(() => {
     const storedName = localStorage.getItem('name');
     return storedName !== null ? storedName : 'HOHO';
   });
-  const [editedName, setEditedName] = useState('');
 
   const handleEditToggle = () => {
-    setIsEditing(!isEditing);
+    setIsEdit(!isEdit);
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedName(e.target.value);
+    setName(e.target.value);
   };
 
   const handleNameBlur = () => {
-    if (editedName !== '') {
-      setName(editedName);
-      localStorage.setItem('name', editedName);
-      console.log('Name:', editedName);
+    if (name.trim() !== '') {
+      localStorage.setItem('name', name);
     }
-    setIsEditing(false);
+    setIsEdit(false);
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    if (inputRef.current !== null) inputRef.current.focus();
+    if (inputRef.current !== null) {
+      inputRef.current.focus();
+    }
   }, []);
 
   return (
     <MypageProfileContainer>
       <img src={userImg} alt="userImage" />
       <div>
-        {isEditing ? (
+        {isEdit ? (
           <NameEdit
             type="text"
-            value={editedName}
+            value={name}
             ref={inputRef}
             onChange={handleNameChange}
             onBlur={handleNameBlur}
