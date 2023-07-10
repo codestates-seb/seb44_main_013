@@ -2,9 +2,9 @@ import { AppItemContainer } from "./AppItem.stlyed";
 import item from "../../assets/userImg.jpg";
 import { AiOutlineWifi } from "react-icons/ai";
 import { BsBatteryFull } from "react-icons/bs";
-import Bookmark from "../bookmark/Bookmark";
+import Bookmark from "../../commons/atoms/buttons/Bookmark";
 
-export default function AppItem () {
+export default function AppItem() {
   return (
     <AppItemContainer>
       <span>10:30</span>

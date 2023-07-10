@@ -4,7 +4,7 @@ import { BsArrowReturnLeft } from 'react-icons/bs';
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
-import Bookmark from '@/components/bookmark/Bookmark';
+import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import UserProfile from '@/commons/molecules/UserProfile';
 import Tag from '@/commons/molecules/Tag';
 import { BodyText, HeadingText, LabelText } from '@/commons/atoms/Typography';
@@ -51,7 +51,7 @@ export default function PortfolioDetail() {
               {isSuccess &&
                 <>
                   <LikeBtn portfolio_id={data.portfolio_id} lastestLikes={data.likes} nowIsLike={data.isLike} />
-                  <Bookmark />
+                  <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
                 </>
               }
             </FlexWrapper>
