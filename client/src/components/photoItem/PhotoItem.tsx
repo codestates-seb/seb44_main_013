@@ -1,7 +1,7 @@
 import tw from "twin.macro";
 import styled from "styled-components";
 import photoImg from "../../assets/userImg.jpg";
-import Bookmark from "../bookmark/Bookmark";
+import Bookmark from "../../commons/atoms/buttons/Bookmark";
 
 export const PhotoItemContainer = styled.div`
   ${tw`
@@ -29,7 +29,7 @@ export const PhotoItemContainer = styled.div`
   }
 `;
 
-export default function PhotoItem () {
+export default function PhotoItem() {
   return (
     <PhotoItemContainer>
       <img src={photoImg} alt="photo image" />

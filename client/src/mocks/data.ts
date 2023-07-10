@@ -11,7 +11,8 @@ export const portfolios = [
     created_at: '2020-20-20',
     view: 30,
     likes: 20,
-    isLike: false,
+    isLiked: false,
+    isMarked: false,
     tags: ['javascript', 'react', '집', '잠', '영화', '로또', '백수']
   },
 ]

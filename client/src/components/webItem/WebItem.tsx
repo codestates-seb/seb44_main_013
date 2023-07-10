@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import WebItem1 from '../../assets/WebItem1.png';
-import Bookmark from '../bookmark/Bookmark';
+import Bookmark from '../../commons/atoms/buttons/Bookmark';
 
 import {
   BookmarkWrapper,
