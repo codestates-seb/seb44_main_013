@@ -15,14 +15,14 @@ import { User } from '@/types';
 
 export default function PortfolioDetail() {
   const navigate = useNavigate();
-  // const { portfolio_id } = useParams();
-  const portfolio_id = 1;
+  const { portfolio_id } = useParams();
   let user: User = {
     member_id: 0,
     name: '',
     picture: ''
   }
-  const { data, isSuccess } = useQuery(['portfolio'],
+
+  const { data, isSuccess } = useQuery(['portfolio', portfolio_id],
     () => call(`/portfolios/${portfolio_id}`, 'GET'));
   if (isSuccess) {
     user = {
@@ -31,6 +31,7 @@ export default function PortfolioDetail() {
       picture: data.picture
     }
   }
+
   return (
     <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
@@ -47,8 +48,12 @@ export default function PortfolioDetail() {
         <UserContainer>
           <UserCard>
             <FlexWrapper gap={0} className='justify-between'>
-              <LikeBtn likes={isSuccess && data.likes} />
-              <Bookmark />
+              {isSuccess &&
+                <>
+                  <LikeBtn portfolio_id={data.portfolio_id} lastestLikes={data.likes} nowIsLike={data.isLike} />
+                  <Bookmark />
+                </>
+              }
             </FlexWrapper>
             <UserProfile type="portfolio" user={user} />
             <Center>
@@ -61,7 +66,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {isSuccess &&
-                data.tags.map((tag: string) => <Tag value={tag} />)
+                data.tags.map((tag: string, id: number) => <Tag value={tag} key={id} />)
               }
             </FlexWrapper>
           </UserCard>
