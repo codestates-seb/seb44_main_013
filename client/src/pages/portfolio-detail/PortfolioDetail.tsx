@@ -23,7 +23,13 @@ export default function PortfolioDetail() {
   }
 
   const { data, isSuccess } = useQuery(['portfolio', portfolio_id],
-    () => call(`/portfolios/${portfolio_id}`, 'GET'));
+    () => call(`/portfolios/${portfolio_id}`, 'GET'),
+    {
+      staleTime: 1000 * 60 * 5,
+      cacheTime: Infinity
+    }
+  );
+
   if (isSuccess) {
     user = {
       member_id: data.member_id,
