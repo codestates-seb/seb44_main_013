@@ -11,17 +11,26 @@ import { BodyText, HeadingText, LabelText } from '@/commons/atoms/Typography';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { call } from '@/utils/ApiService';
+import { User } from '@/types';
 
 export default function PortfolioDetail() {
-  // const { portfolioId } = useParams();
-  const portfolioId = 1;
-  const { data, isSuccess } = useQuery(['portfolio'],
-    () => call(`/portfolios/${portfolioId}`, 'GET'));
-
-  if (isSuccess) {
-
+  const navigate = useNavigate();
+  // const { portfolio_id } = useParams();
+  const portfolio_id = 1;
+  let user: User = {
+    member_id: 0,
+    name: '',
+    picture: ''
   }
-
+  const { data, isSuccess } = useQuery(['portfolio'],
+    () => call(`/portfolios/${portfolio_id}`, 'GET'));
+  if (isSuccess) {
+    user = {
+      member_id: data.member_id,
+      name: data.name,
+      picture: data.picture
+    }
+  }
   return (
     <FlexColumnContainer gap={10} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
@@ -37,7 +46,7 @@ export default function PortfolioDetail() {
               <LikeBtn likes={isSuccess && data.likes} />
               <Bookmark />
             </FlexWrapper>
-            <UserProfile type="portfolio" username="HOHO" />
+            <UserProfile type="portfolio" user={user} />
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
