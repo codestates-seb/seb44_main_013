@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: ENC(MSADrPeqSNMWvaOBsyZTzaIb6dQ3Nem29PJ89zAZ33jP8O+sTbu754/hhDQ81goJ)
+    url: jdbc:mysql://localhost:3306/portfolly
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ENC(KWKo0pSOt1ufRLYjLgnoc1kF0Rihu/CU)
-    password: ENC(ZYyGDXZoS5Oe2fUs6MGdRPetOXN/HCGO)
+    username: ${DATABASE_ID}
+    password: ${DATABASE_PASSWORD}
 
   profiles:
     include: oauth
@@ -15,7 +15,17 @@ spring:
         hbm2ddl:
           auto: create
     show-sql: true
+mail:
+  address:
+    admin: admin@gmail.com
+
+#jwt:
+#  key:
+#    secret: ${JWT_SECRET_KEY}    # 환경변수에 로드
+#  access-token-expiration-minutes: 30
+#  refresh-token-expiration-minutes: 420
 
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+    password: ${PASSWORD}
