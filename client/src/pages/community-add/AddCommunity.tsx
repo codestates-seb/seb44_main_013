@@ -9,7 +9,9 @@ import {
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddCommunity() {
   const modules = {
@@ -31,14 +33,37 @@ export default function AddCommunity() {
   };
 
   const [title, setTitle] = useState("");
+  const [quillText, setQuillText] = useState("");
+  const navigate = useNavigate();
 
   const handleTitle = (e: any) => {
     setTitle(e.target.value);
   };
-  console.log(title);
+
+  // react-quill 테스트용
+  const bodyReq = {
+    title: title,
+    content: quillText,
+  }
+
+  const postCommunity = () => {
+    axios.post('/community/add', {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: bodyReq,
+      }
+    )  
+    .then((res) => console.log(res.body))
+    .catch((err) => console.log(err));
+
+    navigate('/boards');
+  }
+  // console.log(boards);
 
   return (
     <>
+      {/* <CHeader /> */}
       <EditorContainer>
         <TextEditorContainer>
           <h1 className='addTitle'>Edit Your Forum</h1>
@@ -49,8 +74,10 @@ export default function AddCommunity() {
               theme="snow"
               modules={modules}
               className='reactQuillContainer'
+              value={quillText}
+              onChange={(e: any) => setQuillText(e.replace(/<\/?p[^>]*>/g, ''))}
             />
-            <SaveBtnContainer>
+            <SaveBtnContainer onClick={postCommunity}>
               <PurpleBtn>Save</PurpleBtn>
             </SaveBtnContainer>
           </TextEditor>
