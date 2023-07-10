@@ -5,8 +5,13 @@ import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { useState, useRef, useEffect } from 'react';
+import { UserData } from '@/mocks/data';
 
-export default function MypageProfile() {
+export default function MypageProfile({
+  userData,
+}: {
+  userData: UserData | null;
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(() => {
     const storedName = localStorage.getItem('name');
@@ -50,7 +55,7 @@ export default function MypageProfile() {
           />
         ) : (
           <>
-            <h1>{name}</h1>
+            <h1 onClick={handleEditToggle}>{name}</h1>
             <BsFillPencilFill
               size={20}
               className="editBtn"

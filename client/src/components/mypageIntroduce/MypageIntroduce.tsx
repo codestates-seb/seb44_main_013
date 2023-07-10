@@ -8,6 +8,11 @@ import {
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import { UserData } from '@/mocks/data';
+
+interface MypageIntroduceProps {
+  userData: UserData | null;
+}
 
 const useInput = (
   initial: string
@@ -18,11 +23,11 @@ const useInput = (
   return [value, handleChange];
 };
 
-export default function MypageIntroduce() {
+export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
   const [isEdit, setIsEdit] = useState(false);
-  const [job, handleJobEdit] = useInput('What is your job?');
-  const [career, handleCareerEdit] = useInput('Career 1');
-  const [awards, handleAwardsEdit] = useInput('Awards 1');
+  const [job, handleJobEdit] = useInput(userData?.job || '');
+  const [career, handleCareerEdit] = useInput(userData?.career || '');
+  const [awards, handleAwardsEdit] = useInput(userData?.awards || '');
 
   const Toggle = () => {
     setIsEdit(!isEdit);

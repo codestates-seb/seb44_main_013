@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MypageItem from '@/components/mypageItem/MypageItem';
 import {
   BoxTitle,
@@ -13,17 +13,32 @@ import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
 import CommunityList from '@/components/mypage-community/CommunityList';
 import { Pagenation } from '@/components/pagenation/Pagenation';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
+import { UserData } from '@/mocks/data';
 
 export default function MyPage() {
   const [isUser, setIsUser] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    fetch('/members')
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+        console.log('user data:', data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
   return (
     <MainWrapper>
       {/* 프로필 부분  */}
       <MyProfileWrapper>
-        <MypageProfile />
-        {/* 탈퇴버튼+기능 추가 - 위정연 */}
-        <MypageIntroduce />
+        {/* 정보 조회, 수정 기능 추가 - 위정연 */}
+        <MypageProfile userData={userData} />
+        {/* 탈퇴버튼 추가 - 위정연 */}
+        <MypageIntroduce userData={userData} />
       </MyProfileWrapper>
 
       <MyItemsWrapper>
