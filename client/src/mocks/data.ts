@@ -14,3 +14,17 @@ export const portfolios = [
     tags: ['javascript', 'react', '집', '잠', '영화', '로또', '백수']
   },
 ]
+
+
+/*2023-07-10 Mypage User Information - 위정연 */
+export interface UserData {
+  job: string;
+  career: string;
+  awards: string;
+}
+
+export const userData: UserData = {
+  job: 'What is your job?',
+  career: 'Career 1',
+  awards: 'Awards 1',
+};

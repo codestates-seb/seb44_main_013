@@ -1,40 +1,63 @@
-// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정 
+// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정
 
-import { MypageProfileContainer, NameEdit} from "./MypageProfile.styled";
-import userImg from "../../assets/userImg.jpg";
-import { BsFillPencilFill } from "react-icons/bs";
-import { BiMap } from "react-icons/bi";
-import { useState, useRef, useEffect } from "react";
+import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
+import userImg from '../../assets/userImg.jpg';
+import { BsFillPencilFill } from 'react-icons/bs';
+import { BiMap } from 'react-icons/bi';
+import { useState, useRef, useEffect } from 'react';
 
-export default function MypageProfile () {
-  const [isEdit, setIsEdit] = useState(false)
-  const [name, setName] = useState("HOHO")
+export default function MypageProfile() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState(() => {
+    const storedName = localStorage.getItem('name');
+    return storedName !== null ? storedName : 'HOHO';
+  });
+  const [editedName, setEditedName] = useState('');
 
-  const hanldeEditState = () => {
-    setIsEdit(!isEdit);
-  }
+  const handleEditToggle = () => {
+    setIsEditing(!isEditing);
+  };
 
-  const handleEditValue = (e: any) => {
-    setName(e.target.value);
-  }
-  console.log(isEdit);
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditedName(e.target.value);
+  };
+
+  const handleNameBlur = () => {
+    if (editedName !== '') {
+      setName(editedName);
+      localStorage.setItem('name', editedName);
+      console.log('Name:', editedName);
+    }
+    setIsEditing(false);
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (inputRef.current !== null) inputRef.current.focus();
-  });
-  
+  }, []);
+
   return (
     <MypageProfileContainer>
       <img src={userImg} alt="userImage" />
       <div>
-        {isEdit ?
-           <NameEdit type="text" value={name} ref={inputRef} onChange={handleEditValue} onBlur={hanldeEditState}></NameEdit> :
+        {isEditing ? (
+          <NameEdit
+            type="text"
+            value={editedName}
+            ref={inputRef}
+            onChange={handleNameChange}
+            onBlur={handleNameBlur}
+          />
+        ) : (
           <>
             <h1>{name}</h1>
-            <BsFillPencilFill size={20} className="editBtn" onClick={hanldeEditState} />
+            <BsFillPencilFill
+              size={20}
+              className="editBtn"
+              onClick={handleEditToggle}
+            />
           </>
-        }
+        )}
       </div>
       <div>
         <BiMap size={18} />
@@ -43,4 +66,3 @@ export default function MypageProfile () {
     </MypageProfileContainer>
   );
 }
-
