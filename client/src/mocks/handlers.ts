@@ -7,6 +7,7 @@ const DaHamHandlers = [
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolio_id = Number(req.params.portfolio_id);
     const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
+    portfolios.map((p) => ++p.view);
     return res(ctx.status(200), ctx.json(Portfolio[0]));
   }),
   // 좋아요 기능
