@@ -11,7 +11,7 @@ interface MypageProfileProps {
 }
 
 const WeatherIcon = styled.img`
-  width: 70px;
+  width: 60px;
   height: 60px;
 `;
 
@@ -63,7 +63,7 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
           response.json().then((data) => {
             setWeatherData({
               city: data.name,
-              weather: `${data.main.temp}°C`,
+              weather: `${parseFloat(data.main.temp).toFixed(1)}°C`,
               icon: data.weather[0].icon,
             });
           })
@@ -100,7 +100,7 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
       <div>
         <BiMap size={18} />
         <p>
-          {weatherData.city}, {weatherData.weather}
+          {weatherData.city} / {weatherData.weather}
         </p>
         {weatherData.icon && (
           <WeatherIcon
