@@ -2,16 +2,20 @@ package com.portfolly.server.exception;
 
 import lombok.Getter;
 
-@Getter
 public enum ExceptionCode {
-    MEMBER_NOT_FOUND(404, "Member not found"),
-    PORTFOLIO_NOT_FOUND(404, "Portfolio not found");
 
-    private final int status;
-    private final String message;
+    MEMBER_EXIST(409,"회원이 존재합니다."),
+    MEMBER_NOT_EXIST(404,"회원이 존재하지 않습니다."),
+    MEMBER_ROLE_NOT_EXIST(404,"회원의 역할이 정해지지 않았습니다."),
+    EMAIL_NOT_EXIST(404,"회원의 이메일이 존재하지 않습니다."),
+    EMAIL_DUPLICATION_ERROR(409,"이메일 중복 오류 입니다.");
 
-    ExceptionCode(int status, String message) {
-        this.status = status;
+    @Getter
+    private int status;
+    @Getter
+    private String message;
+    ExceptionCode(int code, String message) {
+        this.status = code;
         this.message = message;
     }
 }

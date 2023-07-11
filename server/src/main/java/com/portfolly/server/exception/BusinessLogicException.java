@@ -2,9 +2,10 @@ package com.portfolly.server.exception;
 
 import lombok.Getter;
 
-@Getter
-public class BusinessLogicException extends RuntimeException {
-    private final ExceptionCode exceptionCode;
+public class BusinessLogicException extends RuntimeException{
+    @Getter
+    private ExceptionCode exceptionCode;
+
     public BusinessLogicException(ExceptionCode exceptionCode) {
         super(exceptionCode.getMessage());
         this.exceptionCode = exceptionCode;
