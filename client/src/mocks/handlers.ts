@@ -27,6 +27,18 @@ const UserHandlers = [
   rest.get<UserData>('/members', (req, res, ctx) => {
     return res(ctx.json(userData));
   }),
+  rest.delete<UserData>('/members', (req, res, ctx) => {
+    // userData를 초기 상태로 재설정합니다.
+    userData.name = 'Your Name';
+    userData.job = 'What is your job?';
+    userData.career = 'Career 1';
+    userData.award = 'Awards 1';
+
+    return res(
+      ctx.status(200),
+      ctx.json({ message: 'User data successfully deleted' })
+    );
+  }),
 ];
 
 export { UserHandlers };

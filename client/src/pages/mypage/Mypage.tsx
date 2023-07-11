@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MypageItem from '@/components/mypageItem/MypageItem';
 import {
   BoxTitle,
@@ -17,6 +17,21 @@ import { UserData } from '@/mocks/data';
 
 export default function MyPage() {
   const [userData, setUserData] = useState<UserData | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/members');
+        const data = await response.json();
+        setUserData(data);
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   return (
     <MainWrapper>

@@ -24,8 +24,8 @@ export interface Styledprops
 }
 
 //0710 정연 Mypage 사용자 정보 수정 
-import { worker } from "../mocks/worker";
+// import { worker } from "../mocks/worker";
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start();
-}
+// if (process.env.NODE_ENV === 'development') {
+//   worker.start();
+// }

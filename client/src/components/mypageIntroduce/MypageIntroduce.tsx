@@ -1,44 +1,30 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { MdDone } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   MypageIntroWrap,
   MypageIntroContainer,
   IntroduceTitle,
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
-import { UserData } from '@/mocks/data';
-import { useNavigate } from 'react-router-dom';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import { UserData } from '@/mocks/data';
 
 interface MypageIntroduceProps {
   userData: UserData | null;
 }
 
-const useInput = (
-  initial: string
-): [string, (e: ChangeEvent<HTMLInputElement>) => void] => {
-  const [value, setValue] = useState(initial);
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setValue(e.target.value);
-  return [value, handleChange];
-};
-
 export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
   const initialJob = userData?.job || 'What is your job?';
   const initialCareer = userData?.career || 'Career 1';
-  const initialAwards = userData?.awards || 'Awards 1';
+  const initialAwards = userData?.award || 'Awards 1';
   const navigate = useNavigate();
 
-  const [job, handleJobEdit] = useInput(
-    localStorage.getItem('job') || initialJob
-  );
-  const [career, handleCareerEdit] = useInput(
-    localStorage.getItem('career') || initialCareer
-  );
-  const [awards, handleAwardsEdit] = useInput(
-    localStorage.getItem('awards') || initialAwards
-  );
+  const [job, setJob] = useState(initialJob);
+  const [career, setCareer] = useState(initialCareer);
+  const [awards, setAwards] = useState(initialAwards);
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -46,25 +32,25 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
     setIsEdit(!isEdit);
   };
 
-  const handleSave = () => {
-    console.log('API 호출: 정보 저장', job, career, awards);
+  const handleSave = async () => {
+    try {
+      await axios.put('/members', { job, career, awards });
+      console.log('저장 성공');
+    } catch (error) {
+      console.error('저장 실패', error);
+    }
     setIsEdit(false);
-    localStorage.setItem('job', job);
-    localStorage.setItem('career', career);
-    localStorage.setItem('awards', awards);
   };
 
-  const deleteInfo = () => {
-    localStorage.removeItem('job');
-    localStorage.removeItem('career');
-    localStorage.removeItem('awards');
-    localStorage.removeItem('name');
-  };
-
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('정말로 탈퇴하시겠습니까?')) {
-      deleteInfo();
-      navigate('/');
+      try {
+        await axios.delete('/members');
+        console.log('삭제 성공');
+        navigate('/');
+      } catch (error) {
+        console.error('삭제 실패', error);
+      }
     }
   };
 
@@ -73,7 +59,11 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
       <MypageIntroContainer>
         <IntroduceTitle>Job</IntroduceTitle>
         {isEdit ? (
-          <input type="text" value={job} onChange={handleJobEdit} />
+          <input
+            type="text"
+            value={job}
+            onChange={(e) => setJob(e.target.value)}
+          />
         ) : (
           <p className="introContent">{job}</p>
         )}
@@ -83,7 +73,11 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
         <IntroduceTitle>Career</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input type="text" value={career} onChange={handleCareerEdit} />
+            <input
+              type="text"
+              value={career}
+              onChange={(e) => setCareer(e.target.value)}
+            />
           ) : (
             <li className="introContent">{career}</li>
           )}
@@ -94,7 +88,11 @@ export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
         <IntroduceTitle>Awards</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input type="text" value={awards} onChange={handleAwardsEdit} />
+            <input
+              type="text"
+              value={awards}
+              onChange={(e) => setAwards(e.target.value)}
+            />
           ) : (
             <li className="introContent">{awards}</li>
           )}
