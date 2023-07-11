@@ -8,3 +8,4 @@ out
 gen
 /src/main/resources/application-aws.yml
 /src/main/resources/application.yml
+/sec/main/resources/application.properties
