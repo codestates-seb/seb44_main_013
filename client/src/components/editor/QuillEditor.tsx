@@ -4,6 +4,7 @@ import tw from 'twin.macro';
 import { memo, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.snow.css";
+import { QuillPropsType } from '@/types';
 
 const QuillWrapper = styled.div`
 ${tw`z-10 absolute border-0 top-0`}
@@ -27,7 +28,7 @@ ${tw`z-10 absolute border-0 top-0`}
   }
 `
 
-const QuillEditor = memo(() => {
+const QuillEditor = memo(({ htmlContent, setContentHandler }: QuillPropsType) => {
   const quillRef = useRef<ReactQuill>();
 
   const modules = useMemo(
@@ -59,11 +60,12 @@ const QuillEditor = memo(() => {
             quillRef.current = element;
           }
         }}
-        // onChange={}
+        value={htmlContent}
+        onChange={(content) => setContentHandler(content)}
         modules={modules}
         theme="snow"
         style={{ height: '100%', marginBottom: '0' }}
-        placeholder={'Writing Something...'}
+        placeholder={'Write Something...'}
       />
     </QuillWrapper>
   )
