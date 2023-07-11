@@ -23,3 +23,27 @@ export interface Styledprops
   color: string;
 }
 
+//0707 혜진 community-main:<data> commu
+export interface CommuProps {
+  board_id: number,
+  title: string,
+  content: string,
+  view: number,
+  division:string,
+  name: string,
+  created_at: string,
+  modifiedAt: string,
+  member_id: number,
+  status:boolean,
+  comment?: CommentProps[]
+}
+
+//0708 혜진 community-detail comments add
+export interface CommentProps {
+  comments_id: number;
+  content: string;
+  member_id: number;
+  name: string;
+  createdAt: string;
+  modifiedAt: string;
+}

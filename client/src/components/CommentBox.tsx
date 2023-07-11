@@ -3,19 +3,26 @@ import Card from '@/commons/atoms/Card';
 import Comment from '@/commons/molecules/Comment';
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import CommentWriteBox from '@/commons/molecules/CommentWriteBox';
+import { CommentProps } from '@/types';
 
-interface CommentBoxProps {
-    comment: 'CommentType'
-}
 
-export default function CommentBox({ comment }: CommentBoxProps) {
+export default function CommentBox( {comment}:any) {
     return (
-        <Card className='justify-between'>
-            <FlexColumnContainer gap={0}>
-                <Comment username='vite' content='zzzzz' date='2020-20-20' />
-                <Comment username='vite' content='zzzzz' date='2020-20-20' />
+        <Card>
+            <FlexColumnContainer gap={0} className="overflow-scroll">
+                {
+                    comment.map((e:CommentProps) => {
+                        return (<Comment key={e.comments_id}
+                                        username={e.name}
+                                        content={e.content}
+                                        date={e.createdAt}
+                                        comment={e}
+                                />
+                        )
+                    })
+                }
             </FlexColumnContainer>
-            <CommentWriteBox />
+            <CommentWriteBox/>
         </Card>
     )
 } 

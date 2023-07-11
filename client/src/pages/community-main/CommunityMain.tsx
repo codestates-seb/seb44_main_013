@@ -17,6 +17,8 @@ import { CommuProps } from '@/types';
 export default function CommunityMain() {
   const [ datas, setDatas ] = useState<CommuProps[]>([])
 
+
+
   useEffect(() => {
     const axiosCommu = async () => {
       return call('/boards', 'GET', null)
