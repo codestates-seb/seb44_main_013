@@ -69,7 +69,7 @@ const HJHandlers = [
     if(index !== -1){
       commuDetail[index].comment.push(newPostData);
     }
-    console.log(commuDetail[1].comment);
+    //console.log(commuDetail[1].comment);
     return res(ctx.status(200), ctx.json(newPostData));
   }),
 ];
