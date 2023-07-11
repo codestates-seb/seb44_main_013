@@ -1,8 +1,10 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps, EventHandler } from "react";
 import { User } from './UserInterface';
+import { QuillPropsType } from './QuillPropsType';
 
 export type { User };
+export type { QuillPropsType };
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
