@@ -10,8 +10,9 @@ import axios from 'axios';
 import { useState } from 'react';
 
 
-export default function CommentBox( {comment}:any) {
+export default function CommentBox( {comment, }:any) {
     const [isInput, setIsInput ] = useState('');
+    const [ amendComment, setAmendComment ] = useState(comment);
     const board_id = useParams();
     
     const handleComment = ( value: string ) => {
@@ -22,7 +23,6 @@ export default function CommentBox( {comment}:any) {
         const axiosPost = async () => {
         try{
             console.log('POST 성공');
-            const numBoard_id = Number(board_id)
 
             axios('/comments', {
             method:'POST',
@@ -30,11 +30,11 @@ export default function CommentBox( {comment}:any) {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify({ 
-                board_id: `${numBoard_id}`,
+                board_id: board_id,
                 content: isInput,
             })
             })
-            console.log(board_id);
+            //console.log(board_id);
 
         } catch(err) {
             console.log('POST실패 ' + err);
@@ -50,7 +50,7 @@ export default function CommentBox( {comment}:any) {
             modifiedAt:"2023-06-21T17:34:51.3395597"
         });
         setIsInput('');
-        console.log(comment);
+        //console.log(comment);
     }
 
     return (
@@ -63,6 +63,8 @@ export default function CommentBox( {comment}:any) {
                                         content={e.content}
                                         date={e.createdAt}
                                         comment={e}
+                                        amendComment={amendComment}
+                                        setAmendComment={setAmendComment}
                                 />
                         )
                     })

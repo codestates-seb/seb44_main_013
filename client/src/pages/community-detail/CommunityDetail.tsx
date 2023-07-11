@@ -45,7 +45,7 @@ export default function CommunityDetail( {handleClick}:any ) {
               <DetailContents data={memberData}/>
             </CmDContainer>
             <CommentContainer>
-              <CommentBox comment={memberData.comment} />
+              <CommentBox comment={memberData.comment}/>
             </CommentContainer>
           </MainContainer>
         </>
