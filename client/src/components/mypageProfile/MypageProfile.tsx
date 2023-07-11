@@ -63,7 +63,7 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
           response.json().then((data) => {
             setWeatherData({
               city: data.name,
-              weather: `${parseFloat(data.main.temp).toFixed(1)}°C`,
+              weather: `${Math.round(data.main.temp)}°C`,
               icon: data.weather[0].icon,
             });
           })
