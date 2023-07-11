@@ -47,8 +47,6 @@ public class PortfolioService {
     public Portfolio selectPortfolio(Long portfolioId) {
         //runtimeException
         Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()->new RuntimeException());
-        //조회수 증가
-        increaseViews(portfolio);
         return portfolio;
     }
 
@@ -71,9 +69,9 @@ public class PortfolioService {
     }
 
     //회원이 존재하는지 확인
-    private void verifyPortfolio(Portfolio portfolio) {
-        memberService.findMember(portfolio.getMember().getId());
-    }
+//    private void verifyPortfolio(Portfolio portfolio) {
+//        memberService.findMember(portfolio.getMember().getId());
+//    }
 
 
     //isLiked
