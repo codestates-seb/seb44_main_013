@@ -4,12 +4,25 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { useState, useRef, useEffect } from 'react';
 import { UserData } from '@/mocks/data';
+import styled from 'styled-components';
 
 interface MypageProfileProps {
   userData: UserData | null;
 }
 
+const WeatherIcon = styled.img`
+  width: 70px;
+  height: 60px;
+`;
+
 export default function MypageProfile({ userData }: MypageProfileProps) {
+  const API_KEY = '76e0dc6fc7f77e50fa77bdb26076dbb1';
+  const [weatherData, setWeatherData] = useState<{
+    city: string;
+    weather: string;
+    icon: string;
+  }>({ city: '', weather: '', icon: '' });
+
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState(() => {
     const storedName = localStorage.getItem('name');
@@ -32,10 +45,33 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     if (inputRef.current !== null) {
       inputRef.current.focus();
     }
+  }, []);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+      fetch(url)
+        .then((response) =>
+          response.json().then((data) => {
+            setWeatherData({
+              city: data.name,
+              weather: `${data.main.temp}°C`,
+              icon: data.weather[0].icon,
+            });
+          })
+        )
+        .catch(() => {
+          alert("Can't find you. No weather for you.");
+        });
+    });
   }, []);
 
   return (
@@ -63,7 +99,15 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
       </div>
       <div>
         <BiMap size={18} />
-        <p>Seoul, South Korea</p>
+        <p>
+          {weatherData.city}, {weatherData.weather}
+        </p>
+        {weatherData.icon && (
+          <WeatherIcon
+            src={`http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
+            alt="Weather icon"
+          />
+        )}
       </div>
     </MypageProfileContainer>
   );
