@@ -1,86 +1,105 @@
-import {useState} from 'react';
-import MypageItem from "@/components/mypageItem/MypageItem";
-import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from "./MyPage.styled";
+import { useEffect, useState } from 'react';
+import MypageItem from '@/components/mypageItem/MypageItem';
+import {
+  BoxTitle,
+  BoxWrapper,
+  MainWrapper,
+  MyItemsWrapper,
+  MyProfileWrapper,
+} from './MyPage.styled';
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import MypageProfile from '@/components/mypageProfile/MypageProfile';
 import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
 import CommunityList from '@/components/mypage-community/CommunityList';
 import { Pagenation } from '@/components/pagenation/Pagenation';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
+import { UserData } from '@/mocks/data';
 
+export default function MyPage() {
+  const [isUser, setIsUser] = useState(true);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
-export default function MyPage () {
-    const [ isUser, setIsUser ] = useState(true);
+  useEffect(() => {
+    fetch('/members')
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+        console.log('user data:', data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
-    return(
-        <MainWrapper>
-            
-            {/* 프로필 부분  */}
-            <MyProfileWrapper>
-                <MypageProfile/>
-                <MypageIntroduce/>
-            </MyProfileWrapper>
+  const deleteInfo = () => {
+    localStorage.removeItem('job');
+    localStorage.removeItem('career');
+    localStorage.removeItem('awards');
+  };
 
-            <MyItemsWrapper>
-                {/* {}안에 서버로부터 받아온 정보를 보내주면 됩니다. */}
-                <FlexColumnWrapper gap={0}>
-                    <BoxTitle>게시물</BoxTitle>
-                    <BoxWrapper>
-                            {Array.from({length:10}).map((_, index) => {
-                                return (
-                                <MypageItem key={index} title={'Title'} name={'phy'} src={''} />
-                                )
-                            })}
-                    </BoxWrapper>
-                </FlexColumnWrapper>
-                
-                { isUser ? 
-                (   
+  return (
+    <MainWrapper>
+      {/* 프로필 부분  */}
+      <MyProfileWrapper>
+        {/* 정보 조회, 수정 기능 추가 - 위정연 */}
+        <MypageProfile userData={userData} />
+        {/* 탈퇴버튼 추가 - 위정연 */}
+        <MypageIntroduce userData={userData} deleteInfo={deleteInfo} />
+      </MyProfileWrapper>
 
-                    <FlexColumnWrapper gap={0}>
-                        <BoxTitle>북마크</BoxTitle>
-                        <BoxWrapper>
-                            {Array.from({length:10}).map((_, index) => {
-                                return (
-                                <MypageItem key={index} title={'Title'} name={'phy'} src={''} />
-                                )
-                            })}
-                        </BoxWrapper>
+      <MyItemsWrapper>
+        {/* {}안a에 서버로부터 받아온 정보를 보내주면 됩니다. */}
+        <FlexColumnWrapper gap={0}>
+          <BoxTitle>게시물</BoxTitle>
+          <BoxWrapper>
+            {Array.from({ length: 10 }).map((_, index) => {
+              return (
+                <MypageItem key={index} title={'Title'} name={'phj'} src={''} />
+              );
+            })}
+          </BoxWrapper>
+        </FlexColumnWrapper>
 
-                        {/* 게시판 목록 부분  */}
+        {isUser ? (
+          <FlexColumnWrapper gap={0}>
+            <BoxTitle>북마크</BoxTitle>
+            <BoxWrapper>
+              {Array.from({ length: 10 }).map((_, index) => {
+                return (
+                  <MypageItem
+                    key={index}
+                    title={'Title'}
+                    name={'phj'}
+                    src={''}
+                  />
+                );
+              })}
+            </BoxWrapper>
 
-                        <BoxTitle>게시판</BoxTitle>
-                        <BoxWrapper isRow="column">
-                            {Array.from({length:5}).map((_, index) => {
-                                return(
-                                    <CommunityList key={index}/>
-                                )
-                            })}
+            {/* 게시판 목록 부분  */}
 
-                            <PagenationWrapper>
-                                <Pagenation>&lt;</Pagenation>
+            <BoxTitle>게시판</BoxTitle>
+            <BoxWrapper isRow="column">
+              {Array.from({ length: 5 }).map((_, index) => {
+                return <CommunityList key={index} />;
+              })}
 
-                                {Array.from({length: 5}).map((e, i) => {
-                                    if(i === 0){
-                                        return(
-                                            <Pagenation>{i+1}</Pagenation>
-                                        )
-                                    }
-                                    return(
-                                        <Pagenation>{(i+length)+1}</Pagenation>
-                                    )
+              <PagenationWrapper>
+                <Pagenation>&lt;</Pagenation>
 
-                                })}
-                                
-                                <Pagenation> &gt;</Pagenation>
-                            </PagenationWrapper>
+                {Array.from({ length: 5 }).map((e, i) => {
+                  if (i === 0) {
+                    return <Pagenation>{i + 1}</Pagenation>;
+                  }
+                  return <Pagenation>{i + length + 1}</Pagenation>;
+                })}
 
-                        </BoxWrapper>
-                    </FlexColumnWrapper>
-                ) 
-                : null }
-            </MyItemsWrapper>
-
-        </MainWrapper>
-    )
+                <Pagenation> &gt;</Pagenation>
+              </PagenationWrapper>
+            </BoxWrapper>
+          </FlexColumnWrapper>
+        ) : null}
+      </MyItemsWrapper>
+    </MainWrapper>
+  );
 }

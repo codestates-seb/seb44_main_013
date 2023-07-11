@@ -11,3 +11,23 @@ const DaHamHandlers = [
 ];
 
 export const handlers = DaHamHandlers;
+
+
+
+/**0710 정연 Mypage 사용자 정보 수정 */
+// mocks/handlers.ts
+import { UserData, userData } from './data';
+
+const UserHandlers = [
+  rest.put<UserData>('/members', (req, res, ctx) => {
+    Object.assign(userData, req.body);
+
+    return res(ctx.json(userData));
+  }),
+  rest.get<UserData>('/members', (req, res, ctx) => {
+    return res(ctx.json(userData));
+  }),
+];
+
+export { UserHandlers };
+
