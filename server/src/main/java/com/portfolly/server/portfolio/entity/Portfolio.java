@@ -6,16 +6,18 @@ import com.portfolly.server.likes.entity.Likes;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.category.entity.Category;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-//@NoArgsConstructor
+@NoArgsConstructor
 //@AllArgsConstructor
 public class Portfolio extends Auditable {
     @Id
@@ -25,6 +27,7 @@ public class Portfolio extends Auditable {
     private String content;
     private String explains;
     private Long view = 0L;
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public Portfolio(Long id, String title, String content, String explains, Long view, Status status, Member member, Category category) {
