@@ -15,9 +15,11 @@ export default function PortfolioEdit() {
     <FlexColumnContainer gap={0} className="mx-h-screen top-0 overflow-hidden">
       <LogoHeader />
       <QuillEditor htmlContent={htmlContent} setContentHandler={setHtmlContent} />
-      {openTitle && <TitleForm isCreated='' setOpenTitle={setOpenTitle} htmlContent={htmlContent} />}
+      {openTitle &&
+        <TitleForm isCreated='' setOpenTitle={setOpenTitle} htmlContent={htmlContent} />
+      }
       <PortfolioEditButton
-        type="black"
+        color="black"
         className="absolute bottom-10 right-16" onClick={() => setOpenTitle(true)}>
         <BsCheck2 size="25" color="white" />
       </PortfolioEditButton>

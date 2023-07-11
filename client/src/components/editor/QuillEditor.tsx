@@ -24,7 +24,8 @@ ${tw`z-10 absolute border-0 top-0`}
     border: 0;
   }
   .ql-editor{
-    max-height: calc(100vh - 60px);
+    width: 1000px;
+    height: calc(100vh - 60px);
   }
 `
 
