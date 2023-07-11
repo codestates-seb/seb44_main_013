@@ -53,8 +53,6 @@ export default function CommentBox( {comment}:any) {
         console.log(comment);
     }
 
-
-  
     return (
         <Card>
             <FlexColumnContainer gap={0} className="overflow-scroll">
