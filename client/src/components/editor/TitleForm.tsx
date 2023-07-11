@@ -1,5 +1,5 @@
 /* 2023-07-04 포트폴리오 작성/수정 페이지 제목,태그 작성 Form - 김다함 */
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { DarkTextArea } from '@/commons/styles/Inputs.styled';
 import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
 import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
@@ -26,11 +26,21 @@ const TitleFormContainer = styled.div`
 `;
 
 const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => {
-  console.log(htmlContent)
+  const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
+
+  useEffect(() => {
+    register("htmlContent", { required: true, minLength: 50 });
+    setValue("htmlContent", htmlContent);
+  }, [register]);
+
+  const onSubmitPortfolio: SubmitHandler<FieldValues> = (data) => {
+    console.log(data.title + '\n' + data.htmlContent);
+  };
+
   return (
     <TitleFormContainer>
       <FlexColumnWrapper gap={15}>
-        <PortfolioTitleInput placeholder='Title' />
+        <PortfolioTitleInput placeholder='Title' {...register("title", { required: true, minLength: 5 })} />
         <FlexWrapper gap={10}>
           <ContegroyDropDown />
           <SmallText color='white' className='pt-2'>{isCreated}</SmallText>
@@ -51,8 +61,12 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
         <div className='flex justify-between'>
           <DarkTextArea className='w-[42%] h-20' />
           <FlexWrapper gap={15}>
-            <PortfolioEditButton type='dark' onClick={() => setOpenTitle(false)}><RiArrowGoBackFill size='25' color='white' /></PortfolioEditButton>
-            <PortfolioEditButton type='light'><BsCheck2 size='25' color='black' /></PortfolioEditButton>
+            <PortfolioEditButton color='dark' onClick={() => setOpenTitle(false)}>
+              <RiArrowGoBackFill size='25' color='white' />
+            </PortfolioEditButton>
+            <PortfolioEditButton color='light' onClick={handleSubmit(onSubmitPortfolio)} disabled={isSubmitting}>
+              <BsCheck2 size='25' color='black' />
+            </PortfolioEditButton>
           </FlexWrapper>
         </div>
       </FlexColumnWrapper>
