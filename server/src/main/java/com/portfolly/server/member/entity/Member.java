@@ -4,7 +4,7 @@ import com.portfolly.server.board.comment.entity.CopComment;
 import com.portfolly.server.board.comment.entity.RecComment;
 import com.portfolly.server.board.entity.CopBoard;
 import com.portfolly.server.board.entity.RecBoard;
-import com.portfolly.server.bookmark.Bookmark;
+import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.portfolio.entity.Portfolio;
 
 import javax.persistence.*;
