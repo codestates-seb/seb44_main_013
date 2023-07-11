@@ -75,9 +75,7 @@ export const IntroduceTitle = styled.h2`
   height: 40px;
   box-shadow: inset 3px 3px 3px 0 rgb(170, 170, 170, 0.25);
 `;
-
-export const BtnStyleContainer = styled.div`
-  ${tw`
+export const BtnStyleContainer = tw.div`
     mt-8
-  `}
+
 `;

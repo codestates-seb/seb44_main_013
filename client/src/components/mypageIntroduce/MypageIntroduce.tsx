@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { MdDone } from 'react-icons/md';
 import {
@@ -8,47 +7,40 @@ import {
   IntroduceTitle,
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { UserData } from '@/mocks/data';
+import { useNavigate } from 'react-router-dom';
+import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 
 interface MypageIntroduceProps {
   userData: UserData | null;
-  deleteInfo: () => void;
 }
 
 const useInput = (
   initial: string
-): [
-  string,
-  (e: ChangeEvent<HTMLInputElement>) => void,
-  React.Dispatch<React.SetStateAction<string>>
-] => {
+): [string, (e: ChangeEvent<HTMLInputElement>) => void] => {
   const [value, setValue] = useState(initial);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.value);
-  return [value, handleChange, setValue];
+  return [value, handleChange];
 };
 
-export default function MypageIntroduce({
-  userData,
-  deleteInfo,
-}: MypageIntroduceProps) {
+export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
   const initialJob = userData?.job || 'What is your job?';
   const initialCareer = userData?.career || 'Career 1';
   const initialAwards = userData?.awards || 'Awards 1';
+  const navigate = useNavigate();
 
-  const [job, handleJobEdit, setJob] = useInput(
+  const [job, handleJobEdit] = useInput(
     localStorage.getItem('job') || initialJob
   );
-  const [career, handleCareerEdit, setCareer] = useInput(
+  const [career, handleCareerEdit] = useInput(
     localStorage.getItem('career') || initialCareer
   );
-  const [awards, handleAwardsEdit, setAwards] = useInput(
+  const [awards, handleAwardsEdit] = useInput(
     localStorage.getItem('awards') || initialAwards
   );
 
   const [isEdit, setIsEdit] = useState(false);
-  const navigate = useNavigate();
 
   const toggleEdit = () => {
     setIsEdit(!isEdit);
@@ -62,12 +54,16 @@ export default function MypageIntroduce({
     localStorage.setItem('awards', awards);
   };
 
+  const deleteInfo = () => {
+    localStorage.removeItem('job');
+    localStorage.removeItem('career');
+    localStorage.removeItem('awards');
+    localStorage.removeItem('name');
+  };
+
   const handleDelete = () => {
     if (window.confirm('정말로 탈퇴하시겠습니까?')) {
       deleteInfo();
-      setJob(initialJob);
-      setCareer(initialCareer);
-      setAwards(initialAwards);
       navigate('/');
     }
   };
