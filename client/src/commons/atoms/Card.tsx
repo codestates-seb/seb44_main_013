@@ -8,7 +8,7 @@ interface CardProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const CardContainer = styled.div`
-    ${tw`flex flex-col w-full h-[700px] p-5 box-border rounded-2xl justify-between`}
+    ${tw`flex flex-col w-full h-full p-5 box-border rounded-2xl`}
 
     background-color: white;
     box-sizing: inherit;

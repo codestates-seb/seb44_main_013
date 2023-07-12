@@ -21,7 +21,7 @@ const UserHandlers = [
 
     return res(ctx.json(userData));
   }),
-  rest.get<UserData>('/members', (req, res, ctx) => {
+  rest.get<UserData>('/members', (_, res, ctx) => {
     return res(ctx.json(userData));
   }),
   rest.delete<UserData>('/members', (req, res, ctx) => {
@@ -53,12 +53,33 @@ const HJHandlers = [
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
+  rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
+    const { comments_id, member_id, content, name, board_id } = await req.json();
+    const filterdData = commuDetail.filter(el => el.board_id === 2);
+    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);  
 
+    const temp = {
+      comments_id: comments_id,
+      content: content,
+      member_id: member_id,
+      name: name,
+      createdAt: "2023-06-23T17:34:51.3395597",
+      modifiedAt: "2023-06-23T17:34:51.3395597"
+    };
+
+    if(index !== -1){
+      (filterdData[0].comment)[index]  = temp;
+    }
+    //console.log((filterdData[0].comment)[index])
+
+    return res(ctx.status(200), ctx.json( temp ));
+
+  }),
 
   //4. 댓글 작성 
   rest.post('/comments', async(req, res, ctx) => {
-    const board_id = 2;
-  
+     const board_id = 2;
+    // const {  board_id } = await req.json();
     const filteredData = commuDetail.find(e => e.board_id === board_id); 
     if(!filteredData){
       return res(ctx.status(404), ctx.json({message: '게시물을 찾을 수 없다.'}));
