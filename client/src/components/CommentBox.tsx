@@ -8,6 +8,7 @@ import { CommentProps } from '@/types';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
+import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 
 
 export default function CommentBox( {comment, }:any) {
@@ -55,22 +56,24 @@ export default function CommentBox( {comment, }:any) {
 
     return (
         <Card>
-            <FlexColumnContainer gap={0} className="overflow-scroll">
-                {
-                    comment.map((e:CommentProps) => {
-                        return (<Comment key={e.comments_id}
-                                        username={e.name}
-                                        content={e.content}
-                                        date={e.createdAt}
-                                        comment={e}
-                                        amendComment={amendComment}
-                                        setAmendComment={setAmendComment}
-                                />
-                        )
-                    })
-                }
-            </FlexColumnContainer>
-            <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={isInput}/>
+            <JbWrapper >
+                <FlexColumnContainer gap={0} className="overflow-scroll">
+                    {
+                        comment.map((e:CommentProps) => {
+                            return (<Comment key={e.comments_id}
+                                            username={e.name}
+                                            content={e.content}
+                                            date={e.createdAt}
+                                            comment={e}
+                                            amendComment={amendComment}
+                                            setAmendComment={setAmendComment}
+                                    />
+                            )
+                        })
+                    }
+                </FlexColumnContainer>
+                <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={isInput}/>
+            </JbWrapper>
         </Card>
     )
 } 
