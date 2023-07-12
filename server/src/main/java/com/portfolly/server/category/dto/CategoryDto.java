@@ -16,8 +16,8 @@ public class CategoryDto {
         private Long portfolioId;
         private String title;
         private String content;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+//        private LocalDateTime createdAt;
+//        private LocalDateTime modifiedAt;
 //        private MemberDto.Response member;
 //        private List<TagDto.Response> tags;
     }

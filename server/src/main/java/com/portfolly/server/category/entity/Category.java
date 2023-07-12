@@ -18,6 +18,13 @@ public class Category {
     private Long id;
     private String name;
 
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
+
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private List<Portfolio> portfolios = new ArrayList<>();
     @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
