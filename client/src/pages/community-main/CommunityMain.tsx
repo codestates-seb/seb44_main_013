@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Search from '@/components/search/Search';
+import { call } from '@/utils/ApiService';
 import {
   ItemWrapper,
   SearchContainer,
@@ -10,11 +12,59 @@ import {
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 
+import { CommuProps } from '@/types';
+
 export default function CommunityMain() {
+  const [ datas, setDatas ] = useState<CommuProps[]>([])
+
+
+
+  useEffect(() => {
+    const axiosCommu = async () => {
+      return call('/boards', 'GET', null)
+      .then((res) => {
+        setDatas(res);
+      })
+      .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
+    }
+
+    axiosCommu();
+  }, []);
+
+  
+  // 검색 - 07.11 효정
+  
+  const [searchValue, setSearchValue] = useState('');
+  const [searchArr, setSearchArr] = useState([] as any);
+  const [enterPress, setEnterPress] = useState(false);
+
+  useEffect(() => {
+      setSearchArr(datas);
+  }, [datas]);
+
+  useEffect(() => {
+    if(searchValue !== '') {
+      setSearchArr(datas.filter((el: any) => {
+        return el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+        el.content.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+        el.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      }));
+    }else {
+      setSearchArr(datas);
+    };
+
+    setEnterPress(false);
+    console.log(datas);
+    console.log(searchArr);
+    
+  }, [enterPress])
+
+  
+
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search />
+        <Search setSearchValue={setSearchValue} setEnterPress={setEnterPress} />
       </SearchContainer>
 
       <ItemWrapper>
@@ -24,13 +74,13 @@ export default function CommunityMain() {
           </StyledWritingBtn>
         </Link>
         <ListsWrapper>
-          {Array.from({ length: 8 }).map((_, index) => {
-            return (
-              <Link to="/boards/detail">
-                <CommunityItem key={index} />
-              </Link>
-            );
-          })}
+          {
+            searchArr.map((e: any) => {
+              return(
+                <CommunityItem key={e.board_id} datas={e} />
+              )
+            })
+          }
         </ListsWrapper>
       </ItemWrapper>
     </CommunityWrapper>

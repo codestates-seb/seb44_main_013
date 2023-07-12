@@ -9,27 +9,27 @@ const Container = styled.div<{ gap?: number, bg?: string }>`
 `
 
 export const Center = tw.div`
-  flex justify-center items-center
-`
+  flex justify-center items-center 
+`;
 
 export const FlexContainer = styled(Container)`
-  ${tw`items-center justify-center`}
+  ${tw`items-center justify-center mt-10`}
 `;
-//categorypart 같음 
+//categorypart 같음
 export const FlexColumnContainer = styled(Container)`
   ${tw`flex-col items-center justify-center`}
 `;
 
 export const FlexStartContainer = styled(Container)`
-    ${tw`items-center justify-start`}
+  ${tw`items-center justify-start`}
 `;
 
-export const FlexWrapper = styled.div<{ gap: number }>`
+export const FlexWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
-export const FlexColumnWrapper = styled.div<{ gap: number }>`
+export const FlexColumnWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
 `;

@@ -33,7 +33,6 @@ export default function PortfolioDetail() {
       picture: data.picture
     }
   }
-
   return (
     <FlexColumnContainer bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
