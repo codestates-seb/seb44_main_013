@@ -66,10 +66,10 @@ const UserRequestHandlers = [
 
     return res(ctx.json(userData));
   }),
-  rest.get<UserData>('/members', (req, res, ctx) => {
+  rest.get<UserData>('/members', (_, res, ctx) => {
     return res(ctx.json(userData));
   }),
-  rest.delete<UserData>('/members', (req, res, ctx) => {
+  rest.delete<UserData>('/members', (_, res, ctx) => {
     // userData를 초기 상태로 재설정합니다.
     userData.name = 'Your Name';
     userData.job = 'What is your job?';
@@ -102,7 +102,7 @@ const HJHandlers = [
   }),
   //3. 댓글 수정
   rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
-    const { comments_id, member_id, content, name, board_id } = await req.json();
+    const { comments_id, member_id, content, name } = await req.json();
     const filterdData = commuDetail.filter(el => el.board_id === 2);
     const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);
 

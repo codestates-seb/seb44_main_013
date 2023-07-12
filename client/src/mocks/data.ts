@@ -27,7 +27,7 @@ export interface UserData {
 }
 
 export const userData: UserData = {
-  name: 'unknown',  // 이 부분은 기본 이름으로 설정할 내용을 적어주세요.
+  name: 'unknown',
   job: 'What is your job?',
   career: 'Career 1',
   award: 'Awards 1',
