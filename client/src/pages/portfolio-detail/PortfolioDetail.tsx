@@ -2,7 +2,7 @@
 import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
-import { Center, FlexColumnContainer, FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import UserProfile from '@/commons/molecules/UserProfile';
@@ -23,11 +23,7 @@ export default function PortfolioDetail() {
   }
 
   const { data, isSuccess } = useQuery(['portfolio', portfolio_id],
-    () => call(`/portfolios/${portfolio_id}`, 'GET'),
-    {
-      staleTime: 1000 * 60 * 5,
-      cacheTime: Infinity
-    }
+    () => call(`/portfolios/${portfolio_id}`, 'GET'), { staleTime: Infinity, cacheTime: Infinity }
   );
 
   if (isSuccess) {
@@ -38,7 +34,7 @@ export default function PortfolioDetail() {
     }
   }
   return (
-    <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
+    <FlexColumnContainer bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
         <BsArrowReturnLeft size={30} color='white'
           className='cursor-pointer'
@@ -48,18 +44,18 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {isSuccess &&
-            <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+            <div className='break-keep w-full' dangerouslySetInnerHTML={{ __html: data.content }}></div>
           }
         </PortfolioContainer>
 
         <UserContainer>
           <UserCard>
-            <FlexWrapper gap={0} className='justify-between'>
+            <FlexWrapper className='justify-between'>
               {isSuccess &&
                 <>
                   <LikeBtn portfolio_id={data.portfolio_id} initialLikes={data.likes} initialIsLiked={data.isLiked} />
                   <FlexWrapper gap={20}>
-                    <SmallText color='white'>views · {isSuccess && data.view}</SmallText>
+                    <SmallText color='white'>views · {isSuccess && data.views}</SmallText>
                     <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
                   </FlexWrapper>
                 </>
@@ -72,7 +68,7 @@ export default function PortfolioDetail() {
             </Center>
 
             <HeadingText color='white'>{isSuccess && data.title}</HeadingText>
-            <BodyText color='white'>{isSuccess && data.explain}</BodyText>
+            <BodyText color='white'>{isSuccess && data.explains}</BodyText>
           </UserCard>
 
           <UserCard>

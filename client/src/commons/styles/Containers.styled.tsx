@@ -24,12 +24,12 @@ export const FlexStartContainer = styled(Container)`
   ${tw`items-center justify-start`}
 `;
 
-export const FlexWrapper = styled.div<{ gap: number }>`
+export const FlexWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
-export const FlexColumnWrapper = styled.div<{ gap: number }>`
+export const FlexColumnWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
 `;
