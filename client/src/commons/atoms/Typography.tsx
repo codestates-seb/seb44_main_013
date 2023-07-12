@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import tw from 'twin.macro'
 
 const H = styled.h4<{ color?: string }>`
-  ${tw`m-0`}
+  ${tw`m-0 select-none`}
   color: ${(props) => props.color};
   font-weight: 600;
 `
@@ -29,10 +29,12 @@ export const BodyText = styled(Span)`
 `;
 
 export const InputLabelText = styled(Span)`
+  user-select: none;
   font-size: 16px;
   font-weight: 600;
 `;
 
 export const SmallText = styled(Span)`
+  user-select: none;
   font-size: 13px;
 `;

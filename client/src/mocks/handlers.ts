@@ -3,17 +3,61 @@ import { rest } from 'msw';
 import { portfolios, commu, commuDetail } from './data';
 
 const DaHamHandlers = [
+  // 포트폴리오 정보 조회
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolio_id = Number(req.params.portfolio_id);
     const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
+    portfolios.map((p) => ++p.view);
     return res(ctx.status(200), ctx.json(Portfolio[0]));
+  }),
+  // 좋아요 기능
+  rest.post('/likes/:portfolio_id', (req, res, ctx) => {
+    const portfolio_id = Number(req.params.portfolio_id);
+    let response = { likes: 0 };
+    portfolios.map((p) => {
+      if (p.portfolio_id === portfolio_id) {
+        p.isLiked = true;
+        response = { likes: ++p.likes }
+      }
+    })
+    return res(ctx.status(200), ctx.json(response));
+  }),
+  rest.delete('/likes/:portfolio_id', (req, res, ctx) => {
+    const portfolio_id = Number(req.params.portfolio_id);
+    let response = { likes: 0 };
+    portfolios.map((p) => {
+      if (p.portfolio_id === portfolio_id) {
+        p.isLiked = false;
+        response = { likes: --p.likes };
+      }
+    })
+    return res(ctx.status(200), ctx.json(response));
+  }),
+  // 북마크 기능
+  rest.post('/bookmarks/:portfolio_id', (req, res, ctx) => {
+    const portfolio_id = Number(req.params.portfolio_id);
+    portfolios.map((p) => {
+      if (p.portfolio_id === portfolio_id) {
+        p.isMarked = true;
+      }
+    })
+    return res(ctx.status(200));
+  }),
+  rest.delete('/bookmarks/:portfolio_id', (req, res, ctx) => {
+    const portfolio_id = Number(req.params.portfolio_id);
+    portfolios.map((p) => {
+      if (p.portfolio_id === portfolio_id) {
+        p.isMarked = false;
+      }
+    })
+    return res(ctx.status(200));
   })
 ];
 
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
-import { setupWorker} from "msw";
+import { setupWorker } from "msw";
 import { UserData, userData } from './data';
 
 const UserRequestHandlers = [
@@ -57,10 +101,10 @@ const HJHandlers = [
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
-  rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
+  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
     const { comments_id, member_id, content, name } = await req.json();
     const filterdData = commuDetail.filter(el => el.board_id === 2);
-    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);  
+    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);
 
     const temp = {
       comments_id: comments_id,
@@ -71,36 +115,36 @@ const HJHandlers = [
       modifiedAt: "2023-06-23T17:34:51.3395597"
     };
 
-    if(index !== -1){
-      (filterdData[0].comment)[index]  = temp;
+    if (index !== -1) {
+      (filterdData[0].comment)[index] = temp;
     }
     //console.log((filterdData[0].comment)[index])
 
-    return res(ctx.status(200), ctx.json( temp ));
+    return res(ctx.status(200), ctx.json(temp));
 
   }),
 
   //4. 댓글 작성 
-  rest.post('/comments', async(req, res, ctx) => {
-     const board_id = 2;
+  rest.post('/comments', async (req, res, ctx) => {
+    const board_id = 2;
     // const {  board_id } = await req.json();
-    const filteredData = commuDetail.find(e => e.board_id === board_id); 
-    if(!filteredData){
-      return res(ctx.status(404), ctx.json({message: '게시물을 찾을 수 없다.'}));
+    const filteredData = commuDetail.find(e => e.board_id === board_id);
+    if (!filteredData) {
+      return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
     }
-    const comments_id  = filteredData.comment.length || 0;
-  
+    const comments_id = filteredData.comment.length || 0;
+
     const newPostData = {
-      comments_id: comments_id+1,
+      comments_id: comments_id + 1,
       content: (await req.json()).content,
       member_id: 1,
       name: 'jhj',
       createdAt: "2023-06-21T17:34:51.3395597",
-      modifiedAt:"2023-06-21T17:34:51.3395597"
+      modifiedAt: "2023-06-21T17:34:51.3395597"
     }
     //filteredData.comment.push(newPostData);
     const index = commuDetail.findIndex(e => e.board_id === board_id);
-    if(index !== -1){
+    if (index !== -1) {
       commuDetail[index].comment.push(newPostData);
     }
     //console.log(commuDetail[1].comment);

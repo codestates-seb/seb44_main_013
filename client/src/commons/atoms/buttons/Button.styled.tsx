@@ -9,6 +9,7 @@ export const Button = tw.button`
   py-1
   transition duration-300 ease-in-out
   max-md:text-xs
+  select-none
 `;
 
 export const Purpletype = styled(Button)`

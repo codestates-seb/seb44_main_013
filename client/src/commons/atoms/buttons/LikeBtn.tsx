@@ -1,16 +1,24 @@
 import { FaHeart } from 'react-icons/fa';
-import { useState } from 'react';
+import { SmallText } from '../Typography';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
+import useLikeBtn from '@/hooks/useLikeBtn';
 
-export default function LikeBtn() {
-  const [liked, setLiked] = useState(false);
+export interface LikeBtnProps {
+  portfolio_id: number;
+  initialLikes: number;
+  initialIsLiked: boolean;
+}
 
-  const toggleLike = () => {
-    setLiked(!liked);
-  };
-
+export default function LikeBtn({ portfolio_id, initialLikes, initialIsLiked }: LikeBtnProps) {
+  const [likes, color, onClick] = useLikeBtn({
+    portfolio_id: portfolio_id,
+    initialLikes: initialLikes,
+    initialIsLiked: initialIsLiked,
+  });
   return (
-    <div onClick={toggleLike}>
-      <FaHeart color={liked ? '#e46868' : 'gray'} size={25} />
-    </div>
+    <FlexWrapper gap={10}>
+      <FaHeart color={color} size={25} className='cursor-pointer' onClick={onClick} />
+      <SmallText color='white'>{likes}</SmallText>
+    </FlexWrapper>
   );
 }

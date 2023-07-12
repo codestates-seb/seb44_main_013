@@ -19,15 +19,15 @@ interface CommuCommentProps {
   setAmendComment: any;
 }
 
-export default function Comment({ username, content, date, comment , amendComment, setAmendComment}: CommuCommentProps) {
-  const { board_id}  = useParams();
+export default function Comment({ username, content, date, comment, amendComment, setAmendComment }: CommuCommentProps) {
+  const { board_id } = useParams();
 
   const inputEl = useRef(null);
-  const [ isEditMode, setIsEditMode ] = useState(false);
-  const [ basicContent, setBasicContent ] = useState(content);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [basicContent, setBasicContent] = useState(content);
 
   const nDate = new Date(date);
-  const convertDate = nDate.toLocaleDateString('en-US',{
+  const convertDate = nDate.toLocaleDateString('en-US', {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -35,8 +35,8 @@ export default function Comment({ username, content, date, comment , amendCommen
 
   const editComment = () => {
     const axiosPatch = async () => {
-      try{
-        console.log('PATCH 성공' );
+      try {
+        console.log('PATCH 성공');
         const data = {
           board_id: board_id,
           comments_id: comment.comments_id,
@@ -49,7 +49,7 @@ export default function Comment({ username, content, date, comment , amendCommen
         setAmendComment(data);
         return call(`/comments/${comment.comments_id}`, 'PATCH', data)
 
-      }catch(err){
+      } catch (err) {
         console.log('PATCH 실패 ' + err);
       }
     };
@@ -60,17 +60,17 @@ export default function Comment({ username, content, date, comment , amendCommen
   };
 
   useEffect(() => {
-  // console.log('re-render')
-  // console.log(comment)
+    // console.log('re-render')
+    // console.log(comment)
   }, [isEditMode]);
 
 
-  const handleAmend = ( value:string ) => {
-    if(value.length === 0 ) {
+  const handleAmend = (value: string) => {
+    if (value.length === 0) {
       // alert('빈 객체입니다. ');
       // setBasicContent(comment.content)
       //유효성 검사  + 글자 수 제한 
-    }else {
+    } else {
       setBasicContent(value);
     }
   };
@@ -95,22 +95,22 @@ export default function Comment({ username, content, date, comment , amendCommen
       </FlexWrapper>
       <FlexWrapper gap={0} className='w-full justify-between'>
         <BodyText>
-          { isEditMode ? 
+          {isEditMode ?
             (
               <input
-                value = {basicContent}
-                ref = {inputEl}
-                onBlur = {handleBlur}
-                onChange={(e:any) => handleAmend(e.target.value)}  
+                value={basicContent}
+                ref={inputEl}
+                onBlur={handleBlur}
+                onChange={(e: any) => handleAmend(e.target.value)}
               />
-            ) 
-            : 
+            )
+            :
             (
               <span
                 onClick={handleClick}>
-                  {basicContent}
+                {basicContent}
               </span>
-            ) 
+            )
           }
         </BodyText>
         <SmallText color='gray'>{convertDate}</SmallText>

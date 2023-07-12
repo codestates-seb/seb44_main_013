@@ -13,7 +13,7 @@ const HeaderContainer = styled.div`
 export default function LogoHeader() {
   return (
     <HeaderContainer>
-      <Link to="/"><Logo/></Link>
+      <Link to="/"><Logo /></Link>
     </HeaderContainer>
-  ) 
+  )
 }

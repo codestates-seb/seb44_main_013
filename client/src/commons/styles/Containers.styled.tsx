@@ -2,11 +2,11 @@
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-const Container = styled.div<{ gap: number; bg?: string }>`
+const Container = styled.div<{ gap?: number, bg?: string }>`
   ${tw`flex`}
-  gap: ${(props) => props.gap}px;
-  background-color: ${(props) => props.bg};
-`;
+  gap: ${(props) => props.gap || 0}px;
+  background-color: ${(props) => props.bg || 'white'};
+`
 
 export const Center = tw.div`
   flex justify-center items-center 
@@ -24,12 +24,12 @@ export const FlexStartContainer = styled(Container)`
   ${tw`items-center justify-start`}
 `;
 
-export const FlexWrapper = styled.div<{ gap: number }>`
+export const FlexWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
-export const FlexColumnWrapper = styled.div<{ gap: number }>`
+export const FlexColumnWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
 `;

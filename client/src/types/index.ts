@@ -30,12 +30,12 @@ export interface CommuProps {
   title: string,
   content: string,
   view: number,
-  division:string,
+  division: string,
   name: string,
   created_at: string,
   modifiedAt: string,
   member_id: number,
-  status:boolean,
+  status: boolean,
   comment?: CommentProps[]
 }
 

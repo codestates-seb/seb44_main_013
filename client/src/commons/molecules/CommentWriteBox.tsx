@@ -5,18 +5,18 @@ import { TextArea } from '@/commons/styles/Inputs.styled';
 import SaveBtn from '../atoms/buttons/writing/SaveBtn';
 
 
-export default function CommentWriteBox({saveComment, handleComment, isInput}:any) {
+export default function CommentWriteBox({ saveComment, handleComment, isInput }: any) {
 
   return (
     <FlexColumnContainer gap={5} className='w-full bt-[1px] mt-10'>
       <FlexWrapper gap={0} className='w-full justify-between'>
-        <UserProfile type='comment' user={{ member_id: 1, name: 'jhj', picture: 'https://picsum.photos/233'  }} />
+        <UserProfile type='comment' user={{ member_id: 1, name: 'jhj', picture: 'https://picsum.photos/233' }} />
         <SaveBtn onClick={saveComment} />
       </FlexWrapper>
-      <TextArea className="w-full h-20" 
-        placeholder="write your comment" 
+      <TextArea className="w-full h-20"
+        placeholder="write your comment"
         value={isInput}
-        onChange={(e:any) => handleComment(e.target.value)}
+        onChange={(e: any) => handleComment(e.target.value)}
       />
     </FlexColumnContainer>
   )
