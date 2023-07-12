@@ -47,12 +47,12 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
         </FlexWrapper>
         <div className='flex gap-1.5 w-[40%] flex-wrap z-0'>
           {/* 예시 */}
-          <Tag value='JavaScript' isSelected={true} />
+          <Tag value='JavaScript' selected={true} />
           <Tag value='JavaScript' />
           <Tag value='JavaScript' />
           <Tag value='JavaScript' />
           <Tag value='JavaScript' />
-          <Tag value='JavaScript' isSelected={true} />
+          <Tag value='JavaScript' selected={true} />
           <Tag value='JavaScript' />
           <Tag value='JavaScript' />
           <Tag value='JavaScript' />
