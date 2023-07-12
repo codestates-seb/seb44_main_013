@@ -57,7 +57,7 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
           {isSuccess &&
             data.map((category: CategoryType) => {
               if (category.name === selected) {
-                category.tags.map((tag, id) => <Tag value={tag} key={id} />)
+                return category.tags.map((tag, id) => <Tag value={tag} key={id} />)
               }
             })
           }
