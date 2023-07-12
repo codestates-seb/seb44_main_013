@@ -1,3 +1,6 @@
+// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정
+//2023-07-10 회원이름 조회, 수정, 저장, 삭제 기능 구현 - 위정연
+
 import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
 import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
@@ -5,29 +8,27 @@ import { BiMap } from 'react-icons/bi';
 import { useState, useRef, useEffect } from 'react';
 import { UserData } from '@/mocks/data';
 import styled from 'styled-components';
+import axios from 'axios';
+
+const WeatherIcon = styled.img`
+  width: 60px;
+  height: 60px;
+`;
 
 interface MypageProfileProps {
   userData: UserData | null;
 }
 
-const WeatherIcon = styled.img`
-  width: 70px;
-  height: 60px;
-`;
-
 export default function MypageProfile({ userData }: MypageProfileProps) {
   const API_KEY = '76e0dc6fc7f77e50fa77bdb26076dbb1';
+  const [isEdit, setIsEdit] = useState(false);
+  const [name, setName] = useState(userData?.name || 'HOHO');
+  const inputRef = useRef<HTMLInputElement>(null);
   const [weatherData, setWeatherData] = useState<{
     city: string;
     weather: string;
     icon: string;
   }>({ city: '', weather: '', icon: '' });
-
-  const [isEdit, setIsEdit] = useState(false);
-  const [name, setName] = useState(() => {
-    const storedName = localStorage.getItem('name');
-    return storedName !== null ? storedName : 'HOHO';
-  });
 
   const handleEditToggle = () => {
     setIsEdit(!isEdit);
@@ -37,40 +38,39 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
     setName(e.target.value);
   };
 
-  const handleNameBlur = () => {
+  const handleNameBlur = async () => {
     if (name.trim() !== '') {
-      localStorage.setItem('name', name);
+      try {
+        await axios.put('/members', { name });
+        console.log('이름 변경 성공');
+      } catch (error) {
+        console.error('이름 변경 실패', error);
+      }
     }
     setIsEdit(false);
   };
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
-    if (inputRef.current !== null) {
-      inputRef.current.focus();
-    }
+    inputRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition(async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
       const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 
-      fetch(url)
-        .then((response) =>
-          response.json().then((data) => {
-            setWeatherData({
-              city: data.name,
-              weather: `${data.main.temp}°C`,
-              icon: data.weather[0].icon,
-            });
-          })
-        )
-        .catch(() => {
-          alert("Can't find you. No weather for you.");
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setWeatherData({
+          city: data.name,
+          weather: `${Math.round(data.main.temp)}°C`,
+          icon: data.weather[0].icon,
         });
+      } catch (error) {
+        console.error("Can't find you. No weather for you.", error);
+      }
     });
   }, []);
 
@@ -100,7 +100,7 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
       <div>
         <BiMap size={18} />
         <p>
-          {weatherData.city}, {weatherData.weather}
+          {weatherData.city} / {weatherData.weather}
         </p>
         {weatherData.icon && (
           <WeatherIcon
