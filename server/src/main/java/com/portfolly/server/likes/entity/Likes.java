@@ -10,7 +10,6 @@ public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean status;
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
