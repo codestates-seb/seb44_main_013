@@ -4,7 +4,8 @@ import tw from 'twin.macro';
 import DropDownBox from '../atoms/dropdown/DropDownBox';
 import DropDownItem from '../atoms/dropdown/DropDownItem';
 import { FlexColumnWrapper } from '../styles/Containers.styled';
-import { useState } from 'react';
+import { category, isOpen } from '@/modules/CategorySlice';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 export const DropDownItemContainer = styled.div`
     ${tw`w-28 flex flex-col z-10 absolute`}
@@ -15,25 +16,19 @@ export const DropDownItemContainer = styled.div`
 `;
 
 export const ContegroyDropDown = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectValue, setSelectValue] = useState('웹');
-
-  const selectHandler = (e: React.MouseEvent<HTMLElement>) => {
-    setIsOpen(!isOpen);
-    console.log(e)
-    // setSelectValue(e);
-  }
+  const selected = useSelector(category);
+  const isOpened = useSelector(isOpen);
 
   return (
     <FlexColumnWrapper gap={0}>
-      <DropDownBox value={'웹'} openHandler={setIsOpen} isOpen={isOpen} />
-      {isOpen &&
+      <DropDownBox value={selected} />
+      {isOpened &&
         <DropDownItemContainer>
-          <DropDownItem value='앱' onClick={selectHandler} />
-          <DropDownItem value='웹' onClick={selectHandler} />
-          <DropDownItem value='3D/애니메이션' onClick={selectHandler} />
-          <DropDownItem value='디자인/일러스트' onClick={selectHandler} />
-          <DropDownItem value='사진/영상' onClick={selectHandler} />
+          <DropDownItem value='웹' />
+          <DropDownItem value='앱' />
+          <DropDownItem value='3D/애니메이션' />
+          <DropDownItem value='디자인/일러스트' />
+          <DropDownItem value='사진/영상' />
         </DropDownItemContainer>
       }
     </FlexColumnWrapper>

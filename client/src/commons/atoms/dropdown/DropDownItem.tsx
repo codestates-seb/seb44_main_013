@@ -2,8 +2,10 @@
 import { ComponentPropsWithoutRef } from 'react';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategory, openCategory, isOpen } from '@/modules/CategorySlice';
 
-interface DropDownItemProps extends ComponentPropsWithoutRef<'div'> {
+interface DropDownItemProps {
   value: string;
 }
 
@@ -17,8 +19,16 @@ const DropDownItemContainer = styled.div`
 `;
 
 export default function DropDownItem({ value }: DropDownItemProps) {
+  const dispatch = useDispatch();
+  const isOpened = useSelector(isOpen);
+
+  const selectCategory = () => {
+    dispatch(openCategory(!isOpened));
+    dispatch(setCategory(value));
+  }
+
   return (
-    <DropDownItemContainer>
+    <DropDownItemContainer onClick={selectCategory}>
       {value}
     </DropDownItemContainer>
   )
