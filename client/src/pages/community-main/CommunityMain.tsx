@@ -21,7 +21,7 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call('/boards/detail', 'GET', null)
+      return call('/boards', 'GET', null)
       .then((res) => {
         setDatas(res);
       })
@@ -39,19 +39,27 @@ export default function CommunityMain() {
   const [enterPress, setEnterPress] = useState(false);
 
   useEffect(() => {
-    if(searchValue !== null) {
+      setSearchArr(datas);
+  }, [datas]);
+
+  useEffect(() => {
+    if(searchValue !== '') {
       setSearchArr(datas.filter((el: any) => {
         return el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
         el.content.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
         el.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
       }));
-    }else{
-      setSearchArr([]);
+    }else {
+      setSearchArr(datas);
     };
 
     setEnterPress(false);
+    console.log(datas);
+    console.log(searchArr);
     
   }, [enterPress])
+
+  
 
   return (
     <CommunityWrapper>
