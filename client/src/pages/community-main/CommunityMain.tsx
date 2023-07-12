@@ -31,6 +31,7 @@ export default function CommunityMain() {
 
   
   // 검색 - 07.11 효정
+  
   const [searchValue, setSearchValue] = useState('');
   const [searchArr, setSearchArr] = useState([] as any);
   const [enterPress, setEnterPress] = useState(false);
