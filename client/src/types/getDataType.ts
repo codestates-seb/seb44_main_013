@@ -10,3 +10,11 @@ export interface CategoryType {
   name: "웹" | "앱" | "3D/애니메이션" | "디자인/일러스트" | "사진/영상";
   tags: Array<string>;
 }
+
+export interface portfolioContentType {
+  title: string;
+  content: string;
+  category: string;
+  tags: Array<string>;
+  explains: string;
+}

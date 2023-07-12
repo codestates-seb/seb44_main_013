@@ -18,6 +18,7 @@ import { selectedTags } from '@/modules/TagSlice';
 import { useQuery } from '@tanstack/react-query';
 import { call } from '@/utils/ApiService';
 import { CategoryType } from '@/types';
+import usePortfolioMutation from '@/query/portfolioMutation';
 
 interface TitleFormProps {
   isCreated?: string;
@@ -34,6 +35,7 @@ const TitleFormContainer = styled.div`
 const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => {
   const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
   const { data, isSuccess } = useQuery(['category'], () => call('/category', 'GET'), { staleTime: Infinity, cacheTime: Infinity });
+  const portfolioMutation = usePortfolioMutation();
   const dispatch = useDispatch();
   const selected = useSelector(category);
   const tags = useSelector(selectedTags);
@@ -43,8 +45,14 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
     setValue("htmlContent", htmlContent);
   }, [register]);
 
-  const onSubmitPortfolio: SubmitHandler<FieldValues> = (data) => {
-    console.log(data.title + '\n' + data.htmlContent + '\n' + selected + '\n' + tags);
+  const onSubmitPortfolio: SubmitHandler<FieldValues> = async (data) => {
+    await portfolioMutation.mutate({
+      title: data.title,
+      content: htmlContent,
+      category: selected,
+      tags: tags,
+      explains: data.explains,
+    });
   };
 
   return (
@@ -66,7 +74,7 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
         </div>
         <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
         <div className='flex justify-between'>
-          <DarkTextArea className='w-[42%] h-20' />
+          <DarkTextArea className='w-[42%] h-20' {...register('explains', { required: true, maxLength: 300 })} />
           <FlexWrapper gap={15}>
             <PortfolioEditButton color='dark'
               onClick={() => { setOpenTitle(false); dispatch(openCategory(false)) }}>

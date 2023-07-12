@@ -1,14 +1,40 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail, category } from './data';
+import { portfolios, commu, commuDetail, category, PortfolioType } from './data';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolio_id = Number(req.params.portfolio_id);
     const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
-    portfolios.map((p) => ++p.view);
+    portfolios.map((p) => ++p.views);
     return res(ctx.status(200), ctx.json(Portfolio[0]));
+  }),
+  // 포트폴리오 작성
+  rest.post('/portfolios', async (req, res, ctx) => {
+    const portfolio_id = Math.floor(Math.random() * 100);
+    const body = await req.json();
+    const newPortfolio: PortfolioType = {
+      portfolio_id: portfolio_id,
+      member_id: 1,
+      picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
+      name: 'noname',
+      title: String(body.title),
+      category: body.category,
+      tags: body.tags,
+      content: String(body.content),
+      explains: body.explains,
+      created_at: String(new Date()),
+      views: 0,
+      isLiked: false,
+      isMarked: false,
+      likes: 0,
+    }
+    portfolios.push(newPortfolio);
+    return res(
+      ctx.status(201),
+      ctx.json({ portfolio_id: portfolio_id })
+    );
   }),
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
