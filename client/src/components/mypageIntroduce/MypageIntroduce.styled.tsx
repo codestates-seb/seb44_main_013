@@ -1,5 +1,5 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const MypageIntroWrap = styled.div`
   ${tw`
@@ -32,6 +32,7 @@ export const MypageIntroContainer = styled.div`
     py-4
     flex
     items-center
+    
   `}
 
   input {
@@ -60,7 +61,7 @@ export const MypageIntroContainer = styled.div`
 `;
 
 export const IntroduceTitle = styled.h2`
-${tw`
+  ${tw`
   rounded-lg
   inline-block
   px-1
@@ -73,4 +74,8 @@ ${tw`
   font-weight: 700;
   height: 40px;
   box-shadow: inset 3px 3px 3px 0 rgb(170, 170, 170, 0.25);
+`;
+export const BtnStyleContainer = tw.div`
+    mt-8
+
 `;

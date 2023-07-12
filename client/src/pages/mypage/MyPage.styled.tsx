@@ -1,5 +1,5 @@
-import tw from 'twin.macro'
-import { styled } from 'styled-components'
+import tw from 'twin.macro';
+import { styled } from 'styled-components';
 
 export const MainWrapper = tw.div`
     w-screen
@@ -18,8 +18,8 @@ export const MyItemsWrapper = tw.div`
     m-auto
 `;
 
-export const BoxWrapper = styled.div< {isRow?: string} >`
-    ${ tw`
+export const BoxWrapper = styled.div<{ isRow?: string }>`
+  ${tw`
         w-[1050px]
         h-[240px]
         py-3
@@ -28,10 +28,9 @@ export const BoxWrapper = styled.div< {isRow?: string} >`
         mb-5
         ml-2
     `}
-    flex-direction:${(props) => (props.isRow ? 'column' : 'row')};
-    overflow: ${(props) => (props.isRow ? 'none' : 'auto')};
-    height: ${(props) => (props.isRow ? '380px' : '240px')}
-   
+  flex-direction:${(props) => (props.isRow ? 'column' : 'row')};
+  overflow: ${(props) => (props.isRow ? 'none' : 'auto')};
+  height: ${(props) => (props.isRow ? '380px' : '240px')};
 `;
 
 export const BoxTitle = tw.div`
@@ -42,7 +41,7 @@ export const BoxTitle = tw.div`
     mt-10
 `;
 
-//MyProfile 
+//MyProfile
 export const MyProfileWrapper = tw.div`
     flex
     flex-row

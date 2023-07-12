@@ -21,7 +21,7 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call('/boards', 'GET', null)
+      return call('/boards/detail', 'GET', null)
       .then((res) => {
         setDatas(res);
       })
@@ -31,10 +31,32 @@ export default function CommunityMain() {
     axiosCommu();
   }, []);
 
+  
+  // 검색 - 07.11 효정
+  
+  const [searchValue, setSearchValue] = useState('');
+  const [searchArr, setSearchArr] = useState([] as any);
+  const [enterPress, setEnterPress] = useState(false);
+
+  useEffect(() => {
+    if(searchValue !== null) {
+      setSearchArr(datas.filter((el: any) => {
+        return el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+        el.content.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+        el.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+      }));
+    }else{
+      setSearchArr([]);
+    };
+
+    setEnterPress(false);
+    
+  }, [enterPress])
+
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search />
+        <Search setSearchValue={setSearchValue} setEnterPress={setEnterPress} />
       </SearchContainer>
 
       <ItemWrapper>
@@ -45,7 +67,7 @@ export default function CommunityMain() {
         </Link>
         <ListsWrapper>
           {
-            datas.map((e) => {
+            searchArr.map((e: any) => {
               return(
                 <CommunityItem key={e.board_id} datas={e} />
               )
