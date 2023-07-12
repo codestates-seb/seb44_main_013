@@ -14,3 +14,19 @@ export const portfolios = [
     tags: ['javascript', 'react', '집', '잠', '영화', '로또', '백수']
   },
 ]
+
+
+/*2023-07-10 Mypage User Information - 위정연 */
+export interface UserData {
+  name: string;
+  job: string;
+  career: string;
+  award: string;
+}
+
+export const userData: UserData = {
+  name: 'unknown',  // 이 부분은 기본 이름으로 설정할 내용을 적어주세요.
+  job: 'What is your job?',
+  career: 'Career 1',
+  award: 'Awards 1',
+};

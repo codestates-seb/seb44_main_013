@@ -11,3 +11,35 @@ const DaHamHandlers = [
 ];
 
 export const handlers = DaHamHandlers;
+
+
+
+/**0710 정연 Mypage 사용자 정보 수정 */
+// mocks/handlers.ts
+import { UserData, userData } from './data';
+
+const UserHandlers = [
+  rest.put<UserData>('/members', (req, res, ctx) => {
+    Object.assign(userData, req.body);
+
+    return res(ctx.json(userData));
+  }),
+  rest.get<UserData>('/members', (req, res, ctx) => {
+    return res(ctx.json(userData));
+  }),
+  rest.delete<UserData>('/members', (req, res, ctx) => {
+    // userData를 초기 상태로 재설정합니다.
+    userData.name = 'Your Name';
+    userData.job = 'What is your job?';
+    userData.career = 'Career 1';
+    userData.award = 'Awards 1';
+
+    return res(
+      ctx.status(200),
+      ctx.json({ message: 'User data successfully deleted' })
+    );
+  }),
+];
+
+export { UserHandlers };
+
