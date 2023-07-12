@@ -29,7 +29,7 @@ const App = () => {
 
           <Route element={<CHeaderLayout />}>
             <Route path="/boards" element={<CommunityMain />} />
-            <Route path="/boards/detail/:member_Id" element={<CommunityDetail/>}/>
+            <Route path="/boards/:board_id" element={<CommunityDetail/>}/>
             <Route path="/boards/edit" element={<AddCommunity/>}/>
           </Route>
 
