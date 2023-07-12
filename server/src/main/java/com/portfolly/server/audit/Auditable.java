@@ -17,19 +17,20 @@ import java.time.format.DateTimeFormatter;
 @Transactional
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class Auditable {
+public abstract class Auditable {
     @CreatedDate
     @Column(name = "created_at",updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     @LastModifiedDate
     @Column(name = "modified_at")
-    private LocalDateTime modified_at;
+    private LocalDateTime modifiedAt;
 
     public String getCreatedAt() {
-        return created_at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return createdAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
     }
 
     public String getModifiedAt() {
-        return modified_at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+        return modifiedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
     }
 }
