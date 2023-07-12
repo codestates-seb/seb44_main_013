@@ -16,6 +16,33 @@ export const portfolios = [
     tags: ['javascript', 'react', '집', '잠', '영화', '로또', '백수']
   },
 ]
+export const category = [
+  {
+    id: 1,
+    name: "웹",
+    tags: ['javascript', 'react.js', 'SSR', 'CSR', 'vue.js'],
+  },
+  {
+    id: 2,
+    name: "앱",
+    tags: ['android', 'iOS', 'react native', 'androidStudio'],
+  },
+  {
+    id: 3,
+    name: "3D/애니메이션",
+    tags: ['음', '오', '아', '예'],
+  },
+  {
+    id: 4,
+    name: "디자인/일러스트",
+    tags: ['마마', '우우우우', '갈릴레오', '피가로'],
+  },
+  {
+    id: 5,
+    name: "사진/영상",
+    tags: ['오마오마갓', '무슨일이야', '올세잇디토', '아침이멀긴뭘멀어'],
+  }
+]
 
 
 /*2023-07-10 Mypage User Information - 위정연 */

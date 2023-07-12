@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail } from './data';
+import { portfolios, commu, commuDetail, category } from './data';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -51,6 +51,10 @@ const DaHamHandlers = [
       }
     })
     return res(ctx.status(200));
+  }),
+  // 카테고리별 태그 조회
+  rest.get('/category', (_, res, ctx) => {
+    return res(ctx.status(200), ctx.json(category));
   })
 ];
 
