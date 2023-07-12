@@ -37,7 +37,6 @@ export default function PortfolioDetail() {
       picture: data.picture
     }
   }
-
   return (
     <FlexColumnContainer gap={0} bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
