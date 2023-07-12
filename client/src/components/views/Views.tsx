@@ -1,7 +1,7 @@
 import { ViewContainer } from "./Views.styled"
 
-export default function Views () {
+export default function Views ({view}:any) {
   return (
-    <ViewContainer>View 2,000</ViewContainer>
+    <ViewContainer>View {view}</ViewContainer>
   )
-};
+}

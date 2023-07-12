@@ -18,8 +18,16 @@ export const CmDContainer = tw.div`
 
 export const CommentContainer = tw.div`
   w-1/3
+  h-[700px]
 `;
 
 export const CommentWrite = tw.div`
   
+`;
+
+export const JbWrapper = tw.div`
+  flex
+  flex-col
+  justify-between
+  h-full
 `;
