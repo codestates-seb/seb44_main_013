@@ -14,6 +14,7 @@ import { BsCheck2 } from 'react-icons/bs';
 import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { category, openCategory } from '@/modules/CategorySlice';
+import { selectedTags } from '@/modules/TagSlice';
 import { useQuery } from '@tanstack/react-query';
 import { call } from '@/utils/ApiService';
 import { CategoryType } from '@/types';
@@ -35,6 +36,7 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
   const { data, isSuccess } = useQuery(['category'], () => call('/category', 'GET'), { staleTime: Infinity, cacheTime: Infinity });
   const dispatch = useDispatch();
   const selected = useSelector(category);
+  const tags = useSelector(selectedTags);
 
   useEffect(() => {
     register("htmlContent", { required: true, minLength: 50 });
@@ -42,7 +44,7 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
   }, [register]);
 
   const onSubmitPortfolio: SubmitHandler<FieldValues> = (data) => {
-    console.log(data.title + '\n' + data.htmlContent + '\n' + selected + '\n');
+    console.log(data.title + '\n' + data.htmlContent + '\n' + selected + '\n' + tags);
   };
 
   return (

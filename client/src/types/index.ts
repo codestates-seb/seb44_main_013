@@ -2,9 +2,11 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, EventHandler } from "react";
 import { UserType, CategoryType } from './getDataType';
 import { QuillPropsType } from './QuillPropsType';
+import { tagSliceType } from './reduxStateType';
 
 export type { UserType, CategoryType };
 export type { QuillPropsType };
+export type { tagSliceType };
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
