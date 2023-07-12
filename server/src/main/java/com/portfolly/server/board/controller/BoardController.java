@@ -31,15 +31,16 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardMapper mapper;
 
-    @PostConstruct
-    public void postConstruct() {
-
-        Board board1 = new Board("제목 테스트1", "본문 테스트1");
-        Board board2 = new Board("제목 테스트2", "본문 테스트2");
-
-        boardService.createBoard(board1);
-        boardService.createBoard(board2);
-    }
+    // 초기데이터 생성
+//    @PostConstruct
+//    public void postConstruct() {
+//
+//        Board board1 = new Board("제목 테스트1", "본문 테스트1");
+//        Board board2 = new Board("제목 테스트2", "본문 테스트2");
+//
+//        boardService.createBoard(board1);
+//        boardService.createBoard(board2);
+//    }
 
     // 1. 게시물 작성
     @PostMapping("/write")
@@ -78,16 +79,17 @@ public class BoardController {
 
     }
 
-    // 3-2. 전제 게시물 조회 (페이지네이션)
-    @GetMapping
-    public ResponseEntity getBoards(@Positive @RequestParam int page,
-                                    @Positive @RequestParam int size) {
-        Page<Board> pages = boardService.pageBoards(page - 1, size);
-        List<Board> boards = pages.getContent();
+    // todo : 3-2. 게시글 전체 조회(Division별)
+//    @GetMapping
+//    public ResponseEntity getBoards(@Positive @RequestParam int page,
+//                                    @Positive @RequestParam int size) {
+//        Page<Board> pages = boardService.pageBoards(page - 1, size);
+//        List<Board> boards = pages.getContent();
+//
+//        return ResponseEntity.ok(new MultiResponseDto(mapper.boardsToBoardResponseList(boards), pages));
+//
+//    }
 
-        return ResponseEntity.ok(new MultiResponseDto(mapper.boardsToBoardResponseList(boards), pages));
-
-    }
 
     // 4. 게시글 삭제
     @DeleteMapping("/{board-id}")
