@@ -11,12 +11,12 @@ import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typ
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { call } from '@/utils/ApiService';
-import { User } from '@/types';
+import { UserType } from '@/types';
 
 export default function PortfolioDetail() {
   const navigate = useNavigate();
   const { portfolio_id } = useParams();
-  let user: User = {
+  let user: UserType = {
     member_id: 0,
     name: '',
     picture: ''

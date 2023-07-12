@@ -6,11 +6,11 @@ const CircleBtn = css`
     ${tw`rounded-full inline-flex justify-center items-center`}
 `
 
-export const PortfolioEditButton = styled.button<{ type: 'light' | 'dark' | 'black' }>`
+export const PortfolioEditButton = styled.button<{ color: 'light' | 'dark' | 'black' }>`
     ${CircleBtn}
     width: 63px;
     height: 63px;
-    ${(props) => props.type === 'dark' &&
+    ${(props) => props.color === 'dark' &&
     css`
             background-color: rgba(71, 70, 70, 0.62);
             border: 1px solid #EFEFEF;
@@ -19,13 +19,13 @@ export const PortfolioEditButton = styled.button<{ type: 'light' | 'dark' | 'bla
             }
         `
   }
-    ${(props) => props.type === 'light' &&
+    ${(props) => props.color === 'light' &&
     css`
           background-color: white;
           border: 1px solid white;
         `
   }
-    ${(props) => props.type === 'black' &&
+    ${(props) => props.color === 'black' &&
     css`
         background-color: black;
         border: 1px solid black;
