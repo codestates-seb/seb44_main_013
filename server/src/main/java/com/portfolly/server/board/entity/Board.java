@@ -29,7 +29,7 @@ public class Board extends Auditable {
 
     private Long view = 0L;
 
-    // todo : 게시판 구분 (Rec/Cop)
+    // todo : 게시판 구분 (RECRUITMENT / COOPERATION)
     private String division;
 
     // 게시글 상태
