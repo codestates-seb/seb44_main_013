@@ -1,12 +1,14 @@
 /* 2023.07.05 드롭다운 박스(접혔을 때 본체) - 김다함 */
-import { ReactNode } from 'react';
+import { ComponentPropsWithoutRef, Dispatch, ReactNode, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import { FlexContainer } from '@/commons/styles/Containers.styled';
 
-interface DropDownProps {
-    value: string;
+interface DropDownProps extends ComponentPropsWithoutRef<'select'> {
+  value: string;
+  isOpen: boolean;
+  openHandler: Dispatch<SetStateAction<boolean>>;
 }
 
 const DropDownBoxContainer = styled.div`
@@ -17,11 +19,17 @@ const DropDownBoxContainer = styled.div`
     color: white;
 `;
 
-export default function DropDownBox({ value }: DropDownProps) {
-    return (
-        <DropDownBoxContainer>
-            {value}
-            {'isOpen' ? <BiCaretUp /> : <BiCaretDown />}
-        </DropDownBoxContainer>
-    )
+export default function DropDownBox({ value, isOpen, openHandler }: DropDownProps) {
+  const ClickHandler = () => {
+    openHandler(!isOpen);
+  }
+  return (
+    <DropDownBoxContainer>
+      {value}
+      {isOpen ?
+        <BiCaretUp className='cursor-pointer' onClick={ClickHandler} /> :
+        <BiCaretDown className='cursor-pointer' onClick={ClickHandler} />
+      }
+    </DropDownBoxContainer>
+  )
 }

@@ -1,9 +1,10 @@
 /* 2023.07.05 드롭다운 아이템(펼쳤을 때 나오는 옵션들) - 김다함 */
+import { ComponentPropsWithoutRef } from 'react';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-interface DropDownItemProps {
-    value: string;
+interface DropDownItemProps extends ComponentPropsWithoutRef<'div'> {
+  value: string;
 }
 
 const DropDownItemContainer = styled.div`
@@ -16,9 +17,9 @@ const DropDownItemContainer = styled.div`
 `;
 
 export default function DropDownItem({ value }: DropDownItemProps) {
-    return (
-        <DropDownItemContainer>
-            {value}
-        </DropDownItemContainer>
-    )
+  return (
+    <DropDownItemContainer>
+      {value}
+    </DropDownItemContainer>
+  )
 }
