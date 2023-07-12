@@ -2,11 +2,11 @@ import { FlexColumnWrapper, FlexWrapper } from '../styles/Containers.styled';
 import Image from '@/commons/atoms/Image';
 import Label from '@/commons/atoms/Label';
 import { SmallText } from '../atoms/Typography';
-import { User } from '@/types';
+import { UserType } from '@/types';
 
 interface UserProfileProps {
   type: 'board' | 'comment' | 'portfolio' | 'blackboard';
-  user: User;
+  user: UserType;
   date?: string;
 }
 
