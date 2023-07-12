@@ -2,7 +2,7 @@ package com.portfolly.server.member.entity;
 
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.board.entity.Board;
-import com.portfolly.server.bookmark.Bookmark;
+import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.*;
 
