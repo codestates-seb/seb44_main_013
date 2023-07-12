@@ -13,15 +13,16 @@ const DaHamHandlers = [
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
+import { setupWorker} from "msw";
 import { UserData, userData } from './data';
 
-const UserHandlers = [
+const UserRequestHandlers = [
   rest.put<UserData>('/members', (req, res, ctx) => {
     Object.assign(userData, req.body);
 
     return res(ctx.json(userData));
   }),
-  rest.get<UserData>('/members', (_, res, ctx) => {
+  rest.get<UserData>('/members', (req, res, ctx) => {
     return res(ctx.json(userData));
   }),
   rest.delete<UserData>('/members', (req, res, ctx) => {
@@ -33,11 +34,14 @@ const UserHandlers = [
 
     return res(
       ctx.status(200),
-      ctx.json({ message: 'User data successfully deleted' })
+      ctx.json({ message: '삭제 성공' })
     );
   }),
 ];
-  
+
+export const worker = setupWorker(...UserRequestHandlers);
+export { UserRequestHandlers };
+
 
 
 //혜진 게시판 파트 
@@ -107,6 +111,6 @@ const HJHandlers = [
 
 
 export const handlers = DaHamHandlers
-  .concat(UserHandlers)
+  // .concat(UserHandlers)
   .concat(HJHandlers);
 

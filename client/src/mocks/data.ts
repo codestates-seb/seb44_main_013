@@ -21,14 +21,14 @@ export interface UserData {
   name: string;
   job: string;
   career: string;
-  awards: string;
+  award: string;
 }
 
 export const userData: UserData = {
-  name: 'unknown', // 이 부분은 기본 이름으로 설정할 내용을 적어주세요.
+  name: 'unknown',  // 이 부분은 기본 이름으로 설정할 내용을 적어주세요.
   job: 'What is your job?',
   career: 'Career 1',
-  awards: 'Awards 1',
+  award: 'Awards 1',
 };
 
 
