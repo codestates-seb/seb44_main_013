@@ -1,3 +1,6 @@
+// 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정
+//2023-07-10 회원이름 조회, 수정, 저장, 삭제 기능 구현 - 위정연
+
 import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
 import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
