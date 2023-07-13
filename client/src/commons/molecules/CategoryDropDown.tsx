@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-import { category, isOpen } from '@/modules/categorySlice';
+import { category, isOpened } from '@/modules/categorySlice';
 
 import { FlexColumnWrapper } from '../styles/Containers.styled';
 import DropDownBox from '../atoms/dropdown/DropDownBox';
@@ -19,12 +19,12 @@ export const DropDownItemContainer = styled.div`
 
 export default function ContegroyDropDown() {
   const selectedCategory = useSelector(category);
-  const isOpened = useSelector(isOpen);
+  const isOpen = useSelector(isOpened);
 
   return (
     <FlexColumnWrapper gap={0}>
       <DropDownBox value={selectedCategory} />
-      {isOpened &&
+      {isOpen &&
         <DropDownItemContainer>
           <DropDownItem value='웹' />
           <DropDownItem value='앱' />
