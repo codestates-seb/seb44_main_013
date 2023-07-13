@@ -6,7 +6,7 @@ import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
 import { useState, useRef, useEffect } from 'react';
-import { UserData } from '@/mocks/data';
+import { User } from '@/mocks/data';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -15,14 +15,16 @@ const WeatherIcon = styled.img`
   height: 60px;
 `;
 
+const WEATHER_ICON_URL = 'http://openweathermap.org/img/wn/';
+
 interface MypageProfileProps {
-  userData: UserData | null;
+  user: User | null;
 }
 
-export default function MypageProfile({ userData }: MypageProfileProps) {
+export default function MypageProfile({ user }: MypageProfileProps) {
   const API_KEY = '76e0dc6fc7f77e50fa77bdb26076dbb1';
   const [isEdit, setIsEdit] = useState(false);
-  const [name, setName] = useState(userData?.name || 'HOHO');
+  const [name, setName] = useState(user?.name || 'HOHO');
   const inputRef = useRef<HTMLInputElement>(null);
   const [weatherData, setWeatherData] = useState<{
     city: string;
@@ -54,23 +56,32 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
     inputRef.current?.focus();
   }, []);
 
+  const getWeatherByCoords = async (lat: number, lon: number) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
+      return {
+        city: data.name,
+        weather: `${Math.round(data.main.temp)}°C`,
+        icon: data.weather[0].icon,
+      };
+    } catch (error) {
+      console.error('날씨정보를 받아올 수 없습니다.', error);
+      return {
+        city: '',
+        weather: '',
+        icon: '',
+      }; // 오류가 발생하면 빈 문자열을 가진 객체를 반환
+    }
+  };
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setWeatherData({
-          city: data.name,
-          weather: `${Math.round(data.main.temp)}°C`,
-          icon: data.weather[0].icon,
-        });
-      } catch (error) {
-        console.error("Can't find you. No weather for you.", error);
-      }
+      const weather = await getWeatherByCoords(lat, lon);
+      setWeatherData(weather);
     });
   }, []);
 
@@ -104,7 +115,7 @@ export default function MypageProfile({ userData }: MypageProfileProps) {
         </p>
         {weatherData.icon && (
           <WeatherIcon
-            src={`http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
+            src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`}
             alt="Weather icon"
           />
         )}

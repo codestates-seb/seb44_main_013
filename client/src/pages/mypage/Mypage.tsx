@@ -1,89 +1,95 @@
 import { useEffect, useState } from 'react';
-import MypageItem from "@/components/mypageItem/MypageItem";
+import MypageItem from '@/components/mypageItem/MypageItem';
 import {
-    BoxTitle,
-    BoxWrapper,
-    MainWrapper,
-    MyItemsWrapper,
-    MyProfileWrapper,
-  } from './MyPage.styled';
+  BoxTitle,
+  BoxWrapper,
+  MainWrapper,
+  MyItemsWrapper,
+  MyProfileWrapper,
+} from './MyPage.styled';
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import MypageProfile from '@/components/mypageProfile/MypageProfile';
 import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
 import CommunityList from '@/components/mypage-community/CommunityList';
 import { Pagenation } from '@/components/pagenation/Pagenation';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
-import { UserData } from '@/mocks/data';
+import { User } from '@/mocks/data';
 
-export default function MyPage () {
-    const isUser = false;
-    const [userData, setUserData] = useState<UserData | null>(null);
+export default function MyPage() {
+  const isUser = false;
+  const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-      const fetchUserData = async () => {
-        try {
-          const response = await fetch('/members');
-          const data = await response.json();
-          setUserData(data);
-          console.log(data);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-  
-      fetchUserData();
-    }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/members');
+        const data = await response.json();
+        setUser(data);
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    return(
-        <MainWrapper>
-            {/* 프로필 부분  */}
-                <MyProfileWrapper>
-                <MypageProfile userData={userData} />
-                <MypageIntroduce userData={userData} />
-            </MyProfileWrapper>
+    fetchUser();
+  }, []);
 
-            <MyItemsWrapper>
-                <FlexColumnWrapper gap={0}>
-                    <BoxTitle>게시물</BoxTitle>
-                    <BoxWrapper>
-                            {Array.from({length:10}).map((_, index) => {
-                                return (
-                                <MypageItem key={index} title={'Title'} name={'phy'} src={''} />
-                                )
-                            })}
-                    </BoxWrapper>
-                </FlexColumnWrapper>
+  return (
+    <MainWrapper>
+      {/* 프로필 부분  */}
+      <MyProfileWrapper>
+        <MypageProfile user={user} />
+        <MypageIntroduce user={user} />
+      </MyProfileWrapper>
 
-                { isUser ?
-                (<FlexColumnWrapper gap={0}>
-                    <BoxTitle>북마크</BoxTitle>
-                    <BoxWrapper>
-                        {Array.from({ length: 10 }).map((_, index) => {
-                        return (
-                            <MypageItem key={index} title={'Title'} name={'phj'} src={''} />
-                        );
-                        })}
-                    </BoxWrapper>
+      <MyItemsWrapper>
+        <FlexColumnWrapper gap={0}>
+          <BoxTitle>게시물</BoxTitle>
+          <BoxWrapper>
+            {Array.from({ length: 10 }).map((_, index) => {
+              return (
+                <MypageItem key={index} title={'Title'} name={'phy'} src={''} />
+              );
+            })}
+          </BoxWrapper>
+        </FlexColumnWrapper>
 
-                    {/* 게시판 목록 부분  */}
-                    <BoxTitle>게시판</BoxTitle>
-                    <BoxWrapper isRow="column">
-                        {Array.from({ length: 5 }).map((_, index) => {
-                        return <CommunityList key={index} />;
-                        })}
+        {isUser ? (
+          <FlexColumnWrapper gap={0}>
+            <BoxTitle>북마크</BoxTitle>
+            <BoxWrapper>
+              {Array.from({ length: 10 }).map((_, index) => {
+                return (
+                  <MypageItem
+                    key={index}
+                    title={'Title'}
+                    name={'phj'}
+                    src={''}
+                  />
+                );
+              })}
+            </BoxWrapper>
 
-                        <PagenationWrapper>
-                            <Pagenation>&lt;</Pagenation>
+            {/* 게시판 목록 부분  */}
+            <BoxTitle>게시판</BoxTitle>
+            <BoxWrapper isRow="column">
+              {Array.from({ length: 5 }).map((_, index) => {
+                return <CommunityList key={index} />;
+              })}
 
-                            {Array.from({ length: 5 }).map((_, i) => {
-                                return <Pagenation>{i + 1}</Pagenation>;
-                            })}
+              <PagenationWrapper>
+                <Pagenation>&lt;</Pagenation>
 
-                            <Pagenation> &gt;</Pagenation>
-                        </PagenationWrapper>
-                    </BoxWrapper>
-                </FlexColumnWrapper>) : null }
-            </MyItemsWrapper>
-        </MainWrapper>
-    );
+                {Array.from({ length: 5 }).map((_, i) => {
+                  return <Pagenation>{i + 1}</Pagenation>;
+                })}
+
+                <Pagenation> &gt;</Pagenation>
+              </PagenationWrapper>
+            </BoxWrapper>
+          </FlexColumnWrapper>
+        ) : null}
+      </MyItemsWrapper>
+    </MainWrapper>
+  );
 }
