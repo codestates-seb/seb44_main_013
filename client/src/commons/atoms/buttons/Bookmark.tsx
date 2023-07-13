@@ -1,4 +1,5 @@
 import useToggle, { Toggle } from '@/hooks/useToggle';
+
 import { FaBookmark } from 'react-icons/fa';
 
 export default function Bookmark({ portfolioId, isToggled }: Toggle) {

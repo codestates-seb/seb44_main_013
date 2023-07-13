@@ -1,5 +1,4 @@
 /* 2023-07-04 주소, 모양, 사이즈를 입력 받는 이미지 아토믹 컴포넌트 - 김다함*/
-import { ComponentPropsWithoutRef } from 'react';
 import { styled, css } from 'styled-components';
 import tw from 'twin.macro';
 
@@ -27,7 +26,7 @@ const FeatherImage = styled.img<{ shape?: string, size: number | string }>`
     height: ${(props) => typeof props.size === 'string' ? props.size : `${props.size}px`};
 `;
 
-export const Image = ({ src, url, shape, size }: ImageProps) => {
+export default function Image({ src, url, shape, size }: ImageProps) {
   return (
     <ImageContainer shape={shape} size={size}>
       <a href={url}>
@@ -36,5 +35,3 @@ export const Image = ({ src, url, shape, size }: ImageProps) => {
     </ImageContainer>
   )
 }
-
-export default Image;

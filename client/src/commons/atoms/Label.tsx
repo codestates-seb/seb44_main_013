@@ -22,10 +22,8 @@ const Text = styled.a<{ size: string, type: string }>`
     ? 'white' : '#232629'}
 `;
 
-const Label = ({ type, text, url }: LabelProps) => {
+export default function Label({ type, text, url }: LabelProps) {
   return (
     <Text size={LabelSizes[type]} type={type} href={url}>{text}</Text>
   )
 }
-
-export default Label;
