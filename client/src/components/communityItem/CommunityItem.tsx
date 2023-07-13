@@ -10,10 +10,10 @@ import UserProfile from '@/commons/molecules/UserProfile';
 
 export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
-  const eachData = communityItem
+  const eachData = communityItem;
 
-  const HandleClick = (e: CommuProps) => {
-    navigate(`/boards/${e.board_id}`, { state: e });
+  const HandleClick = (event: CommuProps) => {
+    navigate(`/boards/${event.board_id}`, { state: event });
   }
 
   return (
