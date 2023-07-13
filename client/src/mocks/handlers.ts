@@ -211,7 +211,7 @@ const HyoHandler = [
       member_id: 1,
       status: true
     }
-    commu.push(newCommunity);
+    commu.unshift(newCommunity);
     return res(ctx.status(201), ctx.json(newCommunity));
   })
 ]
