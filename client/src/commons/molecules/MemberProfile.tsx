@@ -2,11 +2,11 @@ import { FlexColumnWrapper, FlexWrapper } from '../styles/Containers.styled';
 import Image from '@/commons/atoms/Image';
 import Label from '@/commons/atoms/Label';
 import { SmallText } from '../atoms/Typography';
-import { UserType } from '@/types';
+import { Member } from '@/types';
 
-interface UserProfileProps {
+interface UserProfile {
   type: 'board' | 'comment' | 'portfolio' | 'blackboard';
-  user: UserType;
+  member: Member;
   date?: string;
 }
 
@@ -17,20 +17,20 @@ const ImageSizes: any = {
   blackboard: 65
 }
 
-const UserProfile = ({ type, user, date }: UserProfileProps) => {
+const MemberProfile = ({ type, member, date }: UserProfile) => {
   return (
     <FlexWrapper gap={15} className='items-center'>
-      <Image src={user.picture} url={`/members/${user.member_id}`} shape='circle' size={ImageSizes[type]} />
+      <Image src={member.picture} url={`/members/${member.memberId}`} shape='circle' size={ImageSizes[type]} />
       {type === 'portfolio' ?
-        <Label text={user.name} type={type} url={`/members/${user.member_id}`} />
+        <Label text={member.name} type={type} url={`/members/${member.memberId}`} />
         :
         <FlexColumnWrapper gap={0}>
-          <Label text={user.name} type={type} url={`/members/${user.member_id}`} />
-          <SmallText className={type === 'blackboard' ? 'text-zinc-200 text-white' : ''}>{date}2022.06.30</SmallText>
+          <Label text={member.name} type={type} url={`/members/${member.memberId}`} />
+          <SmallText className={type === 'blackboard' ? 'text-zinc-200 text-white' : ''}>{date}</SmallText>
         </FlexColumnWrapper>
       }
     </FlexWrapper >
   )
 }
 
-export default UserProfile;
+export default MemberProfile;
