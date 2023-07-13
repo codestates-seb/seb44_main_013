@@ -7,7 +7,7 @@ import { BodyText, SmallText } from '../atoms/Typography';
 import { CommentProps } from '@/types';
 
 import { useParams } from 'react-router-dom';
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 import { useEffect, useRef, useState } from 'react';
 
 interface CommuCommentProps {

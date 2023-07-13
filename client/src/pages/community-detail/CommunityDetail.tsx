@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 
 import MemberProfile from '@/commons/molecules/MemberProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
