@@ -1,6 +1,7 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail, category, PortfolioType } from './data';
+import { portfolios, commu, commuDetail, UserData, userData, category, PortfolioType } from './data';
+
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -87,8 +88,6 @@ const DaHamHandlers = [
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
-import { setupWorker } from "msw";
-import { UserData, userData } from './data';
 
 const UserRequestHandlers = [
   rest.put<UserData>('/members', (req, res, ctx) => {
@@ -113,9 +112,6 @@ const UserRequestHandlers = [
   }),
 ];
 
-export const worker = setupWorker(...UserRequestHandlers);
-export { UserRequestHandlers };
-
 
 
 //혜진 게시판 파트 
@@ -131,10 +127,10 @@ const HJHandlers = [
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
-  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
+  rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
     const { comments_id, member_id, content, name } = await req.json();
     const filterdData = commuDetail.filter(el => el.board_id === 2);
-    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
 
     const temp = {
       comments_id: comments_id,
@@ -142,11 +138,13 @@ const HJHandlers = [
       member_id: member_id,
       name: name,
       createdAt: "2023-06-23T17:34:51.3395597",
-      modifiedAt: "2023-06-23T17:34:51.3395597"
+      modifiedAt: "2023-06-23T17:34:51.3395597",
+      status: "POST_ACTIVE"
     };
+    //console.log(temp);
 
-    if (index !== -1) {
-      (filterdData[0].comment)[index] = temp;
+    if(index !== -1){
+      (filterdData[0].comments)[index]  = temp;
     }
     //console.log((filterdData[0].comment)[index])
 
@@ -162,8 +160,8 @@ const HJHandlers = [
     if (!filteredData) {
       return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
     }
-    const comments_id = filteredData.comment.length || 0;
-
+    const comments_id  = filteredData.comments.length || 0;
+  
     const newPostData = {
       comments_id: comments_id + 1,
       content: (await req.json()).content,
@@ -174,17 +172,26 @@ const HJHandlers = [
     }
     //filteredData.comment.push(newPostData);
     const index = commuDetail.findIndex(e => e.board_id === board_id);
-    if (index !== -1) {
-      commuDetail[index].comment.push(newPostData);
+    if(index !== -1){
+      commuDetail[index].comments.push(newPostData);
     }
     //console.log(commuDetail[1].comment);
     return res(ctx.status(200), ctx.json(newPostData));
   }),
+  //5. 댓글 삭제
+  rest.delete('/comments/:comments_id', async(req, res, ctx) => {
+    const { comments_id } = await req.json();
+    const filterdData = commuDetail.filter(el => el.board_id === 2);
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
+    const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index+1, -1))
+
+    return res(ctx.json(200), ctx.json({ message: ' 댓글 삭제 성공 ', data: newArr}))
+  })
 ];
 
 
 
 export const handlers = DaHamHandlers
-  // .concat(UserHandlers)
+  .concat(UserRequestHandlers)
   .concat(HJHandlers);
 

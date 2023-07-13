@@ -84,41 +84,43 @@ import { CommuProps } from "@/types"
 export const commu: CommuProps[] = [
   {
     board_id: 1,
+    //유저 프로필 이미지
     title: "박효정씨는 아침 요청입니다.",
     content: "매일 아침마다 효정씨는 모두에게 아침 인사를 해줍니다. 아주 성실한 친구죠.",
     view: 208,
-    division: "recruitment",
+    division: "RECRUITMENT",
     name: "phy",
     created_at: "2023-06-21T17:34:51.3395597",
     modifiedAt: "2023-06-21T17:34:51.3395597",
     member_id: 1,
-    status: true
+    status: "POST_ACTIVE"
   },
   {
     board_id: 2,
+    //유저 프로필 이미지
     title: "위정연씨는 칭찬 스티커를 줍니다.",
     content: "잘 하는 사람만 정연씨의 칭찬 스티커를 받을 수 있죠.",
     view: 200,
-    division: "recruitment",
+    division: "COOPERATION",
     name: "yjy",
     created_at: "2023-05-21T17:34:51.3395597",
     modifiedAt: "2023-05-21T17:34:51.3395597",
     member_id: 2,
-    status: true
+    status: "POST_ACTIVE"
   },
   {
     board_id: 3,
+    //유저 프로필 이미지
     title: "김다함씨는 열정맨입니다.",
     content: "다함씨는 조용히 다함",
     view: 150,
-    division: "recruitment",
+    division: "COOPERATION",
     name: "kdh",
     created_at: "2023-04-21T17:34:51.3395597",
     modifiedAt: "2023-04-21T17:34:51.3395597",
     member_id: 3,
-    status: true
+    status: "POST_ACTIVE"
   }
-
 ];
 
 export const commuDetail = [
@@ -126,51 +128,59 @@ export const commuDetail = [
     board_id: 1,
     title: "박효정씨는 아침 요청입니다.",
     content: "매일 아침마다 효정씨는 모두에게 아침 인사를 해줍니다. 아주 성실한 친구죠.",
-    division: "recruitment",
+    division: "RECRUITMENT",
+    view: 208,
     name: "phy",
     created_at: "2023-06-21T17:34:51.3395597",
     modifiedAt: "2023-06-21T17:34:51.3395597",
     member_id: 1,
-    status: true,
-    comment: [
+    status: "POST_ACTIVE", 
+    comments: [
       {
         comments_id: 1,
         content: '울랄랄 숑숑숑 댓글',
         member_id: 1,
         name: 'phj',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 2,
         content: '댓글2',
         member_id: 2,
         name: 'wjw',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
       }
     ]
 
   },
   {
     board_id: 2,
+    //유저 프로필 
     title: "위정연씨는 칭찬 스티커를 줍니다.",
     content: "잘 하는 사람만 정연씨의 칭찬 스티커를 받을 수 있죠.",
-    division: "recruitment",
+    division: "COOPERATION",
+    view: 200, //추가
     name: "wjw",
     created_at: "2023-06-21T17:34:51.3395597",
     modifiedAt: "2023-06-21T17:34:51.3395597",
     member_id: 1,
-    status: true,
-    comment: [
+    status: "POST_ACTIVE",
+    comments: [
       {
         comments_id: 1,
+        //유저 프로필 
         content: '울랄랄 숑숑숑 댓글',
         member_id: 1,
         name: 'phj',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 2,
+        //유저 프로필 
         content: '댓글2',
         member_id: 2,
         name: 'wjw',
@@ -178,63 +188,90 @@ export const commuDetail = [
         modifiedAt: "2023-06-23T17:34:51.3395597"
       }, {
         comments_id: 3,
+        //유저 프로필 
         content: '댓글3',
         member_id: 3,
         name: 'kdh',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 4,
+        //유저 프로필 
         content: '댓글4',
         member_id: 1,
         name: 'phj',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
       }
     ]
 
   },
   {
     board_id: 3,
+    //유저 프로필 
     title: "김다함씨는 열정맨입니다.",
     content: "다함씨는 조용히 다함",
-    division: "recruitment",
+    division: "COOPERATION",
+    view: 150, //추가
     name: "kdh",
     created_at: "2023-06-21T17:34:51.3395597",
     modifiedAt: "2023-06-21T17:34:51.3395597",
     member_id: 1,
-    status: true,
-    comment: [
+    status: "POST_ACTIVE",
+    comments: [
       {
         comments_id: 1,
+        //유저 프로필 
         content: '울랄랄 숑숑숑 댓글',
         member_id: 1,
         name: 'phj',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 2,
+        //유저 프로필 
         content: '댓글2',
         member_id: 2,
         name: 'wjw',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 3,
+        //유저 프로필 
         content: '댓글3',
         member_id: 3,
         name: 'kdh',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
-      }, {
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
+      },{
         comments_id: 4,
+        //유저 프로필 
         content: '댓글4',
         member_id: 1,
         name: 'phj',
         createdAt: "2023-06-23T17:34:51.3395597",
-        modifiedAt: "2023-06-23T17:34:51.3395597"
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE",
       }
     ]
 
   }
 ];
+
+
+export const WholeData = [
+
+  {
+    data: {
+      member_id:1,
+      portfolio_id: 1,
+      title: "제목"
+    }
+  }
+]
+
