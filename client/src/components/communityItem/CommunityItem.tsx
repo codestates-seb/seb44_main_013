@@ -6,7 +6,6 @@ import { CommunityItemContainer } from './CommunityItem.styled';
 
 import Views from '../views/Views';
 import UserProfile from '@/commons/molecules/UserProfile';
-
 export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
   const eachData = communityItem
