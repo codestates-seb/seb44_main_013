@@ -8,9 +8,11 @@ import Views from '../views/Views';
 import UserProfile from '@/commons/molecules/UserProfile';
 
 
-export default function CommunityItem(datas: any) {
+export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
-  const eachData = datas.datas
+  const eachData = communityItem;
+  console.log(eachData);
+  // console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
