@@ -1,16 +1,17 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-import axios, { AxiosError, RawAxiosRequestConfig, AxiosResponse, AxiosHeaders } from 'axios'
+import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
+// 23-07-12 네틀리파이 배포 준비 위해 임시 주석 처리 AxiosError, AxiosResponse - 혜진
 // import { CustomAxiosInterface } from '@/types/axiosInterface'
 // import { API_BASE_URL } from "@/app-config.js";
 const API_BASE_URL = ''
 const ACCESS_TOKEN = "ACCESS_TOKEN";
-const IS_ADMIN = "IS_ADMIN";
-const USER_NAME = "USER_NAME";
+// const IS_ADMIN = "IS_ADMIN";
+// const USER_NAME = "USER_NAME";
 
 axios.defaults.baseURL = API_BASE_URL;
 
-export async function call(api: string, method: string, data?: {}) {
-  let headers = new AxiosHeaders({
+export async function call(api: string, method: string, data?: any) {
+  const headers = new AxiosHeaders({
     "Content-Type": "application/json"
   });
 
@@ -19,7 +20,7 @@ export async function call(api: string, method: string, data?: {}) {
     headers.append("Authorization", "Bearer " + accessToken);
   }
 
-  let options: RawAxiosRequestConfig = {
+  const options: RawAxiosRequestConfig = {
     headers: headers,
     method: method,
     url: API_BASE_URL + api,

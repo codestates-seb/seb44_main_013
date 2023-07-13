@@ -31,7 +31,7 @@ const App = () => {
             </Route>
           <Route element={<CHeaderLayout />}>
             <Route path="/boards" element={<CommunityMain />} />
-            <Route path="/boards/:board_id" element={<CommunityDetail />} />
+            <Route path="/boards/:id" element={<CommunityDetail />} />
             <Route path="/boards/edit" element={<AddCommunity />} />
           </Route>
             <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />

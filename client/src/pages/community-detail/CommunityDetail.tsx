@@ -19,7 +19,7 @@ import {
 
 export default function CommunityDetail( {handleClick}:any ) {
   const [ memberData, setMemberData ] = useState<CommuProps | null>(null); 
-  const { board_id:boardId } = useParams(); //_ 상수일 때만 사용 + 전체 대문자 -> 별칭 : boardId로 쓰겠다.
+  const { id:boardId } = useParams(); 
 
   useEffect(()=> {
     const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
@@ -33,15 +33,14 @@ export default function CommunityDetail( {handleClick}:any ) {
 
     getMember();
   }, [boardId]);
-  // earlyreturn pattern : memberData가 없는 경우 37까지만 실행하고 끝 -> 성능 상승 
+
   if(!memberData) return <PageWrapper><Loading/></PageWrapper>
- // eslint prettier 적용하기 : 과제 (0712)
+
   return (
     <PageWrapper >
-      {/* !== 처럼 바로 이해안되는 거는 노노  -> 삼항연산자 삭제 */}
-      {/* member_id change */}
+
         <UserProfile type={'blackboard'} 
-          user={{ member_id: memberData.member_id, 
+          user={{ member_id: memberData.memberId, 
                   name: memberData.name, 
                   picture: 'https://picsum.photos/200/300' 
                 }} 

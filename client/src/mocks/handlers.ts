@@ -1,6 +1,7 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail, UserData, userData, category, PortfolioType } from './data';
+import { portfolios, commuDetail, UserData, userData, category, PortfolioType } from './data';
+import { commu } from './infiniteScrollData'
 
 
 const DaHamHandlers = [
@@ -121,21 +122,21 @@ const HJHandlers = [
     return res(ctx.status(200), ctx.json(commu));
   }),
   //2. 게시한 상세 페이지 조회 GET : community-detail page
-  rest.get('/boards/:board_id', (req, res, ctx) => {
-    const board_id = Number(req.params.board_id);
-    const filteredData = commuDetail.filter(e => e.board_id === board_id);
+  rest.get('/boards/:id', (req, res, ctx) => {
+    const id = Number(req.params.id);
+    const filteredData = commuDetail.filter(e => e.id === id);
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
   rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
-    const { comments_id, member_id, content, name } = await req.json();
-    const filterdData = commuDetail.filter(el => el.board_id === 2);
+    const { comments_id, memberId, content, name } = await req.json();
+    const filterdData = commuDetail.filter(el => el.id === 2);
     const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
 
     const temp = {
       comments_id: comments_id,
       content: content,
-      member_id: member_id,
+      memberId: memberId,
       name: name,
       createdAt: "2023-06-23T17:34:51.3395597",
       modifiedAt: "2023-06-23T17:34:51.3395597",
@@ -156,7 +157,7 @@ const HJHandlers = [
   rest.post('/comments', async (req, res, ctx) => {
     const board_id = 2;
     // const {  board_id } = await req.json();
-    const filteredData = commuDetail.find(e => e.board_id === board_id);
+    const filteredData = commuDetail.find(e => e.id === board_id);
     if (!filteredData) {
       return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
     }
@@ -165,13 +166,13 @@ const HJHandlers = [
     const newPostData = {
       comments_id: comments_id + 1,
       content: (await req.json()).content,
-      member_id: 1,
+      memberId: 1,
       name: 'jhj',
       createdAt: "2023-06-21T17:34:51.3395597",
       modifiedAt: "2023-06-21T17:34:51.3395597"
     }
     //filteredData.comment.push(newPostData);
-    const index = commuDetail.findIndex(e => e.board_id === board_id);
+    const index = commuDetail.findIndex(e => e.id === board_id);
     if(index !== -1){
       commuDetail[index].comments.push(newPostData);
     }
@@ -181,7 +182,7 @@ const HJHandlers = [
   //5. 댓글 삭제
   rest.delete('/comments/:comments_id', async(req, res, ctx) => {
     const { comments_id } = await req.json();
-    const filterdData = commuDetail.filter(el => el.board_id === 2);
+    const filterdData = commuDetail.filter(el => el.id === 2);
     const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
     const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index+1, -1))
 

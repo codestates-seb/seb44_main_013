@@ -55,16 +55,8 @@ export default function Comment(
   };
 
   const handleChangeEditMode = () => {
-    // setIsEditMode((previousIsEditMode) => !previousIsEditMode);
-    //더블 클릭의 경우를 생각해주어야 합니다. 
-    // callback으로 -> react에서 맨 마지막 껄로 치환
     setIsEditMode(!isEditMode)
   };
-
-  // const editComment = () =>  {
-  //   handleClick();
-  // };
-
 
   useEffect(() => {
     //
