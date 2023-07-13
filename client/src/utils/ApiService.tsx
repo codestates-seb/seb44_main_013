@@ -1,5 +1,5 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-import axios, { AxiosError, RawAxiosRequestConfig, AxiosResponse, AxiosHeaders } from 'axios'
+import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
 // import { CustomAxiosInterface } from '@/types/axiosInterface'
 // import { API_BASE_URL } from "@/app-config.js";
 const API_BASE_URL = ''
@@ -28,6 +28,7 @@ export async function call(api: string, method: string, data?: {}) {
   if (data)
     options.data = JSON.stringify(data);
 
+  // 에러처리고려
   return await axios.request(options)
     .then((res) => res.data)
     .catch(error => {
