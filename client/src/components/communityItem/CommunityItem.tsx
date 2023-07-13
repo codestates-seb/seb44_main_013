@@ -1,12 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { CommunityItemContainer } from './CommunityItem.styled';
 import Views from '../views/Views';
 import UserProfile from '@/commons/molecules/UserProfile';
-import { useNavigate } from 'react-router-dom';
 import { CommuProps } from '@/types';
 
-export default function CommunityItem(datas: any) {
+export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
-  const eachData = datas.datas
+  const eachData = communityItem
 
   const HandleClick = (e: CommuProps) => {
     navigate(`/boards/${e.board_id}`, { state: e });
