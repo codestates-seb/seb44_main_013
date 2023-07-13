@@ -4,10 +4,6 @@ import tw from 'twin.macro';
 import { memo, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.snow.css";
-<<<<<<< HEAD
-=======
-import { QuillPropsType } from '@/types';
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 
 const QuillWrapper = styled.div`
 ${tw`z-10 absolute border-0 top-0`}
@@ -27,20 +23,11 @@ ${tw`z-10 absolute border-0 top-0`}
     border: 0;
   }
   .ql-editor{
-<<<<<<< HEAD
     max-height: calc(100vh - 60px);
   }
 `
 
 const QuillEditor = memo(() => {
-=======
-    width: 1000px;
-    height: calc(100vh - 60px);
-  }
-`
-
-const QuillEditor = memo(({ htmlContent, setContentHandler }: QuillPropsType) => {
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   const quillRef = useRef<ReactQuill>();
 
   const modules = useMemo(
@@ -72,20 +59,11 @@ const QuillEditor = memo(({ htmlContent, setContentHandler }: QuillPropsType) =>
             quillRef.current = element;
           }
         }}
-<<<<<<< HEAD
         // onChange={}
         modules={modules}
         theme="snow"
         style={{ height: '100%', marginBottom: '0' }}
         placeholder={'Writing Something...'}
-=======
-        value={htmlContent}
-        onChange={(content) => setContentHandler(content)}
-        modules={modules}
-        theme="snow"
-        style={{ height: '100%', marginBottom: '0' }}
-        placeholder={'Write Something...'}
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
       />
     </QuillWrapper>
   )

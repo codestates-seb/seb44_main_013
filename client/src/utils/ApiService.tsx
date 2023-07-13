@@ -9,11 +9,7 @@ const USER_NAME = "USER_NAME";
 
 axios.defaults.baseURL = API_BASE_URL;
 
-<<<<<<< HEAD
 export async function call(api: string, method: string, data?: string) {
-=======
-export async function call(api: string, method: string, data?: {}) {
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   let headers = new AxiosHeaders({
     "Content-Type": "application/json"
   });

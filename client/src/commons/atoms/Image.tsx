@@ -23,11 +23,7 @@ const ImageContainer = styled.div<{ shape?: string, size: number }>`
 
 const FeatherImage = styled.img<{ shape?: string, size: number | string }>`
     ${(props) => props.shape === 'circle' &&
-<<<<<<< HEAD
     tw`rounded-full min-w-full min-h-full`}
-=======
-    tw`rounded-full min-w-full min-h-full select-none`}
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
     height: ${(props) => typeof props.size === 'string' ? props.size : `${props.size}px`};
 `;
 

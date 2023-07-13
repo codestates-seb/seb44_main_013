@@ -2,8 +2,6 @@ package com.portfolly.server.board.mapper;
 
 import com.portfolly.server.board.dto.BoardDto;
 import com.portfolly.server.board.entity.Board;
-import com.portfolly.server.comment.dto.CommentDto;
-import com.portfolly.server.comment.entity.Comment;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-13T19:47:30+0900",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.1.1.jar, environment: Java 11.0.18 (Azul Systems, Inc.)"
+    date = "2023-07-12T14:23:49+0900",
+    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.1.1.jar, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
 public class BoardMapperImpl implements BoardMapper {
@@ -28,7 +26,6 @@ public class BoardMapperImpl implements BoardMapper {
 
         board.setTitle( post.getTitle() );
         board.setContent( post.getContent() );
-        board.setDivision( post.getDivision() );
 
         return board;
     }
@@ -67,10 +64,6 @@ public class BoardMapperImpl implements BoardMapper {
         }
         response.setDivision( board.getDivision() );
         response.setView( board.getView() );
-        response.setComments( commentToCommentResponseList( board.getComments() ) );
-        if ( board.getStatus() != null ) {
-            response.setStatus( board.getStatus().name() );
-        }
 
         return response;
     }
@@ -89,20 +82,6 @@ public class BoardMapperImpl implements BoardMapper {
         return list;
     }
 
-    @Override
-    public List<CommentDto.Response> commentToCommentResponseList(List<Comment> comments) {
-        if ( comments == null ) {
-            return null;
-        }
-
-        List<CommentDto.Response> list = new ArrayList<CommentDto.Response>( comments.size() );
-        for ( Comment comment : comments ) {
-            list.add( commentToResponse( comment ) );
-        }
-
-        return list;
-    }
-
     protected BoardDto.ResponseList boardToResponseList(Board board) {
         if ( board == null ) {
             return null;
@@ -110,7 +89,6 @@ public class BoardMapperImpl implements BoardMapper {
 
         BoardDto.ResponseList responseList = new BoardDto.ResponseList();
 
-        responseList.setId( board.getId() );
         responseList.setTitle( board.getTitle() );
         responseList.setContent( board.getContent() );
         if ( board.getCreatedAt() != null ) {
@@ -121,24 +99,7 @@ public class BoardMapperImpl implements BoardMapper {
         }
         responseList.setDivision( board.getDivision() );
         responseList.setView( board.getView() );
-        if ( board.getStatus() != null ) {
-            responseList.setStatus( board.getStatus().name() );
-        }
 
         return responseList;
-    }
-
-    protected CommentDto.Response commentToResponse(Comment comment) {
-        if ( comment == null ) {
-            return null;
-        }
-
-        CommentDto.Response response = new CommentDto.Response();
-
-        response.setId( comment.getId() );
-        response.setContent( comment.getContent() );
-        response.setStatus( comment.getStatus() );
-
-        return response;
     }
 }

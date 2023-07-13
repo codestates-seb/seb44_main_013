@@ -1,18 +1,8 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps, EventHandler } from "react";
-<<<<<<< HEAD
 import { User } from './UserInterface';
 
 export type { User };
-=======
-import { UserType, CategoryType, portfolioContentType } from './getDataType';
-import { QuillPropsType } from './QuillPropsType';
-import { tagSliceType } from './reduxStateType';
-
-export type { UserType, CategoryType, portfolioContentType };
-export type { QuillPropsType };
-export type { tagSliceType };
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
@@ -40,20 +30,12 @@ export interface CommuProps {
   title: string,
   content: string,
   view: number,
-<<<<<<< HEAD
   division:string,
-=======
-  division: string,
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   name: string,
   created_at: string,
   modifiedAt: string,
   member_id: number,
-<<<<<<< HEAD
   status:boolean,
-=======
-  status: boolean,
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   comment?: CommentProps[]
 }
 

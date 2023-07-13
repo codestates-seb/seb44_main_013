@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 import WebItem1 from '../../assets/WebItem1.png';
-<<<<<<< HEAD
 import Bookmark from '../bookmark/Bookmark';
-=======
-import Bookmark from '../../commons/atoms/buttons/Bookmark';
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 
 import {
   BookmarkWrapper,

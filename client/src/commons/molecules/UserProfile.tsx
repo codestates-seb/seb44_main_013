@@ -2,19 +2,11 @@ import { FlexColumnWrapper, FlexWrapper } from '../styles/Containers.styled';
 import Image from '@/commons/atoms/Image';
 import Label from '@/commons/atoms/Label';
 import { SmallText } from '../atoms/Typography';
-<<<<<<< HEAD
 import { User } from '@/types';
 
 interface UserProfileProps {
   type: 'board' | 'comment' | 'portfolio' | 'blackboard';
   user: User;
-=======
-import { UserType } from '@/types';
-
-interface UserProfileProps {
-  type: 'board' | 'comment' | 'portfolio' | 'blackboard';
-  user: UserType;
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   date?: string;
 }
 

@@ -1,6 +1,5 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-<<<<<<< HEAD
 import { portfolios, commu, commuDetail } from './data';
 
 const DaHamHandlers = [
@@ -8,100 +7,13 @@ const DaHamHandlers = [
     const portfolio_id = Number(req.params.portfolio_id);
     const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
     return res(ctx.status(200), ctx.json(Portfolio[0]));
-=======
-import { portfolios, commu, commuDetail, category, PortfolioType } from './data';
-
-const DaHamHandlers = [
-  // 포트폴리오 정보 조회
-  rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
-    portfolios.map((p) => ++p.views);
-    return res(ctx.status(200), ctx.json(Portfolio[0]));
-  }),
-  // 포트폴리오 작성
-  rest.post('/portfolios', async (req, res, ctx) => {
-    const portfolio_id = Math.floor(Math.random() * 100);
-    const body = await req.json();
-    const newPortfolio: PortfolioType = {
-      portfolio_id: portfolio_id,
-      member_id: 1,
-      picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
-      name: 'noname',
-      title: String(body.title),
-      category: body.category,
-      tags: body.tags,
-      content: String(body.content),
-      explains: body.explains,
-      created_at: String(new Date()),
-      views: 0,
-      isLiked: false,
-      isMarked: false,
-      likes: 0,
-    }
-    portfolios.push(newPortfolio);
-    return res(
-      ctx.status(201),
-      ctx.json({ portfolio_id: portfolio_id })
-    );
-  }),
-  // 좋아요 기능
-  rest.post('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = true;
-        response = { likes: ++p.likes }
-      }
-    })
-    return res(ctx.status(200), ctx.json(response));
-  }),
-  rest.delete('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = false;
-        response = { likes: --p.likes };
-      }
-    })
-    return res(ctx.status(200), ctx.json(response));
-  }),
-  // 북마크 기능
-  rest.post('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = true;
-      }
-    })
-    return res(ctx.status(200));
-  }),
-  rest.delete('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = false;
-      }
-    })
-    return res(ctx.status(200));
-  }),
-  // 카테고리별 태그 조회
-  rest.get('/category', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json(category));
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
   })
 ];
 
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
-<<<<<<< HEAD
 import { setupWorker} from "msw";
-=======
-import { setupWorker } from "msw";
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 import { UserData, userData } from './data';
 
 const UserRequestHandlers = [
@@ -145,17 +57,10 @@ const HJHandlers = [
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
-<<<<<<< HEAD
   rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
     const { comments_id, member_id, content, name } = await req.json();
     const filterdData = commuDetail.filter(el => el.board_id === 2);
     const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);  
-=======
-  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
-    const { comments_id, member_id, content, name } = await req.json();
-    const filterdData = commuDetail.filter(el => el.board_id === 2);
-    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 
     const temp = {
       comments_id: comments_id,
@@ -166,26 +71,16 @@ const HJHandlers = [
       modifiedAt: "2023-06-23T17:34:51.3395597"
     };
 
-<<<<<<< HEAD
     if(index !== -1){
       (filterdData[0].comment)[index]  = temp;
     }
     //console.log((filterdData[0].comment)[index])
 
     return res(ctx.status(200), ctx.json( temp ));
-=======
-    if (index !== -1) {
-      (filterdData[0].comment)[index] = temp;
-    }
-    //console.log((filterdData[0].comment)[index])
-
-    return res(ctx.status(200), ctx.json(temp));
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
 
   }),
 
   //4. 댓글 작성 
-<<<<<<< HEAD
   rest.post('/comments', async(req, res, ctx) => {
      const board_id = 2;
     // const {  board_id } = await req.json();
@@ -197,36 +92,15 @@ const HJHandlers = [
   
     const newPostData = {
       comments_id: comments_id+1,
-=======
-  rest.post('/comments', async (req, res, ctx) => {
-    const board_id = 2;
-    // const {  board_id } = await req.json();
-    const filteredData = commuDetail.find(e => e.board_id === board_id);
-    if (!filteredData) {
-      return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
-    }
-    const comments_id = filteredData.comment.length || 0;
-
-    const newPostData = {
-      comments_id: comments_id + 1,
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
       content: (await req.json()).content,
       member_id: 1,
       name: 'jhj',
       createdAt: "2023-06-21T17:34:51.3395597",
-<<<<<<< HEAD
       modifiedAt:"2023-06-21T17:34:51.3395597"
     }
     //filteredData.comment.push(newPostData);
     const index = commuDetail.findIndex(e => e.board_id === board_id);
     if(index !== -1){
-=======
-      modifiedAt: "2023-06-21T17:34:51.3395597"
-    }
-    //filteredData.comment.push(newPostData);
-    const index = commuDetail.findIndex(e => e.board_id === board_id);
-    if (index !== -1) {
->>>>>>> 366484dbb3bd8e1e3ffb25a060debf2dda90b01d
       commuDetail[index].comment.push(newPostData);
     }
     //console.log(commuDetail[1].comment);
