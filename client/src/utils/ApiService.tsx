@@ -4,13 +4,13 @@ import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
 // import { API_BASE_URL } from "@/app-config.js";
 const API_BASE_URL = ''
 const ACCESS_TOKEN = "ACCESS_TOKEN";
-const IS_ADMIN = "IS_ADMIN";
-const USER_NAME = "USER_NAME";
+// const IS_ADMIN = "IS_ADMIN";
+// const USER_NAME = "USER_NAME";
 
 axios.defaults.baseURL = API_BASE_URL;
 
-export async function call(api: string, method: string, data?: {}) {
-  let headers = new AxiosHeaders({
+export async function call(api: string, method: string, data?: any) {
+  const headers = new AxiosHeaders({
     "Content-Type": "application/json"
   });
 
@@ -19,7 +19,7 @@ export async function call(api: string, method: string, data?: {}) {
     headers.append("Authorization", "Bearer " + accessToken);
   }
 
-  let options: RawAxiosRequestConfig = {
+  const options: RawAxiosRequestConfig = {
     headers: headers,
     method: method,
     url: API_BASE_URL + api,

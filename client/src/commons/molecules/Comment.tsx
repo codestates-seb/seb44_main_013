@@ -6,7 +6,6 @@ import RemoveBtn from '../atoms/buttons/revise-remove/RemoveBtn';
 import { BodyText, SmallText } from '../atoms/Typography';
 import { CommentProps } from '@/types';
 
-import { useParams } from 'react-router-dom';
 import { call } from '@/utils/apiService';
 import { useEffect, useRef, useState } from 'react';
 
@@ -14,73 +13,87 @@ interface CommuCommentProps {
   username: string;
   content: string;
   date: string;
-  comment: CommentProps;
-  amendComment: any;
-  setAmendComment: any;
+  comments: CommentProps;
+  setDeleteId: any;
+  setAmendComment?: any;
 }
 
-export default function Comment({ username, content, date, comment, amendComment, setAmendComment }: CommuCommentProps) {
-  const { board_id } = useParams();
+export default function Comment(
+  { username, content, date, comments, setDeleteId }: CommuCommentProps) { //setAmendComment
 
   const inputEl = useRef(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [basicContent, setBasicContent] = useState(content);
 
-  const nDate = new Date(date);
-  const convertDate = nDate.toLocaleDateString('en-US', {
+  const newDate = new Date(date);
+  const convertDate = newDate.toLocaleDateString('en-US', {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   }).replace(/\//g, '.');
 
-  const editComment = () => {
-    const axiosPatch = async () => {
-      try {
-        console.log('PATCH 성공');
-        const data = {
-          board_id: board_id,
-          comments_id: comment.comments_id,
-          content: basicContent,
-          member_id: comment.member_id,
-          name: username,
-          createdAt: "2023-06-23T17:34:51.3395597",
-          modifiedAt: "2023-06-23T17:34:51.3395597"
-        }
-        setAmendComment(data);
-        return call(`/comments/${comment.comments_id}`, 'PATCH', data)
 
-      } catch (err) {
-        console.log('PATCH 실패 ' + err);
+  const axiosPatch = async () => {
+    try {
+      console.log('PATCH 성공');
+      const data = {
+        comments_id: comments.comments_id,
+        content: basicContent,
+        member_id: comments.memberId,
+        name: username,
+        createdAt: "2023-06-23T17:34:51.3395597",
+        modifiedAt: "2023-06-23T17:34:51.3395597",
+        status: "POST_ACTIVE"
       }
-    };
+      await call(`/comments/${comments.comments_id}`, 'PATCH', data)
+      // setAmendComment(data);comments는 [{}.{}]인데 이걸 대체하려 하니 안돼지..
 
-    axiosPatch();
-    setIsEditMode(!isEditMode);
-    handleClick();
+    } catch (err) {
+      console.log('PATCH 실패 ' + err);
+    }
+
+  };
+
+  const handleChangeEditMode = () => {
+    setIsEditMode(!isEditMode)
   };
 
   useEffect(() => {
-    // console.log('re-render')
-    // console.log(comment)
+    //
   }, [isEditMode]);
 
 
   const handleAmend = (value: string) => {
-    if (value.length === 0) {
-      // alert('빈 객체입니다. ');
-      // setBasicContent(comment.content)
-      //유효성 검사  + 글자 수 제한 
-    } else {
-      setBasicContent(value);
-    }
+    // if(value.length === 0 ) {
+    //   // alert('빈 객체입니다. ');
+    //   // setBasicContent(comment.content)
+    //   //유효성 검사  + 글자 수 제한 
+    // }
+    setBasicContent(value);
   };
 
-  const handleClick = () => {
-    setIsEditMode(!isEditMode);
-  };
+
 
   const handleBlur = () => {
-    setIsEditMode(false);
+    if (isEditMode) {
+      handleChangeEditMode();
+      setIsEditMode(false);
+      axiosPatch();
+    }
+  }
+
+  //댓글 삭제 기능 구현
+  const handleDelete = () => {
+    const deleteComment = async () => {
+      try {
+        console.log('DELETE 성공');
+        setDeleteId(comments.comments_id)
+        return call(`/comments/${comments.comments_id}`, 'DELETE', { comments_id: comments.comments_id })
+      } catch (err) {
+        console.log('DELETE 실패' + err);
+      }
+    };
+    deleteComment();
   }
 
 
@@ -89,8 +102,8 @@ export default function Comment({ username, content, date, comment, amendComment
       <FlexWrapper gap={0} className='w-full justify-between'>
         <MemberProfile type='comment' member={{ memberId: comment.member_id, name: username, picture: 'https://picsum.photos/200/300' }} />
         <FlexWrapper gap={0}>
-          <ReviseBtn onClick={editComment} color={'black'} />
-          <RemoveBtn color={'black'} />
+          <ReviseBtn onClick={handleChangeEditMode} color={'black'} />
+          <RemoveBtn onClick={handleDelete} color={'black'} />
         </FlexWrapper>
       </FlexWrapper>
       <FlexWrapper gap={0} className='w-full justify-between'>
@@ -101,13 +114,12 @@ export default function Comment({ username, content, date, comment, amendComment
                 value={basicContent}
                 ref={inputEl}
                 onBlur={handleBlur}
-                onChange={(e: any) => handleAmend(e.target.value)}
+                onChange={(element: any) => handleAmend(element.target.value)}
               />
             )
             :
             (
-              <span
-                onClick={handleClick}>
+              <span>
                 {basicContent}
               </span>
             )

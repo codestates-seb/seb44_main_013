@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import Search from '@/components/search/Search';
 import { call } from '@/utils/apiService';
+import CommunityItem from '@/components/communityItem/CommunityItem';
+import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
+
+import { CommuProps } from '@/types';
+
 import {
   ItemWrapper,
   SearchContainer,
@@ -9,15 +15,9 @@ import {
   ListsWrapper,
   StyledWritingBtn,
 } from './CommunityMain.styled';
-import CommunityItem from '@/components/communityItem/CommunityItem';
-import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
-
-import { CommuProps } from '@/types';
 
 export default function CommunityMain() {
-  const [datas, setDatas] = useState<CommuProps[]>([])
-
-
+  const [data, setDatas] = useState<CommuProps[]>([])
 
   useEffect(() => {
     const axiosCommu = async () => {
@@ -33,38 +33,46 @@ export default function CommunityMain() {
 
 
   // 검색 - 07.11 효정
-
-  const [searchValue, setSearchValue] = useState('');
-  const [searchArr, setSearchArr] = useState([] as any);
-  const [enterPress, setEnterPress] = useState(false);
-
-  useEffect(() => {
-    setSearchArr(datas);
-  }, [datas]);
+  const [currentSearch, setCurrentSearch] = useState('');
+  const [searchs, setSearchs] = useState([] as any);
+  // const [isEntered, setIsEntered] = useState(false);
 
   useEffect(() => {
-    if (searchValue !== '') {
-      setSearchArr(datas.filter((el: any) => {
-        return el.title.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          el.content.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-          el.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
-      }));
+    setSearchs(data);
+  }, [data]);
+
+  // const 기존데이터랑다르냐 = (data: any[]) => {
+  useEffect(() => {
+    const lowerCasified = data.map((element) => {
+      return {
+        ...element,
+        title: element.title.toLocaleLowerCase(),
+        content: element.content.toLocaleLowerCase(),
+        name: element.name.toLocaleLowerCase(),
+      }
+    })
+    const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
+    // const isExistContent = lowerCasified.includes(currentSearch.toLocaleLowerCase());
+    // console.log(isExistTitle);
+  }, [])
+  // } 
+  const 엔터치면검색 = (event: any) => {
+    event.preventDefault();
+    if (currentSearch === '') {
+      setSearchs(data);
     } else {
-      setSearchArr(datas);
+      setSearchs(data.filter((element: any) => {
+        return element.title.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
+          element.content.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
+          element.name.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase())
+      }));
     };
-
-    setEnterPress(false);
-    console.log(datas);
-    console.log(searchArr);
-
-  }, [enterPress])
-
-
+  }
 
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search setSearchValue={setSearchValue} setEnterPress={setEnterPress} />
+        <Search setSearchValue={setCurrentSearch} 엔터치면검색={엔터치면검색} />
       </SearchContainer>
 
       <ItemWrapper>
@@ -75,9 +83,9 @@ export default function CommunityMain() {
         </Link>
         <ListsWrapper>
           {
-            searchArr.map((e: any) => {
+            searchs.map((communityItem: any) => {
               return (
-                <CommunityItem key={e.board_id} datas={e} />
+                <CommunityItem key={communityItem.id} communityItem={communityItem} />
               )
             })
           }

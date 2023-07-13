@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import { styled } from 'styled-components';
 import { BsSearchHeart } from 'react-icons/bs';
 
-export const SearchContainer = tw.div`
+export const SearchContainer = tw.form`
   relative
   flex
   flex-grow

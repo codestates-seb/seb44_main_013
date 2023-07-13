@@ -1,5 +1,5 @@
 // type 모아두는 곳
-import { ButtonHTMLAttributes, DetailedHTMLProps, EventHandler } from "react";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { Member, Tag, Category, Portfolio, PortfolioContent, CategoryTags } from '@/types/portfolio';
 import { QuillPropsType } from './QuillPropsType';
 import { TagSlice, CategorySlice } from './reduxState';
@@ -31,7 +31,7 @@ export interface Styledprops
 
 //0707 혜진 community-main:<data> commu
 export interface CommuProps {
-  board_id: number,
+  id: number,
   title: string,
   content: string,
   view: number,
@@ -39,26 +39,18 @@ export interface CommuProps {
   name: string,
   created_at: string,
   modifiedAt: string,
-  member_id: number,
-  status: boolean,
-  comment?: CommentProps[]
+  memberId: number,
+  status: string,
+  comments?: CommentProps[]
 }
 
 //0708 혜진 community-detail comments add
 export interface CommentProps {
   comments_id: number;
   content: string;
-  member_id: number;
+  memberId: number;
   name: string;
   createdAt: string;
   modifiedAt: string;
+  status: string;
 }
-
-
-//0710 정연 Mypage 사용자 정보 수정 
-// import { worker } from "../mocks/worker";
-
-// if (process.env.NODE_ENV === 'development') {
-//   worker.start();
-// }
-

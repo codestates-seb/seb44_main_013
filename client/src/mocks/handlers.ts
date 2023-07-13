@@ -1,7 +1,10 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
 
-import { portfolios, commu, commuDetail } from './data';
+import { portfolios, commuDetail } from './data';
+import { commu } from './infiniteScrollData'
+
+import { CommuProps } from '@/types';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -87,20 +90,19 @@ const DaHamHandlers = [
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
-import { setupWorker } from "msw";
-import { UserData, userData } from './data';
+import { User, userData } from './data';
 import { Portfolio } from '@/types';
 
 const UserRequestHandlers = [
-  rest.put<UserData>('/members', (req, res, ctx) => {
+  rest.put<User>('/members', (req, res, ctx) => {
     Object.assign(userData, req.body);
 
     return res(ctx.json(userData));
   }),
-  rest.get<UserData>('/members', (_, res, ctx) => {
+  rest.get<User>('/members', (_, res, ctx) => {
     return res(ctx.json(userData));
   }),
-  rest.delete<UserData>('/members', (_, res, ctx) => {
+  rest.delete<User>('/members', (_, res, ctx) => {
     // userData를 초기 상태로 재설정합니다.
     userData.name = 'Your Name';
     userData.job = 'What is your job?';
@@ -114,9 +116,6 @@ const UserRequestHandlers = [
   }),
 ];
 
-export const worker = setupWorker(...UserRequestHandlers);
-export { UserRequestHandlers };
-
 
 
 //혜진 게시판 파트 
@@ -126,28 +125,30 @@ const HJHandlers = [
     return res(ctx.status(200), ctx.json(commu));
   }),
   //2. 게시한 상세 페이지 조회 GET : community-detail page
-  rest.get('/boards/:board_id', (req, res, ctx) => {
-    const board_id = Number(req.params.board_id);
-    const filteredData = commuDetail.filter(e => e.board_id === board_id);
+  rest.get('/boards/:id', (req, res, ctx) => {
+    const id = Number(req.params.id);
+    const filteredData = commuDetail.filter(e => e.id === id);
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
   rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
-    const { comments_id, member_id, content, name } = await req.json();
-    const filterdData = commuDetail.filter(el => el.board_id === 2);
-    const index = (filterdData[0].comment).findIndex(el => el.comments_id === comments_id);
+    const { comments_id, memberId, content, name } = await req.json();
+    const filterdData = commuDetail.filter(el => el.id === 2);
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);
 
     const temp = {
       comments_id: comments_id,
       content: content,
-      member_id: member_id,
+      memberId: memberId,
       name: name,
       createdAt: "2023-06-23T17:34:51.3395597",
-      modifiedAt: "2023-06-23T17:34:51.3395597"
+      modifiedAt: "2023-06-23T17:34:51.3395597",
+      status: "POST_ACTIVE"
     };
+    //console.log(temp);
 
     if (index !== -1) {
-      (filterdData[0].comment)[index] = temp;
+      (filterdData[0].comments)[index] = temp;
     }
     //console.log((filterdData[0].comment)[index])
 
@@ -159,33 +160,64 @@ const HJHandlers = [
   rest.post('/comments', async (req, res, ctx) => {
     const board_id = 2;
     // const {  board_id } = await req.json();
-    const filteredData = commuDetail.find(e => e.board_id === board_id);
+    const filteredData = commuDetail.find(e => e.id === board_id);
     if (!filteredData) {
       return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
     }
-    const comments_id = filteredData.comment.length || 0;
+    const comments_id = filteredData.comments.length || 0;
 
     const newPostData = {
       comments_id: comments_id + 1,
       content: (await req.json()).content,
-      member_id: 1,
+      memberId: 1,
       name: 'jhj',
       createdAt: "2023-06-21T17:34:51.3395597",
       modifiedAt: "2023-06-21T17:34:51.3395597"
     }
     //filteredData.comment.push(newPostData);
-    const index = commuDetail.findIndex(e => e.board_id === board_id);
+    const index = commuDetail.findIndex(e => e.id === board_id);
     if (index !== -1) {
-      commuDetail[index].comment.push(newPostData);
+      commuDetail[index].comments.push(newPostData);
     }
     //console.log(commuDetail[1].comment);
     return res(ctx.status(200), ctx.json(newPostData));
   }),
+  //5. 댓글 삭제
+  rest.delete('/comments/:comments_id', async (req, res, ctx) => {
+    const { comments_id } = await req.json();
+    const filterdData = commuDetail.filter(el => el.id === 2);
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);
+    const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index + 1, -1))
+
+    return res(ctx.json(200), ctx.json({ message: ' 댓글 삭제 성공 ', data: newArr }))
+  })
 ];
 
+// 게시판 등록 - 효정
+const HyoHandler = [
+  rest.post('/boards/write', async (req, res, ctx) => {
+    const currentReq = await req.json();
+    console.log(currentReq.body);
 
+    const newCommunity: CommuProps = {
+      board_id: 10,
+      title: currentReq.body.title,
+      content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
+      view: 0,
+      division: "recruitment",
+      name: "phy",
+      created_at: "2023-06-21T17:34:51.3395597",
+      modifiedAt: "2023-06-21T17:34:51.3395597",
+      member_id: 1,
+      status: true
+    }
+    commu.push(newCommunity);
+    return res(ctx.status(201), ctx.json(newCommunity));
+  })
+]
 
 export const handlers = DaHamHandlers
-  // .concat(UserHandlers)
-  .concat(HJHandlers);
+  .concat(UserRequestHandlers)
+  .concat(HJHandlers)
+  .concat(HyoHandler);
 

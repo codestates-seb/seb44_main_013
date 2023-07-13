@@ -1,6 +1,6 @@
 import { SearchBox, SearchContainer, SearchIcon } from './Search.styled';
 
-export default function Search({setSearchValue, setEnterPress}: any) {
+export default function Search({setSearchValue, 엔터치면검색}: any) {
 
   // const [searchValue, setSearchValue] = useState('');
   // 위의 상태를 검색창이 있는 곳에 두고 setSearchValue를 Search 컴포넌트로 내려주었어요.
@@ -16,15 +16,16 @@ export default function Search({setSearchValue, setEnterPress}: any) {
       setSearchValue(e.target.value)
   }
 
-  const handleKeyPress = (e: any) => {
-    if(e.key === 'Enter'){
-      setEnterPress(true);
-    }
-  }
+  // const handleKeyPress = (e: any) => {
+  //   if(e.key === 'Enter'){
+  //     setEnterPress(true);
+  //   }
+  // }
+  
   return (
-    <SearchContainer>
+    <SearchContainer onSubmit={엔터치면검색}>
       <SearchIcon />
-      <SearchBox type="text" onChange={changeValue} onKeyDown={handleKeyPress} />
+      <SearchBox type="text" onChange={changeValue} />
     </SearchContainer>
   );
 }
