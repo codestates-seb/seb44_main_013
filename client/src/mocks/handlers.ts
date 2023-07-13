@@ -1,79 +1,83 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail, category, PortfolioType } from './data';
+
+import { portfolios, commu, commuDetail, category } from './data';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
-    portfolios.map((p) => ++p.views);
-    return res(ctx.status(200), ctx.json(Portfolio[0]));
+    const portfolioId = Number(req.params.portfolio_id);
+    const Portfolio = portfolios.filter((portfolio) => portfolio.portfolioId === portfolioId);
+    portfolios.map((portfolio) => ++portfolio.views);
+    return res(ctx.status(200), ctx.json({ data: Portfolio[0] }));
   }),
   // 포트폴리오 작성
   rest.post('/portfolios', async (req, res, ctx) => {
-    const portfolio_id = Math.floor(Math.random() * 100);
+    const portfolioId = Math.floor(Math.random() * 100);
     const body = await req.json();
-    const newPortfolio: PortfolioType = {
-      portfolio_id: portfolio_id,
-      member_id: 1,
-      picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
-      name: 'noname',
+    const newPortfolio: Portfolio = {
+      portfolioId: portfolioId,
       title: String(body.title),
-      category: body.category,
-      tags: body.tags,
       content: String(body.content),
       explains: body.explains,
-      created_at: String(new Date()),
       views: 0,
+      modifiedAt: String(new Date()),
+      createdAt: String(new Date()),
+      category: body.category,
+      member: {
+        memberId: 1,
+        name: 'noname',
+        picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
+      },
+      tags: body.tags,
+      likes: 0,
       isLiked: false,
       isMarked: false,
-      likes: 0,
     }
     portfolios.push(newPortfolio);
     return res(
       ctx.status(201),
-      ctx.json({ portfolio_id: portfolio_id })
+      ctx.json({ portfolio_id: portfolioId })
     );
   }),
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
+    const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = true;
-        response = { likes: ++p.likes }
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isLiked = true;
+        response = { likes: ++portfolio.likes }
       }
     })
     return res(ctx.status(200), ctx.json(response));
   }),
   rest.delete('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
+    const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = false;
-        response = { likes: --p.likes };
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isLiked = false;
+        response = { likes: --portfolio.likes };
       }
     })
     return res(ctx.status(200), ctx.json(response));
   }),
   // 북마크 기능
   rest.post('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = true;
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isMarked = true;
       }
     })
     return res(ctx.status(200));
   }),
   rest.delete('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = false;
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isMarked = false;
       }
     })
     return res(ctx.status(200));
@@ -89,6 +93,7 @@ const DaHamHandlers = [
 // mocks/handlers.ts
 import { setupWorker } from "msw";
 import { UserData, userData } from './data';
+import { Portfolio } from '@/types';
 
 const UserRequestHandlers = [
   rest.put<UserData>('/members', (req, res, ctx) => {
