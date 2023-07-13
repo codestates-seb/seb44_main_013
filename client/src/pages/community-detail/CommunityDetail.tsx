@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { call } from '@/utils/ApiService';
 
-import UserProfile from '@/commons/molecules/UserProfile';
+import MemberProfile from '@/commons/molecules/MemberProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
 import {
   CmDContainer,
@@ -34,9 +34,9 @@ export default function CommunityDetail({ handleClick }: any) {
     <PageWrapper >
       {memberData !== undefined ?
         (<>
-          <UserProfile type={'blackboard'}
-            user={{
-              member_id: memberData.member_id,
+          <MemberProfile type={'blackboard'}
+            member={{
+              memberId: memberData.member_id,
               name: memberData.name,
               picture: 'https://picsum.photos/200/300'
             }}
