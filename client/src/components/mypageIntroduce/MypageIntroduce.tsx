@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { BsFillPencilFill } from 'react-icons/bs';
-import { MdDone } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import { BsFillPencilFill } from 'react-icons/bs';
+import { MdDone } from 'react-icons/md';
+import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import { User } from '@/mocks/data';
+
 import {
   MypageIntroWrap,
   MypageIntroContainer,
   IntroduceTitle,
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
-import { User } from '@/mocks/data';
 
 interface MypageIntroduceProps {
   user: User | null;
@@ -32,25 +34,35 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
     setIsEdit(!isEdit);
   };
 
-  const handleSave = async () => {
-    try {
-      await axios.put('/members', { job, career, awards });
-      console.log('저장 성공');
-    } catch (error) {
-      console.error('저장 실패', error);
-    }
-    setIsEdit(false);
+  const handleInput =
+    (setValue: React.Dispatch<React.SetStateAction<string>>) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value);
+    };
+
+  const handleUpdate = () => {
+    axios
+      .put('/members', { job, career, awards })
+      .then(() => {
+        console.log('저장 성공');
+        setIsEdit(false);
+      })
+      .catch((error) => {
+        console.error('저장 실패', error);
+      });
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (window.confirm('정말로 탈퇴하시겠습니까?')) {
-      try {
-        await axios.delete('/members');
-        console.log('삭제 성공');
-        navigate('/');
-      } catch (error) {
-        console.error('삭제 실패', error);
-      }
+      axios
+        .delete('/members')
+        .then(() => {
+          console.log('삭제 성공');
+          navigate('/');
+        })
+        .catch((error) => {
+          console.error('삭제 실패', error);
+        });
     }
   };
 
@@ -59,11 +71,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
       <MypageIntroContainer>
         <IntroduceTitle>Job</IntroduceTitle>
         {isEdit ? (
-          <input
-            type="text"
-            value={job}
-            onChange={(e) => setJob(e.target.value)}
-          />
+          <input type="text" value={job} onChange={handleInput(setJob)} />
         ) : (
           <p className="introContent">{job}</p>
         )}
@@ -76,7 +84,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
             <input
               type="text"
               value={career}
-              onChange={(e) => setCareer(e.target.value)}
+              onChange={handleInput(setCareer)}
             />
           ) : (
             <li className="introContent">{career}</li>
@@ -91,7 +99,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
             <input
               type="text"
               value={awards}
-              onChange={(e) => setAwards(e.target.value)}
+              onChange={handleInput(setAwards)}
             />
           ) : (
             <li className="introContent">{awards}</li>
@@ -99,7 +107,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         </ul>
       </MypageIntroContainer>
       {isEdit ? (
-        <MdDone className="editBtn" onClick={handleSave} size={24} />
+        <MdDone className="editBtn" onClick={handleUpdate} size={24} />
       ) : (
         <BsFillPencilFill className="editBtn" onClick={toggleEdit} />
       )}

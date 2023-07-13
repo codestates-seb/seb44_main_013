@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
+
+import { User } from '@/mocks/data';
+import MypageProfile from '@/components/mypageProfile/MypageProfile';
+import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
+import CommunityList from '@/components/mypage-community/CommunityList';
+import { Pagenation } from '@/components/pagenation/Pagenation';
 import MypageItem from '@/components/mypageItem/MypageItem';
+
+import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
+import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 import {
   BoxTitle,
   BoxWrapper,
@@ -7,31 +16,21 @@ import {
   MyItemsWrapper,
   MyProfileWrapper,
 } from './MyPage.styled';
-import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
-import MypageProfile from '@/components/mypageProfile/MypageProfile';
-import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
-import CommunityList from '@/components/mypage-community/CommunityList';
-import { Pagenation } from '@/components/pagenation/Pagenation';
-import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
-import { User } from '@/mocks/data';
+import axios from 'axios';
 
 export default function MyPage() {
   const isUser = false;
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch('/members');
-        const data = await response.json();
-        setUser(data);
-        console.log(data);
-      } catch (error) {
+    axios
+      .get('/members')
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((error) => {
         console.error(error);
-      }
-    };
-
-    fetchUser();
+      });
   }, []);
 
   return (

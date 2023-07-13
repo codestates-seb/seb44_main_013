@@ -1,14 +1,16 @@
 // 2023-07-05 프로필 기본 보기 & 수정(click to edit) 구현 - 박효정
 //2023-07-10 회원이름 조회, 수정, 저장, 삭제 기능 구현 - 위정연
+import { useState, useRef, useEffect } from 'react';
 
-import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
+import axios from 'axios';
+import styled from 'styled-components';
+
 import userImg from '../../assets/userImg.jpg';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { BiMap } from 'react-icons/bi';
-import { useState, useRef, useEffect } from 'react';
 import { User } from '@/mocks/data';
-import styled from 'styled-components';
-import axios from 'axios';
+
+import { MypageProfileContainer, NameEdit } from './MypageProfile.styled';
 
 const WeatherIcon = styled.img`
   width: 60px;
@@ -41,13 +43,12 @@ export default function MypageProfile({ user }: MypageProfileProps) {
   };
 
   const handleNameBlur = async () => {
-    if (name.trim() !== '') {
-      try {
-        await axios.put('/members', { name });
-        console.log('이름 변경 성공');
-      } catch (error) {
-        console.error('이름 변경 실패', error);
-      }
+    if (!name.trim()) return null;
+    try {
+      await axios.put('/members', { name });
+      console.log('이름 변경 성공');
+    } catch (error) {
+      console.error('이름 변경 실패', error);
     }
     setIsEdit(false);
   };
@@ -72,7 +73,7 @@ export default function MypageProfile({ user }: MypageProfileProps) {
         city: '',
         weather: '',
         icon: '',
-      }; // 오류가 발생하면 빈 문자열을 가진 객체를 반환
+      };
     }
   };
 
