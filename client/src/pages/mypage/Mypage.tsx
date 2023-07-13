@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
+
+import { UserProfile } from '@/mocks/data';
 import MypageItem from '@/components/mypageItem/MypageItem';
+import MypageProfile from '@/components/mypageProfile/MypageProfile';
+import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
+import CommunityList from '@/components/mypage-community/CommunityList';
+import { Pagenation } from '@/components/pagenation/Pagenation';
+
+import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
+import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 import {
   BoxTitle,
   BoxWrapper,
@@ -7,38 +16,31 @@ import {
   MyItemsWrapper,
   MyProfileWrapper,
 } from './MyPage.styled';
-import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
-import MypageProfile from '@/components/mypageProfile/MypageProfile';
-import MypageIntroduce from '@/components/mypageIntroduce/MypageIntroduce';
-import CommunityList from '@/components/mypage-community/CommunityList';
-import { Pagenation } from '@/components/pagenation/Pagenation';
-import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
-import { UserData } from '@/mocks/data';
 
 export default function MyPage() {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchCurrentUserProfile = async () => {
       try {
         const response = await fetch('/members');
         const data = await response.json();
-        setUserData(data);
+        setUser(data);
         console.log(data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchUserData();
+    fetchCurrentUserProfile();
   }, []);
 
   return (
     <MainWrapper>
       {/* 프로필 부분  */}
       <MyProfileWrapper>
-        <MypageProfile userData={userData} />
-        <MypageIntroduce userData={userData} />
+        <MypageProfile userData={user} />
+        <MypageIntroduce userData={user} />
       </MyProfileWrapper>
 
       <MyItemsWrapper>

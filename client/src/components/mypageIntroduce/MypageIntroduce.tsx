@@ -1,19 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 import { BsFillPencilFill } from 'react-icons/bs';
 import { MdDone } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import { UserProfile } from '@/mocks/data';
+
 import {
   MypageIntroWrap,
   MypageIntroContainer,
   IntroduceTitle,
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
-import { UserData } from '@/mocks/data';
 
 interface MypageIntroduceProps {
-  userData: UserData | null;
+  userData: UserProfile | null;
 }
 
 export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
