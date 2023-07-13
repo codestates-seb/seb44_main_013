@@ -216,7 +216,7 @@ const HyoHandler = [
 ]
 
 export const handlers = DaHamHandlers
-  // .concat(UserHandlers)
+  .concat(UserRequestHandlers)
   .concat(HJHandlers)
   .concat(HyoHandler);
 
