@@ -1,6 +1,6 @@
 /* 2023-07-05 게시물 댓글(낱개) 컴포넌트 - 김다함 */
 import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
-import UserProfile from './UserProfile';
+import UserProfile from './MemberProfile';
 import ReviseBtn from '../atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '../atoms/buttons/revise-remove/RemoveBtn';
 import { BodyText, SmallText } from '../atoms/Typography';

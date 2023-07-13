@@ -1,6 +1,6 @@
 /* 2023-07-05 게시물 댓글 작성란 컴포넌트 - 김다함 */
 import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
-import UserProfile from './UserProfile';
+import UserProfile from './MemberProfile';
 import { TextArea } from '@/commons/styles/Inputs.styled';
 import SaveBtn from '../atoms/buttons/writing/SaveBtn';
 

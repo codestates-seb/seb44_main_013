@@ -1,6 +1,6 @@
 import { CommunityItemContainer } from './CommunityItem.styled';
 import Views from '../views/Views';
-import UserProfile from '@/commons/molecules/UserProfile';
+import UserProfile from '@/commons/molecules/MemberProfile';
 import { useNavigate } from 'react-router-dom';
 import { CommuProps } from '@/types';
 
