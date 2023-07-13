@@ -3,6 +3,8 @@ import { rest } from 'msw';
 import { portfolios, commuDetail, UserData, userData, category, PortfolioType } from './data';
 import { commu } from './infiniteScrollData'
 
+import { CommuProps } from '@/types';
+
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -190,9 +192,31 @@ const HJHandlers = [
   })
 ];
 
-
+// 게시판 등록 - 효정
+const HyoHandler = [
+  rest.post('/boards/write', async (req, res, ctx) => {
+    const currentReq = await req.json();
+    console.log(currentReq.body);
+      
+    const newCommunity: CommuProps = {
+      board_id: 10,
+      title: currentReq.body.title,
+      content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
+      view: 0,
+      division: "recruitment",
+      name: "phy",
+      created_at: "2023-06-21T17:34:51.3395597",
+      modifiedAt: "2023-06-21T17:34:51.3395597",
+      member_id: 1,
+      status: true
+    }
+    commu.push(newCommunity);
+    return res(ctx.status(201), ctx.json(newCommunity));
+  })
+]
 
 export const handlers = DaHamHandlers
-  .concat(UserRequestHandlers)
-  .concat(HJHandlers);
+  // .concat(UserHandlers)
+  .concat(HJHandlers)
+  .concat(HyoHandler);
 

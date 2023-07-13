@@ -1,3 +1,11 @@
+import ReactQuill from 'react-quill';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import 'react-quill/dist/quill.snow.css';
+
+import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+
 import {
   EditorContainer,
   TextEditorContainer,
@@ -6,12 +14,6 @@ import {
   TextEditor,
   TitleAdd,
 } from './AddCommunity.styled';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
-import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function AddCommunity() {
   const modules = {
@@ -28,14 +30,16 @@ export default function AddCommunity() {
       [{ font: [] }],
       [{ align: [] }],
       ['clean'],
-      ['link', 'image', 'video'],
+      ['link'],
     ],
   };
+
+  // 상수로 빼는 방법도 있음!
   
   // post 요청
 
   const [title, setTitle] = useState("");
-  const [quillText, setQuillText] = useState("");
+  const [post, setPost] = useState("");
   const navigate = useNavigate();
 
   const handleTitle = (e: any) => {
@@ -43,24 +47,27 @@ export default function AddCommunity() {
   };
 
   // react-quill 테스트용
-  const bodyReq = {
+  const postInformation = {
     title: title,
-    content: quillText,
+    content: post,
   }
 
   const postCommunity = () => {
-    axios.post('/community/add', {
+    axios.post('/boards/write', {
         headers: {
           "Content-Type": "application/json"
         },
-        body: bodyReq,
+        body: postInformation,
       }
     )  
-    .then((res) => console.log(res.body))
+    .then((res) => console.log('post 요청 성공'))
     .catch((err) => console.log(err));
 
     navigate('/boards');
   }
+
+  //  console.log(postInformation);
+  //  console.log(post);
 
   // patch 요청
   // 게시글 클릭했을 때의 게시글 number로 api 보내서 get 요청 해 res 받아오기
@@ -68,13 +75,13 @@ export default function AddCommunity() {
   // 배치한 내용에서(원본) 수정한다면 patch요청 보내기
   const communityNum = 1; // 임시로
   useEffect(() => {
-    axios.get(`/community`)
+    axios.get(`/boards/:${communityNum}`)
     .then((res) => console.log(res.data[0]))
     .catch((err) => console.log(err));
   }, [])
 
   const changeCommunity = () => {
-    axios.patch('/community', bodyReq)
+    axios.patch(`/boards/edit/:${communityNum}`, postInformation)
   }
 
   // community 뒤에 게시글 id 넣기
@@ -94,9 +101,11 @@ export default function AddCommunity() {
               theme="snow"
               modules={modules}
               className='reactQuillContainer'
-              value={quillText}
-              onChange={(e: any) => setQuillText(e.replace(/<\/?p[^>]*>/g, ''))}
+              value={post}
+              onChange={(e)=> setPost(e)}
             />
+            {/* replace(/<\/?p[^>]*>/g, '') */}
+            {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
             <SaveBtnContainer onClick={postCommunity}>
               <PurpleBtn>Save</PurpleBtn>
             </SaveBtnContainer>
