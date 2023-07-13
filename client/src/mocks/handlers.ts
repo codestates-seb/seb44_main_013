@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commu, commuDetail, UserData, userData, category, PortfolioType } from './data';
+import { portfolios, commu, commuDetail, User, userData, category, PortfolioType } from './data';
 
 
 const DaHamHandlers = [
@@ -90,15 +90,15 @@ const DaHamHandlers = [
 // mocks/handlers.ts
 
 const UserRequestHandlers = [
-  rest.put<UserData>('/members', (req, res, ctx) => {
+  rest.put<User>('/members', (req, res, ctx) => {
     Object.assign(userData, req.body);
 
     return res(ctx.json(userData));
   }),
-  rest.get<UserData>('/members', (_, res, ctx) => {
+  rest.get<User>('/members', (_, res, ctx) => {
     return res(ctx.json(userData));
   }),
-  rest.delete<UserData>('/members', (_, res, ctx) => {
+  rest.delete<User>('/members', (_, res, ctx) => {
     // userData를 초기 상태로 재설정합니다.
     userData.name = 'Your Name';
     userData.job = 'What is your job?';

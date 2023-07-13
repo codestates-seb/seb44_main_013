@@ -63,14 +63,14 @@ export const category = [
 
 
 /*2023-07-10 Mypage User Information - 위정연 */
-export interface UserData {
+export interface User{
   name: string;
   job: string;
   career: string;
   award: string;
 }
 
-export const userData: UserData = {
+export const userData: User = {
   name: 'unknown',
   job: 'What is your job?',
   career: 'Career 1',

@@ -10,16 +10,16 @@ import {
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
-import { UserData } from '@/mocks/data';
+import { User } from '@/mocks/data';
 
 interface MypageIntroduceProps {
-  userData: UserData | null;
+  user: User | null;
 }
 
-export default function MypageIntroduce({ userData }: MypageIntroduceProps) {
-  const initialJob = userData?.job || 'What is your job?';
-  const initialCareer = userData?.career || 'Career 1';
-  const initialAwards = userData?.award || 'Awards 1';
+export default function MypageIntroduce({ user }: MypageIntroduceProps) {
+  const initialJob = user?.job || 'What is your job?';
+  const initialCareer = user?.career || 'Career 1';
+  const initialAwards = user?.award || 'Awards 1';
   const navigate = useNavigate();
 
   const [job, setJob] = useState(initialJob);
