@@ -1,7 +1,7 @@
 /* 2023-07-07 좋아요 버튼 커스텀훅 - 김다함 */
 import { useCallback, useState } from 'react';
 
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 
 export interface Toggle {
   buttonType?: 'likes' | 'bookmarks';

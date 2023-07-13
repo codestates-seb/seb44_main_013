@@ -1,23 +1,23 @@
 /* 2023-07-07 좋아요 버튼 커스텀훅 - 김다함 */
-import { selectTag } from '@/modules/TagSlice';
 import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { selectTag } from '@/modules/tagSlice';
+import { Tag } from '@/types';
 
 interface TagProps {
-  initialValue: string;
+  tag: Tag;
   isSelected: boolean;
 }
 
-export default function useTagSelect({ initialValue, isSelected }: TagProps) {
-  const [isSelect, setIsSelect] = useState<boolean>(isSelected);
-  const [value, setValue] = useState(initialValue);
+export default function useTagSelect({ tag, isSelected: selected }: TagProps) {
+  const [isSelected, setIsSelect] = useState<boolean>(selected);
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    setValue(value);
-    dispatch(selectTag(!isSelect, value))
-    setIsSelect(!isSelect);
-  }, [isSelect])
+    dispatch(selectTag(!isSelected, tag))
+    setIsSelect(!isSelected);
+  }, [isSelected])
 
-  return [isSelect, onClick] as const;
+  return [isSelected, onClick] as const;
 };

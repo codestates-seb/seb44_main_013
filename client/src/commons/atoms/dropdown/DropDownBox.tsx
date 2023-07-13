@@ -1,10 +1,11 @@
 /* 2023.07.05 드롭다운 박스(접혔을 때 본체) - 김다함 */
-import { ComponentPropsWithoutRef, Dispatch, ReactNode, SetStateAction } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
+
+import { isOpened, openCategory } from '@/modules/categorySlice';
+
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import { useDispatch, useSelector } from 'react-redux';
-import { isOpen, openCategory } from '@/modules/CategorySlice';
 
 interface DropDownProps {
   value: string;
@@ -20,18 +21,18 @@ const Value = styled.p`
 ${tw`w-24 overflow-hidden whitespace-nowrap text-ellipsis`}
 `
 
-export default function DropDownBox({ value }: DropDownProps) {
+export default function DropDownBox({ value }: DropDownProps) { // value => dropdownItem
   const dispatch = useDispatch();
-  const isOpened = useSelector(isOpen);
+  const isOpen = useSelector(isOpened);
 
   const CategoryHandler = () => {
-    dispatch(openCategory(!isOpened));
+    dispatch(openCategory(!isOpen));
   }
 
   return (
     <DropDownBoxContainer>
       <Value>{value}</Value>
-      {isOpened ?
+      {isOpen ?
         <BiCaretUp className='cursor-pointer' onClick={CategoryHandler} /> :
         <BiCaretDown className='cursor-pointer' onClick={CategoryHandler} />
       }

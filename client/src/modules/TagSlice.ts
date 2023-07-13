@@ -1,15 +1,16 @@
 /* 2023-07-12 카테고리 스토어 - 김다함 */
 import { createSlice } from '@reduxjs/toolkit';
+
 import { RootState } from '@/modules/index';
-import { tagSliceType } from '@/types';
+import { Tag, TagSlice } from '@/types';
 
 export const SELECT_TAG = 'SELECT_TAG' as const;
 
-export const selectTag = (isSelect: boolean, tagName: string) => ({ type: SELECT_TAG, isSelect, tagName });
+export const selectTag = (isSelected: boolean, tag: Tag) => ({ type: SELECT_TAG, isSelected, tag });
 
-const initialState: tagSliceType = {
-  isSelect: false,
-  selected: [],
+const initialState: TagSlice = {
+  isSelected: false,
+  selectedTags: [],
 }
 
 const { reducer: tagReducer } = createSlice({
@@ -18,14 +19,14 @@ const { reducer: tagReducer } = createSlice({
   reducers: {},
   extraReducers: {
     SELECT_TAG: (state, action) => {
-      state.isSelect = action.isSelect;
-      if (action.isSelect) state.selected = [...state.selected, action.tagName]
-      else state.selected = state.selected.filter((selected) => selected !== action.tagName);
+      state.isSelected = action.isSelected;
+      if (action.isSelected) state.selectedTags = [...state.selectedTags, action.tag]
+      else state.selectedTags = state.selectedTags.filter((tag: Tag) => tag.name !== action.tag.name);
     },
   },
 });
 
-export const isSelect = (state: RootState) => state.tagSlice.isSelect;
-export const selectedTags = (state: RootState) => state.tagSlice.selected;
+export const isSelect = (state: RootState) => state.tagSlice.isSelected;
+export const tags = (state: RootState) => state.tagSlice.selectedTags;
 
 export default tagReducer;

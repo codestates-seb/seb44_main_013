@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { Portfolio, Member, Tag as tag } from '@/types';
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
@@ -78,7 +78,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: tag) => <Tag value={tag.name} key={tag.tagId} />)
+                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} />)
               }
             </FlexWrapper>
           </UserCard>

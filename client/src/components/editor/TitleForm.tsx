@@ -1,58 +1,62 @@
 /* 2023-07-04 포트폴리오 작성/수정 페이지 제목,태그 작성 Form - 김다함 */
+import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import { DarkTextArea } from '@/commons/styles/Inputs.styled';
-import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
-import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
-import Tag from '@/commons/molecules/Tag';
-import { FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
-import { PortfolioTitleInput } from '@/commons/styles/Inputs.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
+
+import { Tag as tag } from '@/types';
+import { tags } from '@/modules/tagSlice';
+import { call } from '@/utils/apiService';
+import { categoryTags } from '@/assets/data/categoryTags';
+
+import { FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
 import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
+import { PortfolioTitleInput } from '@/commons/styles/Inputs.styled';
+import { category, openCategory } from '@/modules/categorySlice';
+import { DarkTextArea } from '@/commons/styles/Inputs.styled';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { BsCheck2 } from 'react-icons/bs';
-import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { category, openCategory } from '@/modules/CategorySlice';
-import { selectedTags } from '@/modules/TagSlice';
-import { useQuery } from '@tanstack/react-query';
-import { call } from '@/utils/ApiService';
-import { CategoryType } from '@/types';
-import usePortfolioMutation from '@/query/portfolioMutation';
-
-interface TitleFormProps {
-  isCreated?: string;
-  setOpenTitle: Dispatch<SetStateAction<boolean>>;
-  htmlContent: string;
-}
+import Tag from '@/commons/molecules/Tag';
+import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
 
 const TitleFormContainer = styled.div`
-    ${tw`w-screen px-16 py-7 rounded-t-2xl z-20 bottom-0 absolute`};
-    background-color: #161616;
-    box-shadow: 0 -8px 10px -1px #a9a9a9;
-`;
+      ${tw`w-screen px-16 py-7 rounded-t-2xl z-20 bottom-0 absolute`};
+      background-color: #161616;
+      box-shadow: 0 -8px 10px -1px #a9a9a9;
+  `;
 
-const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => {
+interface TitleForm {
+  setIsTitleFormOpen: Dispatch<SetStateAction<boolean>>;
+  htmlContent: string;
+  createdAt: string;
+}
+
+export default function TitleForm({ createdAt = '', setIsTitleFormOpen, htmlContent }: TitleForm) {
   const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
-  const { data, isSuccess } = useQuery(['category'], () => call('/category', 'GET'), { staleTime: Infinity, cacheTime: Infinity });
-  const portfolioMutation = usePortfolioMutation();
   const dispatch = useDispatch();
-  const selected = useSelector(category);
-  const tags = useSelector(selectedTags);
+  const navigate = useNavigate();
+
+  const selectedCategory = useSelector(category);
+  const selectedTags = useSelector(tags);
+
+  const postPortfolio = (body: any) => call('/portfolios', 'POST', body);
 
   useEffect(() => {
     register("htmlContent", { required: true, minLength: 50 });
     setValue("htmlContent", htmlContent);
   }, [register]);
 
-  const onSubmitPortfolio: SubmitHandler<FieldValues> = async (data) => {
-    await portfolioMutation.mutate({
+  const submitPortfolio: SubmitHandler<FieldValues> = async (data) => {
+    postPortfolio({
       title: data.title,
       content: htmlContent,
-      category: selected,
-      tags: tags,
+      category: selectedCategory,
+      tags: selectedTags,
       explains: data.explains,
-    });
+    }).then((res) => navigate(`/portfolios/${res.portfolioId}`));
   };
 
   return (
@@ -61,14 +65,14 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
         <PortfolioTitleInput placeholder='Title' {...register("title", { required: true, minLength: 5 })} />
         <FlexWrapper gap={10}>
           <ContegroyDropDown />
-          <SmallText color='white' className='pt-2'>{isCreated}</SmallText>
+          {createdAt &&
+            <SmallText color='white' className='pt-2'>{createdAt}</SmallText>
+          }
         </FlexWrapper>
         <div className='flex gap-1.5 w-[40%] flex-wrap z-0'>
-          {isSuccess &&
-            data.map((category: CategoryType) => {
-              if (category.name === selected) {
-                return category.tags.map((tag, id) => <Tag value={tag} key={id} />)
-              }
+          {
+            categoryTags[selectedCategory].tags.map((tag: tag) => {
+              return <Tag tag={tag} key={tag.tagId} />
             })
           }
         </div>
@@ -77,10 +81,10 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
           <DarkTextArea className='w-[42%] h-20' {...register('explains', { required: true, maxLength: 300 })} />
           <FlexWrapper gap={15}>
             <PortfolioEditButton color='dark'
-              onClick={() => { setOpenTitle(false); dispatch(openCategory(false)) }}>
+              onClick={() => { setIsTitleFormOpen(false); dispatch(openCategory(false)) }}>
               <RiArrowGoBackFill size='25' color='white' />
             </PortfolioEditButton>
-            <PortfolioEditButton color='light' onClick={handleSubmit(onSubmitPortfolio)} disabled={isSubmitting}>
+            <PortfolioEditButton color='light' onClick={handleSubmit(submitPortfolio)} disabled={isSubmitting}>
               <BsCheck2 size='25' color='black' />
             </PortfolioEditButton>
           </FlexWrapper>
@@ -89,5 +93,3 @@ const TitleForm = ({ isCreated, setOpenTitle, htmlContent }: TitleFormProps) => 
     </TitleFormContainer>
   )
 }
-
-export default TitleForm;

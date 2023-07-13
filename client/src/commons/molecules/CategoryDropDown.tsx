@@ -1,11 +1,13 @@
 /* 2023-07-04 게시물 카테고리 선택 드롭다운 컴포넌트 - 김다함 */
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
+
+import { category, isOpen } from '@/modules/categorySlice';
+
+import { FlexColumnWrapper } from '../styles/Containers.styled';
 import DropDownBox from '../atoms/dropdown/DropDownBox';
 import DropDownItem from '../atoms/dropdown/DropDownItem';
-import { FlexColumnWrapper } from '../styles/Containers.styled';
-import { category, isOpen } from '@/modules/CategorySlice';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 export const DropDownItemContainer = styled.div`
     ${tw`w-28 flex flex-col z-10 absolute`}
@@ -15,13 +17,13 @@ export const DropDownItemContainer = styled.div`
     top: 117px;
 `;
 
-export const ContegroyDropDown = () => {
-  const selected = useSelector(category);
+export default function ContegroyDropDown() {
+  const selectedCategory = useSelector(category);
   const isOpened = useSelector(isOpen);
 
   return (
     <FlexColumnWrapper gap={0}>
-      <DropDownBox value={selected} />
+      <DropDownBox value={selectedCategory} />
       {isOpened &&
         <DropDownItemContainer>
           <DropDownItem value='웹' />
@@ -34,5 +36,3 @@ export const ContegroyDropDown = () => {
     </FlexColumnWrapper>
   )
 }
-
-export default ContegroyDropDown;
