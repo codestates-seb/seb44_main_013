@@ -1,12 +1,12 @@
 /* 2023-07-05 게시물 댓글(낱개) 컴포넌트 - 김다함 */
 import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
-import UserProfile from './UserProfile';
+import MemberProfile from './MemberProfile';
 import ReviseBtn from '../atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '../atoms/buttons/revise-remove/RemoveBtn';
 import { BodyText, SmallText } from '../atoms/Typography';
 import { CommentProps } from '@/types';
 
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 import { useEffect, useRef, useState } from 'react';
 
 interface CommuCommentProps {
@@ -21,12 +21,12 @@ interface CommuCommentProps {
 export default function Comment(
   { username, content, date, comments, setDeleteId }: CommuCommentProps) { //setAmendComment
 
-  const inputEl = useRef(null); 
-  const [ isEditMode, setIsEditMode ] = useState(false);
-  const [ basicContent, setBasicContent ] = useState(content);
+  const inputEl = useRef(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [basicContent, setBasicContent] = useState(content);
 
   const newDate = new Date(date);
-  const convertDate = newDate.toLocaleDateString('en-US',{
+  const convertDate = newDate.toLocaleDateString('en-US', {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -34,21 +34,21 @@ export default function Comment(
 
 
   const axiosPatch = async () => {
-    try{
-      console.log('PATCH 성공' );
+    try {
+      console.log('PATCH 성공');
       const data = {
         comments_id: comments.comments_id,
         content: basicContent,
-        member_id: comments.member_id,
+        member_id: comments.memberId,
         name: username,
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE"
       }
-      await call(`/comments/${comments.comments_id}`, 'PATCH', data )
+      await call(`/comments/${comments.comments_id}`, 'PATCH', data)
       // setAmendComment(data);comments는 [{}.{}]인데 이걸 대체하려 하니 안돼지..
 
-    }catch(err){
+    } catch (err) {
       console.log('PATCH 실패 ' + err);
     }
 
@@ -63,7 +63,7 @@ export default function Comment(
   }, [isEditMode]);
 
 
-  const handleAmend = ( value:string ) => {
+  const handleAmend = (value: string) => {
     // if(value.length === 0 ) {
     //   // alert('빈 객체입니다. ');
     //   // setBasicContent(comment.content)
@@ -75,7 +75,7 @@ export default function Comment(
 
 
   const handleBlur = () => {
-    if(isEditMode){
+    if (isEditMode) {
       handleChangeEditMode();
       setIsEditMode(false);
       axiosPatch();
@@ -85,10 +85,10 @@ export default function Comment(
   //댓글 삭제 기능 구현
   const handleDelete = () => {
     const deleteComment = async () => {
-      try{
+      try {
         console.log('DELETE 성공');
         setDeleteId(comments.comments_id)
-        return call(`/comments/${comments.comments_id}`, 'DELETE', {comments_id: comments.comments_id})
+        return call(`/comments/${comments.comments_id}`, 'DELETE', { comments_id: comments.comments_id })
       } catch (err) {
         console.log('DELETE 실패' + err);
       }
@@ -100,7 +100,7 @@ export default function Comment(
   return (
     <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-1.5 pt-3'>
       <FlexWrapper gap={0} className='w-full justify-between'>
-        <UserProfile type='comment' user={{ member_id: comments.member_id, name: username, picture: 'https://picsum.photos/200/300' }} />
+        <MemberProfile type='comment' member={{ memberId: comment.member_id, name: username, picture: 'https://picsum.photos/200/300' }} />
         <FlexWrapper gap={0}>
           <ReviseBtn onClick={handleChangeEditMode} color={'black'} />
           <RemoveBtn onClick={handleDelete} color={'black'} />
@@ -111,16 +111,16 @@ export default function Comment(
           {isEditMode ?
             (
               <input
-                value = {basicContent}
-                ref = {inputEl}
-                onBlur = {handleBlur}
-                onChange={(element:any) => handleAmend(element.target.value)}  
+                value={basicContent}
+                ref={inputEl}
+                onBlur={handleBlur}
+                onChange={(element: any) => handleAmend(element.target.value)}
               />
             )
             :
             (
               <span>
-                  {basicContent}
+                {basicContent}
               </span>
             )
           }

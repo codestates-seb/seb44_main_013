@@ -1,7 +1,7 @@
 /* 2023-07-05 각종 컴포넌트를 담는 Card 컴포넌트 - 김다함 */
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 interface CardProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;

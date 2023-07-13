@@ -1,9 +1,10 @@
 /* 2023-07-06 React Quill Editor - 김다함 */
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
 import { memo, useMemo, useRef } from 'react';
-import ReactQuill from 'react-quill';
 import "react-quill/dist/quill.snow.css";
+import { styled } from 'styled-components';
+import ReactQuill from 'react-quill';
+import tw from 'twin.macro';
+
 import { QuillPropsType } from '@/types';
 
 const QuillWrapper = styled.div`

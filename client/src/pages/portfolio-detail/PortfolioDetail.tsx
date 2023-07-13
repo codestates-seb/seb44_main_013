@@ -1,81 +1,84 @@
 /* 2023-07-07 포트폴리오 상세보기 페이지 - 김다함 */
-import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
-import { BsArrowReturnLeft } from 'react-icons/bs';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import { Portfolio, Member, Tag as tag } from '@/types';
+import { call } from '@/utils/apiService';
+
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typography';
+import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
+import MemberProfile from '@/commons/molecules/MemberProfile';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
-import UserProfile from '@/commons/molecules/UserProfile';
 import Tag from '@/commons/molecules/Tag';
-import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typography';
-import { useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import { call } from '@/utils/ApiService';
-import { UserType } from '@/types';
+import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
+  const [portfolio, setPortfolio] = useState<Portfolio>();
+  const [member, setMember] = useState<Member>();
+
   const navigate = useNavigate();
-  const { portfolio_id } = useParams();
-  let user: UserType = {
-    member_id: 0,
-    name: '',
-    picture: ''
-  }
+  const { portfolio_id: portfolioId } = useParams();
 
-  const { data, isSuccess } = useQuery(['portfolio', portfolio_id],
-    () => call(`/portfolios/${portfolio_id}`, 'GET'), { staleTime: Infinity, cacheTime: Infinity }
-  );
+  const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
-  if (isSuccess) {
-    user = {
-      member_id: data.member_id,
-      name: data.name,
-      picture: data.picture
-    }
-  }
+  useEffect(() => {
+    getPortfolio().then((res) => {
+      setPortfolio(res.data);
+      setMember(res.data.member);
+    });
+  }, [])
+
   return (
     <FlexColumnContainer bg='rgba(16, 16, 21, 1)'>
       <ButtonHeader>
-        <BsArrowReturnLeft size={30} color='white'
+        <BsArrowReturnLeft
+          size={30} color='white'
           className='cursor-pointer'
           onClick={() => navigate(-1)} />
       </ButtonHeader>
 
       <ContentContainer>
         <PortfolioContainer>
-          {isSuccess &&
-            <div className='break-keep w-full' dangerouslySetInnerHTML={{ __html: data.content }}></div>
+          {portfolio &&
+            <div className='break-keep w-full' dangerouslySetInnerHTML={{ __html: portfolio.content }}></div>
           }
         </PortfolioContainer>
 
         <UserContainer>
           <UserCard>
             <FlexWrapper className='justify-between'>
-              {isSuccess &&
+              {portfolio &&
                 <>
-                  <LikeBtn portfolio_id={data.portfolio_id} initialLikes={data.likes} initialIsLiked={data.isLiked} />
+                  <LikeBtn portfolioId={portfolio.portfolioId} currentLikes={portfolio.likes} isToggled={portfolio.isLiked} />
                   <FlexWrapper gap={20}>
-                    <SmallText color='white'>views · {isSuccess && data.views}</SmallText>
-                    <Bookmark portfolio_id={data.portfolio_id} initialMarkedState={data.isMarked} />
+                    <SmallText color='white'>views · {portfolio.views}</SmallText>
+                    <Bookmark portfolioId={portfolio.portfolioId} isToggled={portfolio.isMarked} />
                   </FlexWrapper>
                 </>
               }
             </FlexWrapper>
-            <UserProfile type="portfolio" user={user} />
-
+            {member &&
+              <MemberProfile type="portfolio" member={member} />
+            }
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
-
-            <HeadingText color='white'>{isSuccess && data.title}</HeadingText>
-            <BodyText color='white'>{isSuccess && data.explains}</BodyText>
+            {portfolio &&
+              <>
+                <HeadingText color='white'>{portfolio.title}</HeadingText>
+                <BodyText color='white'>{portfolio.explains}</BodyText>
+              </>
+            }
           </UserCard>
 
           <UserCard>
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
-              {isSuccess &&
-                data.tags.map((tag: string, id: number) => <Tag value={tag} key={id} />)
+              {portfolio &&
+                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} />)
               }
             </FlexWrapper>
           </UserCard>

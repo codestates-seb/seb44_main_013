@@ -1,6 +1,5 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
 import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
-// 23-07-12 네틀리파이 배포 준비 위해 임시 주석 처리 AxiosError, AxiosResponse - 혜진
 // import { CustomAxiosInterface } from '@/types/axiosInterface'
 // import { API_BASE_URL } from "@/app-config.js";
 const API_BASE_URL = ''
@@ -29,6 +28,7 @@ export async function call(api: string, method: string, data?: any) {
   if (data)
     options.data = JSON.stringify(data);
 
+  // 에러처리고려
   return await axios.request(options)
     .then((res) => res.data)
     .catch(error => {

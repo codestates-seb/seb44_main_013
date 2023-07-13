@@ -1,96 +1,97 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commuDetail, User, userData, category, PortfolioType } from './data';
+
+import { portfolios, commuDetail } from './data';
 import { commu } from './infiniteScrollData'
 
 import { CommuProps } from '@/types';
 
-
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    const Portfolio = portfolios.filter((p) => p.portfolio_id === portfolio_id);
-    portfolios.map((p) => ++p.views);
-    return res(ctx.status(200), ctx.json(Portfolio[0]));
+    const portfolioId = Number(req.params.portfolio_id);
+    const Portfolio = portfolios.filter((portfolio) => portfolio.portfolioId === portfolioId);
+    portfolios.map((portfolio) => ++portfolio.views);
+    return res(ctx.status(200), ctx.json({ data: Portfolio[0] }));
   }),
   // 포트폴리오 작성
   rest.post('/portfolios', async (req, res, ctx) => {
-    const portfolio_id = Math.floor(Math.random() * 100);
+    const portfolioId = Math.floor(Math.random() * 100);
     const body = await req.json();
-    const newPortfolio: PortfolioType = {
-      portfolio_id: portfolio_id,
-      member_id: 1,
-      picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
-      name: 'noname',
+    const newPortfolio: Portfolio = {
+      portfolioId: portfolioId,
       title: String(body.title),
-      category: body.category,
-      tags: body.tags,
       content: String(body.content),
       explains: body.explains,
-      created_at: String(new Date()),
       views: 0,
+      modifiedAt: String(new Date()),
+      createdAt: String(new Date()),
+      category: body.category,
+      member: {
+        memberId: 1,
+        name: 'noname',
+        picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
+      },
+      tags: body.tags,
+      likes: 0,
       isLiked: false,
       isMarked: false,
-      likes: 0,
     }
     portfolios.push(newPortfolio);
     return res(
       ctx.status(201),
-      ctx.json({ portfolio_id: portfolio_id })
+      ctx.json({ portfolioId: portfolioId })
     );
   }),
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
+    const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = true;
-        response = { likes: ++p.likes }
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isLiked = true;
+        response = { likes: ++portfolio.likes }
       }
     })
     return res(ctx.status(200), ctx.json(response));
   }),
   rest.delete('/likes/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
+    const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isLiked = false;
-        response = { likes: --p.likes };
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isLiked = false;
+        response = { likes: --portfolio.likes };
       }
     })
     return res(ctx.status(200), ctx.json(response));
   }),
   // 북마크 기능
   rest.post('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = true;
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isMarked = true;
       }
     })
     return res(ctx.status(200));
   }),
   rest.delete('/bookmarks/:portfolio_id', (req, res, ctx) => {
-    const portfolio_id = Number(req.params.portfolio_id);
-    portfolios.map((p) => {
-      if (p.portfolio_id === portfolio_id) {
-        p.isMarked = false;
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) {
+        portfolio.isMarked = false;
       }
     })
     return res(ctx.status(200));
   }),
-  // 카테고리별 태그 조회
-  rest.get('/category', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json(category));
-  })
 ];
 
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
+import { User, userData } from './data';
+import { Portfolio } from '@/types';
 
 const UserRequestHandlers = [
   rest.put<User>('/members', (req, res, ctx) => {
@@ -130,10 +131,10 @@ const HJHandlers = [
     return (res(ctx.status(200), ctx.json(filteredData)))
   }),
   //3. 댓글 수정
-  rest.patch(`/comments/:comments_id`, async(req, res, ctx) => {
+  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
     const { comments_id, memberId, content, name } = await req.json();
     const filterdData = commuDetail.filter(el => el.id === 2);
-    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);
 
     const temp = {
       comments_id: comments_id,
@@ -146,8 +147,8 @@ const HJHandlers = [
     };
     //console.log(temp);
 
-    if(index !== -1){
-      (filterdData[0].comments)[index]  = temp;
+    if (index !== -1) {
+      (filterdData[0].comments)[index] = temp;
     }
     //console.log((filterdData[0].comment)[index])
 
@@ -163,8 +164,8 @@ const HJHandlers = [
     if (!filteredData) {
       return res(ctx.status(404), ctx.json({ message: '게시물을 찾을 수 없다.' }));
     }
-    const comments_id  = filteredData.comments.length || 0;
-  
+    const comments_id = filteredData.comments.length || 0;
+
     const newPostData = {
       comments_id: comments_id + 1,
       content: (await req.json()).content,
@@ -175,20 +176,20 @@ const HJHandlers = [
     }
     //filteredData.comment.push(newPostData);
     const index = commuDetail.findIndex(e => e.id === board_id);
-    if(index !== -1){
+    if (index !== -1) {
       commuDetail[index].comments.push(newPostData);
     }
     //console.log(commuDetail[1].comment);
     return res(ctx.status(200), ctx.json(newPostData));
   }),
   //5. 댓글 삭제
-  rest.delete('/comments/:comments_id', async(req, res, ctx) => {
+  rest.delete('/comments/:comments_id', async (req, res, ctx) => {
     const { comments_id } = await req.json();
     const filterdData = commuDetail.filter(el => el.id === 2);
-    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);  
-    const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index+1, -1))
+    const index = (filterdData[0].comments).findIndex(el => el.comments_id === comments_id);
+    const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index + 1, -1))
 
-    return res(ctx.json(200), ctx.json({ message: ' 댓글 삭제 성공 ', data: newArr}))
+    return res(ctx.json(200), ctx.json({ message: ' 댓글 삭제 성공 ', data: newArr }))
   })
 ];
 
@@ -197,7 +198,7 @@ const HyoHandler = [
   rest.post('/boards/write', async (req, res, ctx) => {
     const currentReq = await req.json();
     console.log(currentReq.body);
-      
+
     const newCommunity: CommuProps = {
       board_id: 10,
       title: currentReq.body.title,

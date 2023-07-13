@@ -1,23 +1,26 @@
-import { FaHeart } from 'react-icons/fa';
-import { SmallText } from '../Typography';
-import { FlexWrapper } from '@/commons/styles/Containers.styled';
-import useLikeBtn from '@/hooks/useLikeBtn';
+/* 2023-07-07 좋아요 버튼 - 김다함 */
+import useToggle, { Toggle } from '@/hooks/useToggle';
 
-export interface LikeBtnProps {
-  portfolio_id: number;
-  initialLikes: number;
-  initialIsLiked: boolean;
+import { FaHeart } from 'react-icons/fa';
+import { SmallText } from '@/commons/atoms/Typography';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
+
+export interface LikeButton extends Toggle {
+  currentLikes: number;
 }
 
-export default function LikeBtn({ portfolio_id, initialLikes, initialIsLiked }: LikeBtnProps) {
-  const [likes, color, onClick] = useLikeBtn({
-    portfolio_id: portfolio_id,
-    initialLikes: initialLikes,
-    initialIsLiked: initialIsLiked,
-  });
+export default function LikeBtn({ portfolioId, currentLikes, isToggled }: LikeButton) {
+  const [buttonColor, onClick, likes] = useToggle({
+    portfolioId: portfolioId,
+    isToggled: isToggled,
+    buttonType: 'likes',
+    count: currentLikes,
+    color: '#e46868',
+  })
+
   return (
     <FlexWrapper gap={10}>
-      <FaHeart color={color} size={25} className='cursor-pointer' onClick={onClick} />
+      <FaHeart color={buttonColor} size={25} className='cursor-pointer' onClick={onClick} />
       <SmallText color='white'>{likes}</SmallText>
     </FlexWrapper>
   );

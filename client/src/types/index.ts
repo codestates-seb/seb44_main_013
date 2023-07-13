@@ -1,12 +1,13 @@
 // type 모아두는 곳
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react"; //Eventhandler
-import { UserType, CategoryType, portfolioContentType } from './getDataType';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { Member, Tag, Category, Portfolio, PortfolioContent, CategoryTags } from '@/types/portfolio';
 import { QuillPropsType } from './QuillPropsType';
-import { tagSliceType } from './reduxStateType';
+import { TagSlice, CategorySlice } from './reduxState';
 
-export type { UserType, CategoryType, portfolioContentType };
+// 다함 전용 타입
+export type { Member, Tag, Category, CategoryTags, Portfolio, PortfolioContent };
 export type { QuillPropsType };
-export type { tagSliceType };
+export type { TagSlice, CategorySlice };
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
@@ -39,7 +40,7 @@ export interface CommuProps {
   created_at: string,
   modifiedAt: string,
   memberId: number,
-  status:string,
+  status: string,
   comments?: CommentProps[]
 }
 

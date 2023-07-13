@@ -1,7 +1,7 @@
 /* 2023-07-12 포트폴리오 작성 Mutation - 김다함 */
 
 import { portfolioContentType } from '@/types';
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { call } from '@/utils/apiService';
 
-import { call } from '@/utils/ApiService';
-
-import UserProfile from '@/commons/molecules/UserProfile';
+import MemberProfile from '@/commons/molecules/MemberProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
 import Loading from '../../components/loading/Loading'; // components/loding 이동 (page x) 수정 완 
 import CommentBox from '@/components/CommentBox';
@@ -17,42 +16,42 @@ import {
   PageWrapper,
 } from './CommunityDetail.styled';
 
-export default function CommunityDetail( {handleClick}:any ) {
-  const [ memberData, setMemberData ] = useState<CommuProps | null>(null); 
-  const { id:boardId } = useParams(); 
+export default function CommunityDetail({ handleClick }: any) {
+  const [memberData, setMemberData] = useState<CommuProps | null>(null);
+  const { id: boardId } = useParams();
 
-  useEffect(()=> {
+  useEffect(() => {
     const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
     const getMember = async () => { //axiosMember(xxx) 이름에서부터 유추 (한글 직독직 -> 영어)
       return findBoardsById(boardId as string)
-      .then((res) => {
-        setMemberData(res[0]);
-      })
-      .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err)); 
+        .then((res) => {
+          setMemberData(res[0]);
+        })
+        .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err));
     };
 
     getMember();
   }, [boardId]);
 
-  if(!memberData) return <PageWrapper><Loading/></PageWrapper>
+  if (!memberData) return <PageWrapper><Loading /></PageWrapper>
 
   return (
     <PageWrapper >
-
-        <UserProfile type={'blackboard'} 
-          user={{ member_id: memberData.memberId, 
-                  name: memberData.name, 
-                  picture: 'https://picsum.photos/200/300' 
-                }} 
-        />
-        <MainContainer onClick={handleClick}>
-          <CmDContainer>
-            <DetailContents data={memberData}/>
-          </CmDContainer>
-          <CommentContainer>
-            <CommentBox comments={memberData.comments}/>
-          </CommentContainer>
-        </MainContainer>
+      <MemberProfile type={'blackboard'}
+        member={{
+          memberId: memberData.memberId,
+          name: memberData.name,
+          picture: 'https://picsum.photos/200/300'
+        }}
+      />
+      <MainContainer onClick={handleClick}>
+        <CmDContainer>
+          <DetailContents data={memberData} />
+        </CmDContainer>
+        <CommentContainer>
+          <CommentBox comments={memberData.comments} />
+        </CommentContainer>
+      </MainContainer>
     </PageWrapper>
   );
 }
