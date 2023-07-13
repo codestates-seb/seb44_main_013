@@ -1,6 +1,6 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
-import { portfolios, commuDetail, UserData, userData, category, PortfolioType } from './data';
+import { portfolios, commuDetail, User, userData, category, PortfolioType } from './data';
 import { commu } from './infiniteScrollData'
 
 import { CommuProps } from '@/types';
