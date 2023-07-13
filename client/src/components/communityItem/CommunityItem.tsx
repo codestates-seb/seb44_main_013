@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
+import { CommuProps } from '@/types';
+
 import Views from '../views/Views';
 import UserProfile from '@/commons/molecules/UserProfile';
-
-import { CommuProps } from '@/types';
 
 import { CommunityItemContainer } from './CommunityItem.styled';
 
