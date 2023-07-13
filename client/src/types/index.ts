@@ -30,7 +30,7 @@ export interface Styledprops
 
 //0707 혜진 community-main:<data> commu
 export interface CommuProps {
-  board_id: number,
+  id: number,
   title: string,
   content: string,
   view: number,
@@ -38,7 +38,7 @@ export interface CommuProps {
   name: string,
   created_at: string,
   modifiedAt: string,
-  member_id: number,
+  memberId: number,
   status:string,
   comments?: CommentProps[]
 }
@@ -47,7 +47,7 @@ export interface CommuProps {
 export interface CommentProps {
   comments_id: number;
   content: string;
-  member_id: number;
+  memberId: number;
   name: string;
   createdAt: string;
   modifiedAt: string;
