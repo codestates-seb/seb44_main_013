@@ -1,11 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-
 import { CommuProps } from '@/types';
-
-import { CommunityItemContainer } from './CommunityItem.styled';
-
 import Views from '../views/Views';
 import UserProfile from '@/commons/molecules/UserProfile';
+import { CommunityItemContainer } from './CommunityItem.styled';
+
 export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
   const eachData = communityItem
