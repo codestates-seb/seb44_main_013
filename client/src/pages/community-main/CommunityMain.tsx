@@ -45,15 +45,15 @@ export default function CommunityMain() {
 
   // const 기존데이터랑다르냐 = (data: any[]) => {
   useEffect(() => {
-    const lowerCasified = data.map((element) => {
-      return {
-        ...element,
-        title: element.title.toLocaleLowerCase(),
-        content: element.content.toLocaleLowerCase(),
-        name: element.name.toLocaleLowerCase(),
-      }
-    })
-    const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
+    // const lowerCasified = data.map((element) => {
+    //   return {
+    //     ...element,
+    //     title: element.title.toLocaleLowerCase(),
+    //     content: element.content.toLocaleLowerCase(),
+    //     name: element.name.toLocaleLowerCase(),
+    //   }
+    // })
+    //const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
     // const isExistContent = lowerCasified.includes(currentSearch.toLocaleLowerCase());
     // console.log(isExistTitle);
   }, [])

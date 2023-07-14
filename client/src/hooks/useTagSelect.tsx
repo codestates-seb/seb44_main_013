@@ -20,4 +20,4 @@ export default function useTagSelect({ tag, isSelected: selected }: TagProps) {
   }, [isSelected])
 
   return [isSelected, onClick] as const;
-};
+}

@@ -5,9 +5,6 @@ import { useState } from 'react';
 import communitymainimg from '../../../assets/communitymainimg.png';
 import mainwebimg from '../../../assets/mainimg.png';
 
-// interface BackImgProps {
-//     //타입 작성
-// }
 export const MainImgWrapper = styled.div`
   ${tw`
         w-screen h-fit bg-center bg-no-repeat bg-cover

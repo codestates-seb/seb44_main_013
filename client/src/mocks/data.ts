@@ -1,5 +1,5 @@
 /* 2023-07-07 Portfolio Dtail Page Data - 김다함 */
-import { CategoryTags, Portfolio } from '@/types';
+import { Portfolio } from '@/types';
 
 export const portfolios: Array<Portfolio> = [
   {

@@ -33,8 +33,8 @@ export default function PhotoItem() {
   return (
     <PhotoItemContainer>
       <img src={photoImg} alt="photo image" />
-      <Bookmark />
+      <Bookmark portfolioId={1} isToggled={false} />
     </PhotoItemContainer>
   );
-};
+}
 

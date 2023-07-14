@@ -15,7 +15,7 @@ export default function WebItem() {
         <WebItemImg src={WebItem1} alt="웹 아이템1 이미지" />
       </Link>{' '}
       <BookmarkWrapper>
-        <Bookmark />
+        <Bookmark portfolioId={1} isToggled={false} />
       </BookmarkWrapper>
     </WebItemContainer>
   );

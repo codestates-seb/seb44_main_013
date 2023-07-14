@@ -13,7 +13,7 @@ export default function AppItem() {
         <BsBatteryFull size={20} />
       </div>
       <img src={item} alt="appImg" />
-      <Bookmark />
+      <Bookmark portfolioId={1} isToggled={false} />
     </AppItemContainer>
   );
-};
+}
