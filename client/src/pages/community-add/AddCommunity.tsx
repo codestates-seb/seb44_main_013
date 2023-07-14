@@ -63,7 +63,7 @@ export default function AddCommunity() {
     .then((res) => console.log('post 요청 성공 ' + res))
     .catch((err) => console.log(err));
 
-    navigate('/boards');
+    navigate('/boards?division=RECRUITMENT');
   }
 
   // patch 요청
@@ -101,7 +101,6 @@ export default function AddCommunity() {
               value={post}
               onChange={(event)=> setPost(event)}
             />
-            {/* replace(/<\/?p[^>]*>/g, '') */}
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
             <SaveBtnContainer onClick={postCommunity}>
               <PurpleBtn>Save</PurpleBtn>
