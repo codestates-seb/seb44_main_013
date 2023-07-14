@@ -1,9 +1,9 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const MypageProfileContainer = styled.div`
   ${tw`
-    bg-neutral-100
+    bg-[#fffefebc]
     shadow-md
     rounded-lg
     text-center
@@ -13,7 +13,7 @@ export const MypageProfileContainer = styled.div`
   width: 350px;
   height: 350px;
 
-  >img {
+  > img {
     ${tw`
       rounded-full
     `}
@@ -21,8 +21,8 @@ export const MypageProfileContainer = styled.div`
     height: 200px;
     margin: 0 auto 10px;
   }
-  
-  >div {
+
+  > div {
     margin: 10px 0;
     display: flex;
     justify-content: center;
