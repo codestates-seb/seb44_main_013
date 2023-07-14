@@ -7,4 +7,7 @@ export const WebItemsContainer = tw.div`
   mt-10
   md:(flex-row)
   sm:(flex-col)
+  bg-contain
+  bg-no-repeat
+  bg-center
 `;

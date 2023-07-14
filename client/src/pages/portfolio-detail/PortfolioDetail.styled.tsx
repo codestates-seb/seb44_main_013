@@ -1,20 +1,42 @@
-import tw from 'tailwind-styled-components';
+import { styled } from 'styled-components';
+import tw from 'twin.macro';
 
-export const PageWrapper = tw.div`
-  flex
+export const ContentContainer = styled.div`
+  ${tw`flex gap-8 px-6 w-full h-fit`}
+`
+
+export const ButtonHeader = tw.div`
+  w-full py-5 px-8
+`
+
+const RoundedBox = styled.div`
+  ${tw`rounded-xl`}
+`
+
+export const PortfolioContainer = styled(RoundedBox)`
+  ${tw`
+    w-3/4
+    bg-black
+    text-white
+    py-10
+    px-14
+    overflow-y-auto
+  `}
+  height: calc(100vh - 70px);
 `;
 
-export const PortfolioContainer = tw.div`
-  flex-grow
-  mt-20
-  w-2/3
-  bg-slate-200	
-  ml-10
+export const UserContainer = styled.div`
+${tw`
+  flex flex-col
+  w-1/4
+  h-full
+  gap-6
+  overflow-y-auto
+`}
+  max-height: calc(100vh - 70px);
 `;
 
-export const UserContainer = tw.div`
-  flex
-  w-1/3
-  mt-20
-  ml-10
-`;
+export const UserCard = styled(RoundedBox)`
+  ${tw`flex flex-col p-8 gap-6`}
+  background-color: rgba(32, 32, 36, 1);
+`

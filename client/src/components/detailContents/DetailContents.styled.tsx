@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 export const DetailCntContainer = styled.div`
   ${tw`
-    mt-10
-    w-3/5
     bg-white
     p-5
     shadow-md

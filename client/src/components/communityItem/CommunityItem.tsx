@@ -1,14 +1,28 @@
-import { CommunityItemContainer } from './CommunityItem.styled';
-import Views from '../views/Views';
-import UserProfile from '@/commons/molecules/UserProfile';
+import { useNavigate } from 'react-router-dom';
 
-export default function CommunityItem() {
+import { CommuProps } from '@/types';
+
+import { CommunityItemContainer } from './CommunityItem.styled';
+
+import Views from '../views/Views';
+import MemberProfile from '@/commons/molecules/MemberProfile';
+
+export default function CommunityItem({communityItem}: any) {
+  const navigate = useNavigate();
+  const eachData = communityItem;
+  //console.log(eachData);
+
+  const handleLink = (e: CommuProps) => {
+    navigate(`/boards/${e.id}`, { state: e });
+    //console.log(e.id);
+  }
+
   return (
-    <CommunityItemContainer>
-      <UserProfile type={'board'} username={'emma'} />
-      <h2>Title</h2>
-      <p>contents</p>
-      <Views />
+    <CommunityItemContainer onClick={() => { handleLink(eachData) }}>
+      <MemberProfile type={'board'} member={{ memberId: eachData.member_id, name: eachData.name, picture: 'https://picsum.photos/200/300' }} />
+      <h2>{eachData.title}</h2>
+      <p>{eachData.content}</p>
+      <Views view={eachData.view} />
     </CommunityItemContainer>
   );
 }

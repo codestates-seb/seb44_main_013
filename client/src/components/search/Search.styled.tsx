@@ -2,12 +2,14 @@ import tw from 'twin.macro';
 import { styled } from 'styled-components';
 import { BsSearchHeart } from 'react-icons/bs';
 
-export const SearchContainer = tw.div`
+export const SearchContainer = tw.form`
   relative
   flex
-  flex-1
   flex-grow
   items-center
+  max-w-md
+  min-w-min
+  mx-auto
 `;
 
 export const SearchIcon = tw(BsSearchHeart)`

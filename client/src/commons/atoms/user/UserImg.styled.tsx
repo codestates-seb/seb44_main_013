@@ -1,6 +1,6 @@
 import tw from 'tailwind-styled-components';
 
-export const ImgContainer = tw.div`
+export const ImgContainer = tw.button`
   w-12
   h-12
   flex

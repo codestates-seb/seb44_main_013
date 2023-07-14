@@ -8,6 +8,7 @@ export const MypageProfileContainer = styled.div`
     rounded-lg
     text-center
     p-7
+    mr-5
   `}
   width: 350px;
   height: 350px;
@@ -42,4 +43,15 @@ export const MypageProfileContainer = styled.div`
   .editBtn {
     ${tw`cursor-pointer`}
   }
+`;
+
+export const NameEdit = styled.input`
+  ${tw`
+    text-center
+    outline-neutral-300
+    bg-transparent
+  `}
+  font-size: 25px;
+  width: 200px;
+  height: 45px;
 `;

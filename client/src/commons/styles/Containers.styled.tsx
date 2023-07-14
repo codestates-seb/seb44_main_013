@@ -2,22 +2,34 @@
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
-export const FlexContainer = styled.div<{ gap: number }>`
-  ${tw`flex items-center justify-start`}
-  gap: ${(props) => props.gap}px;
-`;
-
-export const FlexColumnContainer = styled.div<{ gap: number }>`
-  ${tw`flex flex-col items-center justify-center`}
-  gap: ${(props) => props.gap}px;
-`;
-
-export const FlexWrapper = styled.div<{ gap: number }>`
+const Container = styled.div<{ gap?: number, bg?: string }>`
   ${tw`flex`}
+  gap: ${(props) => props.gap || 0}px;
+  background-color: ${(props) => props.bg || 'white'};
+`
+
+export const Center = tw.div`
+  flex justify-center items-center 
+`;
+
+export const FlexContainer = styled(Container)`
+  ${tw`items-center justify-center mt-10`}
+`;
+//categorypart 같음
+export const FlexColumnContainer = styled(Container)`
+  ${tw`flex-col items-center justify-center`}
+`;
+
+export const FlexStartContainer = styled(Container)`
+  ${tw`items-center justify-start`}
+`;
+
+export const FlexWrapper = styled.div<{ gap?: number }>`
+  ${tw`flex flex-wrap`}
   gap: ${(props) => props.gap}px;
 `;
 
-export const FlexColumnWrapper = styled.div<{ gap: number }>`
+export const FlexColumnWrapper = styled.div<{ gap?: number }>`
   ${tw`flex flex-col `}
   gap: ${(props) => props.gap}px;
 `;

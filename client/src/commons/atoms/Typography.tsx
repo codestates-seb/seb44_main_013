@@ -2,30 +2,39 @@
 import { styled } from 'styled-components';
 import tw from 'twin.macro'
 
+const H = styled.h4<{ color?: string }>`
+  ${tw`m-0 select-none`}
+  color: ${(props) => props.color};
+  font-weight: 600;
+`
+
 const Span = styled.span<{ color?: string }>`
-    ${tw`align-middle`}
-    color: ${(props) => props.color};
+  ${tw`align-middle`}
+  color: ${(props) => props.color};
 `
 
 // 제목 텍스트 스타일 컴포넌트
-export const HeadingText = styled.h1`
-    margin: 0;
+export const HeadingText = tw(H)`
+  text-xl
 `;
 
 // 라벨 텍스트 스타일 컴포넌트
-export const LabelText = styled.h3`
-    margin: 0;
+export const LabelText = tw(H)`
+  text-lg
 `;
 
 // 본문 텍스트 스타일 컴포넌트
-export const BodyText = styled.span`
+export const BodyText = styled(Span)`
+    font-weight:200;
 `;
 
 export const InputLabelText = styled(Span)`
-    font-size: 16px;
-    font-weight: 600;
-`
+  user-select: none;
+  font-size: 16px;
+  font-weight: 600;
+`;
 
 export const SmallText = styled(Span)`
-    font-size: 13px;
-`
+  user-select: none;
+  font-size: 13px;
+`;

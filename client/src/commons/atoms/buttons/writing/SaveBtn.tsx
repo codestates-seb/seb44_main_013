@@ -1,5 +1,9 @@
 import { Edittype } from "../Button.styled"
 
-export default function SaveBtn(){
-    return <Edittype>Save</Edittype>
+interface IProps {
+    onClick: () => void;
+}
+
+export default function SaveBtn( {onClick}:IProps ){
+    return <Edittype onClick={onClick}>Save</Edittype>
 }
