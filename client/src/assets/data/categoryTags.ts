@@ -28,19 +28,19 @@ export const categoryTags: CategoryTags = {
   "앱": {
     tags: [
       {
-        tagId: 1,
+        tagId: 6,
         name: 'android',
       },
       {
-        tagId: 2,
+        tagId: 7,
         name: 'iOS',
       },
       {
-        tagId: 3,
+        tagId: 8,
         name: 'react native',
       },
       {
-        tagId: 4,
+        tagId: 9,
         name: 'android studio',
       },
     ],
@@ -48,19 +48,19 @@ export const categoryTags: CategoryTags = {
   "3D/애니메이션": {
     tags: [
       {
-        tagId: 1,
+        tagId: 10,
         name: '음',
       },
       {
-        tagId: 2,
+        tagId: 11,
         name: '오',
       },
       {
-        tagId: 3,
+        tagId: 12,
         name: '아',
       },
       {
-        tagId: 4,
+        tagId: 13,
         name: '예',
       },
     ],
@@ -68,23 +68,23 @@ export const categoryTags: CategoryTags = {
   "디자인/일러스트": {
     tags: [
       {
-        tagId: 1,
+        tagId: 14,
         name: '훌라',
       },
       {
-        tagId: 2,
+        tagId: 15,
         name: '훌라',
       },
       {
-        tagId: 3,
+        tagId: 16,
         name: '신나고',
       },
       {
-        tagId: 4,
+        tagId: 17,
         name: '즐거운',
       },
       {
-        tagId: 5,
+        tagId: 18,
         name: '코딩시간',
       }
     ],
@@ -92,23 +92,23 @@ export const categoryTags: CategoryTags = {
   "사진/영상": {
     tags: [
       {
-        tagId: 1,
+        tagId: 19,
         name: '사실은',
       },
       {
-        tagId: 2,
+        tagId: 20,
         name: '하나도',
       },
       {
-        tagId: 3,
+        tagId: 21,
         name: '안 신나',
       },
       {
-        tagId: 4,
+        tagId: 22,
         name: '목이',
       },
       {
-        tagId: 5,
+        tagId: 23,
         name: '거북목된다',
       }
     ],
