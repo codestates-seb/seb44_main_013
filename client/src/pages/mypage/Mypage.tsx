@@ -23,8 +23,12 @@ import { RootState } from '@/modules';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
-  const loginState = useSelector((state:RootState) => state.loginSlice.isLogin);
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+  const itemsPerPage = 5;
 
+  const loginState = useSelector(
+    (state: RootState) => state.loginSlice.isLogin
+  );
 
   useEffect(() => {
     axios
@@ -36,6 +40,18 @@ export default function MyPage() {
         console.error(error);
       });
   }, []);
+
+  //pagenation
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedCommunityList = Array.from({ length: 10 }).slice(
+    startIndex,
+    endIndex
+  );
 
   return (
     <MainWrapper>
@@ -76,18 +92,37 @@ export default function MyPage() {
             {/* 게시판 목록 부분  */}
             <BoxTitle>게시판</BoxTitle>
             <BoxWrapper isRow="column">
-              {Array.from({ length: 5 }).map((_, index) => {
+              {paginatedCommunityList.map((_, index) => {
                 return <CommunityList key={index} />;
               })}
 
               <PagenationWrapper>
-                <Pagenation>&lt;</Pagenation>
+                <Pagenation
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  isActive={currentPage === 1}
+                >
+                  &lt;
+                </Pagenation>
 
                 {Array.from({ length: 5 }).map((_, i) => {
-                  return <Pagenation>{i + 1}</Pagenation>;
+                  const pageNumber = i + 1;
+                  return (
+                    <Pagenation
+                      key={pageNumber}
+                      onClick={() => handlePageChange(pageNumber)}
+                      isActive={pageNumber === currentPage}
+                    >
+                      {pageNumber}
+                    </Pagenation>
+                  );
                 })}
 
-                <Pagenation> &gt;</Pagenation>
+                <Pagenation
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  isActive={currentPage === 5}
+                >
+                  &gt;
+                </Pagenation>
               </PagenationWrapper>
             </BoxWrapper>
           </FlexColumnWrapper>
