@@ -20,7 +20,12 @@ export default function CHeader() {
         <Logo />
       </Link>
       <BtnContainer>
-        <RecuitBtn>Recruitment</RecuitBtn>&nbsp;&nbsp;|<CooperBtn>Cooperation</CooperBtn>
+        <Link to="/boards?division=RECRUITMENT">
+          <RecuitBtn>Recruitment</RecuitBtn>
+        </Link>&nbsp;&nbsp;|
+        <Link to="/boards?division=COOPERATION">
+          <CooperBtn>Cooperation</CooperBtn>
+        </Link>
         {loginState ? (
           <UserImg/>
         ) : (
