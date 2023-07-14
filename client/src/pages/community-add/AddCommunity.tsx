@@ -66,9 +66,6 @@ export default function AddCommunity() {
     navigate('/boards');
   }
 
-  //  console.log(postInformation);
-  //  console.log(post);
-
   // patch 요청
   // 게시글 클릭했을 때의 게시글 number로 api 보내서 get 요청 해 res 받아오기
   // 받아온 res 제목과 내용에 각각 배치
@@ -102,7 +99,7 @@ export default function AddCommunity() {
               modules={modules}
               className='reactQuillContainer'
               value={post}
-              onChange={(e)=> setPost(e)}
+              onChange={(event)=> setPost(event)}
             />
             {/* replace(/<\/?p[^>]*>/g, '') */}
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
