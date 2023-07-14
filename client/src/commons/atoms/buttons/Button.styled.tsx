@@ -56,3 +56,19 @@ export const AskCommisionBtn = styled(Purpletype)`
     text-base
   `}
 `;
+
+// 삭제 확인 모달 취소 버튼
+export const DeleteCancelButton = styled(Purpletype)`
+  ${tw`
+    bg-white
+    text-POINT_COLOR
+  `}
+
+  border: 1px solid #8580E1;
+
+  &:hover{
+    ${tw`
+      bg-gray-200
+    `}
+  }
+`;
