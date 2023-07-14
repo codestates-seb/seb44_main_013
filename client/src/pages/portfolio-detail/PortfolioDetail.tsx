@@ -78,7 +78,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} />)
+                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} readonly={true} />)
               }
             </FlexWrapper>
           </UserCard>
