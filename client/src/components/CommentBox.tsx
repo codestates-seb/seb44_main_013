@@ -11,7 +11,7 @@ import { CommentProps } from '@/types';
 import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 
-import { call } from '@/utils/ApiService';
+import { call } from '@/utils/apiService';
 
 
 export default function CommentBox( {comments = [] }:any) { 
