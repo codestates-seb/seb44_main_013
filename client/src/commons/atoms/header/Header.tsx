@@ -5,10 +5,11 @@ import UserImg from '../user/UserImg';
 import Logo from '../logo/Logo';
 import Search from '@/components/search/Search';
 import { RecuitBtn } from './CHeader.styled';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules';
 
 export default function Header() {
-  // const [isLogin, setIsLogin] = useState(false); -> 전역 관리에서 true/false 관리
-  const isLogin = true;
+  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
 
   return (
     <HeaderContainer>
@@ -20,7 +21,7 @@ export default function Header() {
         <CLink href="/boards">
           <RecuitBtn>Community</RecuitBtn>
         </CLink>
-        {isLogin ? (
+        {loginState ? (
           <UserImg />
         ) : (
           <Link to="/login">

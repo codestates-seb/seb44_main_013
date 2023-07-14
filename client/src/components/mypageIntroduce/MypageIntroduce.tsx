@@ -7,6 +7,9 @@ import { MdDone } from 'react-icons/md';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { User } from '@/mocks/data';
 
+import { useDispatch } from 'react-redux';
+import { login } from '@/modules/loginSlice';
+
 import {
   MypageIntroWrap,
   MypageIntroContainer,
@@ -23,6 +26,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
   const initialCareer = user?.career || 'Career 1';
   const initialAwards = user?.award || 'Awards 1';
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [job, setJob] = useState(initialJob);
   const [career, setCareer] = useState(initialCareer);
@@ -58,6 +62,10 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         .delete('/members')
         .then(() => {
           console.log('삭제 성공');
+
+          //0713 혜진 추가
+          dispatch(login(false))
+
           navigate('/');
         })
         .catch((error) => {

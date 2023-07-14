@@ -16,11 +16,15 @@ import {
   MyItemsWrapper,
   MyProfileWrapper,
 } from './MyPage.styled';
+
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules';
 
 export default function MyPage() {
-  const isUser = false;
   const [user, setUser] = useState<User | null>(null);
+  const loginState = useSelector((state:RootState) => state.loginSlice.isLogin);
+
 
   useEffect(() => {
     axios
@@ -53,7 +57,7 @@ export default function MyPage() {
           </BoxWrapper>
         </FlexColumnWrapper>
 
-        {isUser ? (
+        {loginState ? (
           <FlexColumnWrapper gap={0}>
             <BoxTitle>북마크</BoxTitle>
             <BoxWrapper>
