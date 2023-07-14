@@ -60,7 +60,7 @@ export default function AddCommunity() {
         body: postInformation,
       }
     )  
-    .then((res) => console.log('post 요청 성공'))
+    .then((res) => console.log('post 요청 성공 ' + res))
     .catch((err) => console.log(err));
 
     navigate('/boards');
@@ -80,9 +80,9 @@ export default function AddCommunity() {
     .catch((err) => console.log(err));
   }, [])
 
-  const changeCommunity = () => {
-    axios.patch(`/boards/edit/:${communityNum}`, postInformation)
-  }
+  // const changeCommunity = () => {
+  //   axios.patch(`/boards/edit/:${communityNum}`, postInformation)
+  // }  : 임시 주석
 
   // community 뒤에 게시글 id 넣기
   // create, patch 를 같은 페이지에서 게시글 number params 여부에 따라

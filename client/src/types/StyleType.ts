@@ -5,8 +5,8 @@ export type ProfileType = {
     }
 }
 
-export type ProfileImageType = {
-    [key: string]: {
+// export type ProfileImageType = {
+//     [key: string]: {
 
-    }
-}
+//     }
+// }
