@@ -66,7 +66,7 @@ export default function CommunityMain() {
           element.content.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
           element.name.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase())
       }));
-    };
+    }
   }
 
   return (

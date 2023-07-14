@@ -200,7 +200,7 @@ const HyoHandler = [
     console.log(currentReq.body);
 
     const newCommunity: CommuProps = {
-      board_id: 10,
+      id: 10,
       title: currentReq.body.title,
       content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
       view: 0,
@@ -208,8 +208,8 @@ const HyoHandler = [
       name: "phy",
       created_at: "2023-06-21T17:34:51.3395597",
       modifiedAt: "2023-06-21T17:34:51.3395597",
-      member_id: 1,
-      status: true
+      memberId: 1,
+      status: "POST_ACTIVE"
     }
     commu.unshift(newCommunity);
     return res(ctx.status(201), ctx.json(newCommunity));
