@@ -7,16 +7,32 @@ import {
   HeaderContainer,
   RecuitBtn,
 } from './CHeader.styled';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules';
+import LoginBtn from '../buttons/login/LoginBtn';
 
 export default function CHeader() {
+  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+  
   return (
     <HeaderContainer>
       <Link to="/">
         <Logo />
       </Link>
       <BtnContainer>
-        <RecuitBtn>Recruitment</RecuitBtn>&nbsp;&nbsp;|<CooperBtn>Cooperation</CooperBtn>
-        <UserImg />
+        <Link to="/boards?division=RECRUITMENT">
+          <RecuitBtn>Recruitment</RecuitBtn>
+        </Link>&nbsp;&nbsp;|
+        <Link to="/boards?division=COOPERATION">
+          <CooperBtn>Cooperation</CooperBtn>
+        </Link>
+        {loginState ? (
+          <UserImg/>
+        ) : (
+          <Link to="/login">
+            <LoginBtn />
+          </Link>
+        )}
       </BtnContainer>
     </HeaderContainer>
   );

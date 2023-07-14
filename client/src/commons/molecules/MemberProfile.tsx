@@ -26,7 +26,7 @@ const MemberProfile = ({ type, member, date }: UserProfile) => {
         :
         <FlexColumnWrapper gap={0}>
           <Label text={member.name} type={type} url={`/members/${member.memberId}`} />
-          <SmallText className={type === 'blackboard' ? 'text-zinc-200 text-white' : ''}>{date}</SmallText>
+          <SmallText className={type === 'blackboard' ? 'text-white' : ''}>{date}</SmallText>
         </FlexColumnWrapper>
       }
     </FlexWrapper >

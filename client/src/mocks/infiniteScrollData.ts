@@ -469,5 +469,27 @@ export const commu: CommuProps[] = [
     modifiedAt: "2023-04-21T17:34:51.3395597",
     memberId: 4,
     status: "POST_ACTIVE"
-  }
+  },
 ];
+
+
+
+// export const MainCategoryDatas = [
+//   data: [
+//     {
+//       data:{
+//         memberId: 1,
+//         portfolioId: 1,
+//         title: "제목1"
+//       }
+//     },
+//     {
+//       data:{
+//         memberId: 1,
+//         portfolioId: 1,
+//         title: "제목1"
+//       }
+//     }
+//   ]
+
+// ]

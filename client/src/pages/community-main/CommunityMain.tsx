@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import Search from '@/components/search/Search';
 import { call } from '@/utils/apiService';
@@ -17,11 +17,13 @@ import {
 } from './CommunityMain.styled';
 
 export default function CommunityMain() {
-  const [data, setDatas] = useState<CommuProps[]>([])
+  const [ data, setDatas ] = useState<CommuProps[]>([])
+  const [ searchParams, setSearchParams ] = useSearchParams(); 
+  const division = searchParams.get('division')
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call('/boards', 'GET', null)
+      return call(`/boards?division=${division}`, 'GET', {params: {division: division}})
         .then((res) => {
           setDatas(res);
         })
@@ -29,7 +31,7 @@ export default function CommunityMain() {
     }
 
     axiosCommu();
-  }, []);
+  }, [division]);
 
 
   // 검색 - 07.11 효정
@@ -43,15 +45,15 @@ export default function CommunityMain() {
 
   // const 기존데이터랑다르냐 = (data: any[]) => {
   useEffect(() => {
-    const lowerCasified = data.map((element) => {
-      return {
-        ...element,
-        title: element.title.toLocaleLowerCase(),
-        content: element.content.toLocaleLowerCase(),
-        name: element.name.toLocaleLowerCase(),
-      }
-    })
-    const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
+    // const lowerCasified = data.map((element) => {
+    //   return {
+    //     ...element,
+    //     title: element.title.toLocaleLowerCase(),
+    //     content: element.content.toLocaleLowerCase(),
+    //     name: element.name.toLocaleLowerCase(),
+    //   }
+    // })
+    //const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
     // const isExistContent = lowerCasified.includes(currentSearch.toLocaleLowerCase());
     // console.log(isExistTitle);
   }, [])
@@ -66,7 +68,7 @@ export default function CommunityMain() {
           element.content.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
           element.name.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase())
       }));
-    };
+    }
   }
 
   return (
