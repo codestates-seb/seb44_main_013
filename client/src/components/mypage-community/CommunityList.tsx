@@ -14,11 +14,11 @@ export default function CommunityList() {
         <MainTitle>Title</MainTitle>
         <Name>@wjy</Name>
       </TextContainer>
-
+      {/* 
       <TagsContainer>
         <Tags>#tags</Tags>
         <Tags>#tags</Tags>
-      </TagsContainer>
+      </TagsContainer> */}
     </Wrapper>
   );
 }
