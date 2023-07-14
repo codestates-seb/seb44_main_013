@@ -100,7 +100,7 @@ export default function Comment(
   return (
     <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-1.5 pt-3'>
       <FlexWrapper gap={0} className='w-full justify-between'>
-        <MemberProfile type='comment' member={{ memberId: comment.member_id, name: username, picture: 'https://picsum.photos/200/300' }} />
+        <MemberProfile type='comment' member={{ memberId: comments.memberId, name: username, picture: 'https://picsum.photos/200/300' }} />
         <FlexWrapper gap={0}>
           <ReviseBtn onClick={handleChangeEditMode} color={'black'} />
           <RemoveBtn onClick={handleDelete} color={'black'} />
