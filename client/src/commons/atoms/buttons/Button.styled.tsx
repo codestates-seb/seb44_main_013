@@ -9,6 +9,7 @@ export const Button = tw.button`
   py-1
   transition duration-300 ease-in-out
   max-md:text-xs
+  select-none
 `;
 
 export const Purpletype = styled(Button)`
@@ -29,11 +30,7 @@ export const Writingtype = styled(Purpletype)`
   `}
 `;
 export const BackButton = tw.button`
-  absolute
-  top-5
-  left-5
   p-2
-  rounded
   cursor-pointer
   text-BASIC_WHITE
 `;
@@ -46,5 +43,16 @@ export const Edittype = styled(Purpletype)`
     py-1
     text-base
     rounded-lg
+  `}
+`;
+
+//게시물 상세 페이지의 의뢰 요청 버튼 
+export const AskCommisionBtn = styled(Purpletype)`
+  ${tw`
+    w-[200px]
+    px-5
+    py-2
+    rounded-md
+    text-base
   `}
 `;

@@ -1,16 +1,27 @@
+/* 2023-07-07 좋아요 버튼 - 김다함 */
+import useToggle, { Toggle } from '@/hooks/useToggle';
+
 import { FaHeart } from 'react-icons/fa';
-import { useState } from 'react';
+import { SmallText } from '@/commons/atoms/Typography';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
 
-export default function LikeBtn() {
-  const [liked, setLiked] = useState(false);
+export interface LikeButton extends Toggle {
+  currentLikes: number;
+}
 
-  const toggleLike = () => {
-    setLiked(!liked);
-  };
+export default function LikeBtn({ portfolioId, currentLikes, isToggled }: LikeButton) {
+  const [buttonColor, onClick, likes] = useToggle({
+    portfolioId: portfolioId,
+    isToggled: isToggled,
+    buttonType: 'likes',
+    count: currentLikes,
+    color: '#e46868',
+  })
 
   return (
-    <div onClick={toggleLike}>
-      <FaHeart color={liked ? '#e46868' : 'gray'} size={25} />
-    </div>
+    <FlexWrapper gap={10}>
+      <FaHeart color={buttonColor} size={25} className='cursor-pointer' onClick={onClick} />
+      <SmallText color='white'>{likes}</SmallText>
+    </FlexWrapper>
   );
 }

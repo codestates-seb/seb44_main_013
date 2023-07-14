@@ -46,6 +46,8 @@ export const SignBtn = tw.button`
   hover:bg-slate-300
   hover:text-black
   hover:scale-110
+  focus:bg-slate-300
+  focus:text-black
 `;
 
 export const ContentBox = tw.div`
