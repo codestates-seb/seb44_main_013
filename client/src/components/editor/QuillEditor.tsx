@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 import ReactQuill from 'react-quill';
 import tw from 'twin.macro';
 
-import { QuillPropsType } from '@/types';
+import { Quill } from '@/types';
 
 const QuillWrapper = styled.div`
 ${tw`z-10 absolute border-0 top-0`}
@@ -30,7 +30,7 @@ ${tw`z-10 absolute border-0 top-0`}
   }
 `
 
-const QuillEditor = memo(({ htmlContent, setContentHandler }: QuillPropsType) => {
+const QuillEditor = memo(({ htmlContent, setContentHandler }: Quill) => {
   const quillRef = useRef<ReactQuill>();
 
   const modules = useMemo(
