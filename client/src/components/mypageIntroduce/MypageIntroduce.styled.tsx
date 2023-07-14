@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const MypageIntroWrap = styled.div`
   ${tw`
-    bg-[#e9e9e9]
+    bg-[#fffefed3]
     shadow-md
     rounded-lg
     px-10

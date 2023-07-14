@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const MypageProfileContainer = styled.div`
   ${tw`
-    bg-[#e1e1e1]
+    bg-[#fffefebc]
     shadow-md
     rounded-lg
     text-center
