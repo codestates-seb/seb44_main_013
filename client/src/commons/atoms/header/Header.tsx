@@ -18,7 +18,7 @@ export default function Header() {
       </Link>
       <Search />
       <ItemContainer>
-        <CLink href="/boards">
+        <CLink href="/boards?division=RECRUITMENT">
           <RecuitBtn>Community</RecuitBtn>
         </CLink>
         {loginState ? (

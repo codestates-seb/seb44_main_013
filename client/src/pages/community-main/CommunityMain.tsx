@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import Search from '@/components/search/Search';
 import { call } from '@/utils/apiService';
@@ -17,11 +17,13 @@ import {
 } from './CommunityMain.styled';
 
 export default function CommunityMain() {
-  const [data, setDatas] = useState<CommuProps[]>([])
+  const [ data, setDatas ] = useState<CommuProps[]>([])
+  const [ searchParams, setSearchParams ] = useSearchParams(); 
+  const division = searchParams.get('division')
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call('/boards', 'GET', null)
+      return call(`/boards?division=${division}`, 'GET', {params: {division: division}})
         .then((res) => {
           setDatas(res);
         })
@@ -29,7 +31,7 @@ export default function CommunityMain() {
     }
 
     axiosCommu();
-  }, []);
+  }, [division]);
 
 
   // 검색 - 07.11 효정
