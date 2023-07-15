@@ -8,8 +8,8 @@ export const AppItemContainer = styled.div`
     overflow-hidden
   `}
 
-  border-radius: 20px;
   box-shadow: 0 5px 5px 0 #aaa;
+  border-radius: 20px;
   width: 300px;
   height: 500px;
 

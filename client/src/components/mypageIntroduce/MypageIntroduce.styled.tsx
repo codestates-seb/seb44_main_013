@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const MypageIntroWrap = styled.div`
   ${tw`
-    bg-neutral-100
+    bg-[#fffefed3]
     shadow-md
     rounded-lg
     px-10
@@ -40,11 +40,11 @@ export const MypageIntroContainer = styled.div`
       px-3
       py-1
       bg-transparent
-      outline-neutral-400
+      outline-neutral-100
       rounded-md
       inline
     `}
-    border: 1px solid #d4d4d4;
+    border: 2px solid #d4d4d4;
     font-size: 18px;
     font-weight: 300;
   }

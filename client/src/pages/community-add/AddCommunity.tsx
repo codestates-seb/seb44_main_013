@@ -60,14 +60,11 @@ export default function AddCommunity() {
         body: postInformation,
       }
     )  
-    .then((res) => console.log('post 요청 성공'))
+    .then((res) => console.log('post 요청 성공 ' + res))
     .catch((err) => console.log(err));
 
-    navigate('/boards');
+    navigate('/boards?division=RECRUITMENT');
   }
-
-  //  console.log(postInformation);
-  //  console.log(post);
 
   // patch 요청
   // 게시글 클릭했을 때의 게시글 number로 api 보내서 get 요청 해 res 받아오기
@@ -80,9 +77,9 @@ export default function AddCommunity() {
     .catch((err) => console.log(err));
   }, [])
 
-  const changeCommunity = () => {
-    axios.patch(`/boards/edit/:${communityNum}`, postInformation)
-  }
+  // const changeCommunity = () => {
+  //   axios.patch(`/boards/edit/:${communityNum}`, postInformation)
+  // }  : 임시 주석
 
   // community 뒤에 게시글 id 넣기
   // create, patch 를 같은 페이지에서 게시글 number params 여부에 따라
@@ -102,9 +99,8 @@ export default function AddCommunity() {
               modules={modules}
               className='reactQuillContainer'
               value={post}
-              onChange={(e)=> setPost(e)}
+              onChange={(event)=> setPost(event)}
             />
-            {/* replace(/<\/?p[^>]*>/g, '') */}
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
             <SaveBtnContainer onClick={postCommunity}>
               <PurpleBtn>Save</PurpleBtn>

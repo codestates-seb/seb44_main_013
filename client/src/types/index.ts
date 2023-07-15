@@ -42,6 +42,7 @@ export interface CommuProps {
   memberId: number,
   status: string,
   comments?: CommentProps[]
+  pageInfo?: Pagenation
 }
 
 //0708 혜진 community-detail comments add
@@ -54,3 +55,19 @@ export interface CommentProps {
   modifiedAt: string;
   status: string;
 }
+//0714 혜진 Pagenation
+export interface Pagenation {
+  page: number,
+  size: number,
+  totalElements: number,
+  totlaPages:number,
+}
+
+//0714 혜진 메인 카테고리 페이지 props
+export interface MainCategory {
+  data: [];
+}
+
+// export interface MainCategoryData {
+//   data
+// }

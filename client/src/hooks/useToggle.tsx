@@ -36,4 +36,4 @@ export default function useToggle({ portfolioId, buttonType, isToggled: isOn, co
   }, [isToggled])
 
   return [buttonColor, onClick, count] as const;
-};
+}

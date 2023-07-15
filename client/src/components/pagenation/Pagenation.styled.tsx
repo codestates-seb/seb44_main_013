@@ -8,18 +8,25 @@ export const PagenationWrapper = tw.div`
 `;
 
 export const PagenationBtn = styled.button`
-    ${ tw`
-        mt-8
-        font-normal
-        text-base
-        mx-2
-        text-BASIC_WHITE
-    `}
-    &:hover {  
-        color: #8580E1;
-    }
+  ${tw`
+    mt-8
+    font-normal
+    text-base
+    mx-2
+    text-BASIC_WHITE
+    transition-colors
+  `}
 
-    &:focus {
-        color: #8580E1;
-    }
+  &:hover {
+    color: #8580e1;
+  }
+
+  &:focus {
+    color: #8580e1;
+  }
+
+  &.active {
+    color: #8580e1;
+    font-weight: bold;
+  }
 `;
