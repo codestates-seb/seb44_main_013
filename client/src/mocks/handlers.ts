@@ -121,8 +121,19 @@ const UserRequestHandlers = [
 //혜진 게시판 파트 
 const HJHandlers = [
   //1. 게시판 목록 조회 GET : community-main page
-  rest.get('/boards', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json(commu));
+  //url-> http://localhost:8080/boards?division=COOPERATION
+  rest.get('/boards', (req, res, ctx) => {
+    const division = req.url.searchParams.get('division');
+
+    if( division === 'COOPERATION' ){
+      const filteredData = commu.filter((element) => element.division === 'COOPERATION');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
+
+    if( division === 'RECRUITMENT'){ 
+      const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
   }),
   //2. 게시한 상세 페이지 조회 GET : community-detail page
   rest.get('/boards/:id', (req, res, ctx) => {

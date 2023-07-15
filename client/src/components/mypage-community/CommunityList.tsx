@@ -1,7 +1,6 @@
 import {
   MainTitle,
   Name,
-  Tags,
   TagsContainer,
   TextContainer,
   Wrapper,
@@ -12,12 +11,13 @@ export default function CommunityList() {
     <Wrapper>
       <TextContainer>
         <MainTitle>Title</MainTitle>
-        <Name>@wjy</Name>
       </TextContainer>
 
       <TagsContainer>
-        <Tags>#tags</Tags>
-        <Tags>#tags</Tags>
+        <Name>@wjy</Name>
+
+        {/* <Tags>#tags</Tags> */}
+        {/* <Tags>#tags</Tags> */}
       </TagsContainer>
     </Wrapper>
   );

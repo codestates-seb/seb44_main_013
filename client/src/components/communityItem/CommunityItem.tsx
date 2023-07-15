@@ -10,12 +10,11 @@ import MemberProfile from '@/commons/molecules/MemberProfile';
 export default function CommunityItem({communityItem}: any) {
   const navigate = useNavigate();
   const eachData = communityItem;
-  console.log(eachData);
-  // console.log(eachData);
+  //console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
-    console.log(e.id);
+    //console.log(e.id);
   }
 
   return (

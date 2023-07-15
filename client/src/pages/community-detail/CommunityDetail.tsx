@@ -6,6 +6,7 @@ import MemberProfile from '@/commons/molecules/MemberProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
 import Loading from '../../components/loading/Loading'; // components/loding 이동 (page x) 수정 완 
 import CommentBox from '@/components/CommentBox';
+import DeleteModal from '@/components/deleteModal/DeleteModal';
 
 import { CommuProps } from '@/types';
 
@@ -18,6 +19,7 @@ import {
 
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
+  const [clickDeletePost, setClickDeletePost] = useState(false);
   const { id: boardId } = useParams();
 
   useEffect(() => {
@@ -35,6 +37,12 @@ export default function CommunityDetail({ handleClick }: any) {
 
   if (!memberData) return <PageWrapper><Loading /></PageWrapper>
 
+  // 게시글 삭제 버튼 클릭 시 - 효정(07.14)
+
+  const handleDeleteModal = () => {
+    setClickDeletePost(!clickDeletePost);
+  }
+
   return (
     <PageWrapper >
       <MemberProfile type={'blackboard'}
@@ -46,12 +54,13 @@ export default function CommunityDetail({ handleClick }: any) {
       />
       <MainContainer onClick={handleClick}>
         <CmDContainer>
-          <DetailContents data={memberData} />
+          <DetailContents data={memberData} handleDeleteModal={handleDeleteModal} />
         </CmDContainer>
         <CommentContainer>
           <CommentBox comments={memberData.comments} />
         </CommentContainer>
       </MainContainer>
+      {clickDeletePost ? <DeleteModal handleDeleteModal={handleDeleteModal} /> : ''}
     </PageWrapper>
   );
 }

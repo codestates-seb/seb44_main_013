@@ -13,4 +13,4 @@ export default function Bookmark({ portfolioId, isToggled }: Toggle) {
   return (
     <FaBookmark color={buttonColor} size={25} className='cursor-pointer' onClick={onClick} />
   );
-};
+}
