@@ -1,11 +1,12 @@
 /* 2023-07-06 React Quill Editor - 김다함 */
 import { memo, useMemo, useRef } from 'react';
-import "react-quill/dist/quill.snow.css";
 import { styled } from 'styled-components';
+import "react-quill/dist/quill.snow.css";
 import ReactQuill from 'react-quill';
 import tw from 'twin.macro';
 
 import { Quill } from '@/types';
+import useImageHandler from '@/hooks/useImageHandler';
 
 const QuillWrapper = styled.div`
 ${tw`z-10 absolute border-0 top-0`}
@@ -32,6 +33,7 @@ ${tw`z-10 absolute border-0 top-0`}
 
 const QuillEditor = memo(({ htmlContent, setContentHandler }: Quill) => {
   const quillRef = useRef<ReactQuill>();
+  const [imageUrlHandler, imageHandler] = useImageHandler();
 
   const modules = useMemo(
     () => ({
@@ -51,6 +53,10 @@ const QuillEditor = memo(({ htmlContent, setContentHandler }: Quill) => {
           ['image', 'video'],
           ['clean']
         ],
+        handlers: {
+          imageUrl: () => imageUrlHandler(quillRef.current?.getEditor()),
+          image: () => imageHandler(quillRef.current?.getEditor()),
+        },
       },
     }), []);
 

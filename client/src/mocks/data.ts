@@ -1,5 +1,5 @@
 /* 2023-07-07 Portfolio Dtail Page Data - 김다함 */
-import { CategoryTags, Portfolio } from '@/types';
+import { Picture, Portfolio } from '@/types';
 
 export const portfolios: Array<Portfolio> = [
   {
@@ -32,8 +32,10 @@ export const portfolios: Array<Portfolio> = [
   },
 ]
 
+export const pictures: Array<Picture> = []
+
 /*2023-07-10 Mypage User Information - 위정연 */
-export interface User{
+export interface User {
   name: string;
   job: string;
   career: string;
@@ -61,7 +63,7 @@ export const commuDetail = [
     created_at: "2023-06-21T17:34:51.3395597",
     modifiedAt: "2023-06-21T17:34:51.3395597",
     memberId: 1,
-    status: "POST_ACTIVE", 
+    status: "POST_ACTIVE",
     comments: [
       {
         comments_id: 1,
@@ -71,7 +73,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 2,
         content: '댓글2',
         memberId: 2,
@@ -105,7 +107,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 2,
         //유저 프로필 
         content: '댓글2',
@@ -122,7 +124,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 4,
         //유저 프로필 
         content: '댓글4',
@@ -157,7 +159,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 2,
         //유저 프로필 
         content: '댓글2',
@@ -166,7 +168,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 3,
         //유저 프로필 
         content: '댓글3',
@@ -175,7 +177,7 @@ export const commuDetail = [
         createdAt: "2023-06-23T17:34:51.3395597",
         modifiedAt: "2023-06-23T17:34:51.3395597",
         status: "POST_ACTIVE",
-      },{
+      }, {
         comments_id: 4,
         //유저 프로필 
         content: '댓글4',

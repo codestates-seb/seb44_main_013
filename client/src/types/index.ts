@@ -1,11 +1,11 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { Member, Tag, Category, Portfolio, PortfolioContent, CategoryTags } from '@/types/portfolio';
+import { Member, Tag, Category, Portfolio, PortfolioContent, CategoryTags, Picture } from '@/types/portfolio';
 import { Quill } from './quill';
 import { TagSlice, CategorySlice } from './reduxState';
 
 // 다함 전용 타입
-export type { Member, Tag, Category, CategoryTags, Portfolio, PortfolioContent };
+export type { Member, Tag, Category, CategoryTags, Portfolio, PortfolioContent, Picture };
 export type { Quill };
 export type { TagSlice, CategorySlice };
 
