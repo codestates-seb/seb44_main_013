@@ -7,7 +7,7 @@ interface LabelProps {
   url?: string;
 }
 
-const LabelSizes: any= {
+const LabelSizes: any = {
   board: 20,
   comment: 12,
   portfolio: 30,
