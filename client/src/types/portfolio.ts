@@ -55,3 +55,8 @@ export interface PortfolioContent {
   tags: Array<Tag>;
   explains: string;
 }
+
+export interface Picture {
+  portfolioId: number;
+  filename: string;
+}
