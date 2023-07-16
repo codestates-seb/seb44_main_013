@@ -7,6 +7,7 @@ import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Member extends Auditable {
     private Long id;
     @Column(length = 20, nullable = false)
     private String name;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, unique = true)
     private String email;
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
@@ -33,6 +34,9 @@ public class Member extends Auditable {
     private String career;
     private String award;
     private String skill;
+    @Column(name = "expired_at")
+    private LocalDateTime expired_at; // 삭제 만료 날짜
+    private String refreshToken;
     @Enumerated(value = EnumType.STRING)
     private Member_Status memberStatus = Member_Status.MEMBER_ACTIVE;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
@@ -41,7 +45,6 @@ public class Member extends Auditable {
     private List<Bookmark> bookmark_id;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
     private List<Board> board_id;
-
     public enum Member_Status{
         MEMBER_ACTIVE(0,"휴먼 계정"),
         MEMBER_DORMANCY(1,"활동중"),
@@ -53,7 +56,6 @@ public class Member extends Auditable {
             this.status_number = status_number;
         }
     }
-
     public enum Member_Role{
         CLIENT("클라이언트"),
         PARTNER("파트너");

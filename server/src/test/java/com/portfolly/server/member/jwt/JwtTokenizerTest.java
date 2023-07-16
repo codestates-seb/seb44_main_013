@@ -1,6 +1,6 @@
 package com.portfolly.server.member.jwt;
 
-import com.portfolly.server.member.security.oauth2_jwt.jwt.JwtTokenizer;
+import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.io.Decoders;
 import org.junit.jupiter.api.*;

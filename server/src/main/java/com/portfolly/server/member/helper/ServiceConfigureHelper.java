@@ -1,7 +1,7 @@
 package com.portfolly.server.member.helper;
 
-import com.portfolly.server.exception.BusinessLogicException;
-import com.portfolly.server.exception.ExceptionCode;
+import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
+import com.portfolly.server.exception.businessLogicException.ExceptionCode;
 import com.portfolly.server.member.entity.Member;
 
 import java.util.Optional;
