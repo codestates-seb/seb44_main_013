@@ -1,5 +1,6 @@
 spring:
   security:
+    debug: false
     oauth2:
       client:
         registration:

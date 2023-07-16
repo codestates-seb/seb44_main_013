@@ -4,52 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e97aca9-3b77-4b55-89b9-74682aca65f9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/config/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/swagger/SpringDocConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/controller/MemberController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$MemberBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$MemberBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/DeleteScheduleDateHelper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/DeleteScheduleDateHelper$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/DeleteScheduleDateHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/DeleteScheduleDateHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/mapper/MemberMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/mapper/MemberMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/security/jasypt/JasyptConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/security/oauth2_jwt/utils/ErrorResponder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/service/MemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/service/MemberService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/resources/application-oauth.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/resources/application-oauth.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/test/classes/com/portfolly/server/member/jwt/JwtTokenizerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/test/classes/com/portfolly/server/member/jwt/JwtTokenizerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/helper/DeleteScheduleDateHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/helper/DeleteScheduleDateHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/config/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/jasypt/JasyptConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/jasypt/JasyptConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/filter/JwtVerificationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/handler/MemberAccessDeniedHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/handler/MemberAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/handler/Oauth2MemberSuccessHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/jwt/JwtTokenizer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/utils/CustomAuthorityUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/security/oauth2_jwt/utils/ErrorResponder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application-oauth.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application-oauth.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/com/portfolly/server/member/jwt/JwtTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/com/portfolly/server/member/jwt/JwtTokenizerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="4e97aca9-3b77-4b55-89b9-74682aca65f9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -108,21 +63,21 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/saesbyeol/Desktop/testest",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "shared-indexes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/saesbyeol/Desktop/testest&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;shared-indexes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

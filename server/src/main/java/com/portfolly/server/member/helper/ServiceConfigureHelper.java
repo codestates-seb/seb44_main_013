@@ -20,6 +20,7 @@ public interface ServiceConfigureHelper {
         return Member.builder()
                 .name(member.getName())
                 .email(member.getEmail())
+                .refreshToken(member.getRefreshToken())
                 .member_role(member.getMember_role())
                 .location("장소를 입력하세요.")
                 .comInfo("[클라이언트] 회사정보를 입력하세요.")
