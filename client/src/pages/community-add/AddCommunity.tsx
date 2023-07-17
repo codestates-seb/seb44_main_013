@@ -46,16 +46,17 @@ export default function AddCommunity() {
     setTitle(e.target.value);
   };
 
-  // react-quill 테스트용
+  //  post 요청 body
   const postInformation = {
     title: title,
     content: post,
+    division: 'RECRUITMENT',
   }
 
   const postCommunity = () => {
-    axios.post('/boards/write', {
+    axios.post('http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080/boards/write', {
         headers: {
-          "Content-Type": "application/json"
+          widthCredentials: true,
         },
         body: postInformation,
       }
