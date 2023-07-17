@@ -17,6 +17,7 @@ import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
 import { PortfolioTitleInput } from '@/commons/styles/Inputs.styled';
 import { category, openCategory } from '@/modules/categorySlice';
 import { DarkTextArea } from '@/commons/styles/Inputs.styled';
+import { ModalContainer } from '../modal/Modal.styled';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { BsCheck2 } from 'react-icons/bs';
 import Tag from '@/commons/molecules/Tag';
@@ -60,36 +61,38 @@ export default function TitleForm({ createdAt = '', setIsTitleFormOpen, htmlCont
   };
 
   return (
-    <TitleFormContainer>
-      <FlexColumnWrapper gap={15}>
-        <PortfolioTitleInput placeholder='Title' {...register("title", { required: true, minLength: 5 })} />
-        <FlexWrapper gap={10}>
-          <ContegroyDropDown />
-          {createdAt &&
-            <SmallText color='white' className='pt-2'>{createdAt}</SmallText>
-          }
-        </FlexWrapper>
-        <div className='flex gap-1.5 w-[40%] flex-wrap z-0'>
-          {
-            categoryTags[selectedCategory].tags.map((tag: tag) => {
-              return <Tag tag={tag} key={tag.tagId} />
-            })
-          }
-        </div>
-        <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
-        <div className='flex justify-between'>
-          <DarkTextArea className='w-[42%] h-20' {...register('explains', { required: true, maxLength: 300 })} />
-          <FlexWrapper gap={15}>
-            <PortfolioEditButton color='dark'
-              onClick={() => { setIsTitleFormOpen(false); dispatch(openCategory(false)) }}>
-              <RiArrowGoBackFill size='25' color='white' />
-            </PortfolioEditButton>
-            <PortfolioEditButton color='light' onClick={handleSubmit(submitPortfolio)} disabled={isSubmitting}>
-              <BsCheck2 size='25' color='black' />
-            </PortfolioEditButton>
+    <ModalContainer>
+      <TitleFormContainer>
+        <FlexColumnWrapper gap={15}>
+          <PortfolioTitleInput placeholder='Title' {...register("title", { required: true, minLength: 5 })} />
+          <FlexWrapper gap={10}>
+            <ContegroyDropDown />
+            {createdAt &&
+              <SmallText color='white' className='pt-2'>{createdAt}</SmallText>
+            }
           </FlexWrapper>
-        </div>
-      </FlexColumnWrapper>
-    </TitleFormContainer>
+          <div className='flex gap-1.5 w-[40%] flex-wrap z-0'>
+            {
+              categoryTags[selectedCategory].tags.map((tag: tag) => {
+                return <Tag tag={tag} key={tag.tagId} />
+              })
+            }
+          </div>
+          <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
+          <div className='flex justify-between'>
+            <DarkTextArea className='w-[42%] h-20' {...register('explains', { required: true, maxLength: 300 })} />
+            <FlexWrapper gap={15}>
+              <PortfolioEditButton color='dark'
+                onClick={() => { setIsTitleFormOpen(false); dispatch(openCategory(false)) }}>
+                <RiArrowGoBackFill size='25' color='white' />
+              </PortfolioEditButton>
+              <PortfolioEditButton color='light' onClick={handleSubmit(submitPortfolio)} disabled={isSubmitting}>
+                <BsCheck2 size='25' color='black' />
+              </PortfolioEditButton>
+            </FlexWrapper>
+          </div>
+        </FlexColumnWrapper>
+      </TitleFormContainer>
+    </ModalContainer>
   )
 }
