@@ -44,13 +44,22 @@ export default function TitleForm({ createdAt = '', setIsTitleFormOpen, htmlCont
   const selectedTags = useSelector(tags);
 
   const postPortfolio = (body: any) => call('/portfolios', 'POST', body);
+  const checkValidation = (data: FieldValues) => {
+    if (htmlContent.length < 50) { alert('본문을 50자 이상 작성해주세요.'); return false; };
+    if (data.title.length < 5) { alert('제목을 5글자 이상 작성해주세요.'); return false; };
+    if (selectedTags.length < 1) { alert('태그를 최소 1개 이상 선택해주세요.'); return false; };
+    if (data.explains > 300) { alert('소개글은 최대 300자까지 작성 가능합니다.'); return false; };
+    return true;
+  }
 
   useEffect(() => {
-    register("htmlContent", { required: true, minLength: 50 });
+    register("htmlContent");
     setValue("htmlContent", htmlContent);
   }, [register]);
 
-  const submitPortfolio: SubmitHandler<FieldValues> = async (data) => {
+  const submitPortfolio: SubmitHandler<FieldValues> = (data: FieldValues) => {
+    const validate = checkValidation(data);
+    if (!validate) return;
     postPortfolio({
       title: data.title,
       content: htmlContent,
@@ -64,7 +73,7 @@ export default function TitleForm({ createdAt = '', setIsTitleFormOpen, htmlCont
     <ModalContainer>
       <TitleFormContainer>
         <FlexColumnWrapper gap={15}>
-          <PortfolioTitleInput placeholder='Title' {...register("title", { required: true, minLength: 5 })} />
+          <PortfolioTitleInput placeholder='Title' {...register("title")} />
           <FlexWrapper gap={10}>
             <ContegroyDropDown />
             {createdAt &&
@@ -80,7 +89,7 @@ export default function TitleForm({ createdAt = '', setIsTitleFormOpen, htmlCont
           </div>
           <InputLabelText color='#c8c9cc'>소개글</InputLabelText>
           <div className='flex justify-between'>
-            <DarkTextArea className='w-[42%] h-20' {...register('explains', { required: true, maxLength: 300 })} />
+            <DarkTextArea className='w-[42%] h-20' {...register('explains')} />
             <FlexWrapper gap={15}>
               <PortfolioEditButton color='dark'
                 onClick={() => { setIsTitleFormOpen(false); dispatch(openCategory(false)) }}>
