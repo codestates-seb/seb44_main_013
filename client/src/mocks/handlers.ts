@@ -36,12 +36,22 @@ const DaHamHandlers = [
       likes: 0,
       isLiked: false,
       isMarked: false,
+      isMine: true,
     }
     portfolios.push(newPortfolio);
     return res(
       ctx.status(201),
       ctx.json({ portfolioId: portfolioId })
     );
+  }),
+  // 포트폴리오 삭제
+  rest.delete('/portfolios/:portfolio_id', (req, res, ctx) => {
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.forEach((portfolio, index) => {
+      if (portfolio.portfolioId === portfolioId)
+        portfolios.splice(index, 1);
+    });
+    return res(ctx.status(201));
   }),
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
@@ -131,12 +141,12 @@ const HJHandlers = [
   rest.get('/boards', (req, res, ctx) => {
     const division = req.url.searchParams.get('division');
 
-    if( division === 'COOPERATION' ){
+    if (division === 'COOPERATION') {
       const filteredData = commu.filter((element) => element.division === 'COOPERATION');
       return res(ctx.status(200), ctx.json(filteredData));
     }
 
-    if( division === 'RECRUITMENT'){ 
+    if (division === 'RECRUITMENT') {
       const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
       return res(ctx.status(200), ctx.json(filteredData));
     }
