@@ -51,9 +51,9 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, String username, List<String> authorities) throws IOException {
         String accessToken = delegateAccessToken(username, authorities);
-        String refreshToken = delegateRefreshToken(username);
+//        String refreshToken = delegateRefreshToken(username);
 
-        String uri = createURI(accessToken, refreshToken).toString();
+        String uri = createURI(accessToken).toString();
         getRedirectStrategy().sendRedirect(request, response, uri);
     }
 
@@ -61,6 +61,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         Member member = Member.builder()
                 .email(email)
                 .name(name)
+                .member_role(Member.Member_Role.CLIENT)
                 .refreshToken(refreshToken)
                 .build();
 
@@ -94,10 +95,10 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     }
 
     //
-    private URI createURI(String accessToken, String refreshToken) {
+    private URI createURI(String accessToken) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", accessToken);
-        queryParams.add("refresh_token", refreshToken);
+//        queryParams.add("refresh_token", refreshToken);
 
         return UriComponentsBuilder
                 .newInstance()

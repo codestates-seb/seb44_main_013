@@ -5,6 +5,9 @@ spring:
     username: root
     password: 1234
 
+  profiles:
+    include: oauth
+
   jpa:
     properties:
       hibernate:
@@ -12,3 +15,17 @@ spring:
         hbm2ddl:
           auto: create
     show-sql: true
+mail:
+  address:
+    admin: admin@gmail.com
+
+#jwt:
+#  key:
+#    secret: ${JWT_SECRET_KEY}    # 환경변수에 로드
+#  access-token-expiration-minutes: 30
+#  refresh-token-expiration-minutes: 420
+
+#jasypt:
+#  encryptor:
+#    bean: jasyptStringEncryptor
+#    password: ${PASSWORD}
