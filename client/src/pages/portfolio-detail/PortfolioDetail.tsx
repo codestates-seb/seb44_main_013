@@ -18,16 +18,19 @@ import { BsArrowReturnLeft } from 'react-icons/bs';
 export default function PortfolioDetail() {
   const [portfolio, setPortfolio] = useState<Portfolio>();
   const [member, setMember] = useState<Member>();
+  const [createdAt, setCreatedAt] = useState<string>('');
 
   const navigate = useNavigate();
   const { portfolio_id: portfolioId } = useParams();
 
+  const changeDataFormat = (date: string) => new Date(date.substr(0, 10)).toDateString();
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
   useEffect(() => {
     getPortfolio().then((res) => {
       setPortfolio(res.data);
       setMember(res.data.member);
+      setCreatedAt(changeDataFormat(res.data.createdAt));
     });
   }, [])
 
@@ -69,6 +72,7 @@ export default function PortfolioDetail() {
             {portfolio &&
               <>
                 <HeadingText color='white'>{portfolio.title}</HeadingText>
+                <SmallText color="white">{createdAt}</SmallText>
                 <BodyText color='white'>{portfolio.explains}</BodyText>
               </>
             }
