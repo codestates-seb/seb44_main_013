@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-export interface QuillPropsType {
+export interface Quill {
   htmlContent: string;
   setContentHandler: Dispatch<SetStateAction<string>>;
 }

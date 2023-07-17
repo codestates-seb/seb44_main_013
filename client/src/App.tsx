@@ -13,12 +13,14 @@ import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
 import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
 import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 import AddCommunity from './pages/community-add/AddCommunity';
+import LandingPage from './pages/landingpage/LandingPage';
 
 const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
+          <Route path="/home" element={<LandingPage />}></Route>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Main />} />
             <Route path="/members" element={<MyPage />} />
@@ -28,11 +30,13 @@ const App = () => {
             <Route path="/boards/:id" element={<CommunityDetail />} />
             <Route path="/boards/edit" element={<AddCommunity />} />
           </Route>
-          <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />
+          <Route
+            path="/portfolios/:portfolio_id"
+            element={<PortfolioDetail />}
+          />
           <Route path="/portfolio/edit" element={<PortfolioEdit />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-
         </Routes>
       </BrowserRouter>
     </Provider>

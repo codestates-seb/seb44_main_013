@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
+import { categoryTags } from '@/assets/data/categoryTags';
 import { Tag as tag } from '@/types';
 import { tags } from '@/modules/tagSlice';
 import { call } from '@/utils/apiService';
-import { categoryTags } from '@/assets/data/categoryTags';
 
 import { FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { InputLabelText, SmallText } from '@/commons/atoms/Typography';

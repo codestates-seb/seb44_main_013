@@ -2,7 +2,7 @@
 import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
 // import { CustomAxiosInterface } from '@/types/axiosInterface'
 // import { API_BASE_URL } from "@/app-config.js";
-const API_BASE_URL = ''
+export const API_BASE_URL = ''
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 // const IS_ADMIN = "IS_ADMIN";
 // const USER_NAME = "USER_NAME";
