@@ -1,7 +1,8 @@
 /* 2023-07-06 로고만 보이는 헤더 - 김다함 */
-import { Link } from "react-router-dom";
 import { styled } from 'styled-components';
+import { useNavigate } from "react-router-dom";
 import tw from 'twin.macro';
+
 import Logo from '../../commons/atoms/logo/Logo';
 
 const HeaderContainer = styled.div`
@@ -10,9 +11,15 @@ const HeaderContainer = styled.div`
 `;
 
 export default function LogoHeader() {
+  const navigate = useNavigate();
+
+  const gotoMain = () => {
+    navigate('/');
+  }
+
   return (
     <HeaderContainer>
-      <Link to="/"><Logo /></Link>
+      <Logo onClickHandler={gotoMain} />
     </HeaderContainer>
   )
 }
