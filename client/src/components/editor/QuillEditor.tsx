@@ -3,7 +3,6 @@ import { memo, useMemo, useRef } from 'react';
 import { styled } from 'styled-components';
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from 'react-quill';
-import tw from 'twin.macro';
 
 import { Quill } from '@/types';
 import useImageHandler from '@/hooks/useImageHandler';
@@ -13,7 +12,7 @@ const QuillWrapper = styled.div<{ isTitleFormOpen: boolean }>`
   position: absolute;
   border: 0;
   top: 0;
-  pointer-events: ${(props) => props.isTitleFormOpen && 'none'};
+  pointer-events: ${({ isTitleFormOpen }) => isTitleFormOpen && 'none'};
   .ql-toolbar {
     padding: 17px 0;
     background-color: #252525;
@@ -36,8 +35,8 @@ const QuillWrapper = styled.div<{ isTitleFormOpen: boolean }>`
 `
 
 const QuillEditor = memo(({ htmlContent, setContentHandler, isTitleFormOpen }: Quill) => {
-  const quillRef = useRef<ReactQuill>();
   const [imageUrlHandler, imageHandler] = useImageHandler();
+  const quillRef = useRef<ReactQuill>();
 
   const modules = useMemo(
     () => ({
@@ -65,7 +64,7 @@ const QuillEditor = memo(({ htmlContent, setContentHandler, isTitleFormOpen }: Q
     }), []);
 
   return (
-    <QuillWrapper isTitleFormOpen={isTitleFormOpen}>
+    <QuillWrapper isTitleFormOpen={isTitleFormOpen} >
       <ReactQuill
         ref={(element) => {
           if (element !== null) {

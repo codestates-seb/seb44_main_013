@@ -1,9 +1,15 @@
+import { MouseEventHandler } from 'react';
+
 import { LogoContainer, LogoImg } from './Logo.styled';
 import logo from '../../../assets/logo.png';
 
-export default function Logo() {
+interface LogoProps {
+  onClickHandler?: MouseEventHandler<HTMLDivElement>;
+}
+
+export default function Logo({ onClickHandler }: LogoProps) {
   return (
-    <LogoContainer>
+    <LogoContainer onClick={onClickHandler}>
       <LogoImg src={logo} alt="Logo" />
     </LogoContainer>
   );

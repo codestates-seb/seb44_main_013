@@ -1,5 +1,8 @@
 /* 2023-07-06 포트폴리오 작성/수정 페이지 - 김다함 */
-import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import usePreventRefresh from '@/hooks/usePreventRefresh';
 
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
@@ -7,26 +10,16 @@ import QuillEditor from '@/components/editor/QuillEditor';
 import LogoHeader from '@/components/header/LogoHeader';
 import TitleForm from '@/components/editor/TitleForm';
 import { BsCheck2 } from 'react-icons/bs';
+// import BackModal from '@/components/modal/BackModal';
 
 export default function PortfolioEdit() {
+  // const navigate = useNavigate();
   const [isTitleFormOpen, setIsTitleFormOpen] = useState(false);
   const [htmlContent, setHtmlContent] = useState<string>('');
 
-  const preventGoBack = () => {
-    history.pushState(null, "", location.href);
-    alert("종료하기를 눌러주세요 :D");
-  };
+  // const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    (() => {
-      history.pushState(null, "", location.href);
-      window.addEventListener("popstate", preventGoBack);
-    })();
-
-    return () => {
-      window.removeEventListener("popstate", preventGoBack);
-    };
-  }, []);
+  usePreventRefresh();
 
   return (
     <FlexColumnContainer gap={0} className="mx-h-screen top-0 overflow-hidden">
@@ -41,6 +34,7 @@ export default function PortfolioEdit() {
         onClick={() => setIsTitleFormOpen(true)}>
         <BsCheck2 size="25" color="white" />
       </PortfolioEditButton>
+      {/* {isModalOpen && <BackModal onCancel={() => setIsModalOpen(!isModalOpen)} onConfirm={() => navigate(-1)} />} */}
     </FlexColumnContainer>
   );
 }
