@@ -8,8 +8,12 @@ import tw from 'twin.macro';
 import { Quill } from '@/types';
 import useImageHandler from '@/hooks/useImageHandler';
 
-const QuillWrapper = styled.div`
-${tw`z-10 absolute border-0 top-0 pointer-events-none`}
+const QuillWrapper = styled.div<{ isTitleFormOpen: boolean }>`
+  z-index: 10;
+  position: absolute;
+  border: 0;
+  top: 0;
+  pointer-events: ${(props) => props.isTitleFormOpen && 'none'};
   .ql-toolbar {
     padding: 17px 0;
     background-color: #252525;
@@ -31,7 +35,7 @@ ${tw`z-10 absolute border-0 top-0 pointer-events-none`}
   }
 `
 
-const QuillEditor = memo(({ htmlContent, setContentHandler }: Quill) => {
+const QuillEditor = memo(({ htmlContent, setContentHandler, isTitleFormOpen }: Quill) => {
   const quillRef = useRef<ReactQuill>();
   const [imageUrlHandler, imageHandler] = useImageHandler();
 
@@ -61,7 +65,7 @@ const QuillEditor = memo(({ htmlContent, setContentHandler }: Quill) => {
     }), []);
 
   return (
-    <QuillWrapper>
+    <QuillWrapper isTitleFormOpen={isTitleFormOpen}>
       <ReactQuill
         ref={(element) => {
           if (element !== null) {
