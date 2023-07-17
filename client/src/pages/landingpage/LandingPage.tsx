@@ -9,12 +9,20 @@ import PhotographySection from '@/components/section/photography-section/Photogr
 
 export default function LandingPage() {
   useEffect(() => {
-    AOS.init({
-      offset: 200,
-      duration: 800,
-      easing: 'ease-in-out',
-      delay: 300,
-    });
+    const initializeAOS = () => {
+      AOS.init({
+        offset: 200,
+        duration: 800,
+        easing: 'ease-in-out',
+        delay: 300,
+      });
+    };
+
+    window.addEventListener('load', initializeAOS);
+
+    return () => {
+      window.removeEventListener('load', initializeAOS);
+    };
   }, []);
 
   return (
