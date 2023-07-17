@@ -19,7 +19,7 @@ export default function AnimationSection() {
             <Title
               className="animation-title "
               data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos-delay="300"
             >
               Animation
             </Title>

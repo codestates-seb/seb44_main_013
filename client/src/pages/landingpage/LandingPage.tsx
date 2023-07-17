@@ -1,4 +1,3 @@
-// LandingPage.js
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -11,10 +10,10 @@ import PhotographySection from '@/components/section/photography-section/Photogr
 export default function LandingPage() {
   useEffect(() => {
     AOS.init({
-      offset: 100, // 애니메이션 시작 시점을 더 빠르게 설정
+      offset: 200,
       duration: 800,
       easing: 'ease-in-out',
-      delay: 100,
+      delay: 300,
     });
   }, []);
 

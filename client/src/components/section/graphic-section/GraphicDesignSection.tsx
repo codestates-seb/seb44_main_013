@@ -20,7 +20,7 @@ export default function GraphicDesignSection() {
             <Title
               className="graphic-title"
               data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos-delay="300"
             >
               Graphic Design
             </Title>

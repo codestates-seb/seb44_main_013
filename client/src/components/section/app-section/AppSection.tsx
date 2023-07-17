@@ -16,10 +16,14 @@ export default function AppSection() {
         <ImageWrapper data-aos="fade-up">
           <img src={appImage} alt="App" className="image" />
           <TextOverlay>
-            <Title className="app-title" data-aos="fade-left">
+            <Title
+              className="app-title"
+              data-aos="fade-left"
+              data-aos-delay="300"
+            >
               App
             </Title>
-            <Subtitle data-aos="fade-left" data-aos-delay="300">
+            <Subtitle data-aos="fade-left" data-aos-delay="400">
               Interactive and User-Friendly
             </Subtitle>
           </TextOverlay>

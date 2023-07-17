@@ -14,18 +14,17 @@ export default function PhotographySection() {
   return (
     <Element name="photographySection" className="section">
       <SectionWrapper>
-        <ImageWrapper>
-          <img
-            src={photographyImage}
-            alt="Photography"
-            className="image flip-animation"
-            data-aos="flip-left"
-          />
+        <ImageWrapper data-aos="flip-left">
+          <img src={photographyImage} alt="Photography" className="image" />
           <TextOverlay>
-            <Title className="photo-title" data-aos="zoom-in">
+            <Title
+              className="photo-title"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
               Photography
             </Title>
-            <Subtitle data-aos="zoom-in" data-aos-delay="300">
+            <Subtitle data-aos="zoom-in" data-aos-delay="400">
               Breathtaking and Artistic
             </Subtitle>
           </TextOverlay>
