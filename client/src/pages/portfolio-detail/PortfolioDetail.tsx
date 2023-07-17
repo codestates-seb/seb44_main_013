@@ -106,7 +106,7 @@ export default function PortfolioDetail() {
           </UserCard>
         </UserContainer>
       </ContentContainer>
-      {isModalOpen && <DeleteModal deleteHandler={deletePortfolioHandler} handleDeleteModal={openDeleteModal} />}
+      {isModalOpen && <DeleteModal onConfirm={deletePortfolioHandler} onCancel={openDeleteModal} />}
     </FlexColumnContainer>
   );
 }
