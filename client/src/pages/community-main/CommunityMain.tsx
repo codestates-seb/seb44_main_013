@@ -18,7 +18,7 @@ import {
 
 export default function CommunityMain() {
   const [ data, setDatas ] = useState<CommuProps[]>([])
-  const [ searchParams, setSearchParams ] = useSearchParams(); 
+  const [ searchParams,  ] = useSearchParams(); 
   const division = searchParams.get('division')
 
   useEffect(() => {

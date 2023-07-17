@@ -65,7 +65,7 @@ export const categoryTags: CategoryTags = {
       },
     ],
   },
-  "디자인/일러스트": {
+  "그래픽디자인": {
     tags: [
       {
         tagId: 1,

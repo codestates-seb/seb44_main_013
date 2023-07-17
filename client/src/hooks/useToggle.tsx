@@ -14,7 +14,7 @@ export interface Toggle {
 export default function useToggle({ portfolioId, buttonType, isToggled: isOn, color = 'purple', count: cnt = 0 }: Toggle) {
   const [count, setCount] = useState<number>(cnt);
   const [isToggled, setIsToggled] = useState<boolean>(isOn);
-  const [url, setUrl] = useState<string>(`/${buttonType}/${portfolioId}`);
+  const [url, ] = useState<string>(`/${buttonType}/${portfolioId}`);
   const [buttonColor, setButtonColor] = useState<string>(isOn ? `${color}` : 'gray');
 
   const setToggle = (method: 'POST' | 'DELETE') => call(url, `${method}`);
