@@ -22,8 +22,10 @@ export default function PhotographySection() {
             data-aos="flip-left"
           />
           <TextOverlay>
-            <Title data-aos="zoom-in">Photography</Title>
-            <Subtitle data-aos="zoom-in" data-aos-delay="200">
+            <Title className="photo-title" data-aos="zoom-in">
+              Photography
+            </Title>
+            <Subtitle data-aos="zoom-in" data-aos-delay="300">
               Breathtaking and Artistic
             </Subtitle>
           </TextOverlay>

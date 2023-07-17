@@ -19,9 +19,11 @@ export const TextOverlay = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 48px;
-  color: white;
-  /* 타이틀의 스타일 */
+  &.photo-title {
+    font-size: calc(8vw - 8px);
+    color: white;
+    /* 타이틀의 스타일 */
+  }
 `;
 
 export const Subtitle = styled.h2`

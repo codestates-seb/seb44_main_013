@@ -11,10 +11,10 @@ import PhotographySection from '@/components/section/photography-section/Photogr
 export default function LandingPage() {
   useEffect(() => {
     AOS.init({
-      offset: 200,
+      offset: 100, // 애니메이션 시작 시점을 더 빠르게 설정
       duration: 800,
       easing: 'ease-in-out',
-      delay: 300,
+      delay: 100,
     });
   }, []);
 
