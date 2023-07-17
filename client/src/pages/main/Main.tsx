@@ -23,7 +23,7 @@ export default function Main() {
         {selectedCategory === '웹' && <WebItem />}
         {selectedCategory === '앱' && <AppItem />}
         {selectedCategory === '3D/애니메이션' && <ThreeDItem />}
-        {selectedCategory === '디자인/일러스트' && <GraphicItem />}
+        {selectedCategory === '그래픽디자인' && <GraphicItem />}
         {selectedCategory === '사진/영상' && <PhotoItem />}
       </WebItemsContainer>
     </>
