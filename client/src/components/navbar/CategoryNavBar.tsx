@@ -10,11 +10,12 @@ export default function CategoryNavBar() {
 
   return (
     <FlexContainer gap={20}>
-      {Categories.map((category) => {
+      {Categories.map((category, index) => {
         return (
           <CategoryButton
             onClick={() => dispatch(setCategory(category))}
             category={category}
+            key={index}
           />
         );
       })}
