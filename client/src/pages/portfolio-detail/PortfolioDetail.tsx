@@ -13,24 +13,37 @@ import MemberProfile from '@/commons/molecules/MemberProfile';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import Tag from '@/commons/molecules/Tag';
+
+import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
+import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
+import DeleteModal from '@/components/deleteModal/DeleteModal';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [portfolio, setPortfolio] = useState<Portfolio>();
-  const [member, setMember] = useState<Member>();
   const [createdAt, setCreatedAt] = useState<string>('');
+  const [member, setMember] = useState<Member>();
 
-  const navigate = useNavigate();
   const { portfolio_id: portfolioId } = useParams();
+  const navigate = useNavigate();
 
-  const changeDataFormat = (date: string) => new Date(date.substr(0, 10)).toDateString();
+  const deletePortfolio = () => call(`/portfolios/${portfolioId}`, 'DELETE');
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
+
+  const onReviseButtonClick = () => navigate(`/portfolio/edit?portfolioId=${portfolioId}`);
+  const changeDateFormat = (date: string) => new Date(date.substr(0, 10)).toDateString();
+  const openDeleteModal = () => setIsModalOpen(!isModalOpen);
+  const deletePortfolioHandler = () => {
+    deletePortfolio();
+    navigate('/');
+  }
 
   useEffect(() => {
     getPortfolio().then((res) => {
       setPortfolio(res.data);
       setMember(res.data.member);
-      setCreatedAt(changeDataFormat(res.data.createdAt));
+      setCreatedAt(changeDateFormat(res.data.createdAt));
     });
   }, [])
 
@@ -76,18 +89,24 @@ export default function PortfolioDetail() {
                 <BodyText color='white'>{portfolio.explains}</BodyText>
               </>
             }
+            {portfolio?.isMine &&
+              <FlexWrapper className='justify-end'>
+                <ReviseBtn onClick={onReviseButtonClick} /> | <RemoveBtn onClick={openDeleteModal} />
+              </FlexWrapper>
+            }
           </UserCard>
 
           <UserCard>
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} readonly={true} />)
+                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} readOnly={true} />)
               }
             </FlexWrapper>
           </UserCard>
         </UserContainer>
       </ContentContainer>
+      {isModalOpen && <DeleteModal deleteHandler={deletePortfolioHandler} handleDeleteModal={openDeleteModal} />}
     </FlexColumnContainer>
   );
 }

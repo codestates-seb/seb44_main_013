@@ -25,7 +25,7 @@ export interface MypageItemProps extends childrenProps {
 //0707 혜진 styled props 관련 type
 export interface Styledprops
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  color: string;
+  color?: string;
 }
 
 
