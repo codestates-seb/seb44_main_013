@@ -10,7 +10,7 @@ import { RxDotFilled } from 'react-icons/rx';
 const tagStyle = css`
     ${tw`w-fit py-1.5 px-2.5 rounded-full select-none flex`}
 `
-const TagBody = styled.div<{ selected?: boolean, readonly?: boolean }>`
+const TagBody = styled.div<{ selected?: boolean, readOnly?: boolean }>`
     ${tagStyle}
     background-color: #484848;
     border: 0.9px solid #C3C3C3;
@@ -20,7 +20,7 @@ const TagBody = styled.div<{ selected?: boolean, readonly?: boolean }>`
         border-color: #dcdcdc;
     }
 
-    ${(props) => props.selected && !props.readonly &&
+    ${(props) => props.selected && !props.readOnly &&
     css`
       border-color: #dcdcdc;
       background-color: white;
@@ -36,19 +36,19 @@ const TagBody = styled.div<{ selected?: boolean, readonly?: boolean }>`
 
 interface TagProps {
   tag: tag;
-  readonly?: boolean;
+  readOnly?: boolean;
 }
 
-export const Tag = ({ tag, readonly }: TagProps) => {
+export const Tag = ({ tag, readOnly }: TagProps) => {
   const [isSelected, onClick] = useTagSelect({
     isSelected: false,
     currentTag: tag,
   });
 
   return (
-    <TagBody selected={isSelected} onClick={onClick} readonly={readonly}>
+    <TagBody selected={isSelected} onClick={onClick} readOnly={readOnly}>
       <p className='text-xs'>{tag.name}</p>
-      {isSelected && !readonly && <RxDotFilled className='dot' />}
+      {isSelected && !readOnly && <RxDotFilled className='dot' />}
     </TagBody>
   )
 }

@@ -1,11 +1,11 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { Member, Tag, Category, Portfolio, PortfolioContent, CategoryTags, Picture } from '@/types/portfolio';
+import { Member, Tag, Portfolio, PortfolioContent, CATEGORY_TYPE, CategoryTags, Picture } from '@/types/portfolio';
 import { Quill } from './quill';
 import { TagSlice, CategorySlice } from './reduxState';
 
 // 다함 전용 타입
-export type { Member, Tag, Category, CategoryTags, Portfolio, PortfolioContent, Picture };
+export type { Member, Tag, CATEGORY_TYPE, CategoryTags, Portfolio, PortfolioContent, Picture };
 export type { Quill };
 export type { TagSlice, CategorySlice };
 
@@ -25,7 +25,7 @@ export interface MypageItemProps extends childrenProps {
 //0707 혜진 styled props 관련 type
 export interface Styledprops
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  color: string;
+  color?: string;
 }
 
 
@@ -60,7 +60,7 @@ export interface Pagenation {
   page: number,
   size: number,
   totalElements: number,
-  totlaPages:number,
+  totlaPages: number,
 }
 
 //0714 혜진 메인 카테고리 페이지 props

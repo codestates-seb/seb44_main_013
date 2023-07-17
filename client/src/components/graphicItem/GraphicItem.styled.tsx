@@ -9,7 +9,7 @@ export const GraphicItemContainer = styled.div`
 
   width: 300px;
   height: 400px;
-
+  margin-bottom: 10px;
   &:hover {
     ${tw`bg-neutral-500/60`}
   }

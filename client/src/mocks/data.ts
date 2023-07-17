@@ -29,6 +29,7 @@ export const portfolios: Array<Portfolio> = [
     likes: 20,
     isLiked: true,
     isMarked: false,
+    isMine: true,
   },
 ]
 
