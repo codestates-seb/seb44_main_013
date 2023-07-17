@@ -9,7 +9,7 @@ import { Quill } from '@/types';
 import useImageHandler from '@/hooks/useImageHandler';
 
 const QuillWrapper = styled.div`
-${tw`z-10 absolute border-0 top-0`}
+${tw`z-10 absolute border-0 top-0 pointer-events-none`}
   .ql-toolbar {
     padding: 17px 0;
     background-color: #252525;
