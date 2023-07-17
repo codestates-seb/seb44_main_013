@@ -40,6 +40,7 @@ export interface Portfolio {
   likes: number;
   isLiked: boolean;
   isMarked: boolean;
+  isMine: boolean;
 }
 
 export interface PortfolioContent {
