@@ -18,8 +18,8 @@ export const BtnContainer = tw.div`
   items-center
 `;
 
-export const RecuitBtn = styled.button`
-  ${ tw`
+export const RecuitBtn = styled.button<{ color?: string }>`
+  ${tw`
     cursor-pointer
     ml-2.5
     mt-1
@@ -27,7 +27,7 @@ export const RecuitBtn = styled.button`
     text-sm
     whitespace-nowrap
   ` }
-  color: ${(props) => props.color ? props.color : 'white' };
+  color: ${(props) => props.color ? props.color : 'white'};
 
   &:hover {
     color: #8580E1;
