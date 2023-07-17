@@ -1,10 +1,7 @@
 package com.portfolly.server.portfolio.controller;
 
 //import com.nimbusds.oauth2.sdk.token.RefreshToken;
-import com.portfolly.server.dto.MultiResponseDto;
 import com.portfolly.server.dto.SingleResponseDto;
-import com.portfolly.server.exception.BusinessLogicException;
-import com.portfolly.server.exception.ExceptionCode;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.mapper.PortfolioMapper;
@@ -12,7 +9,6 @@ import com.portfolly.server.portfolio.service.PortfolioService;
 import com.portfolly.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Validated
