@@ -6,7 +6,7 @@ import MemberProfile from '@/commons/molecules/MemberProfile';
 import DetailContents from '@/components/detailContents/DetailContents';
 import Loading from '../../components/loading/Loading'; // components/loding 이동 (page x) 수정 완 
 import CommentBox from '@/components/CommentBox';
-import DeleteModal from '@/components/deleteModal/DeleteModal';
+import DeleteModal from '@/components/modal/DeleteModal';
 
 import { CommuProps } from '@/types';
 

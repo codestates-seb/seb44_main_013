@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
 
-export const DeleteModalContainer = styled.div`
+export const ModalContainer = styled.div`
   ${tw`
     bg-neutral-700/50
     w-full
@@ -13,7 +13,7 @@ export const DeleteModalContainer = styled.div`
   `}
 `;
 
-export const DeleteModalContent = styled.div`
+export const ModalContent = styled.div`
   ${tw`
     absolute
     top-1/2

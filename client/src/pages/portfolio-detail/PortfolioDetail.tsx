@@ -16,7 +16,7 @@ import Tag from '@/commons/molecules/Tag';
 
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
-import DeleteModal from '@/components/deleteModal/DeleteModal';
+import DeleteModal from '@/components/modal/DeleteModal';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
