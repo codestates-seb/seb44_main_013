@@ -7,8 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
+    date = "2023-07-12T23:22:46+0900",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.19 (Amazon.com Inc.)"
+=======
     date = "2023-07-12T18:28:03+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.18 (Azul Systems, Inc.)"
+>>>>>>> 8851e623f2a13c12d70072ef29e5f6cc3bc0f0f2
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
@@ -59,6 +64,7 @@ public class MemberMapperImpl implements MemberMapper {
 
         client_Response.setId( member.getId() );
         client_Response.setName( member.getName() );
+        client_Response.setEmail( member.getEmail() );
         client_Response.setMember_role( member.getMember_role() );
         client_Response.setLocation( member.getLocation() );
         client_Response.setComInfo( member.getComInfo() );
@@ -77,6 +83,7 @@ public class MemberMapperImpl implements MemberMapper {
 
         partner_Response.setId( member.getId() );
         partner_Response.setName( member.getName() );
+        partner_Response.setEmail( member.getEmail() );
         partner_Response.setMember_role( member.getMember_role() );
         partner_Response.setLocation( member.getLocation() );
         partner_Response.setJob( member.getJob() );
