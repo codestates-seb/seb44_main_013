@@ -2,7 +2,7 @@
 import useToggle, { Toggle } from '@/hooks/useToggle';
 
 import { FaHeart } from 'react-icons/fa';
-import { SmallText } from '@/commons/atoms/Typography';
+import { SmallText } from '@/commons/atoms/text/Typography';
 import { FlexWrapper } from '@/commons/styles/Containers.styled';
 
 export interface LikeButton extends Toggle {

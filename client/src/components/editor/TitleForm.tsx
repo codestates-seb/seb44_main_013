@@ -3,8 +3,6 @@ import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
 
 import { PortfolioContent, Tag as tag, TitleForm as titleForm } from '@/types';
 import { categoryTags } from '@/assets/data/categoryTags';
@@ -13,22 +11,16 @@ import { category, openCategory } from '@/modules/categorySlice';
 import { setTag, tags } from '@/modules/tagSlice';
 import { call } from '@/utils/apiService';
 
+import { PortfolioTitleInput, TitleFormContainer } from '@/components/editor/Editor.styled';
 import { FlexColumnWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
-import { InputLabelText, SmallText } from '@/commons/atoms/Typography';
-import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
-import { PortfolioTitleInput } from '@/commons/styles/Inputs.styled';
-import { DarkTextArea } from '@/commons/styles/Inputs.styled';
-import { ModalContainer } from '../modal/Modal.styled';
+import { PortfolioEditButton } from '@/pages/portfolio-edit/PortfolioEdit.styled';
+import { InputLabelText, SmallText } from '@/commons/atoms/text/Typography';
+import { DarkTextArea } from '@/components/editor/Editor.styled';
+import { ModalContainer } from '@/components/modal/Modal.styled';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import { BsCheck2 } from 'react-icons/bs';
-import Tag from '@/commons/molecules/Tag';
-import ContegroyDropDown from '@/commons/molecules/CategoryDropDown';
-
-const TitleFormContainer = styled.div`
-      ${tw`w-screen px-16 py-7 rounded-t-2xl z-20 bottom-0 absolute`};
-      background-color: #161616;
-      box-shadow: 0 -8px 10px -1px #a9a9a9;
-  `;
+import Tag from '@/commons/molecules/tag/Tag';
+import ContegroyDropDown from '@/commons/molecules/dropdown/CategoryDropDown';
 
 export default function TitleForm({ setIsTitleFormOpen, htmlContent, portfolio, setPortfolio, portfolioId }: titleForm) {
   const { register, handleSubmit, setValue, getValues, formState: { isSubmitting } } = useForm();

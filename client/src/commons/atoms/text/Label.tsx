@@ -15,11 +15,11 @@ const LabelSizes: any = {
 }
 
 const Text = styled.a<{ size: string, type: string }>`
+    color: ${(props) => props.type === 'portfolio' || props.type === 'blackboard'
+    ? 'white' : '#232629'};
     font-size: ${(props) => props.size}px;
     font-weight: 600;
     user-select: none;
-    color: ${(props) => props.type === 'portfolio' || props.type === 'blackboard'
-    ? 'white' : '#232629'}
 `;
 
 export default function Label({ type, text, url }: LabelProps) {
