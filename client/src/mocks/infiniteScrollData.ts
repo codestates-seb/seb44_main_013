@@ -472,24 +472,171 @@ export const commu: CommuProps[] = [
   },
 ];
 
+const getRandomNumber = (min:number, max:number) => {
+  return Math.floor(Math.random() * (max - min + 2));
+};
+
+export const WebCategoryDatas = [
+  //카테고리 별 입수  - WEB
+  {data: [
+    {
+      data:{
+        memberId: 1,
+        membername:"phj",
+        portfolioId: 1,
+        title: "제목1",
+        isMarked: false,
+
+      }
+    },
+    {
+      data:{
+        memberId: 2,
+        membername:"wjw",
+        portfolioId: 2,
+        title: "제목2",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId: 3,
+        membername:"kdh",
+        portfolioId: 3,
+        title: "제목3",
+        isMarked: false,
+      }
+    }
+
+  ]}
+
+]
+
+export const AppCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:4,
+        title: "제목4",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:5,
+        title: "제목5",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:6,
+        title: "제목6",
+        isMarked: false,
+      }
+    },
+  ]}
+]
+
+export const AnimationCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:7,
+        title: "제목7",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:12,
+        title: "제목12",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:13,
+        title: "제목13",
+        isMarked: false,
+      }
+    },
+  ]}
+]
 
 
-// export const MainCategoryDatas = [
-//   data: [
-//     {
-//       data:{
-//         memberId: 1,
-//         portfolioId: 1,
-//         title: "제목1"
-//       }
-//     },
-//     {
-//       data:{
-//         memberId: 1,
-//         portfolioId: 1,
-//         title: "제목1"
-//       }
-//     }
-//   ]
+export const GraphicCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:3,
+        membername:"kdh",
+        portfolioId:8,
+        title: "제목8",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:"kdh",
+        portfolioId:9,
+        title: "제목9",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:"kdh",
+        portfolioId:10,
+        title: "제목10",
+        isMarked: false,
+      }
+    },
+  ]}
+]
 
-// ]
+export const PhotoCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:4,
+        membername:'jhj',
+        portfolioId:9,
+        title: "제목9",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:'jhj',
+        portfolioId:10,
+        title: "제목10",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:'jhj',
+        portfolioId:11,
+        title: "제목11",
+        isMarked: false,
+      }
+    },
+  ]}
+]
