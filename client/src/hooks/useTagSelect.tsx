@@ -6,16 +6,16 @@ import { selectTag } from '@/modules/tagSlice';
 import { Tag } from '@/types';
 
 interface TagProps {
-  tag: Tag;
+  currentTag: Tag;
   isSelected: boolean;
 }
 
-export default function useTagSelect({ tag, isSelected: selected }: TagProps) {
+export default function useTagSelect({ currentTag, isSelected: selected }: TagProps) {
   const [isSelected, setIsSelect] = useState<boolean>(selected);
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(selectTag(!isSelected, tag))
+    dispatch(selectTag(!isSelected, currentTag))
     setIsSelect(!isSelected);
   }, [isSelected])
 

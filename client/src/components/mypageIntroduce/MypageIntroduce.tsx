@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import { BsFillPencilFill } from 'react-icons/bs';
@@ -7,7 +8,6 @@ import { MdDone } from 'react-icons/md';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { User } from '@/mocks/data';
 
-import { useDispatch } from 'react-redux';
 import { login } from '@/modules/loginSlice';
 
 import {
@@ -16,6 +16,7 @@ import {
   IntroduceTitle,
   BtnStyleContainer,
 } from './MypageIntroduce.styled';
+import DeleteModal from '../modal/DeleteModal';
 
 interface MypageIntroduceProps {
   user: User | null;
@@ -33,6 +34,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
   const [awards, setAwards] = useState(initialAwards);
 
   const [isEdit, setIsEdit] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const toggleEdit = () => {
     setIsEdit(!isEdit);
@@ -40,9 +42,9 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleInput =
     (setValue: React.Dispatch<React.SetStateAction<string>>) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.value);
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
+      };
 
   const handleUpdate = () => {
     axios
@@ -56,22 +58,27 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
       });
   };
 
-  const handleDelete = () => {
-    if (window.confirm('정말로 탈퇴하시겠습니까?')) {
-      axios
-        .delete('/members')
-        .then(() => {
-          console.log('삭제 성공');
+  const handleOpenDeleteModal = () => {
+    setDeleteModalOpen(true);
+  };
 
-          //0713 혜진 추가
-          dispatch(login(false))
+  const handleCloseDeleteModal = () => {
+    setDeleteModalOpen(false);
+  };
 
-          navigate('/');
-        })
-        .catch((error) => {
-          console.error('삭제 실패', error);
-        });
-    }
+  const handleConfirmDelete = () => {
+    axios
+      .delete('/members')
+      .then(() => {
+        console.log('삭제 성공');
+        setDeleteModalOpen(false);
+        //0713 혜진 추가
+        dispatch(login(false));
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('삭제 실패', error);
+      });
   };
 
   return (
@@ -120,8 +127,14 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         <BsFillPencilFill className="editBtn" onClick={toggleEdit} />
       )}
       <BtnStyleContainer>
-        <PurpleBtn onClick={handleDelete}>회원 탈퇴</PurpleBtn>
+        <PurpleBtn onClick={handleOpenDeleteModal}>회원 탈퇴</PurpleBtn>
       </BtnStyleContainer>
+      {isDeleteModalOpen && (
+        <DeleteModal
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </MypageIntroWrap>
   );
 }

@@ -1,7 +1,7 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
 
-import { portfolios, commuDetail } from './data';
+import { portfolios, commuDetail, pictures } from './data';
 import { commu } from './infiniteScrollData'
 
 import { CommuProps } from '@/types';
@@ -36,12 +36,22 @@ const DaHamHandlers = [
       likes: 0,
       isLiked: false,
       isMarked: false,
+      isMine: true,
     }
     portfolios.push(newPortfolio);
     return res(
       ctx.status(201),
       ctx.json({ portfolioId: portfolioId })
     );
+  }),
+  // 포트폴리오 삭제
+  rest.delete('/portfolios/:portfolio_id', (req, res, ctx) => {
+    const portfolioId = Number(req.params.portfolio_id);
+    portfolios.forEach((portfolio, index) => {
+      if (portfolio.portfolioId === portfolioId)
+        portfolios.splice(index, 1);
+    });
+    return res(ctx.status(201));
   }),
   // 좋아요 기능
   rest.post('/likes/:portfolio_id', (req, res, ctx) => {
@@ -85,6 +95,12 @@ const DaHamHandlers = [
     })
     return res(ctx.status(200));
   }),
+  // 이미지 업로드
+  rest.post('/pictures', async (req, res, ctx) => {
+    const imageUrl = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png';
+    pictures.push({ portfolioId: 0, filename: imageUrl });
+    return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }))
+  })
 ];
 
 
@@ -125,12 +141,12 @@ const HJHandlers = [
   rest.get('/boards', (req, res, ctx) => {
     const division = req.url.searchParams.get('division');
 
-    if( division === 'COOPERATION' ){
+    if (division === 'COOPERATION') {
       const filteredData = commu.filter((element) => element.division === 'COOPERATION');
       return res(ctx.status(200), ctx.json(filteredData));
     }
 
-    if( division === 'RECRUITMENT'){ 
+    if (division === 'RECRUITMENT') {
       const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
       return res(ctx.status(200), ctx.json(filteredData));
     }

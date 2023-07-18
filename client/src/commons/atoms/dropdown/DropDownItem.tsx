@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
 import { setCategory, openCategory, isOpened } from '@/modules/categorySlice';
+import { deleteTag } from '@/modules/tagSlice';
 
 interface DropDownItemProps {
   value: string;
@@ -25,6 +26,7 @@ export default function DropDownItem({ value }: DropDownItemProps) {
   const selectCategory = () => {
     dispatch(openCategory(!isOpen));
     dispatch(setCategory(value));
+    dispatch(deleteTag());
   }
 
   return (
