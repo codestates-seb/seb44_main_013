@@ -60,7 +60,7 @@ export default function CommunityDetail({ handleClick }: any) {
           <CommentBox comments={memberData.comments} />
         </CommentContainer>
       </MainContainer>
-      {clickDeletePost ? <DeleteModal handleDeleteModal={handleDeleteModal} /> : ''}
+      {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
     </PageWrapper>
   );
 }
