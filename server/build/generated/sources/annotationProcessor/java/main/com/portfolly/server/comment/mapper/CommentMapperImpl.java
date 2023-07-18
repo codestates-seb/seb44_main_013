@@ -2,12 +2,13 @@ package com.portfolly.server.comment.mapper;
 
 import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
+import java.time.LocalDateTime;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-13T19:47:30+0900",
+    date = "2023-07-18T15:17:16+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.1.1.jar, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
@@ -51,6 +52,12 @@ public class CommentMapperImpl implements CommentMapper {
         response.setId( comment.getId() );
         response.setContent( comment.getContent() );
         response.setStatus( comment.getStatus() );
+        if ( comment.getCreatedAt() != null ) {
+            response.setCreatedAt( LocalDateTime.parse( comment.getCreatedAt() ) );
+        }
+        if ( comment.getModifiedAt() != null ) {
+            response.setModifiedAt( LocalDateTime.parse( comment.getModifiedAt() ) );
+        }
 
         return response;
     }

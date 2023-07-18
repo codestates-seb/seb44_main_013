@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-12T18:28:03+0900",
+    date = "2023-07-18T14:37:30+0900",
     comments = "version: 1.5.3.Final, compiler: javac, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
@@ -27,6 +27,7 @@ public class BoardMapperImpl implements BoardMapper {
 
         board.setTitle( post.getTitle() );
         board.setContent( post.getContent() );
+        board.setDivision( post.getDivision() );
 
         return board;
     }
@@ -57,14 +58,15 @@ public class BoardMapperImpl implements BoardMapper {
         response.setId( board.getId() );
         response.setTitle( board.getTitle() );
         response.setContent( board.getContent() );
+        response.setDivision( board.getDivision() );
+        response.setStatus( board.getStatus() );
+        response.setView( board.getView() );
         if ( board.getCreatedAt() != null ) {
             response.setCreatedAt( LocalDateTime.parse( board.getCreatedAt() ) );
         }
         if ( board.getModifiedAt() != null ) {
             response.setModifiedAt( LocalDateTime.parse( board.getModifiedAt() ) );
         }
-        response.setDivision( board.getDivision() );
-        response.setView( board.getView() );
         List<Comment> list = board.getComments();
         if ( list != null ) {
             response.setComments( new ArrayList<Comment>( list ) );
@@ -94,15 +96,11 @@ public class BoardMapperImpl implements BoardMapper {
 
         BoardDto.ResponseList responseList = new BoardDto.ResponseList();
 
+        responseList.setId( board.getId() );
         responseList.setTitle( board.getTitle() );
         responseList.setContent( board.getContent() );
-        if ( board.getCreatedAt() != null ) {
-            responseList.setCreatedAt( LocalDateTime.parse( board.getCreatedAt() ) );
-        }
-        if ( board.getModifiedAt() != null ) {
-            responseList.setModifiedAt( LocalDateTime.parse( board.getModifiedAt() ) );
-        }
         responseList.setDivision( board.getDivision() );
+        responseList.setStatus( board.getStatus() );
         responseList.setView( board.getView() );
 
         return responseList;
