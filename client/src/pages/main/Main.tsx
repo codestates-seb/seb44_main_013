@@ -17,21 +17,8 @@ export default function Main() {
     <>
       <CategoryNavBar />
       <WebItemsContainer>
-        {/* {Array.from({ length: 4 }).map((_, index) => {
-          return <WebItem key={index} />;
-        })} */}
-        {selectedCategory === '웹' && (
-          <WebItem
-          // portfolio={{
-          //   title: '',
-          //   member: {
-          //     name: '',
-          //     picture: '',
-          //   },
-          // }}
-          />
-        )}
-        {selectedCategory === '앱' && <AppItem />}
+        {selectedCategory === '웹' && <WebItem itemCount={4} />}
+        {selectedCategory === '앱' && <AppItem itemCount={6} />}
         {selectedCategory === '3D/애니메이션' && <ThreeDItem />}
         {selectedCategory === '그래픽디자인' && <GraphicItem />}
         {selectedCategory === '사진/영상' && <PhotoItem />}

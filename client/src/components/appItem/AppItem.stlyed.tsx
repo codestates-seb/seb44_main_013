@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const AppItemContainer = styled.div`
   ${tw`
     relative
-    mb-10
+    mb-16
     overflow-hidden
   `}
 
