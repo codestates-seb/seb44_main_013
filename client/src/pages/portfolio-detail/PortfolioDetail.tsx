@@ -7,7 +7,7 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag as tag } from '@/types';
 import { call } from '@/utils/apiService';
 
-import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
+import { ButtonHeader, ContentContainer, PortfolioContainer, HtmlWrapper, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typography';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
@@ -61,7 +61,7 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {portfolio &&
-            <div dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></div>
+            <HtmlWrapper dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></HtmlWrapper>
           }
         </PortfolioContainer>
 
