@@ -9,7 +9,7 @@ import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import { CATEGORY_TYPE } from '@/types';
 
 interface DropDownProps {
-  value: CATEGORY_TYPE;
+  dropdownItem: CATEGORY_TYPE;
 }
 
 const DropDownBoxContainer = styled.div`
@@ -22,7 +22,7 @@ const Value = styled.p`
 ${tw`w-24 overflow-hidden whitespace-nowrap text-ellipsis`}
 `
 
-export default function DropDownBox({ value }: DropDownProps) { // value => dropdownItem
+export default function DropDownBox({ dropdownItem }: DropDownProps) {
   const dispatch = useDispatch();
   const isOpen = useSelector(isOpened);
 
@@ -32,7 +32,7 @@ export default function DropDownBox({ value }: DropDownProps) { // value => drop
 
   return (
     <DropDownBoxContainer>
-      <Value>{value}</Value>
+      <Value>{dropdownItem}</Value>
       {isOpen ?
         <BiCaretUp className='cursor-pointer' onClick={CategoryHandler} /> :
         <BiCaretDown className='cursor-pointer' onClick={CategoryHandler} />
