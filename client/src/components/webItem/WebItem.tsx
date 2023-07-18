@@ -12,28 +12,20 @@ import {
 } from './WebItem.styled';
 
 type WebItemProps = {
-  itemCount: number; // 아이템 개수를 전달받는 prop
+  item: any;
 };
-// type WebItemProps = {
-//   portfolio: {
-//     title: string;
-//     member: {
-//       name: string;
-//       picture: string;
-//     };
-//   };
-// };
 
-export default function WebItem({ itemCount }: WebItemProps) {
+
+export default function WebItem({ item }: WebItemProps) {
   // export default function WebItem({ portfolio }: WebItemProps) {
   // const { title, member } = portfolio;
-  const items = Array.from({ length: itemCount }, (_, index) => (
-    <WebItemContainer>
+  const items = Array.from({ length: 1 }, (_, index) => (
+    <WebItemContainer key={index}>
       <Link to="/portfolios/:portfolioId">
         <WebItemImg src={WebItem1} alt={`웹 아이템 ${index + 1} 이미지`} />
       </Link>{' '}
       <TitleOverlay>
-        <Title>웹 테스트 제목</Title>
+        <Title>{item.data.title}</Title>
         <Author>작성자 이름</Author>
       </TitleOverlay>
       <BookmarkWrapper>

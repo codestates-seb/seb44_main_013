@@ -1,4 +1,4 @@
-import item from '../../assets/3DImg.png';
+import threeDimg from '../../assets/3DImg.png';
 import {
   Author,
   DItemContainer,
@@ -9,16 +9,16 @@ import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 
 type AnimationProps = {
-  itemCount: number;
+  item: any;
 };
 
-export default function ThreeDItem({ itemCount }: AnimationProps) {
-  const items = Array.from({ length: itemCount }, (_, index) => (
+export default function ThreeDItem({ item }: AnimationProps) {
+  const items = Array.from({ length: 1 }, (_, index) => (
     <DItemContainer>
-      <img src={item} alt={`3Dimg-${index}`} />
+      <img src={threeDimg} alt={`3Dimg-${index}`} />
       <TitleOverlay>
-        <Title>3D 아이템 제목</Title>
-        <Author>작성자 이름</Author>
+        <Title>{item.data.title}</Title>
+        <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
         <Bookmark portfolioId={1} isToggled={false} />

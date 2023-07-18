@@ -9,16 +9,16 @@ import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 
 type GraphicProps = {
-  itemCount: number;
+  item: any;
 };
 
-export default function GraphicItem({ itemCount }: GraphicProps) {
-  const items = Array.from({ length: itemCount }, (_, index) => (
+export default function GraphicItem({ item }: GraphicProps) {
+  const items = Array.from({ length: 1 }, (_, index) => (
     <GraphicItemContainer>
       <img src={graphicimg} alt={`graphic image-${index}`} />
       <TitleOverlay>
-        <Title>3D 아이템 제목</Title>
-        <Author>작성자 이름</Author>
+        <Title>{item.data.title}</Title>
+        <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
         <Bookmark portfolioId={1} isToggled={false} />

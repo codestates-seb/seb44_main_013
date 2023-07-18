@@ -2,7 +2,7 @@
 import { rest } from 'msw';
 
 import { portfolios, commuDetail, pictures } from './data';
-import { commu } from './infiniteScrollData'
+import { commu, WebCategoryDatas, AppCategoryDatas, AnimationCategoryDatas, GraphicCategoryDatas,PhotoCategoryDatas } from './infiniteScrollData'
 
 import { CommuProps } from '@/types';
 
@@ -255,7 +255,28 @@ const HJHandlers = [
   //로그아웃
   rest.get('/members/logout', async (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout 성공'))
+  }),
+
+  //메인 카테고리별 조회 web
+  rest.get(`/portfolios`, async(req, res, ctx) => {
+    const category = req.url.searchParams.get('category');
+
+    if(category === 'web'){
+      return res(ctx.status(200), ctx.json(WebCategoryDatas))
+    } else if (category === 'app'){
+      return res(ctx.status(200), ctx.json(AppCategoryDatas))
+    } else if (category === '3danimation'){
+      return res(ctx.status(200), ctx.json(AnimationCategoryDatas))
+    } else if (category === 'graphicdesign') {
+      return res(ctx.status(200), ctx.json(GraphicCategoryDatas))
+    } else if (category === 'photo') {
+      return res(ctx.status(200), ctx.json(PhotoCategoryDatas))
+    }
+
+
   })
+
+
 
 ];
 
