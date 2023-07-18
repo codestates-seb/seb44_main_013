@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const PhotoItemContainer = styled.div`
   ${tw`
+  my-6
+    mx-6
     relative
     shadow-md
   `}

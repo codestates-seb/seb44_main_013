@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const GraphicItemContainer = styled.div`
   ${tw`
+  my-6 
+    mx-6
     shadow-md
     relative
   `}

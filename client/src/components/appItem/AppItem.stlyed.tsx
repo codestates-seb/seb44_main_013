@@ -3,8 +3,10 @@ import styled from 'styled-components';
 
 export const AppItemContainer = styled.div`
   ${tw`
+    my-6 
+    mx-6
     relative
-    mb-16
+    mb-10
     overflow-hidden
   `}
 
