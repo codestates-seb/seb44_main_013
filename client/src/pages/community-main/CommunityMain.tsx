@@ -17,22 +17,23 @@ import {
 } from './CommunityMain.styled';
 
 export default function CommunityMain() {
-  const [ data, setDatas ] = useState<CommuProps[]>([])
-  const [ searchParams,  ] = useSearchParams(); 
-  const division = searchParams.get('division')
+  const [data, setDatas] = useState<CommuProps[]>([]);
+  const [searchParams] = useSearchParams();
+  const division = searchParams.get('division');
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call(`/api/boards?division=${division}`, 'GET', {params: {division: division}})
+      return call(`/api/boards?division=${division}`, 'GET', {
+        params: { division: division },
+      })
         .then((res) => {
           setDatas(res);
         })
         .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
-    }
+    };
 
     axiosCommu();
   }, [division]);
-
 
   // 검색 - 07.11 효정
   const [currentSearch, setCurrentSearch] = useState('');
@@ -56,20 +57,48 @@ export default function CommunityMain() {
     //const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
     // const isExistContent = lowerCasified.includes(currentSearch.toLocaleLowerCase());
     // console.log(isExistTitle);
-  }, [])
-  // } 
+  }, []);
+  // }
   const 엔터치면검색 = (event: any) => {
     event.preventDefault();
     if (currentSearch === '') {
       setSearchs(data);
     } else {
-      setSearchs(data.filter((element: any) => {
-        return element.title.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
-          element.content.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase()) ||
-          element.name.toLocaleLowerCase().includes(currentSearch.toLocaleLowerCase())
-      }));
+      setSearchs(
+        data.filter((element: any) => {
+          return (
+            element.title
+              .toLocaleLowerCase()
+              .includes(currentSearch.toLocaleLowerCase()) ||
+            element.content
+              .toLocaleLowerCase()
+              .includes(currentSearch.toLocaleLowerCase()) ||
+            element.name
+              .toLocaleLowerCase()
+              .includes(currentSearch.toLocaleLowerCase())
+          );
+        })
+      );
     }
-  }
+  };
+
+  // const 엔터치면검색 = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   if (currentSearch === '') {
+  //     setSearchs(data);
+  //   } else {
+  //     setSearchs(
+  //       data.filter(
+  //         (element: CommuProps) =>
+  //           element.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+  //           element.content
+  //             .toLowerCase()
+  //             .includes(currentSearch.toLowerCase()) ||
+  //           element.name.toLowerCase().includes(currentSearch.toLowerCase())
+  //       )
+  //     );
+  //   }
+  // };
 
   return (
     <CommunityWrapper>
@@ -84,13 +113,14 @@ export default function CommunityMain() {
           </StyledWritingBtn>
         </Link>
         <ListsWrapper>
-          {
-            searchs.map((communityItem: any) => {
-              return (
-                <CommunityItem key={communityItem.id} communityItem={communityItem} />
-              )
-            })
-          }
+          {searchs.map((communityItem: any) => {
+            return (
+              <CommunityItem
+                key={communityItem.id}
+                communityItem={communityItem}
+              />
+            );
+          })}
         </ListsWrapper>
       </ItemWrapper>
     </CommunityWrapper>
