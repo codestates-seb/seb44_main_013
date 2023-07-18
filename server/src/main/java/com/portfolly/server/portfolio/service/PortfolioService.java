@@ -1,5 +1,6 @@
 package com.portfolly.server.portfolio.service;
 
+import com.portfolly.server.bookmark.repository.BookmarkRepository;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
@@ -18,6 +19,7 @@ public class PortfolioService {
     private final PortfolioMapper portfolioMapper;
     private final PortfolioRepository portfolioRepository;
     private final MemberService memberService;
+    private final BookmarkRepository bookmarkRepository;
 
     //포트폴리오 등록
     public Portfolio postPortfolio(PortfolioDto.Post postDto){
@@ -56,9 +58,9 @@ public class PortfolioService {
     }
 
     //포트폴리오 전체 조회
-//    public Page<Portfolio> findPortfolios(int page, int size, String category) {
-//        return portfolioRepository.findByPortfolioStatusAndCategory(PageRequest.of(page, size, Sort.by("portfolioId").descending()), category, Portfolio.Status.ACTIVE);
-//    }
+    public Page<Portfolio> findPortfolios(int page, int size, String category) {
+        return portfolioRepository.findByPortfolioStatusAndCategory(PageRequest.of(page, size, Sort.by("portfolioId").descending()), category, Portfolio.Status.ACTIVE);
+    }
 
 
     //포트폴리오 삭제
@@ -69,18 +71,32 @@ public class PortfolioService {
     }
 
     //회원이 존재하는지 확인
-//    private void verifyPortfolio(Portfolio portfolio) {
-//        memberService.findMember(portfolio.getMember().getId());
-//    }
-
-
-    //isLiked
-//    public boolean isLiked(Long portfolioId) {
-//        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()-> new RuntimeException());
-//    }
-
+    private void verifyPortfolio(Portfolio portfolio) {
+        memberService.findMember(portfolio.getMember().getId());
+    }
 
     //isMarked
+    public boolean isMarked(Long memberId, Long portfolioId) {
+        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()-> new RuntimeException());
+        Member member = memberService.findMember(memberId);
+        return bookmarkRepository.findByMemberAndPortfolio(member, portfolio).isPresent() ? true : false;
+    }
+
+    //isLiked
+    public boolean isLiked(Long portfolioId) {
+        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()-> new RuntimeException());
+        return true;
+    }
+
+
+    //작성자인지 확인
+    public boolean isWriter(Long portfolioId) {
+        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()-> new RuntimeException());
+//        Member member = memberService
+        memberService.findMember(portfolio.getMember().getId());
+        return true;
+        //로그인 노 false 로그인 함 -> T/F
+    }
 
 
 }

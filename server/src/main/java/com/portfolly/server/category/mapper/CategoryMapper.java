@@ -1,7 +1,7 @@
-package com.portfolly.server.category.mapper;
-
-import org.mapstruct.Mapper;
-
-@Mapper
-public interface CategoryMapper {
-}
+//package com.portfolly.server.category.mapper;
+//
+//import org.mapstruct.Mapper;
+//
+//@Mapper
+//public interface CategoryMapper {
+//}

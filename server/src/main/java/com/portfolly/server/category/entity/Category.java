@@ -23,6 +23,7 @@ public class Category {
         this.name = name;
     }
 
+    //web, app, 3da, graphicDesign, photo
 
 
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)

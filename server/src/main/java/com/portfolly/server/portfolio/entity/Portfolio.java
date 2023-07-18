@@ -69,5 +69,8 @@ public class Portfolio extends Auditable {
     private List<Likes> likes = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
     private List<Bookmark> bookmarks = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolio")
+    private List<PortfolioTag> portfolioTags = new ArrayList<>();
+
 
 }

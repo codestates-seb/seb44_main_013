@@ -1,6 +1,7 @@
 package com.portfolly.server.portfolio.controller;
 
 //import com.nimbusds.oauth2.sdk.token.RefreshToken;
+import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import com.portfolly.server.dto.MultiResponseDto;
 import com.portfolly.server.dto.SingleResponseDto;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
@@ -65,17 +66,18 @@ public class PortfolioController {
     }
 
     //포트폴리오 전체 조회
-//    @GetMapping
-//    public ResponseEntity getPortfolios(@RequestParam("page") int page,
-//                                        @RequestParam("size") int size,
-//                                        @RequestParam String category) {
-//        Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
-//        List<Portfolio> portfolios = pagePortfolios.getContent();
-//        for (int i = 0; i < portfolios.size(); i++) {
-//            System.out.println(portfolios.get(i).toString());
-//        }
-//        return new ResponseEntity<>(new MultiResponseDto<>(portfolioMapper.portfoliosToResponseDto(portfolios), pagePortfolios), HttpStatus.OK);
-//    }
+    //web, app, 3da, graphicDesign, photo
+    @GetMapping
+    public ResponseEntity getPortfolios(@RequestParam("page") int page,
+                                        @RequestParam("size") int size,
+                                        @RequestParam String category) {
+        Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
+        List<Portfolio> portfolios = pagePortfolios.getContent();
+        for (int i = 0; i < portfolios.size(); i++) {
+            System.out.println(portfolios.get(i).toString());
+        }
+        return new ResponseEntity<>(new MultiResponseDto<>(portfolioMapper.portfoliosToResponseDto(portfolios), pagePortfolios), HttpStatus.OK);
+    }
 
     //포트폴리오 삭제
     @DeleteMapping("/{portfolio-id}")

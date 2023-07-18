@@ -57,33 +57,15 @@ public class PortfolioDto {
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
 //        private String category;
-//        private boolean isLiked;
-//        private boolean isMarked;
+        private boolean isLiked;
+        private boolean isMarked;
+        private boolean isWriter;
 //        private MemberDto.Client_Response member;
 //        private List<TagDto.Response> tags;
 //        private List<LikesDto.Response> likes;
 //        private List<BookmarkDto.Response> bookmarks;
 
     }
-//    @Getter
-//    @Setter
-//    @NoArgsConstructor
-//    public static class PartnerResponse{
-//        private Long portfolioId;
-//        private String title;
-//        private String content;
-//        private String explains;
-//        private Long view;
-//        private LocalDateTime createdAt;
-//        private LocalDateTime modifiedAt;
-////        private String category;
-////        private boolean isLiked;
-////        private boolean isMarked;
-////        private MemberDto.Partner_Response member;
-////        private List<TagDto.Response> tags;
-////        private List<LikesDto.Response> likes;
-////        private List<BookmarkDto.Response> bookmarks;
-//
-//    }
+
 
 }
