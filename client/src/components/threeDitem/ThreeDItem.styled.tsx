@@ -27,7 +27,7 @@ export const DItemContainer = styled.div`
       right-2
     `}
 
-    >svg {
+    > svg {
       ${tw`
         mx-1
       `}
@@ -42,6 +42,7 @@ export const DItemContainer = styled.div`
       left-2
     `}
   }
+
   img {
     ${tw`
       w-full
@@ -51,4 +52,47 @@ export const DItemContainer = styled.div`
       ${tw`opacity-80`}
     }
   }
+`;
+
+export const TitleOverlay = styled.div`
+  ${tw`
+    absolute
+    inset-0
+    flex
+    flex-col
+    justify-center
+    items-center
+    p-4
+    bg-black
+    bg-opacity-50
+    text-white
+    transition
+    duration-300
+    ease-in-out
+    opacity-0
+    pointer-events-none
+  `}
+
+  ${DItemContainer}:hover & {
+    ${tw`
+      opacity-100
+      pointer-events-auto
+    `}
+  }
+`;
+
+export const Title = styled.h3`
+  ${tw`
+    text-xl
+    font-semibold
+    text-center
+  `}
+`;
+
+export const Author = styled.p`
+  ${tw`
+    mt-1
+    text-sm
+    text-center
+  `}
 `;

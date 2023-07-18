@@ -1,4 +1,9 @@
-import { AppItemContainer } from './AppItem.stlyed';
+import {
+  AppItemContainer,
+  Author,
+  Title,
+  TitleOverlay,
+} from './AppItem.stlyed';
 import item from '../../assets/appImg.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsBatteryFull } from 'react-icons/bs';
@@ -14,6 +19,10 @@ export default function AppItem() {
         <BsBatteryFull size={20} />
       </div>
       <img src={item} alt="appImg" />
+      <TitleOverlay>
+        <Title>아이템 제목</Title>
+        <Author>작성자 이름</Author>
+      </TitleOverlay>
       <BookmarkWrapper>
         <Bookmark portfolioId={1} isToggled={false} />
       </BookmarkWrapper>
