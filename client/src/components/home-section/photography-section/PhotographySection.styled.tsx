@@ -4,6 +4,11 @@ export const SectionWrapper = styled.div``;
 
 export const ImageWrapper = styled.div`
   position: relative;
+  .image {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
 `;
 
 export const TextOverlay = styled.div`
