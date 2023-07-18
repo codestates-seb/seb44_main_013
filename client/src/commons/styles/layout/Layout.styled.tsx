@@ -19,8 +19,9 @@ export const BackImgWrapper = styled.div`
   background-image: url(${communitymainimg});
 `;
 
-export function BackImgControl({ Page }: any) {
-  const [isCategory, setIsCategory] = useState('web');
+export function BackImgControl( ) {
+  const [isCategory, ] = useState('web');
+  //{Page}
 
   if (isCategory === 'web') {
     return <BackImgWrapper />;

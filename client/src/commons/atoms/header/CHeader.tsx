@@ -13,7 +13,7 @@ import LoginBtn from '../buttons/login/LoginBtn';
 
 export default function CHeader() {
   const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-  
+  console.log(loginState);
   return (
     <HeaderContainer>
       <Link to="/">

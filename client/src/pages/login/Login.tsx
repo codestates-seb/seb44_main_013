@@ -1,4 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { BsArrowReturnLeft } from 'react-icons/bs';
+import { GoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthProvider} from "@react-oauth/google";
+import { Cookies, useCookies } from 'react-cookie';
+
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
 import {
   LoginSection,
@@ -12,14 +18,13 @@ import {
 } from './Login.styled';
 import BackText from '@/commons/atoms/backText/BackText';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
-import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function Login() {
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
       
-      <Link to="/">
+      <Link to="/login">
         <BackButton>
           <BsArrowReturnLeft size={30} />
         </BackButton>
@@ -35,7 +40,7 @@ export default function Login() {
           curated for web, app, and design enthusiasts.
         </ContentSection>
 
-        <LoginGoogleForm>Log in with Google</LoginGoogleForm>
+        <LoginGoogleForm type={'normal'}> 자체 로그인 예정</LoginGoogleForm>
 
         <MiddleWrapper>
           <MiddleLine />
@@ -44,7 +49,7 @@ export default function Login() {
         </MiddleWrapper>
 
         <Link to="/signup">
-          <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+          <LoginGoogleForm type={'normal'}> 구글 로그인 이동 </LoginGoogleForm>
         </Link>
 
       </LoginSection>

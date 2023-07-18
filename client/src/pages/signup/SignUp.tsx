@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+
 import {
   SignBtn,
   ButtonContainer,
@@ -14,7 +16,14 @@ import { ContentSection, TitleSection } from '../login/Login.styled';
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
 
 export default function SignUp() {
-  return (
+  const [ role, setRole ] = useState('');
+
+    const selectRole = (res:string) => {
+      console.log(res);
+      setRole(res);
+    }
+  
+ return (
     <SignUpWrapper>
       <BackText>Portfolly</BackText>
 
@@ -31,10 +40,12 @@ export default function SignUp() {
           for web
         </ContentSection>
         <ButtonContainer>
-          <SignBtn>Client</SignBtn>
-          <SignBtn>Partner</SignBtn>
+          <SignBtn onClick={ () => selectRole("CLIENT") } >Client</SignBtn>
+          <SignBtn onClick={ () => selectRole("PARTNER") } >Partner</SignBtn>
         </ButtonContainer>
-          <LoginGoogleForm>Sign up with Google</LoginGoogleForm>
+
+          <LoginGoogleForm type={'google'} role={role}>Sign up with Google</LoginGoogleForm>
+
       </SingupSection>
       <HorizonLine />
       <div className="flex-1">
