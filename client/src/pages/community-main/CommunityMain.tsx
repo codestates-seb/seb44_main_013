@@ -23,7 +23,7 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const axiosCommu = async () => {
-      return call(`/boards?division=${division}`, 'GET', {params: {division: division}})
+      return call(`/api/boards?division=${division}`, 'GET', {params: {division: division}})
         .then((res) => {
           setDatas(res);
         })
