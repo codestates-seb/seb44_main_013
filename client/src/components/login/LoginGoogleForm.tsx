@@ -1,5 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "@/modules/loginSlice";
@@ -10,6 +10,7 @@ import { useState } from "react";
 
 import { GoogleWrapper, TextSection } from "./LoginGoogleForm.styled"
 import GoogleLogo from "@/commons/atoms/logo/GoogleLogo";
+import AlertModal from "../modal/AlertModal";
 
 interface LoginForm {
     children: React.ReactNode;
@@ -29,16 +30,18 @@ export default function LoginGoogleForm ({ children, type, role }: LoginForm){
     const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
+    // const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
+    const [ exitModal, setExitModal ] = useState(false);
 
     console.log(role);
 
     const moveMain = async (res:any) => {
         //구글이랑 소통 먼저
-        // if(role === ''){
-
-        // }
-        await sendGoogleCode(res)
+        if( role === ''){
+            setExitModal(true);
+        } else {
+            await sendGoogleCode(res)
+        }
     };
   
     const handleLogin = useGoogleLogin({
@@ -69,14 +72,23 @@ export default function LoginGoogleForm ({ children, type, role }: LoginForm){
         }
     };
 
+    const handleExit = (   ) => {
+        setExitModal(!exitModal)
+    }
+
     
     if (type === 'google'){
+
+        // if(role === '') return(<> <AlertModal onConfirm ={handleExit} onCancel={ handleExit }/> </>)
+        
         return(
+            <>
+            { exitModal ? <><AlertModal onConfirm ={handleExit} onCancel={ handleExit }/></> : null}
             <GoogleWrapper onClick={moveMain}>
                 <GoogleLogo/>
                 <TextSection>{children}</TextSection>
             </GoogleWrapper>
-    
+            </>
         )
     }
 
