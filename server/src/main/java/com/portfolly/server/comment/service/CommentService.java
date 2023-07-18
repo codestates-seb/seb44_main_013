@@ -77,7 +77,7 @@ public class CommentService {
 
 
 
-    // 댓글 존재 유무
+
     @Transactional(readOnly = true)
     public Comment verifyComment(Long commentId) {
         Optional<Comment> optionalComment = commentRepository.findById(commentId);

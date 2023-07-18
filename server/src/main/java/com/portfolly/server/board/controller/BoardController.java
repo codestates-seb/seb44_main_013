@@ -40,7 +40,7 @@ public class BoardController {
 
 
 
-    // 초기데이터 생성
+
     @PostConstruct
     public void postConstruct() {
 
@@ -91,7 +91,7 @@ public class BoardController {
         return new ResponseEntity<>(mapper.boardToBoardResponse(board), HttpStatus.OK);
     }
 
-    // 상세 게시물 조회 & 조회수 증가
+
     @GetMapping("/{board-id}")
     public ResponseEntity getBoard(@PathVariable("board-id") @Positive Long boardId) {
 
@@ -104,14 +104,14 @@ public class BoardController {
        //         new MultiDto(mapper.boardToBoardResponse(board), comments), HttpStatus.OK);
     }
 
-    // 3-2. 게시글 전체 조회 (Division 별)
+
     @GetMapping
     public ResponseEntity getBoards(@Valid @RequestParam Board.Division division) {
         List<Board> boards = boardService.findBoards(division);
         return new ResponseEntity(mapper.boardsToBoardResponseList(boards), HttpStatus.OK);
     }
 
-    // 3-3. 게시글 페이지 조회(Division 별)
+    // 게시글 페이지 조회
     // [ ver1 ]
 //    @GetMapping("/pages")
 //    public ResponseEntity getPages(@Positive @RequestParam int page,
