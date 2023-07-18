@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { CLink, HeaderContainer, ItemContainer } from './Header.styled';
-import LoginBtn from '../buttons/login/LoginBtn';
-import UserImg from '../user/UserImg';
-import Logo from '../logo/Logo';
+import LoginBtn from '../../commons/atoms/buttons/login/LoginBtn';
+import UserImg from '../../commons/atoms/user/UserImg';
+import Logo from '../../commons/atoms/logo/Logo';
 import Search from '@/components/search/Search';
 import { RecuitBtn } from './CHeader.styled';
 import { useSelector } from 'react-redux';

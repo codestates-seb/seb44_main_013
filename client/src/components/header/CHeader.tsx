@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Logo from '../logo/Logo';
-import UserImg from '../user/UserImg';
+import Logo from '../../commons/atoms/logo/Logo';
+import UserImg from '../../commons/atoms/user/UserImg';
 import {
   BtnContainer,
   CooperBtn,
@@ -9,7 +9,7 @@ import {
 } from './CHeader.styled';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules';
-import LoginBtn from '../buttons/login/LoginBtn';
+import LoginBtn from '../../commons/atoms/buttons/login/LoginBtn';
 
 export default function CHeader() {
   const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
@@ -27,7 +27,7 @@ export default function CHeader() {
           <CooperBtn>Cooperation</CooperBtn>
         </Link>
         {loginState ? (
-          <UserImg/>
+          <UserImg />
         ) : (
           <Link to="/login">
             <LoginBtn />

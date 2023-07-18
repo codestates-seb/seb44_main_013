@@ -11,7 +11,7 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { call } from '@/utils/apiService';
 
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
-import { PortfolioEditButton } from '@/commons/styles/Buttons.styled';
+import { PortfolioCheckButton } from '@/pages/portfolio-edit/PortfolioEdit.styled';
 import QuillEditor from '@/components/editor/QuillEditor';
 import LogoHeader from '@/components/header/LogoHeader';
 import TitleForm from '@/components/editor/TitleForm';
@@ -48,7 +48,7 @@ export default function PortfolioEdit() {
   }, []);
 
   return (
-    <FlexColumnContainer gap={0} className="mx-h-screen top-0 overflow-hidden">
+    <FlexColumnContainer>
       <LogoHeader />
       <QuillEditor
         htmlContent={htmlContent}
@@ -62,12 +62,11 @@ export default function PortfolioEdit() {
           setPortfolio={setPortfolio}
           portfolioId={portfolioId} />
       }
-      <PortfolioEditButton
+      <PortfolioCheckButton
         color="black"
-        className="absolute bottom-10 right-16"
         onClick={() => setIsTitleFormOpen(true)}>
         <BsCheck2 size="25" color="white" />
-      </PortfolioEditButton>
+      </PortfolioCheckButton>
       {/* {isModalOpen && <BackModal onCancel={() => setIsModalOpen(!isModalOpen)} onConfirm={() => navigate(-1)} />} */}
     </FlexColumnContainer>
   );

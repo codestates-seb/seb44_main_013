@@ -1,5 +1,5 @@
-import CHeader from '../../atoms/header/CHeader';
-import Footer from '../../atoms/footer/Footer';
+import CHeader from '../../../components/header/CHeader';
+import Footer from '../../../components/footer/Footer';
 import { Outlet } from 'react-router-dom';
 import { BackImgWrapper } from './Layout.styled';
 

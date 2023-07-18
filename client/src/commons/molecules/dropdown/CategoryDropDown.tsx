@@ -1,28 +1,19 @@
 /* 2023-07-04 게시물 카테고리 선택 드롭다운 컴포넌트 - 김다함 */
 import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
 
 import { category, isOpened } from '@/modules/categorySlice';
 
-import { FlexColumnWrapper } from '../styles/Containers.styled';
-import DropDownBox from '../atoms/dropdown/DropDownBox';
-import DropDownItem from '../atoms/dropdown/DropDownItem';
-
-export const DropDownItemContainer = styled.div`
-    ${tw`w-28 flex flex-col z-10 absolute`}
-    border: 1px solid #C3C3C3;
-    border-top: 0;
-    background-color: rgba(72, 72, 72, 0.9);
-    top: 117px;
-`;
+import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
+import { DropDownItemContainer } from './CategoryDropdown.styled';
+import DropDownBox from '@/commons/atoms/dropdown/DropDownBox';
+import DropDownItem from '@/commons/atoms/dropdown/DropDownItem';
 
 export default function ContegroyDropDown() {
   const selectedCategory = useSelector(category);
   const isOpen = useSelector(isOpened);
 
   return (
-    <FlexColumnWrapper gap={0}>
+    <FlexColumnWrapper>
       <DropDownBox dropdownItem={selectedCategory} />
       {isOpen &&
         <DropDownItemContainer>

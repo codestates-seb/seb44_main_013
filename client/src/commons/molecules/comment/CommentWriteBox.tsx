@@ -1,8 +1,8 @@
 /* 2023-07-05 게시물 댓글 작성란 컴포넌트 UI - 김다함 */
-import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
-import MemberProfile from './MemberProfile';
-import { TextArea } from '@/commons/styles/Inputs.styled';
-import SaveBtn from '../atoms/buttons/writing/SaveBtn';
+import { FlexColumnContainer, FlexWrapper } from '../../styles/Containers.styled';
+import MemberProfile from '../profile/MemberProfile';
+import { TextArea } from '@/components/editor/Editor.styled';
+import SaveBtn from '../../atoms/buttons/writing/SaveBtn';
 
 
 export default function CommentWriteBox({ saveComment, handleComment, isInput }: any) {

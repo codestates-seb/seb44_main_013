@@ -1,13 +1,16 @@
 /* 2023-07-05 게시물 댓글(낱개) 컴포넌트 UI - 김다함 */
-import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
-import MemberProfile from './MemberProfile';
-import ReviseBtn from '../atoms/buttons/revise-remove/ReviseBtn';
-import RemoveBtn from '../atoms/buttons/revise-remove/RemoveBtn';
-import { BodyText, SmallText } from '../atoms/Typography';
-import { CommentProps } from '@/types';
+import { useEffect, useRef, useState } from 'react';
 
 import { call } from '@/utils/apiService';
-import { useEffect, useRef, useState } from 'react';
+
+import { CommentProps } from '@/types';
+
+import { CommentContainer, CommentWrapper } from '@/commons/molecules/comment/Comment.styled';
+import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
+import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
+import { FlexWrapper } from '@/commons/styles/Containers.styled';
+import { BodyText, SmallText } from '@/commons/atoms/text/Typography';
+import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 
 interface CommuCommentProps {
   username: string;
@@ -98,15 +101,15 @@ export default function Comment(
 
 
   return (
-    <FlexColumnContainer gap={10} className='w-full border-b-[1px] pb-1.5 pt-3'>
-      <FlexWrapper gap={0} className='w-full justify-between'>
+    <CommentContainer gap={10}>
+      <CommentWrapper>
         <MemberProfile type='comment' member={{ memberId: comments.memberId, name: username, picture: 'https://picsum.photos/200/300' }} />
-        <FlexWrapper gap={0}>
+        <FlexWrapper>
           <ReviseBtn onClick={handleChangeEditMode} color={'black'} />
           <RemoveBtn onClick={handleDelete} color={'black'} />
         </FlexWrapper>
-      </FlexWrapper>
-      <FlexWrapper gap={0} className='w-full justify-between'>
+      </CommentWrapper>
+      <CommentWrapper>
         <BodyText>
           {isEditMode ?
             (
@@ -126,7 +129,7 @@ export default function Comment(
           }
         </BodyText>
         <SmallText color='gray'>{convertDate}</SmallText>
-      </FlexWrapper>
-    </FlexColumnContainer>
+      </CommentWrapper>
+    </CommentContainer>
   )
 }

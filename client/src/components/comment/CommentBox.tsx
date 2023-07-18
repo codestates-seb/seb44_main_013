@@ -2,17 +2,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import Card from '@/commons/atoms/Card';
-import Comment from '@/commons/molecules/Comment';
-import CommentWriteBox from '@/commons/molecules/CommentWriteBox';
-
 import { CommentProps } from '@/types';
-
-import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
-import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 
 import { call } from '@/utils/apiService';
 
+import Card from '@/commons/atoms/card/Card';
+import Comment from '@/commons/molecules/comment/Comment';
+import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
+import CommentWriteBox from '@/commons/molecules/comment/CommentWriteBox';
+import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 
 export default function CommentBox({ comments = [] }: any) {
   const [currentComment, setCurrentComment] = useState('');
