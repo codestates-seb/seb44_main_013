@@ -1,5 +1,4 @@
 /* 2023-07-12 카테고리 스토어 - 김다함 */
-// CategorySlice => categorySlice (컴포넌트 아니면 camelCase)
 import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/modules/index';
