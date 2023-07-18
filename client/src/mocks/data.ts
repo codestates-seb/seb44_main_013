@@ -193,3 +193,13 @@ export const commuDetail = [
   }
 ];
 
+
+//로그인 더미 데이터 
+export interface UserLogin {
+  memberId: number;
+  memberRole: string;
+  name: string;
+  email: string;
+}
+
+export const usersInLogin: UserLogin[] = [];

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from '@/modules/index';
 import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
 
 import Main from './pages/main/Main';
 import CommunityDetail from './pages/community-detail/CommunityDetail';
@@ -14,9 +15,13 @@ import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
 import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 import AddCommunity from './pages/community-add/AddCommunity';
 import LandingPage from './pages/landingpage/LandingPage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => {
+  const clientId = '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
   return (
+    <GoogleOAuthProvider clientId={clientId}>
+    <CookiesProvider>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
@@ -40,6 +45,8 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </Provider>
+    </CookiesProvider>
+    </GoogleOAuthProvider>
   );
 };
 

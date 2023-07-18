@@ -217,7 +217,37 @@ const HJHandlers = [
     const newArr = (filterdData[0].comments).slice(0, index).concat((filterdData[0].comments).slice(index + 1, -1))
 
     return res(ctx.json(200), ctx.json({ message: ' 댓글 삭제 성공 ', data: newArr }))
+  }),
+
+
+  //로그인1 : get google
+  rest.get('/login/oauth2/code/google', async(_, res, ctx) => {
+    const credential = 'dummy-credential-code';
+    return res( ctx.status(200), ctx.set('credential', credential) )
+  }),
+
+
+  //로그인2 : post server
+  rest.post('/members', async(req, res, ctx) => {
+    const accessToken = 'dummy-access-token';
+    const { role } = await req.json();
+
+
+    return res(
+      ctx.status(200),
+      ctx.json('로그인 성공'),
+      //응답 객체 헤더 설정 accesstoken 전달 
+      ctx.set('authorization', `Bearer ${accessToken}`),
+      ctx.set('accessToken', accessToken),
+      ctx.set('isLogin', 'true'),
+      ctx.set('memberRole', role)
+    )
+  }),
+  //로그아웃
+  rest.get('/members/logout', async(_, res, ctx) => {
+    return res(ctx.status(200), ctx.json('logout 성공'))
   })
+
 ];
 
 // 게시판 등록 - 효정
