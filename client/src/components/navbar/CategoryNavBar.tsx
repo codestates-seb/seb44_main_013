@@ -1,4 +1,4 @@
-/* 2023-07-02 메인(카테고리)페이지 카테고리 navBar 컴포넌트 - 김다함*/
+/* 2023-07-02 메인(카테고리)페이지 카테고리 navBar 컴포넌트 UI - 김다함*/
 import { useDispatch } from 'react-redux';
 
 import { CATEGORY_TYPE } from '@/types';

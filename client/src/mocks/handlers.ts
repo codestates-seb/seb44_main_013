@@ -105,7 +105,7 @@ const DaHamHandlers = [
     return res(ctx.status(200));
   }),
   // 이미지 업로드
-  rest.post('/pictures', async (req, res, ctx) => {
+  rest.post('/pictures', async (_, res, ctx) => {
     const imageUrl = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png';
     pictures.push({ portfolioId: 0, filename: imageUrl });
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }))
@@ -230,14 +230,14 @@ const HJHandlers = [
 
 
   //로그인1 : get google
-  rest.get('/login/oauth2/code/google', async(_, res, ctx) => {
+  rest.get('/login/oauth2/code/google', async (_, res, ctx) => {
     const credential = 'dummy-credential-code';
-    return res( ctx.status(200), ctx.set('credential', credential) )
+    return res(ctx.status(200), ctx.set('credential', credential))
   }),
 
 
   //로그인2 : post server
-  rest.post('/members', async(req, res, ctx) => {
+  rest.post('/members', async (req, res, ctx) => {
     const accessToken = 'dummy-access-token';
     const { role } = await req.json();
 
@@ -253,7 +253,7 @@ const HJHandlers = [
     )
   }),
   //로그아웃
-  rest.get('/members/logout', async(_, res, ctx) => {
+  rest.get('/members/logout', async (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout 성공'))
   })
 
