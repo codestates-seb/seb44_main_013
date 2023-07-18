@@ -13,11 +13,12 @@ import {
 
 type WebItemProps = {
   itemCount: number;
+  searchValue?: string;
 };
 
-export default function WebItem({ itemCount }: WebItemProps) {
+export default function WebItem({ itemCount, searchValue }: WebItemProps) {
   const items = Array.from({ length: itemCount }, (_, index) => (
-    <WebItemContainer>
+    <WebItemContainer key={index}>
       <Link to="/portfolios/:portfolioId">
         <WebItemImg src={WebItem1} alt={`웹 아이템 ${index + 1} 이미지`} />
       </Link>{' '}
@@ -30,5 +31,18 @@ export default function WebItem({ itemCount }: WebItemProps) {
       </BookmarkWrapper>
     </WebItemContainer>
   ));
-  return <>{items}</>;
+
+  const filteredItems = searchValue
+    ? items.filter((item) => {
+        const itemTitle =
+          item.props.children[2]?.props.children.props.children || '';
+        const itemAuthor =
+          item.props.children[3]?.props.children.props.children || '';
+        return (
+          itemTitle.includes(searchValue) || itemAuthor.includes(searchValue)
+        );
+      })
+    : items;
+
+  return <>{filteredItems}</>;
 }

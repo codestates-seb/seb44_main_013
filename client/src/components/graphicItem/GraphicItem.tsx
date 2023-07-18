@@ -10,9 +10,10 @@ import { BookmarkWrapper } from '../webItem/WebItem.styled';
 
 type GraphicProps = {
   itemCount: number;
+  searchValue?: string;
 };
 
-export default function GraphicItem({ itemCount }: GraphicProps) {
+export default function GraphicItem({ itemCount, searchValue }: GraphicProps) {
   const items = Array.from({ length: itemCount }, (_, index) => (
     <GraphicItemContainer>
       <img src={graphicimg} alt={`graphic image-${index}`} />
@@ -25,5 +26,14 @@ export default function GraphicItem({ itemCount }: GraphicProps) {
       </BookmarkWrapper>
     </GraphicItemContainer>
   ));
-  return <>{items}</>;
+
+  const filteredItems = searchValue
+    ? items.filter((item) => {
+        const itemTitle =
+          item.props.children.props.children[0]?.props.children || '';
+        return itemTitle.includes(searchValue);
+      })
+    : items;
+
+  return <>{filteredItems}</>;
 }

@@ -10,9 +10,10 @@ import Bookmark from '@/commons/atoms/buttons/Bookmark';
 
 type AnimationProps = {
   itemCount: number;
+  searchValue?: string;
 };
 
-export default function ThreeDItem({ itemCount }: AnimationProps) {
+export default function ThreeDItem({ itemCount, searchValue }: AnimationProps) {
   const items = Array.from({ length: itemCount }, (_, index) => (
     <DItemContainer>
       <img src={item} alt={`3Dimg-${index}`} />
@@ -25,5 +26,14 @@ export default function ThreeDItem({ itemCount }: AnimationProps) {
       </BookmarkWrapper>
     </DItemContainer>
   ));
-  return <>{items}</>;
+
+  const filteredItems = searchValue
+    ? items.filter((item) => {
+        const itemTitle =
+          item.props.children.props.children[0]?.props.children || '';
+        return itemTitle.includes(searchValue);
+      })
+    : items;
+
+  return <>{filteredItems}</>;
 }

@@ -10,9 +10,10 @@ import {
 
 type PhotoItem = {
   itemCount: number;
+  searchValue?: string;
 };
 
-export default function PhotoItem({ itemCount }: PhotoItem) {
+export default function PhotoItem({ itemCount, searchValue }: PhotoItem) {
   const items = Array.from({ length: itemCount }, (_, index) => (
     <PhotoItemContainer>
       <img src={photoImg} alt={`photo image-${index}`} />
@@ -25,5 +26,14 @@ export default function PhotoItem({ itemCount }: PhotoItem) {
       </BookmarkWrapper>
     </PhotoItemContainer>
   ));
-  return <>{items}</>;
+
+  const filteredItems = searchValue
+    ? items.filter((item) => {
+        const itemTitle =
+          item.props.children.props.children[0]?.props.children || '';
+        return itemTitle.includes(searchValue);
+      })
+    : items;
+
+  return <>{filteredItems}</>;
 }

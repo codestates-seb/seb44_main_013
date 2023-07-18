@@ -42,9 +42,9 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleInput =
     (setValue: React.Dispatch<React.SetStateAction<string>>) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
-      };
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value);
+    };
 
   const handleUpdate = () => {
     axios
