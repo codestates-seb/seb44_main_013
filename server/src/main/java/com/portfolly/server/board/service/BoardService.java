@@ -2,7 +2,6 @@ package com.portfolly.server.board.service;
 
 
 import com.portfolly.server.board.entity.Board;
-import com.portfolly.server.board.mapper.BoardMapper;
 import com.portfolly.server.board.respository.BoardRepository;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
@@ -10,12 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.data.domain.Sort;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service

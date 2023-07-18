@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -71,7 +72,7 @@ public class MemberService implements ServiceConfigureHelper {
             throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_EXIST);
         }
     }
-    private Member findByMember(long memberId){
+    public Member findByMember(long memberId){
         Optional<Member> optionalMember = memberRepository.findById(memberId);
         return optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_EXIST));
     }
