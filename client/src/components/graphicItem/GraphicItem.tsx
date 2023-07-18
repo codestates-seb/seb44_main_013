@@ -17,7 +17,7 @@ export default function GraphicItem({ itemCount }: GraphicProps) {
     <GraphicItemContainer>
       <img src={graphicimg} alt={`graphic image-${index}`} />
       <TitleOverlay>
-        <Title>3D 아이템 제목</Title>
+        <Title>그래픽 아이템 제목</Title>
         <Author>작성자 이름</Author>
       </TitleOverlay>
       <BookmarkWrapper>

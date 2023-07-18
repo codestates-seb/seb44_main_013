@@ -24,7 +24,7 @@ export default function AppItem({ itemCount }: AppItemProps) {
       </div>
       <img src={item} alt={`appImg-${index}`} />
       <TitleOverlay>
-        <Title>아이템 제목</Title>
+        <Title>앱 테스트 제목</Title>
         <Author>작성자 이름</Author>
       </TitleOverlay>
       <BookmarkWrapper>

@@ -17,7 +17,7 @@ export default function PhotoItem({ itemCount }: PhotoItem) {
     <PhotoItemContainer>
       <img src={photoImg} alt={`photo image-${index}`} />
       <TitleOverlay>
-        <Title>3D 아이템 제목</Title>
+        <Title>사진 아이템 제목</Title>
         <Author>작성자 이름</Author>
       </TitleOverlay>
       <BookmarkWrapper>

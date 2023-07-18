@@ -12,21 +12,10 @@ import {
 } from './WebItem.styled';
 
 type WebItemProps = {
-  itemCount: number; // 아이템 개수를 전달받는 prop
+  itemCount: number;
 };
-// type WebItemProps = {
-//   portfolio: {
-//     title: string;
-//     member: {
-//       name: string;
-//       picture: string;
-//     };
-//   };
-// };
 
 export default function WebItem({ itemCount }: WebItemProps) {
-  // export default function WebItem({ portfolio }: WebItemProps) {
-  // const { title, member } = portfolio;
   const items = Array.from({ length: itemCount }, (_, index) => (
     <WebItemContainer>
       <Link to="/portfolios/:portfolioId">
