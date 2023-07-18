@@ -8,24 +8,24 @@ import {
   TitleOverlay,
 } from './PhotoItem.styled';
 
-type PhotoItem = {
+type PhotoItemProps = {
   item: any;
 };
 
-export default function PhotoItem({ item }: PhotoItem) {
-
-  console.log(item);
-  const items = Array.from({ length: 1 }, (_, index) => (
+export default function PhotoItem({ item }: PhotoItemProps) {
+  return (
     <PhotoItemContainer>
-      <img src={photoImg} alt={`photo image-${index}`} />
+      <img src={photoImg} alt={`photo image-${item.data.title}`} />
       <TitleOverlay>
         <Title>{item.data.title}</Title>
-        <Author>작성자 이름</Author>
+        <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark portfolioId={1} isToggled={false} />
+        <Bookmark
+          portfolioId={item.data.portfolioId}
+          isToggled={item.data.isMarked}
+        />
       </BookmarkWrapper>
     </PhotoItemContainer>
-  ));
-  return <>{items}</>;
+  );
 }
