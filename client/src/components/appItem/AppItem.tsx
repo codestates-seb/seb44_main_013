@@ -10,15 +10,19 @@ import { BsBatteryFull } from 'react-icons/bs';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 
-export default function AppItem() {
-  return (
+type AppItemProps = {
+  itemCount: number;
+};
+
+export default function AppItem({ itemCount }: AppItemProps) {
+  const items = Array.from({ length: itemCount }, (_, index) => (
     <AppItemContainer>
       <span>10:30</span>
       <div className="iconsWrap">
         <AiOutlineWifi size={20} />
         <BsBatteryFull size={20} />
       </div>
-      <img src={item} alt="appImg" />
+      <img src={item} alt={`appImg-${index}`} />
       <TitleOverlay>
         <Title>아이템 제목</Title>
         <Author>작성자 이름</Author>
@@ -27,5 +31,6 @@ export default function AppItem() {
         <Bookmark portfolioId={1} isToggled={false} />
       </BookmarkWrapper>
     </AppItemContainer>
-  );
+  ));
+  return <>{items}</>;
 }

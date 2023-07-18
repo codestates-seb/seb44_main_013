@@ -11,6 +11,9 @@ import {
   WebItemImg,
 } from './WebItem.styled';
 
+type WebItemProps = {
+  itemCount: number; // 아이템 개수를 전달받는 prop
+};
 // type WebItemProps = {
 //   portfolio: {
 //     title: string;
@@ -21,13 +24,13 @@ import {
 //   };
 // };
 
-export default function WebItem() {
+export default function WebItem({ itemCount }: WebItemProps) {
   // export default function WebItem({ portfolio }: WebItemProps) {
   // const { title, member } = portfolio;
-  return (
+  const items = Array.from({ length: itemCount }, (_, index) => (
     <WebItemContainer>
       <Link to="/portfolios/:portfolioId">
-        <WebItemImg src={WebItem1} alt="웹 아이템1 이미지" />
+        <WebItemImg src={WebItem1} alt={`웹 아이템 ${index + 1} 이미지`} />
       </Link>{' '}
       <TitleOverlay>
         <Title>웹 테스트 제목</Title>
@@ -37,5 +40,6 @@ export default function WebItem() {
         <Bookmark portfolioId={1} isToggled={false} />
       </BookmarkWrapper>
     </WebItemContainer>
-  );
+  ));
+  return <>{items}</>;
 }
