@@ -23,8 +23,9 @@ import { RootState } from '@/modules';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+  const dummyArray = Array.from({ length: 10 });
 
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
@@ -41,17 +42,40 @@ export default function MyPage() {
       });
   }, []);
 
+  const addScrollListener = (id: string) => {
+    const slider = document.getElementById(id);
+    if (slider) {
+      slider.addEventListener('wheel', horizontalScroll);
+      return () => slider.removeEventListener('wheel', horizontalScroll);
+    }
+  };
+
+  //scroll
+  useEffect(() => {
+    addScrollListener('box-wrapper1');
+    addScrollListener('box-wrapper2');
+  }, []);
+
+  const horizontalScroll = (e: WheelEvent) => {
+    e.preventDefault();
+    const target = e.currentTarget as HTMLElement;
+    if (target) {
+      if (e.deltaY > 0) {
+        target.scrollLeft += 100;
+      } else {
+        target.scrollLeft -= 100;
+      }
+    }
+  };
+
   //pagenation
-  const handlePageChange = (page: number) => {
+  const handlePageChange = (page: number): void => {
     setCurrentPage(page);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedCommunityList = Array.from({ length: 10 }).slice(
-    startIndex,
-    endIndex
-  );
+  const paginatedCommunityList = dummyArray.slice(startIndex, endIndex);
 
   return (
     <MainWrapper>
@@ -64,8 +88,8 @@ export default function MyPage() {
       <MyItemsWrapper>
         <FlexColumnWrapper gap={0}>
           <BoxTitle>게시물</BoxTitle>
-          <BoxWrapper>
-            {Array.from({ length: 10 }).map((_, index) => {
+          <BoxWrapper id="box-wrapper1">
+            {dummyArray.map((_, index) => {
               return (
                 <MypageItem key={index} title={'Title'} name={'phy'} src={''} />
               );
@@ -76,8 +100,8 @@ export default function MyPage() {
         {loginState ? (
           <FlexColumnWrapper gap={0}>
             <BoxTitle>북마크</BoxTitle>
-            <BoxWrapper>
-              {Array.from({ length: 10 }).map((_, index) => {
+            <BoxWrapper id="box-wrapper2">
+              {dummyArray.map((_, index) => {
                 return (
                   <MypageItem
                     key={index}
@@ -104,7 +128,7 @@ export default function MyPage() {
                   &lt;
                 </Pagenation>
 
-                {Array.from({ length: 5 }).map((_, i) => {
+                {dummyArray.slice(0, 5).map((_, i) => {
                   const pageNumber = i + 1;
                   return (
                     <Pagenation
