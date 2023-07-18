@@ -2,6 +2,7 @@ package com.portfolly.server.member.dto;
 
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.member.image.entity.ImageData;
 import com.portfolly.server.validator.EnumFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,6 @@ public class MemberDto {
         private Long id;
         @Schema(title = "사용자 이름", example = "홍길동")
         private String name;
-//        private String image_url;
         @Schema(title = "지역", example = "서울")
         private String location;
         @Schema(title = "회사 정보", example = "[회사 소개]")
@@ -79,7 +79,6 @@ public class MemberDto {
         private String email;
         @Schema(title = "클라이언트/파트너", example = "Client")
         private Member.Member_Role member_role;
-//        private String image_url;
         @Schema(title = "지역", example = "서울")
         private String location;
         @Schema(title = "회사 정보", example = "[회사 소개]")
@@ -103,7 +102,6 @@ public class MemberDto {
         private String email;
         @Schema(title = "클라이언트/파트너", example = "Partner")
         private Member.Member_Role member_role;
-//        private String image_url;
         @Schema(title = "지역", example = "서울")
         private String location;
         @Schema(title = "직업", example = "개발자")
@@ -117,5 +115,4 @@ public class MemberDto {
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
     }
-
 }

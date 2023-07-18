@@ -3,6 +3,7 @@ package com.portfolly.server.member.entity;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.bookmark.entity.Bookmark;
+import com.portfolly.server.member.image.entity.ImageData;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.*;
 
@@ -27,7 +28,6 @@ public class Member extends Auditable {
 //    @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Member_Role member_role; // 클라이언트 / 파트너
-//    private String image_url; // member Profile image S3 ? DB
     private String location; // 도 시 군 만 기입
     private String comInfo;
     private String job;
@@ -45,6 +45,9 @@ public class Member extends Auditable {
     private List<Bookmark> bookmark_id;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
     private List<Board> board_id;
+    @OneToOne(mappedBy = "member",cascade = {CascadeType.ALL})
+    private ImageData imageData;
+
     public enum Member_Status{
         MEMBER_ACTIVE(0,"휴먼 계정"),
         MEMBER_DORMANCY(1,"활동중"),
