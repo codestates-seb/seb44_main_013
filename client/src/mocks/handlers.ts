@@ -2,7 +2,7 @@
 import { rest } from 'msw';
 
 import { portfolios, commuDetail, pictures } from './data';
-import { commu } from './infiniteScrollData'
+import { commu, WebCategoryDatas, AppCategoryDatas, AnimationCategoryDatas, GraphicCategoryDatas,PhotoCategoryDatas } from './infiniteScrollData'
 
 import { CommuProps } from '@/types';
 
@@ -43,6 +43,15 @@ const DaHamHandlers = [
       ctx.status(201),
       ctx.json({ portfolioId: portfolioId })
     );
+  }),
+  // 포트폴리오 수정
+  rest.patch('/portfolios/:portfolio_id', async (req, res, ctx) => {
+    const portfolioId = Number(req.params.portfolio_id);
+    const body = await req.json();
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) portfolio = Object.assign(portfolio, body);
+    })
+    return res(ctx.status(201));
   }),
   // 포트폴리오 삭제
   rest.delete('/portfolios/:portfolio_id', (req, res, ctx) => {
@@ -96,7 +105,7 @@ const DaHamHandlers = [
     return res(ctx.status(200));
   }),
   // 이미지 업로드
-  rest.post('/pictures', async (req, res, ctx) => {
+  rest.post('/pictures', async (_, res, ctx) => {
     const imageUrl = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png';
     pictures.push({ portfolioId: 0, filename: imageUrl });
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }))
@@ -220,12 +229,17 @@ const HJHandlers = [
   }),
 
 
-  //로그인 : google
-  rest.post('/members', async(req, res, ctx) => {
+  //로그인1 : get google
+  rest.get('/login/oauth2/code/google', async (_, res, ctx) => {
+    const credential = 'dummy-credential-code';
+    return res(ctx.status(200), ctx.set('credential', credential))
+  }),
+
+
+  //로그인2 : post server
+  rest.post('/members', async (req, res, ctx) => {
     const accessToken = 'dummy-access-token';
-    const { optionData } = await req.json();
-    
-    console.log(optionData);
+    const { role } = await req.json();
 
 
     return res(
@@ -234,13 +248,35 @@ const HJHandlers = [
       //응답 객체 헤더 설정 accesstoken 전달 
       ctx.set('authorization', `Bearer ${accessToken}`),
       ctx.set('accessToken', accessToken),
-      ctx.set('isLogin', 'true')
+      ctx.set('isLogin', 'true'),
+      ctx.set('memberRole', role)
     )
   }),
   //로그아웃
-  rest.get('/members/logout', async(_, res, ctx) => {
+  rest.get('/members/logout', async (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout 성공'))
+  }),
+
+  //메인 카테고리별 조회 web
+  rest.get(`/portfolios`, async(req, res, ctx) => {
+    const category = req.url.searchParams.get('category');
+
+    if(category === 'web'){
+      return res(ctx.status(200), ctx.json(WebCategoryDatas))
+    } else if (category === 'app'){
+      return res(ctx.status(200), ctx.json(AppCategoryDatas))
+    } else if (category === '3danimation'){
+      return res(ctx.status(200), ctx.json(AnimationCategoryDatas))
+    } else if (category === 'graphicdesign') {
+      return res(ctx.status(200), ctx.json(GraphicCategoryDatas))
+    } else if (category === 'photo') {
+      return res(ctx.status(200), ctx.json(PhotoCategoryDatas))
+    }
+
+
   })
+
+
 
 ];
 

@@ -1,8 +1,10 @@
-import tw from "twin.macro";
-import styled from "styled-components";
+import tw from 'twin.macro';
+import styled from 'styled-components';
 
 export const AppItemContainer = styled.div`
   ${tw`
+    my-6 
+    mx-6
     relative
     mb-10
     overflow-hidden
@@ -34,7 +36,7 @@ export const AppItemContainer = styled.div`
     }
   }
 
-  >span {
+  > span {
     ${tw`
       absolute
       text-white
@@ -47,8 +49,51 @@ export const AppItemContainer = styled.div`
       w-full
       h-full
     `}
-    &:hover{
+    &:hover {
       ${tw`opacity-80`}
     }
   }
+`;
+
+export const TitleOverlay = styled.div`
+  ${tw`
+    absolute
+    inset-0
+    flex
+    flex-col
+    justify-center
+    items-center
+    p-4
+    bg-black
+    bg-opacity-50
+    text-white
+    transition
+    duration-300
+    ease-in-out
+    opacity-0
+    pointer-events-none
+  `}
+
+  ${AppItemContainer}:hover & {
+    ${tw`
+      opacity-100
+      pointer-events-auto
+    `}
+  }
+`;
+
+export const Title = styled.h3`
+  ${tw`
+    text-xl
+    font-semibold
+    text-center
+  `}
+`;
+
+export const Author = styled.p`
+  ${tw`
+    mt-1
+    text-sm
+    text-center
+  `}
 `;

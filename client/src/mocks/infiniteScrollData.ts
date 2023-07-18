@@ -472,24 +472,180 @@ export const commu: CommuProps[] = [
   },
 ];
 
+const getRandomNumber = (min:number, max:number) => {
+  return Math.floor(Math.random() * (max - min + 2));
+};
+
+export const WebCategoryDatas = [
+  //카테고리 별 입수  - WEB
+  {data: [
+    {
+      data:{
+        memberId: 1,
+        membername:"phj",
+        portfolioId: 1,
+        title: "웹",
+        isMarked: false,
+
+      }
+    },
+    {
+      data:{
+        memberId: 2,
+        membername:"wjw",
+        portfolioId: 2,
+        title: "카테고리",
+        isMarked: true,
+      }
+    },
+    {
+      data:{
+        memberId: 3,
+        membername:"kdh",
+        portfolioId: 3,
+        title: "반응형",
+        isMarked: false,
+      }
+    }
+
+  ]}
+
+]
+
+export const AppCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:4,
+        title: "앱",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:5,
+        title: "아이폰",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:6,
+        title: "아이폰",
+        isMarked: true,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:7,
+        title: "갤럭시",
+        isMarked: true,
+      }
+    },
+  ]}
+]
+
+export const AnimationCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:7,
+        title: "입체",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:12,
+        title: "캐릭터",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:2,
+        membername:"wjw",
+        portfolioId:13,
+        title: "애니메이션",
+        isMarked: true,
+      }
+    },
+  ]}
+]
 
 
-// export const MainCategoryDatas = [
-//   data: [
-//     {
-//       data:{
-//         memberId: 1,
-//         portfolioId: 1,
-//         title: "제목1"
-//       }
-//     },
-//     {
-//       data:{
-//         memberId: 1,
-//         portfolioId: 1,
-//         title: "제목1"
-//       }
-//     }
-//   ]
+export const GraphicCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:3,
+        membername:"kdh",
+        portfolioId:8,
+        title: "디자인",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:"kdh",
+        portfolioId:9,
+        title: "그래픽",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:"wjy",
+        portfolioId:10,
+        title: "캐드",
+        isMarked: false,
+      }
+    },
+  ]}
+]
 
-// ]
+export const PhotoCategoryDatas = [
+  {data: [
+    {
+      data:{
+        memberId:4,
+        membername:'jhj',
+        portfolioId:9,
+        title: "사진",
+        isMarked: false,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:'jhj',
+        portfolioId:10,
+        title: "인생샷",
+        isMarked: true,
+      }
+    },
+    {
+      data:{
+        memberId:3,
+        membername:'jhj',
+        portfolioId:11,
+        title: "풍경사진",
+        isMarked: false,
+      }
+    },
+  ]}
+]

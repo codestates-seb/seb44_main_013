@@ -18,54 +18,61 @@ interface LoginForm {
     role?: string;
 }
 
-interface googleToken {
-    credentialCode: string;
-    credential:string;
-    clientId:string;
-    memberId: string;
-    optionData: {memberRole: string};
-}
+// interface googleToken {
+//     credentialCode: string;
+//     credential:string;
+//     clientId:string;
+//     memberId: string;
+//     optionData: {memberRole: string};
+// }
 
 export default function LoginGoogleForm ({ children, type, role }: LoginForm){
-    const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+    // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
     const [ exitModal, setExitModal ] = useState(false);
 
-    console.log(role);
 
-    const moveMain = async (res:any) => {
+    const moveMain = async ( ) => {
+        //일단 먼저 구글에 get 요청 보내야 함  res 없앰 
+        await call('/login/oauth2/code/google', 'GET', null)
+        .then((res) => console.log(res));
+
         //구글이랑 소통 먼저
         if( role === ''){
             setExitModal(true);
-        } else {
-            await sendGoogleCode(res)
+        } else{
+            handleLogin();
+            
         }
     };
   
     const handleLogin = useGoogleLogin({
-        onSuccess: tokenResponse => {
-            console.log(tokenResponse);
-            if(loginState){
-                navigate('/')
-            }
-        }})
+        scope: "email profile",
+        onSuccess: async (tokenResponse) => {
+            // console.log(tokenResponse);
+            sendGoogleCode(tokenResponse);
 
-    const sendGoogleCode = async ( res:googleToken ) => {
+        },
+        flow: "auth-code",
+    })
+
+    const sendGoogleCode = async ( res:any ) => {
         const credentialCode = res.credential;
         const memberId = res.clientId;
-        const optionData = { memberRole: role };
+        console.log(res);
 
         try {
             await call('/members', 'POST', { 
                 credentialCode: credentialCode,
                 cliendId: memberId,
-                ...optionData,
+                role: role,
             })
+            .then((res) => {console.log(res)})
             
-            handleLogin();
             dispatch(login(true));
+            navigate('/')
 
         } catch (err) {
             console.log(err);
@@ -78,8 +85,6 @@ export default function LoginGoogleForm ({ children, type, role }: LoginForm){
 
     
     if (type === 'google'){
-
-        // if(role === '') return(<> <AlertModal onConfirm ={handleExit} onCancel={ handleExit }/> </>)
         
         return(
             <>

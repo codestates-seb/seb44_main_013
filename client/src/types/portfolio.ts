@@ -1,13 +1,14 @@
 /* 2023-07-12 포트폴리오 요청 데이터 관련 타입 모음 - 김다함 */
-enum CATEGORY {
-  "웹",
-  "앱",
-  "3D/애니메이션",
-  "그래픽디자인",
-  "사진/영상",
-}
+// enum CATEGORY {
+//   "웹",
+//   "앱",
+//   "3D/애니메이션",
+//   "그래픽디자인",
+//   "사진/영상",
+// }
 
-export type CATEGORY_TYPE = keyof typeof CATEGORY;
+// export type CATEGORY_TYPE = keyof typeof CATEGORY;
+export type CATEGORY_TYPE = "웹" | "앱" | "3D/애니메이션" | "그래픽디자인" | "사진/영상";
 
 export interface Member {
   memberId: number;
@@ -34,7 +35,7 @@ export interface Portfolio {
   views: number;
   modifiedAt: string;
   createdAt: string;
-  category: string;
+  category: CATEGORY_TYPE;
   member: Member;
   tags: Array<Tag>;
   likes: number;
@@ -45,10 +46,11 @@ export interface Portfolio {
 
 export interface PortfolioContent {
   title: string;
-  content: string;
-  category: string;
+  content?: string;
+  category: CATEGORY_TYPE;
   tags: Array<Tag>;
   explains: string;
+  createdAt?: string;
 }
 
 export interface Picture {

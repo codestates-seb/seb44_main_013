@@ -27,10 +27,12 @@ export const BoxWrapper = styled.div<{ isRow?: string }>`
         flex
         mb-5
         ml-2
+
     `}
   flex-direction:${(props) => (props.isRow ? 'column' : 'row')};
-  overflow: ${(props) => (props.isRow ? 'none' : 'auto')};
+  overflow-x: ${(props) => (props.isRow ? 'hidden' : 'auto')};
   height: ${(props) => (props.isRow ? '380px' : '240px')};
+  white-space: ${(props) => (props.isRow ? 'normal' : 'nowrap')};
 `;
 
 export const BoxTitle = tw.div`
