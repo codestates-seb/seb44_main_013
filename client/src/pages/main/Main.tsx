@@ -20,9 +20,18 @@ const categoryMap = {
   '사진/영상': 'photo',
 };
 
+type Item = {
+  data: {
+    title: string;
+    membername: string;
+  };
+};
+
 export default function Main() {
   const selectedCategory = useSelector(category);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
+  const [filteredItems, setFilteredItems] = useState<Item[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,34 +43,48 @@ export default function Main() {
           null
         );
         setItems(res[0].data);
+        setFilteredItems(res[0].data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('데이터를 가져올 수 없습니다', error);
       }
     };
 
     fetchData();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredItems(items);
+    } else {
+      const results = items.filter(
+        (item) =>
+          item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.data.membername.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredItems(results);
+    }
+  }, [searchTerm, items]);
+
   const renderItems = () => {
     switch (selectedCategory) {
       case '웹':
-        return items.map((element, index) => (
+        return filteredItems.map((element, index) => (
           <WebItem item={element} key={index} />
         ));
       case '앱':
-        return items.map((element, index) => (
+        return filteredItems.map((element, index) => (
           <AppItem item={element} key={index} />
         ));
       case '3D/애니메이션':
-        return items.map((element, index) => (
+        return filteredItems.map((element, index) => (
           <ThreeDItem item={element} key={index} />
         ));
       case '그래픽디자인':
-        return items.map((element, index) => (
+        return filteredItems.map((element, index) => (
           <GraphicItem item={element} key={index} />
         ));
       case '사진/영상':
-        return items.map((element, index) => (
+        return filteredItems.map((element, index) => (
           <PhotoItem item={element} key={index} />
         ));
       default:
@@ -69,9 +92,30 @@ export default function Main() {
     }
   };
 
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (searchTerm === '') {
+        setFilteredItems(items);
+      } else {
+        const results = items.filter(
+          (item) =>
+            item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.data.membername
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+        );
+        setFilteredItems(results);
+      }
+    }
+  };
+
   return (
     <>
-      <Search />
+      <Search setSearchValue={handleSearch} 엔터치면검색={handleKeyPress} />
       <CategoryNavBar />
       <WebItemsContainer>{renderItems()}</WebItemsContainer>
     </>
