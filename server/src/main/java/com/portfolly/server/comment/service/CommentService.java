@@ -77,7 +77,6 @@ public class CommentService {
 
 
 
-
     @Transactional(readOnly = true)
     public Comment verifyComment(Long commentId) {
         Optional<Comment> optionalComment = commentRepository.findById(commentId);
