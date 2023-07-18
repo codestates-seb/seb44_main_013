@@ -1,4 +1,4 @@
-/* 2023-07-05 게시물 댓글 작성란 컴포넌트 - 김다함 */
+/* 2023-07-05 게시물 댓글 작성란 컴포넌트 UI - 김다함 */
 import { FlexColumnContainer, FlexWrapper } from '../styles/Containers.styled';
 import MemberProfile from './MemberProfile';
 import { TextArea } from '@/commons/styles/Inputs.styled';

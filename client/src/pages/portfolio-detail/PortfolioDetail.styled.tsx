@@ -17,6 +17,7 @@ export const PortfolioContainer = styled(RoundedBox)`
   ${tw`
     w-3/4
     bg-black
+    break-keep
     text-white
     py-10
     px-14
@@ -24,6 +25,14 @@ export const PortfolioContainer = styled(RoundedBox)`
   `}
   height: calc(100vh - 70px);
 `;
+
+export const HtmlWrapper = tw.div`
+  w-full 
+  break-words 
+  overflow-hidden 
+  break-keep 
+  text-white
+`
 
 export const UserContainer = styled.div`
 ${tw`

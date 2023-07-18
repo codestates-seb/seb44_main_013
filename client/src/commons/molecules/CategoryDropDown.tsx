@@ -23,7 +23,7 @@ export default function ContegroyDropDown() {
 
   return (
     <FlexColumnWrapper gap={0}>
-      <DropDownBox value={selectedCategory} />
+      <DropDownBox dropdownItem={selectedCategory} />
       {isOpen &&
         <DropDownItemContainer>
           <DropDownItem value="웹" />
