@@ -26,11 +26,11 @@ export default function ContegroyDropDown() {
       <DropDownBox value={selectedCategory} />
       {isOpen &&
         <DropDownItemContainer>
-          <DropDownItem value='웹' />
-          <DropDownItem value='앱' />
-          <DropDownItem value='3D/애니메이션' />
-          <DropDownItem value='디자인/일러스트' />
-          <DropDownItem value='사진/영상' />
+          <DropDownItem value="웹" />
+          <DropDownItem value="앱" />
+          <DropDownItem value="3D/애니메이션" />
+          <DropDownItem value="그래픽디자인" />
+          <DropDownItem value="사진/영상" />
         </DropDownItemContainer>
       }
     </FlexColumnWrapper>

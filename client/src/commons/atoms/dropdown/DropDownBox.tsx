@@ -6,9 +6,10 @@ import tw from 'twin.macro';
 import { isOpened, openCategory } from '@/modules/categorySlice';
 
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+import { CATEGORY_TYPE } from '@/types';
 
 interface DropDownProps {
-  value: string;
+  value: CATEGORY_TYPE;
 }
 
 const DropDownBoxContainer = styled.div`

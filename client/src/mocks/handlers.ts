@@ -44,6 +44,15 @@ const DaHamHandlers = [
       ctx.json({ portfolioId: portfolioId })
     );
   }),
+  // 포트폴리오 수정
+  rest.patch('/portfolios/:portfolio_id', async (req, res, ctx) => {
+    const portfolioId = Number(req.params.portfolio_id);
+    const body = await req.json();
+    portfolios.map((portfolio) => {
+      if (portfolio.portfolioId === portfolioId) portfolio = Object.assign(portfolio, body);
+    })
+    return res(ctx.status(201));
+  }),
   // 포트폴리오 삭제
   rest.delete('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolioId = Number(req.params.portfolio_id);
