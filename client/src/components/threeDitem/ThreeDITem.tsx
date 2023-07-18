@@ -13,17 +13,19 @@ type AnimationProps = {
 };
 
 export default function ThreeDItem({ item }: AnimationProps) {
-  const items = Array.from({ length: 1 }, (_, index) => (
+  return (
     <DItemContainer>
-      <img src={threeDimg} alt={`3Dimg-${index}`} />
+      <img src={threeDimg} alt={`3Dimg-${item.data.title}`} />
       <TitleOverlay>
         <Title>{item.data.title}</Title>
         <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark portfolioId={1} isToggled={false} />
+        <Bookmark
+          portfolioId={item.data.portfolioId}
+          isToggled={item.data.isMarked}
+        />{' '}
       </BookmarkWrapper>
     </DItemContainer>
-  ));
-  return <>{items}</>;
+  );
 }

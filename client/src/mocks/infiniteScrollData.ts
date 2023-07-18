@@ -484,7 +484,7 @@ export const WebCategoryDatas = [
         memberId: 1,
         membername:"phj",
         portfolioId: 1,
-        title: "제목1",
+        title: "웹",
         isMarked: false,
 
       }
@@ -494,8 +494,8 @@ export const WebCategoryDatas = [
         memberId: 2,
         membername:"wjw",
         portfolioId: 2,
-        title: "제목2",
-        isMarked: false,
+        title: "카테고리",
+        isMarked: true,
       }
     },
     {
@@ -503,7 +503,7 @@ export const WebCategoryDatas = [
         memberId: 3,
         membername:"kdh",
         portfolioId: 3,
-        title: "제목3",
+        title: "반응형",
         isMarked: false,
       }
     }
@@ -519,7 +519,7 @@ export const AppCategoryDatas = [
         memberId:1,
         membername:"phj",
         portfolioId:4,
-        title: "제목4",
+        title: "앱",
         isMarked: false,
       }
     },
@@ -528,7 +528,7 @@ export const AppCategoryDatas = [
         memberId:1,
         membername:"phj",
         portfolioId:5,
-        title: "제목5",
+        title: "아이폰",
         isMarked: false,
       }
     },
@@ -537,8 +537,17 @@ export const AppCategoryDatas = [
         memberId:1,
         membername:"phj",
         portfolioId:6,
-        title: "제목6",
-        isMarked: false,
+        title: "아이폰",
+        isMarked: true,
+      }
+    },
+    {
+      data:{
+        memberId:1,
+        membername:"phj",
+        portfolioId:7,
+        title: "갤럭시",
+        isMarked: true,
       }
     },
   ]}
@@ -551,7 +560,7 @@ export const AnimationCategoryDatas = [
         memberId:2,
         membername:"wjw",
         portfolioId:7,
-        title: "제목7",
+        title: "입체",
         isMarked: false,
       }
     },
@@ -560,7 +569,7 @@ export const AnimationCategoryDatas = [
         memberId:2,
         membername:"wjw",
         portfolioId:12,
-        title: "제목12",
+        title: "캐릭터",
         isMarked: false,
       }
     },
@@ -569,8 +578,8 @@ export const AnimationCategoryDatas = [
         memberId:2,
         membername:"wjw",
         portfolioId:13,
-        title: "제목13",
-        isMarked: false,
+        title: "애니메이션",
+        isMarked: true,
       }
     },
   ]}
@@ -584,7 +593,7 @@ export const GraphicCategoryDatas = [
         memberId:3,
         membername:"kdh",
         portfolioId:8,
-        title: "제목8",
+        title: "디자인",
         isMarked: false,
       }
     },
@@ -593,16 +602,16 @@ export const GraphicCategoryDatas = [
         memberId:3,
         membername:"kdh",
         portfolioId:9,
-        title: "제목9",
+        title: "그래픽",
         isMarked: false,
       }
     },
     {
       data:{
         memberId:3,
-        membername:"kdh",
+        membername:"wjy",
         portfolioId:10,
-        title: "제목10",
+        title: "캐드",
         isMarked: false,
       }
     },
@@ -616,7 +625,7 @@ export const PhotoCategoryDatas = [
         memberId:4,
         membername:'jhj',
         portfolioId:9,
-        title: "제목9",
+        title: "사진",
         isMarked: false,
       }
     },
@@ -625,8 +634,8 @@ export const PhotoCategoryDatas = [
         memberId:3,
         membername:'jhj',
         portfolioId:10,
-        title: "제목10",
-        isMarked: false,
+        title: "인생샷",
+        isMarked: true,
       }
     },
     {
@@ -634,7 +643,7 @@ export const PhotoCategoryDatas = [
         memberId:3,
         membername:'jhj',
         portfolioId:11,
-        title: "제목11",
+        title: "풍경사진",
         isMarked: false,
       }
     },

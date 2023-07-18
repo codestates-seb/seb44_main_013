@@ -15,23 +15,25 @@ type WebItemProps = {
   item: any;
 };
 
-
 export default function WebItem({ item }: WebItemProps) {
-  // export default function WebItem({ portfolio }: WebItemProps) {
-  // const { title, member } = portfolio;
-  const items = Array.from({ length: 1 }, (_, index) => (
-    <WebItemContainer key={index}>
-      <Link to="/portfolios/:portfolioId">
-        <WebItemImg src={WebItem1} alt={`웹 아이템 ${index + 1} 이미지`} />
-      </Link>{' '}
+  return (
+    <WebItemContainer>
+      <Link to={`/portfolios/${item.data.portfolioId}`}>
+        <WebItemImg
+          src={WebItem1}
+          alt={`웹 아이템 이미지 - ${item.data.title}`}
+        />
+      </Link>
       <TitleOverlay>
         <Title>{item.data.title}</Title>
-        <Author>작성자 이름</Author>
+        <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark portfolioId={1} isToggled={false} />
+        <Bookmark
+          portfolioId={item.data.portfolioId}
+          isToggled={item.data.isMarked}
+        />
       </BookmarkWrapper>
     </WebItemContainer>
-  ));
-  return <>{items}</>;
+  );
 }

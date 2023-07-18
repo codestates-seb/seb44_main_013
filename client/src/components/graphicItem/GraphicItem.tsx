@@ -13,17 +13,19 @@ type GraphicProps = {
 };
 
 export default function GraphicItem({ item }: GraphicProps) {
-  const items = Array.from({ length: 1 }, (_, index) => (
+  return (
     <GraphicItemContainer>
-      <img src={graphicimg} alt={`graphic image-${index}`} />
+      <img src={graphicimg} alt={`graphic image-${item.data.title}`} />
       <TitleOverlay>
         <Title>{item.data.title}</Title>
         <Author>{item.data.membername}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark portfolioId={1} isToggled={false} />
+        <Bookmark
+          portfolioId={item.data.portfolioId}
+          isToggled={item.data.isMarked}
+        />
       </BookmarkWrapper>
     </GraphicItemContainer>
-  ));
-  return <>{items}</>;
+  );
 }
