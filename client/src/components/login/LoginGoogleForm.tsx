@@ -1,13 +1,91 @@
+import { useGoogleLogin } from "@react-oauth/google";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { login } from "@/modules/loginSlice";
+import { call } from "@/utils/apiService";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/modules';
+import { useState } from "react";
+
 import { GoogleWrapper, TextSection } from "./LoginGoogleForm.styled"
-import { childrenProps } from "@/types"
-import GoogleLogo from "@/commons/atoms/logo/GoogleLogo"
+import GoogleLogo from "@/commons/atoms/logo/GoogleLogo";
 
+interface LoginForm {
+    children: React.ReactNode;
+    type: string;
+    role?: string;
+}
 
-export default function LoginGoogleForm ({children}: childrenProps){
-    return(
-        <GoogleWrapper>
-            <GoogleLogo/>
-            <TextSection>{children}</TextSection>
-        </GoogleWrapper>
-    )
+interface googleToken {
+    credentialCode: string;
+    credential:string;
+    clientId:string;
+    memberId: string;
+    optionData: {memberRole: string};
+}
+
+export default function LoginGoogleForm ({ children, type, role }: LoginForm){
+    const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
+
+    console.log(role);
+
+    const moveMain = async (res:any) => {
+        //구글이랑 소통 먼저
+        // if(role === ''){
+
+        // }
+        await sendGoogleCode(res)
+    };
+  
+    const handleLogin = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            console.log(tokenResponse);
+            if(loginState){
+                navigate('/')
+            }
+        }})
+
+    const sendGoogleCode = async ( res:googleToken ) => {
+        const credentialCode = res.credential;
+        const memberId = res.clientId;
+        const optionData = { memberRole: role };
+
+        try {
+            await call('/members', 'POST', { 
+                credentialCode: credentialCode,
+                cliendId: memberId,
+                ...optionData,
+            })
+            
+            handleLogin();
+            dispatch(login(true));
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    
+    if (type === 'google'){
+        return(
+            <GoogleWrapper onClick={moveMain}>
+                <GoogleLogo/>
+                <TextSection>{children}</TextSection>
+            </GoogleWrapper>
+    
+        )
+    }
+
+    if(type === 'normal'){
+        return(
+            <GoogleWrapper>
+                <TextSection>{children}</TextSection>
+            </GoogleWrapper>
+        )
+    }
+
 }
