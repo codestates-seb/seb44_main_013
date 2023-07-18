@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { PortfolioContent, Tag } from '@/types';
+import { PortfolioContent } from '@/types';
 
 export interface Quill {
   htmlContent: string;
