@@ -220,12 +220,17 @@ const HJHandlers = [
   }),
 
 
-  //로그인 : google
+  //로그인1 : get google
+  rest.get('/login/oauth2/code/google', async(_, res, ctx) => {
+    const credential = 'dummy-credential-code';
+    return res( ctx.status(200), ctx.set('credential', credential) )
+  }),
+
+
+  //로그인2 : post server
   rest.post('/members', async(req, res, ctx) => {
     const accessToken = 'dummy-access-token';
-    const { optionData } = await req.json();
-    
-    console.log(optionData);
+    const { role } = await req.json();
 
 
     return res(
@@ -234,7 +239,8 @@ const HJHandlers = [
       //응답 객체 헤더 설정 accesstoken 전달 
       ctx.set('authorization', `Bearer ${accessToken}`),
       ctx.set('accessToken', accessToken),
-      ctx.set('isLogin', 'true')
+      ctx.set('isLogin', 'true'),
+      ctx.set('memberRole', role)
     )
   }),
   //로그아웃

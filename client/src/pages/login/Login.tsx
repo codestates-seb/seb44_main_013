@@ -40,7 +40,7 @@ export default function Login() {
           curated for web, app, and design enthusiasts.
         </ContentSection>
 
-        <LoginGoogleForm type={'normal'}> 자체 로그인 예정</LoginGoogleForm>
+        <LoginGoogleForm type={'google'}> Login with Google</LoginGoogleForm>
 
         <MiddleWrapper>
           <MiddleLine />
@@ -49,7 +49,7 @@ export default function Login() {
         </MiddleWrapper>
 
         <Link to="/signup">
-          <LoginGoogleForm type={'normal'}> 구글 로그인 이동 </LoginGoogleForm>
+          <LoginGoogleForm type={'normal'}> 처음이신가요? 클릭하세요! </LoginGoogleForm>
         </Link>
 
       </LoginSection>
