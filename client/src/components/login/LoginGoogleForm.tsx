@@ -18,24 +18,24 @@ interface LoginForm {
     role?: string;
 }
 
-interface googleToken {
-    credentialCode: string;
-    credential:string;
-    clientId:string;
-    memberId: string;
-    optionData: {memberRole: string};
-}
+// interface googleToken {
+//     credentialCode: string;
+//     credential:string;
+//     clientId:string;
+//     memberId: string;
+//     optionData: {memberRole: string};
+// }
 
 export default function LoginGoogleForm ({ children, type, role }: LoginForm){
-    const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+    // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
     const [ exitModal, setExitModal ] = useState(false);
 
 
-    const moveMain = async (res:any) => {
-        //일단 먼저 구글에 get 요청 보내야 함 
+    const moveMain = async ( ) => {
+        //일단 먼저 구글에 get 요청 보내야 함  res 없앰 
         await call('/login/oauth2/code/google', 'GET', null)
         .then((res) => console.log(res));
 
