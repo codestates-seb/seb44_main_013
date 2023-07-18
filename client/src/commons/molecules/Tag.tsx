@@ -37,11 +37,12 @@ const TagBody = styled.div<{ selected?: boolean, readOnly?: boolean }>`
 interface TagProps {
   tag: tag;
   readOnly?: boolean;
+  selected?: boolean;
 }
 
-export const Tag = ({ tag, readOnly }: TagProps) => {
+export const Tag = ({ tag, readOnly, selected = false }: TagProps) => {
   const [isSelected, onClick] = useTagSelect({
-    isSelected: false,
+    isSelected: selected,
     currentTag: tag,
   });
 

@@ -5,9 +5,10 @@ import tw from 'twin.macro';
 
 import { setCategory, openCategory, isOpened } from '@/modules/categorySlice';
 import { deleteTag } from '@/modules/tagSlice';
+import { CATEGORY_TYPE } from '@/types';
 
 interface DropDownItemProps {
-  value: string;
+  value: CATEGORY_TYPE;
 }
 
 const DropDownItemContainer = styled.div`

@@ -9,7 +9,7 @@ export const ModalContainer = styled.div`
     absolute
     top-0
     left-0
-    z-1
+    z-20
   `}
 `;
 

@@ -2,22 +2,23 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag as tag } from '@/types';
 import { call } from '@/utils/apiService';
 
 import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { Center, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/Typography';
-import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
-import MemberProfile from '@/commons/molecules/MemberProfile';
-import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
-import Bookmark from '@/commons/atoms/buttons/Bookmark';
-import Tag from '@/commons/molecules/Tag';
-
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
+import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
+import MemberProfile from '@/commons/molecules/MemberProfile';
 import DeleteModal from '@/components/modal/DeleteModal';
+import Bookmark from '@/commons/atoms/buttons/Bookmark';
+import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import { BsArrowReturnLeft } from 'react-icons/bs';
+import Tag from '@/commons/molecules/Tag';
+
 
 export default function PortfolioDetail() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -32,7 +33,6 @@ export default function PortfolioDetail() {
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
   const onReviseButtonClick = () => navigate(`/portfolio/edit?portfolioId=${portfolioId}`);
-  const changeDateFormat = (date: string) => new Date(date.substr(0, 10)).toDateString();
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
     deletePortfolio();

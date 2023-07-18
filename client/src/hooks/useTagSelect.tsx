@@ -1,4 +1,4 @@
-/* 2023-07-07 좋아요 버튼 커스텀훅 - 김다함 */
+/* 2023-07-07 태그 선택 커스텀훅 - 김다함 */
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
