@@ -8,6 +8,8 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.portfolly.server.dto.SingleResponseDto;
 import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.picture.entity.Picture;
+import com.portfolly.server.picture.repository.PictureRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class PictureService {
+    private PictureRepository pictureRepository;
 
 
     @Value("${cloud.aws.s3.bucket}")
@@ -48,9 +51,16 @@ public class PictureService {
             } catch(IOException e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
             }
+            String pictureUrl = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/"+fileName;
 
-            fileNameList.add("https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/"+fileName);
+            fileNameList.add(pictureUrl);
+
+            Picture picture = new Picture();
+            picture.setFileName(fileName);
+            picture.setPictureUrl(pictureUrl);
+            pictureRepository.save(picture);
         });
+
 
         return fileNameList;
     }

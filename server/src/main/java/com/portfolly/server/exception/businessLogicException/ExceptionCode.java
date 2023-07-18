@@ -11,8 +11,6 @@ public enum ExceptionCode {
     EMAIL_NOT_EXIST(HttpStatus.NOT_FOUND,"회원의 이메일이 존재하지 않습니다."),
     EMAIL_DUPLICATION_ERROR(HttpStatus.CONFLICT,"이메일 중복 오류 입니다. [Action] : 다른 이메일을 사용하여 주십시오."),
     NOT_DEFINED_MEMBER_ROLE(HttpStatus.BAD_REQUEST,"정의 되지 않은 회원입니다. [Action] : 클라이언트/파트너를 정의해 주십시오."),
-    POST_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지않는 게시물입니다."),
-    NOT_DEFINED_MEMBER_ROLE(HttpStatus.BAD_REQUEST,"정의 되지 않은 회원입니다. [Action] : 클라이언트/파트너를 정의해 주십시오."),
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다.");
 
     @Getter

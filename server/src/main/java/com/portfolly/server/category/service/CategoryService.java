@@ -1,24 +1,24 @@
-//package com.portfolly.server.category.service;
-//
-//import com.portfolly.server.category.entity.Tag;
-//import com.portfolly.server.category.repository.CategoryRepository;
-//import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
-//import com.portfolly.server.exception.businessLogicException.ExceptionCode;
-//import com.portfolly.server.portfolio.repository.PortfolioRepository;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.data.domain.*;
-//import org.springframework.stereotype.Service;
-//
-//import javax.transaction.Transactional;
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.stream.Collectors;
-//
-//@Service
-//@Transactional
-//@RequiredArgsConstructor
-//public class CategoryService {
+package com.portfolly.server.category.service;
+
+import com.portfolly.server.category.entity.Tag;
+import com.portfolly.server.category.repository.CategoryRepository;
+import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
+import com.portfolly.server.exception.businessLogicException.ExceptionCode;
+import com.portfolly.server.portfolio.repository.PortfolioRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class CategoryService {
 //    private final CategoryRepository categoryRepository;
 //    private final PortfolioRepository portfolioRepository;
 //    private final TagRepository tagRepository;
@@ -42,4 +42,4 @@
 //
 //        return questionPage;
 //    }
-//}
+}

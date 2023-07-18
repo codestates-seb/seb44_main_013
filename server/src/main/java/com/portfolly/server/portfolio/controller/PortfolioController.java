@@ -40,8 +40,10 @@ public class PortfolioController {
     public ResponseEntity postPortfolio(
 //            @RequestHeader(name = "Refresh") String token,
                                         @Valid @RequestBody PortfolioDto.Post postDto){
+        //authentication or token통해서 memberId 받아와야함
 //        Long memberId = findmemberId(token);
-        Portfolio portfolio = portfolioService.postPortfolio(postDto);
+        Long memberId = 1L;
+        Portfolio portfolio = portfolioService.postPortfolio(postDto, memberId);
         URI location = UriCreator.createUri(PORTFOLIO_DEFAULT_URL, portfolio.getId());
         return ResponseEntity.created(location).build();
     }
@@ -62,7 +64,12 @@ public class PortfolioController {
     public ResponseEntity getPortfolio(@PathVariable("portfolio-id") Long portfolioId){
         Portfolio portfolio = portfolioService.selectPortfolio(portfolioId);
         portfolioService.increaseViews(portfolio);
-        return new ResponseEntity<>(new SingleResponseDto<>(portfolioMapper.portfolioToResponseDto(portfolio)), HttpStatus.OK);
+        PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
+        response.setMarked(portfolioService.isMarked(response.getId()));
+        response.setLiked(portfolioService.isLiked(response.getId()));
+        response.setWriter(portfolioService.isWriter(response.getId()));
+        response.setCountLikes(portfolioService.countLikes(response.getId()));
+        return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
     //포트폴리오 전체 조회
@@ -76,7 +83,12 @@ public class PortfolioController {
         for (int i = 0; i < portfolios.size(); i++) {
             System.out.println(portfolios.get(i).toString());
         }
-        return new ResponseEntity<>(new MultiResponseDto<>(portfolioMapper.portfoliosToResponseDto(portfolios), pagePortfolios), HttpStatus.OK);
+        List<PortfolioDto.Response> responses = portfolioMapper.portfoliosToResponseDto(portfolios);
+        for (PortfolioDto.Response response : responses) {
+            response.setFirstImage(portfolioService.firstImageUrl(response.getId()));
+            response.setMarked(portfolioService.isMarked(response.getId()));
+        }
+        return new ResponseEntity<>(new MultiResponseDto<>(responses, pagePortfolios), HttpStatus.OK);
     }
 
     //포트폴리오 삭제
