@@ -20,7 +20,17 @@ export default function Main() {
         {/* {Array.from({ length: 4 }).map((_, index) => {
           return <WebItem key={index} />;
         })} */}
-        {selectedCategory === '웹' && <WebItem />}
+        {selectedCategory === '웹' && (
+          <WebItem
+          // portfolio={{
+          //   title: '',
+          //   member: {
+          //     name: '',
+          //     picture: '',
+          //   },
+          // }}
+          />
+        )}
         {selectedCategory === '앱' && <AppItem />}
         {selectedCategory === '3D/애니메이션' && <ThreeDItem />}
         {selectedCategory === '그래픽디자인' && <GraphicItem />}
