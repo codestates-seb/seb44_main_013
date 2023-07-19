@@ -1,13 +1,4 @@
 /* 2023-07-12 포트폴리오 요청 데이터 관련 타입 모음 - 김다함 */
-// enum CATEGORY {
-//   "웹",
-//   "앱",
-//   "3D/애니메이션",
-//   "그래픽디자인",
-//   "사진/영상",
-// }
-
-// export type CATEGORY_TYPE = keyof typeof CATEGORY;
 export type CATEGORY_TYPE = "웹" | "앱" | "3D/애니메이션" | "그래픽디자인" | "사진/영상";
 
 export interface Member {
