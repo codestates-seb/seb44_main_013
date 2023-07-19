@@ -4,6 +4,7 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
   const handleChange = (event: any) => {
     setSearchValue(event.target.value);
   };
+  console.log(data);
 
   const 엔터치면검색 = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,8 +22,9 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
             }else {
               return (
                 element.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                element.content.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                element.name.toLowerCase().includes(currentSearch.toLowerCase())
+                element.content.toLowerCase().includes(currentSearch.toLowerCase())
+                // element.name.toLowerCase().includes(currentSearch.toLowerCase())
+                // 이름 받으면 주석 풀고 || 붙여서 처리
               )
             }
           }
