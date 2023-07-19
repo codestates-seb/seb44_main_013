@@ -34,16 +34,13 @@ public class PortfolioService {
     //포트폴리오 등록
     public Portfolio postPortfolio(PortfolioDto.Post postDto, Long memberId){
         Member member = memberService.findMember(memberId);
-        //이미지 연관관계
-        //portfolio content에 있는 해당하는 링크 찾아 링크로 picture entity를 찾아옴
-        //문자열 찾기"https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/**"
-        //picture entity에 portfolioId 를 넣어준다
+        //이미지 연관관계 picture entity에 portfolioId 를 넣어준다
         Portfolio portfolio = portfolioMapper.postDtoToPortfolio(postDto);
+//        Picture picture = pictureRepository.findByPortfolioId(portfolio.getId());
+//        picture.setPortfolio(portfolio);
         portfolio.setStatus(Portfolio.Status.ACTIVE);
         portfolio.setMember(member);
         portfolio.setCategory(categoryRepository.findByName(postDto.getCategory()).orElseThrow(()->new RuntimeException()));
-        System.out.println("##############################"+postDto.getCategory());
-        System.out.println("###############################"+portfolio.getCategory());
         portfolioRepository.save(portfolio);
         return portfolio;
     }
@@ -85,9 +82,12 @@ public class PortfolioService {
     //picture에서 portfolioId 에 맞는 첫번째 이미지링크를 가져옴
     public String firstImageUrl(Long portfolioId){
         List<Picture> pictures = pictureRepository.findAllByPortfolioId(portfolioId);
-        //if picture.size != 0 / else default image
-        String firstImage = pictures.get(0).getPictureUrl();
-        return firstImage;
+        if (pictures.size() != 0) {
+            String firstImage = pictures.get(0).getPictureUrl();
+            return firstImage;
+        }
+        //else default image 추가해주어야 함
+        else return null;
     }
 
     public Long matchCategoryId(String category){

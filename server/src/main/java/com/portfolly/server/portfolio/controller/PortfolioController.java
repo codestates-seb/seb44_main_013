@@ -69,6 +69,7 @@ public class PortfolioController {
         response.setLiked(portfolioService.isLiked(response.getId()));
         response.setWriter(portfolioService.isWriter(response.getId()));
         response.setCountLikes(portfolioService.countLikes(response.getId()));
+        response.setFirstImage(portfolioService.firstImageUrl(response.getId()));
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
