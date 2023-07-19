@@ -8,7 +8,16 @@ export const ImageWrapper = styled.div`
     width: 100%;
     height: 100vh;
     object-fit: cover;
+    opacity: 0.5;
   }
+`;
+export const SmallImage = styled.img`
+  width: 800px;
+  height: auto;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  transform: translate(-50%, -50%);
 `;
 
 export const TextOverlay = styled.div`
@@ -16,19 +25,24 @@ export const TextOverlay = styled.div`
   bottom: 0;
   left: 0;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
   width: 100%;
 `;
 
 export const Title = styled.h1`
-  font-size: calc(20vw - 10px);
-  color: white;
+  font-size: calc(25vw - 10px);
+  color: #6c47ff;
+  font-weight: 500;
   opacity: 0;
+  position: relative;
+  z-index: 2;
 `;
 
-export const Subtitle = styled.h2`
-  font-size: 20px;
-  color: white;
+export const Subtitle = styled(Title)`
+  color: #6c47ff57;
   opacity: 0;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
