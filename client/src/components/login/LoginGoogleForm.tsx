@@ -1,94 +1,88 @@
 import { useGoogleLogin } from "@react-oauth/google";
-// import { useCookies } from "react-cookie";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { login } from "@/modules/loginSlice";
-import { call } from "@/utils/apiService";
-import { useSelector } from 'react-redux';
-import { RootState } from '@/modules';
+import axios from "axios";
 import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { login, setCredentials } from "@/modules/loginSlice";
+// import { useNavigate } from "react-router-dom";
+
 
 import { GoogleWrapper, TextSection } from "./LoginGoogleForm.styled"
 import GoogleLogo from "@/commons/atoms/logo/GoogleLogo";
-import AlertModal from "../modal/AlertModal";
+
+
 
 interface LoginForm {
     children: React.ReactNode;
     type: string;
-    role?: string;
 }
 
-// interface googleToken {
-//     credentialCode: string;
-//     credential:string;
-//     clientId:string;
-//     memberId: string;
-//     optionData: {memberRole: string};
-// }
 
-export default function LoginGoogleForm ({ children, type, role }: LoginForm){
-    // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    // const [ cookies, setCookie, removeCookie ] = useCookies(['memberId', 'isLogin', 'memberRole']);
-    const [ exitModal, setExitModal ] = useState(false);
+export default function LoginGoogleForm ({ children, type }: LoginForm){
+    const [ token, setToken ] = useState('');
+    const [ name, setName ] = useState('');
+    const [ email, setEmail ] = useState('');
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
 
 
     const moveMain = async ( ) => {
-        //일단 먼저 구글에 get 요청 보내야 함  res 없앰 
-        await call('/login/oauth2/code/google', 'GET', null)
-        .then((res) => console.log(res));
-
-        //구글이랑 소통 먼저
-        if( role === ''){
-            setExitModal(true);
-        } else{
-            handleLogin();
-            
-        }
+        await testLogin();
+        sendAccessToken();
     };
-  
-    const handleLogin = useGoogleLogin({
-        scope: "email profile",
-        onSuccess: async (tokenResponse) => {
-            // console.log(tokenResponse);
-            sendGoogleCode(tokenResponse);
 
-        },
-        flow: "auth-code",
-    })
-
-    const sendGoogleCode = async ( res:any ) => {
-        const credentialCode = res.credential;
-        const memberId = res.clientId;
-        console.log(res);
-
-        try {
-            await call('/members', 'POST', { 
-                credentialCode: credentialCode,
-                cliendId: memberId,
-                role: role,
+    const testLogin = useGoogleLogin({
+        onSuccess: (tokenResponse) => {
+            const ACCESS = tokenResponse.access_token;
+            setToken(ACCESS);
+            console.log(tokenResponse);
+            
+            axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: {
+                  'Authorization': `Bearer ${token}`
+                }
             })
-            .then((res) => {console.log(res)})
-            
-            dispatch(login(true));
-            navigate('/')
+            .then((response) => {
+                console.log(response);
+                setName(response.data.name);
+                setEmail(response.data.email);
+            })
+            // call('https://www.googleapis.com/oauth2/v3/userinfo', 'GET' , {
+            //     headers:{
+            //         'Authorization': `Bearer ${ACCESS}`
+            //     }
+            // })
+            // .then((response) => {
+            //     console.log(response);
+            //     setName(response.data.name);
+            //     setEmail(response.data.email);
 
-        } catch (err) {
-            console.log(err);
+            // });
         }
-    };
+    });
 
-    const handleExit = (   ) => {
-        setExitModal(!exitModal)
+    const sendAccessToken = () => {
+        return axios.post('/api/미정', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body:{
+                name:name,
+                email:email,
+            }
+        })
+        .then(() => console.log('서버에 정보가 전달 되었습니다.'))
+        .catch(() => console.log('서버에 정보 전달 실패 ㅜ '))
     }
 
+
+//post 
+// 1. 사진/ 이름/ 이메일 : body / accessToken : header 보내드린다. 
+// 2. localstorage에 받은 token 저장 
     
     if (type === 'google'){
         
         return(
             <>
-            { exitModal ? <><AlertModal onConfirm ={handleExit} onCancel={ handleExit }/></> : null}
             <GoogleWrapper onClick={moveMain}>
                 <GoogleLogo/>
                 <TextSection>{children}</TextSection>
