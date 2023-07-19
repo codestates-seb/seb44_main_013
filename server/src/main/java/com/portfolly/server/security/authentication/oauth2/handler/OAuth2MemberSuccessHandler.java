@@ -98,8 +98,11 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     private URI createURI(String accessToken) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", accessToken);
+        // 멤버 id
+        // 멤버가 존재하는지 안하는지
 //        queryParams.add("refresh_token", refreshToken);
 
+        // 엑세스 토큰을 받을 리타이렉트 주소를 알아야함
         return UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
@@ -110,5 +113,4 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                 .build()
                 .toUri();
     }
-
 }

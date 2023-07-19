@@ -1,9 +1,12 @@
 package com.portfolly.server.board.dto;
 
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,6 +23,10 @@ public class BoardDto {
 
         @NotBlank(message = "내용은 공백이 아니어야 합니다.")
         private String content;
+
+        // 게시판 구분 : [COOPERATION, RECRUITMENT]
+        @NotNull(message = "구분은 공백이 아니어야 합니다.")
+        private Board.Division division;
     }
     @Getter
     @Setter
@@ -47,11 +54,12 @@ public class BoardDto {
         private String content;
         private Long memberId;
         private String name;
+        private Board.Division division;
+        private Board.Status status;
+        private Long view;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
-        private String division;
-        private Long view;
-        private List<Comment> Comments;
+        private List<Comment> comments;
     }
 
     // 게시글 전체 조회 응답
@@ -60,13 +68,13 @@ public class BoardDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ResponseList {
+        private Long id;
         private String title;
         private String content;
         private Long memberId;
         private String name;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
-        private String division;
+        private Board.Division division;
+        private Board.Status status;
         private Long view;
     }
 
