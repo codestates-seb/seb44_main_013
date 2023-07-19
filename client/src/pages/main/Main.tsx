@@ -33,38 +33,38 @@ export default function Main() {
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoryParam = categoryMap[selectedCategory] || 'web';
+        // const categoryParam = categoryMap[selectedCategory] || 'web';
         const res = await call(
           `portfolios?category=${categoryParam}`,
           'GET',
           null
         );
         setItems(res[0].data);
+        setFilteredItems(res[0].data);
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
       }
     };
 
-    fetchData().then(() => {
-      setFilteredItems(items);
-    });
+    fetchData();
   }, [selectedCategory]);
 
-  useEffect(() => {
-    if (searchTerm === '') {
-      setFilteredItems(items);
-    } else {
-      const results = items.filter(
-        (item) =>
-          item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.data.membername.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredItems(results);
-    }
-  }, [searchTerm, items]);
+  // useEffect(() => {
+  //   if (searchTerm === '') {
+  //     setFilteredItems(items);
+  //   } else {
+  //     const results = items.filter(
+  //       (item) =>
+  //         item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //         item.data.membername.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //     setFilteredItems(results);
+  //   }
+  // }, [searchTerm, items]);
 
   const renderItems = () => {
     switch (selectedCategory) {
@@ -93,32 +93,74 @@ export default function Main() {
     }
   };
 
-  const handleSearch = (value: string) => {
-    setSearchTerm(value);
-  };
+  // const handleSearch = (value: string) => {
+  //   setSearchTerm(value);
+  // };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      if (searchTerm === '') {
-        setFilteredItems(items);
-      } else {
-        const results = items.filter(
-          (item) =>
-            item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.data.membername
-              .toLowerCase()
-              .includes(searchTerm.toLowerCase())
-        );
-        setFilteredItems(results);
-      }
+  // const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.key === 'Enter') {
+  //     if (searchTerm === '') {
+  //       setFilteredItems(items);
+  //     } else {
+  //       const results = items.filter(
+  //         (item) =>
+  //           item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //           item.data.membername
+  //             .toLowerCase()
+  //             .includes(searchTerm.toLowerCase())
+  //       );
+  //       setFilteredItems(results);
+  //     }
+  //   }
+  // };
+
+  const [searchs, setSearchs] = useState([] as any);
+
+  useEffect(() => {
+    if(searchTerm === ''){
+      setSearchs(renderItems());
     }
-  };
 
+    setSearchs(items);
+  }, [items]);
+
+  console.log(searchs);
+  
+  // searchs 가 추가될 때 그때 렌더링이 되게 해야함
+  // searchterm이 없을때 리렌더링X
+  
   return (
     <>
-      <Search setSearchValue={handleSearch} 엔터치면검색={handleKeyPress} />
+      <Search
+        setSearchValue={setSearchTerm}
+        currentSearch={searchTerm}
+        data={items}
+        setSearchs={setSearchs}
+      />
       <CategoryNavBar />
-      <WebItemsContainer>{renderItems()}</WebItemsContainer>
+      <WebItemsContainer>
+        {
+          // searchTerm === '' ?
+          // renderItems() :
+          searchs.map((searchedItem: any, index: any) => {
+            if(categoryParam === 'web') {
+              return (<WebItem item={searchedItem} key={index} />)
+            }
+            if(categoryParam === 'app') {
+              return (<AppItem item={searchedItem} key={index} />)
+            }
+            if(categoryParam === '3danimation') {
+              return (<ThreeDItem item={searchedItem} key={index} />)
+            }
+            if(categoryParam === 'graphicdesign') {
+              return (<GraphicItem item={searchedItem} key={index} />)
+            }
+            if(categoryParam === 'photo') {
+              return (<PhotoItem item={searchedItem} key={index} />)
+            }
+        })}
+      </WebItemsContainer>
     </>
   );
 }
+
