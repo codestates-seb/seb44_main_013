@@ -1,24 +1,18 @@
 package com.portfolly.server.category.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class CategoryDto {
     @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response {
-        private Long categoryId;
+        private Long id;
         private String name;
     }
 
-    @Getter
-    public static class TagResponse {
-        private Long portfolioId;
-        private String title;
-        private String content;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
-//        private MemberDto.Response member;
-//        private List<TagDto.Response> tags;
-    }
 }
