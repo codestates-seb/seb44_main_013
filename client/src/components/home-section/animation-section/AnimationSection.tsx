@@ -7,6 +7,7 @@ import {
   TextOverlay,
   Title,
   Subtitle,
+  SmallImage,
 } from './AnimationSection.styled';
 
 export default function AnimationSection() {
@@ -15,16 +16,17 @@ export default function AnimationSection() {
       <SectionWrapper>
         <ImageWrapper data-aos="fade-left">
           <img src={animationImage} alt="Animation" className="image" />
+          <SmallImage src={animationImage} alt="Animation" />
           <TextOverlay>
             <Title
               className="animation-title "
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              Animation
+              3D
             </Title>
             <Subtitle data-aos="fade-up" data-aos-delay="400">
-              Captivating and Dynamic
+              Animation
             </Subtitle>
           </TextOverlay>
         </ImageWrapper>

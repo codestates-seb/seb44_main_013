@@ -8,6 +8,7 @@ import {
   TextOverlay,
   Title,
   Subtitle,
+  SmallImage,
 } from './GraphicDesignSection.styled';
 
 export default function GraphicDesignSection() {
@@ -16,16 +17,17 @@ export default function GraphicDesignSection() {
       <SectionWrapper>
         <ImageWrapper data-aos="zoom-in">
           <img src={graphicImage} alt="Graphic Design" className="image" />
+          <SmallImage src={graphicImage} alt="Graphic Design" />
           <TextOverlay>
             <Title
               className="graphic-title"
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              Graphic Design
+              Graphic
             </Title>
             <Subtitle data-aos="fade-up" data-aos-delay="400">
-              Creative and Eye-Catching
+              Design
             </Subtitle>
           </TextOverlay>
         </ImageWrapper>

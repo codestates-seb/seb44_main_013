@@ -8,6 +8,7 @@ import {
   TextOverlay,
   Title,
   Subtitle,
+  SmallImage,
 } from './PhotographySection.styled';
 
 export default function PhotographySection() {
@@ -16,16 +17,17 @@ export default function PhotographySection() {
       <SectionWrapper>
         <ImageWrapper data-aos="flip-left">
           <img src={photographyImage} alt="Photography" className="image" />
+          <SmallImage src={photographyImage} alt="Photography" />
           <TextOverlay>
             <Title
               className="photo-title"
               data-aos="zoom-in"
               data-aos-delay="300"
             >
-              Photography
+              Photo
             </Title>
             <Subtitle data-aos="zoom-in" data-aos-delay="400">
-              Breathtaking and Artistic
+              Movie
             </Subtitle>
           </TextOverlay>
         </ImageWrapper>

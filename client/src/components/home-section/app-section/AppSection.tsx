@@ -7,14 +7,16 @@ import {
   TextOverlay,
   Title,
   Subtitle,
+  SmallImage,
 } from './AppSection.styled';
 
 export default function AppSection() {
   return (
     <Element name="appSection" className="section">
       <SectionWrapper>
-        <ImageWrapper data-aos="fade-up">
+        <ImageWrapper data-aos="fade-up" data-aos-delay="100">
           <img src={appImage} alt="App" className="image" />
+          <SmallImage src={appImage} alt="SmallImage" />
           <TextOverlay>
             <Title
               className="app-title"
@@ -24,7 +26,7 @@ export default function AppSection() {
               App
             </Title>
             <Subtitle data-aos="fade-left" data-aos-delay="400">
-              Interactive and User-Friendly
+              App
             </Subtitle>
           </TextOverlay>
         </ImageWrapper>
