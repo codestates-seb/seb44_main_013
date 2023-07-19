@@ -1,8 +1,8 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios'
+import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios';
+import { API_BASE_URL } from '@/app-config';
 // import { getCookie } from './cookie';
 //ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
-export const API_BASE_URL = ''
 const ACCESS_TOKEN = '';
 // const REFRESH_TOKEN = getCookie('refereshtoken');
 // console.log(ACCESS_TOKEN, REFRESH_TOKEN);
@@ -17,7 +17,7 @@ export async function call(api: string, method: string, data?: any) {
 
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   if (accessToken) {
-  headers.append("Authorization", "Bearer " + accessToken);
+    headers.append("Authorization", "Bearer " + accessToken);
   }
 
   const options: RawAxiosRequestConfig = {
