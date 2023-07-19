@@ -43,13 +43,14 @@ export default function Main() {
           null
         );
         setItems(res[0].data);
-        setFilteredItems(res[0].data);
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
       }
     };
 
-    fetchData();
+    fetchData().then(() => {
+      setFilteredItems(items);
+    });
   }, [selectedCategory]);
 
   useEffect(() => {

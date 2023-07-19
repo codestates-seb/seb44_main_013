@@ -1,7 +1,7 @@
 import ReactQuill from 'react-quill';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
@@ -14,6 +14,7 @@ import {
   TextEditor,
   TitleAdd,
 } from './AddCommunity.styled';
+// import { CommuProps } from '@/types';
 
 export default function AddCommunity() {
   const modules = {
@@ -41,11 +42,12 @@ export default function AddCommunity() {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleTitle = (e: any) => {
     setTitle(e.target.value);
   };
-
+  //새 등록인지 수정인지 한 페이지에서 관리 
   //  post 요청 body
   const postInformation = {
     title: title,
@@ -53,30 +55,64 @@ export default function AddCommunity() {
     division: 'RECRUITMENT',
   }
 
-  const postCommunity = () => {
-    axios.post('http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080/boards/write', {
-        headers: {
-          widthCredentials: true,
-        },
-        body: postInformation,
-      }
-    )  
-    .then((res) => console.log('post 요청 성공 ' + res))
-    .catch((err) => console.log(err));
+  //새 글 작성 함수
+  // const postCommunity = () => {
+  //   axios.post('/api/boards/write', {
+  //       headers: {
+  //         widthCredentials: true,
+  //       },
+  //       body: postInformation,
+  //     }
+  //   )  
+  //   .then((res) => console.log('post 요청 성공 ' + res))
+  //   .catch((err) => console.log(err));
 
-    navigate('/boards?division=RECRUITMENT');
-  }
+  //   navigate('/boards?division=RECRUITMENT');
+  // }
 
   // patch 요청
   // 게시글 클릭했을 때의 게시글 number로 api 보내서 get 요청 해 res 받아오기
   // 받아온 res 제목과 내용에 각각 배치
   // 배치한 내용에서(원본) 수정한다면 patch요청 보내기
-  const communityNum = 1; // 임시로
+  // const communityNum = 1; // 임시로
+  const { id: communityNum } = useParams();
+  //url에서 boardId 받아옵니다. 
+  // 최초 랜더링 시 해당 게시글을 reqct-quill에 뿌립니다. 
   useEffect(() => {
-    axios.get(`/boards/:${communityNum}`)
-    .then((res) => console.log(res.data[0]))
-    .catch((err) => console.log(err));
+    if(location.pathname === `/boards/${communityNum}`){
+      axios.get(`/api/boards/${communityNum}`)
+      .then((res) => {
+        setTitle(res.data.title);
+        setPost(res.data.content);
+      })
+      .catch((err) => console.log(err));
+    }
+
+    if(location.pathname === `/boards/write`) {
+      axios.post(`/api/boards/write`,  {
+        headers: {
+          widthCredentials: true,
+        },
+        body: postInformation,
+      })
+      .then(() => console.log('새글 등록 성공'))
+      .catch((err) => console.log(err))
+
+      navigate(`/boards/`)
+    }
+
   }, [])
+
+  const saveNewCommuData = () =>  {
+    axios.patch(`/api/boards/edit/${communityNum}`, {
+      title: title,
+      content: post
+    })
+    .then(() => navigate(`/boards/${communityNum}`))
+    .catch((err) => console.log(err));
+
+    
+  }
 
   // const changeCommunity = () => {
   //   axios.patch(`/boards/edit/:${communityNum}`, postInformation)
@@ -93,7 +129,7 @@ export default function AddCommunity() {
         <TextEditorContainer>
           <h1 className='addTitle'>Edit Your Forum</h1>
           <TextEditor>
-            <TitleAdd type="text" onChange={(e: any) => handleTitle(e)} />
+            <TitleAdd type="text" onChange={(e: any) => handleTitle(e)} value={title} />
             <hr />
             <ReactQuill
               theme="snow"
@@ -103,8 +139,8 @@ export default function AddCommunity() {
               onChange={(event)=> setPost(event)}
             />
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
-            <SaveBtnContainer onClick={postCommunity}>
-              <PurpleBtn>Save</PurpleBtn>
+            <SaveBtnContainer onClick={saveNewCommuData}>
+              <PurpleBtn >Save</PurpleBtn>
             </SaveBtnContainer>
           </TextEditor>
         </TextEditorContainer>
