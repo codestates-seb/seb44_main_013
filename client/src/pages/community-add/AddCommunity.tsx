@@ -79,7 +79,7 @@ export default function AddCommunity() {
   //url에서 boardId 받아옵니다. 
   // 최초 랜더링 시 해당 게시글을 reqct-quill에 뿌립니다. 
   useEffect(() => {
-    if(location.pathname === `/boards/${communityNum}`){
+    if(location.pathname === `/boards/edit/${communityNum}`){
       axios.get(`/api/boards/${communityNum}`)
       .then((res) => {
         setTitle(res.data.title);
