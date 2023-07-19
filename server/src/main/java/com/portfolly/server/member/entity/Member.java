@@ -34,6 +34,7 @@ public class Member extends Auditable {
     private String career;
     private String award;
     private String skill;
+    private Boolean isMember; // 회원이면 true, 아니면 false
     @Column(name = "expired_at")
     private LocalDateTime expired_at; // 삭제 만료 날짜
     private String refreshToken;
@@ -61,7 +62,9 @@ public class Member extends Auditable {
     }
     public enum Member_Role{
         CLIENT("클라이언트"),
-        PARTNER("파트너");
+        PARTNER("파트너"),
+        NOT_ROLE("역할 없음");
+
 
         private String role;
         Member_Role(String role){
