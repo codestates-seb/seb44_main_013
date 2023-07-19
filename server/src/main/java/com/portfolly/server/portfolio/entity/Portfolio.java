@@ -5,6 +5,7 @@ import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.likes.entity.Likes;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.category.entity.Category;
+import com.portfolly.server.picture.entity.Picture;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -69,5 +70,10 @@ public class Portfolio extends Auditable {
     private List<Likes> likes = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
     private List<Bookmark> bookmarks = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolio")
+    private List<PortfolioTag> portfolioTags = new ArrayList<>();
+    @OneToMany(mappedBy = "portfolio")
+    private List<Picture> pictures = new ArrayList<>();
+
 
 }
