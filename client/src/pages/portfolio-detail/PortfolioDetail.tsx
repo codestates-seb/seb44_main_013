@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import dompurify from "dompurify";
 
 import { changeDateFormat } from '@/utils/changeDateFormat';
-import { Portfolio, Member, Tag as tag } from '@/types';
+import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
 import { ButtonHeader, ContentContainer, PortfolioContainer, HtmlWrapper, UserCard, UserContainer } from './PortfolioDetail.styled';
@@ -18,7 +18,7 @@ import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import { BsArrowReturnLeft } from 'react-icons/bs';
-import Tag from '@/commons/molecules/tag/Tag';
+import PortfolioTag from '@/commons/molecules/tag/Tag';
 
 
 export default function PortfolioDetail() {
@@ -102,7 +102,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: tag) => <Tag tag={tag} key={tag.tagId} readOnly={true} />)
+                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.tagId} readOnly={true} />)
               }
             </FlexWrapper>
           </UserCard>
