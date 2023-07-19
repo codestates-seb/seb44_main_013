@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
+   Member AuthToMember(MemberDto.Auth auth);
    Member PostToMember(MemberDto.Post post);
    Member PatchToMember(MemberDto.Patch patch);
    MemberDto.Client_Response MemberToClientResponse(Member member);

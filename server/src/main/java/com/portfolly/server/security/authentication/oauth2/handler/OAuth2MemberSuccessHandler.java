@@ -25,6 +25,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
     private final MemberService memberService;
+    private Member member;
 
     public OAuth2MemberSuccessHandler(JwtTokenizer jwtTokenizer,
                                       CustomAuthorityUtils authorityUtils,
@@ -58,10 +59,9 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     }
 
     private void saveMember(String refreshToken,String email,String name) {
-        Member member = Member.builder()
+        member = Member.builder()
                 .email(email)
                 .name(name)
-                .member_role(Member.Member_Role.CLIENT)
                 .refreshToken(refreshToken)
                 .build();
 
@@ -106,9 +106,9 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         return UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
-                .host("localhost")
-                .port(80)
-                .path("/receive-token.html")
+                .host("ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com")
+                .port(8080)
+                .path("/token")
                 .queryParams(queryParams)
                 .build()
                 .toUri();

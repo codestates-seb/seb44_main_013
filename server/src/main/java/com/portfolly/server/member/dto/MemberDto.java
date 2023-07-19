@@ -19,12 +19,12 @@ import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 public class MemberDto {
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(title = "사용자 등록 정보")
-    public static class Post {
+    public static class Auth {
         @Schema(title = "사용자 이름", example = "홍길동")
         @NotEmpty(message = "[필수 입력 항목 입니다] Name")
         @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
@@ -33,10 +33,38 @@ public class MemberDto {
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AuthResponse {
+        private Long id;
+        private Boolean isMember;
+    }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Schema(title = "사용자 등록 정보")
+    public static class Post {
+//        @Schema(title = "사용자 이름", example = "홍길동")
+//        @NotEmpty(message = "[필수 입력 항목 입니다] Name")
+//        @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
+//        @Pattern(regexp = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", message = "이름에는 특수 문자가 포함될 수 없습니다.")
+//        private String name;
+//        @Schema(title = "사용자 email", example = "hong@gmail.com")
+//        @Email
+//        private String email;
 //        @Schema(title = "클라이언트/파트너", example = "PARTNER")
 //        @EnumFormat(enumClass = Member.Member_Role.class)
+        private Long memberId;
         private Member.Member_Role member_role;
     }
+
+
 
     @Getter
     @Setter

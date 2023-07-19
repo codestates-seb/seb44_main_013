@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="" />
+    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/authentication/oauth2/handler/OAuth2MemberSuccessHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/authentication/oauth2/handler/OAuth2MemberSuccessHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/authentication/oauth2/handler/OAuth2MemberSuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/authentication/oauth2/handler/OAuth2MemberSuccessHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/server">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -44,12 +54,8 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="be-feat/Security" />
-                    <option name="lastUsedInstant" value="1689231181" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="be-feat/member-controller" />
-                    <option name="lastUsedInstant" value="1689231180" />
+                    <option name="branchName" value="be/feat-MemberAdditionalConfig" />
+                    <option name="lastUsedInstant" value="1689730544" />
                   </RecentBranch>
                 </list>
               </option>
@@ -93,7 +99,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4e97aca9-3b77-4b55-89b9-74682aca65f9" name="Changes" comment="" />
+      <changelist id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="" />
       <created>1688431290255</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
