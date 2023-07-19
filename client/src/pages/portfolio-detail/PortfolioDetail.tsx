@@ -7,8 +7,8 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
-import { ButtonHeader, ContentContainer, PortfolioContainer, HtmlWrapper, UserCard, UserContainer } from './PortfolioDetail.styled';
-import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
+import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
@@ -61,7 +61,7 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {portfolio &&
-            <HtmlWrapper dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></HtmlWrapper>
+            <div dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></div>
           }
         </PortfolioContainer>
 
@@ -92,9 +92,9 @@ export default function PortfolioDetail() {
               </>
             }
             {portfolio?.isMine &&
-              <FlexWrapper className='justify-end'>
-                <ReviseBtn onClick={onReviseButtonClick} /> | <RemoveBtn onClick={openDeleteModal} />
-              </FlexWrapper>
+              <FlexEndWrapper>
+                <ReviseBtn onClick={onReviseButtonClick} />ㅤ|<RemoveBtn onClick={openDeleteModal} />
+              </FlexEndWrapper>
             }
           </UserCard>
 
