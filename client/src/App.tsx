@@ -34,6 +34,7 @@ const App = () => {
             <Route path="/boards" element={<CommunityMain />} />
             <Route path="/boards/:id" element={<CommunityDetail />} />
             <Route path="/boards/edit/:id" element={<AddCommunity />} />
+            <Route path="/boards/edit" element={<AddCommunity />} />
           </Route>
           <Route
             path="/portfolios/:portfolio_id"
