@@ -45,7 +45,7 @@ export default function CommunityMain() {
   }, [data]);
 
   // const 기존데이터랑다르냐 = (data: any[]) => {
-  useEffect(() => {
+  // useEffect(() => {
     // const lowerCasified = data.map((element) => {
     //   return {
     //     ...element,
@@ -57,33 +57,33 @@ export default function CommunityMain() {
     //const isExistTitle = lowerCasified.filter((element: any) => element.includes(currentSearch.toLocaleLowerCase()));
     // const isExistContent = lowerCasified.includes(currentSearch.toLocaleLowerCase());
     // console.log(isExistTitle);
-  }, []);
+  // }, []);
   // }
-  const 엔터치면검색 = (event: any) => {
-    event.preventDefault();
-    if (currentSearch === '') {
-      setSearchs(data);
-    } else {
-      setSearchs(
-        data.filter((element: any) => {
-          return (
-            element.title
-              .toLocaleLowerCase()
-              .includes(currentSearch.toLocaleLowerCase()) ||
-            element.content
-              .toLocaleLowerCase()
-              .includes(currentSearch.toLocaleLowerCase()) ||
-            element.name
-              .toLocaleLowerCase()
-              .includes(currentSearch.toLocaleLowerCase())
-          );
-        })
-      );
-    }
-  };
+  // const 엔터치면검색 = (event: any) => {
+  //   event.preventDefault();
+  //   if (currentSearch === '') {
+  //     setSearchs(data);
+  //   } else {
+  //     setSearchs(
+  //       data.filter((element: any) => {
+  //         return (
+  //           element.title
+  //             .toLocaleLowerCase()
+  //             .includes(currentSearch.toLocaleLowerCase()) ||
+  //           element.content
+  //             .toLocaleLowerCase()
+  //             .includes(currentSearch.toLocaleLowerCase()) ||
+  //           element.name
+  //             .toLocaleLowerCase()
+  //             .includes(currentSearch.toLocaleLowerCase())
+  //         );
+  //       })
+  //     );
+  //   }
+  // };
 
   // const 엔터치면검색 = (event: React.FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
+  //   // event.preventDefault();
   //   if (currentSearch === '') {
   //     setSearchs(data);
   //   } else {
@@ -103,7 +103,12 @@ export default function CommunityMain() {
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search setSearchValue={setCurrentSearch} 엔터치면검색={엔터치면검색} />
+        <Search
+          setSearchValue={setCurrentSearch}
+          currentSearch={currentSearch}
+          data={data}
+          setSearchs={setSearchs}
+        />
       </SearchContainer>
 
       <ItemWrapper>
