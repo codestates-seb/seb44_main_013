@@ -3,19 +3,20 @@ import styled from 'styled-components';
 
 export const CommunityItemContainer = styled.div`
   ${tw`
-      w-[280px]
-      h-80
-      bg-white
-      relative
-      shadow-md
-      p-4
-      ml-10
-      mt-10
-      transition-transform
-      duration-200
-      ease-in-out      
-    `}
-
+    w-[280px]
+    h-80
+    bg-[#ffffffe0]
+    relative
+    p-4
+    ml-10
+    mt-10
+    transition-transform
+    duration-200
+    ease-in-out
+    rounded-2xl
+    shadow-lg
+    
+  `}
   &:hover {
     transform: scale(1.05);
   }
