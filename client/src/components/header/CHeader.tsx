@@ -10,11 +10,19 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules';
 import LoginBtn from '../../commons/atoms/buttons/login/LoginBtn';
+import { useState } from 'react';
 
 export default function CHeader() {
+  const [activeButton, setActiveButton] = useState<string | null>(null);
+
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
   );
+
+  const handleClick = (buttonName: string) => {
+    setActiveButton(buttonName);
+  };
+
   console.log(loginState);
   return (
     <HeaderContainer>
@@ -23,11 +31,21 @@ export default function CHeader() {
       </Link>
       <BtnContainer>
         <Link to="/boards?division=RECRUITMENT">
-          <RecuitBtn>Recruitment</RecuitBtn>
+          <RecuitBtn
+            onClick={() => handleClick('recruitment')}
+            isActive={activeButton === 'recruitment'}
+          >
+            Recruitment
+          </RecuitBtn>{' '}
         </Link>
         <span style={{ color: 'white' }}>&nbsp;&nbsp;|</span>
         <Link to="/boards?division=COOPERATION">
-          <CooperBtn>Cooperation</CooperBtn>
+          <CooperBtn
+            onClick={() => handleClick('cooperation')}
+            isActive={activeButton === 'cooperation'}
+          >
+            Cooperation
+          </CooperBtn>{' '}
         </Link>
         {loginState ? (
           <UserImg />
