@@ -1,7 +1,7 @@
 import { styled, css } from 'styled-components';
 import tw from 'twin.macro';
 
-export const TagBody = styled.div<{ selected?: boolean, readOnly?: boolean }>`
+export const TagBody = styled.div<{ isSelected?: boolean, readOnly?: boolean }>`
     ${tw`w-fit py-1.5 px-2.5 rounded-full select-none flex`}
 
     background-color: #484848;
@@ -12,7 +12,7 @@ export const TagBody = styled.div<{ selected?: boolean, readOnly?: boolean }>`
         border-color: #dcdcdc;
     }
 
-    ${(props) => props.selected && !props.readOnly &&
+    ${(props) => props.isSelected && !props.readOnly &&
     css`
       border-color: #dcdcdc;
       background-color: white;

@@ -8,7 +8,7 @@ import { MdDone } from 'react-icons/md';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { User } from '@/mocks/data';
 
-import { login } from '@/modules/loginSlice';
+import { login } from '@/store/loginSlice';
 
 import {
   MypageIntroWrap,

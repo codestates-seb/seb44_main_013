@@ -8,7 +8,7 @@ import {
   RecuitBtn,
 } from './CHeader.styled';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/modules';
+import { RootState } from '@/store';
 import LoginBtn from '../../commons/atoms/buttons/login/LoginBtn';
 import { useState } from 'react';
 

@@ -28,22 +28,22 @@ export async function call(api: string, method: string, data?: any) {
   }
 
   // 에러처리고려
-  return await axios
-    .request(options)
-    .then((res) => res.data)
-    .catch((error) => {
-      console.log(error);
-      if (axios.isAxiosError(error)) {
-        //axios 에러 객체인 경우,
-        const axiosError = error as AxiosError;
-        //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
-        //응답 데이터로 판별
-        console.log(axiosError.message);
-        console.log(axiosError.status);
+  try {
+    const response = await axios.request(options)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    if (axios.isAxiosError(error)) {
+      //axios 에러 객체인 경우,
+      const axiosError = error as AxiosError;
+      //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
+      //응답 데이터로 판별
+      console.log(axiosError.message);
+      console.log(axiosError.status);
 
-        // if(axiosError.message === 'Token Expired' && axiosError.status === 409){
-        //   console.log('에러 제대로 핸들링 중 : TEST');
-        // }
-      }
-    });
+      // if(axiosError.message === 'Token Expired' && axiosError.status === 409){
+      //   console.log('에러 제대로 핸들링 중 : TEST');
+      // }
+    }
+  }
 }

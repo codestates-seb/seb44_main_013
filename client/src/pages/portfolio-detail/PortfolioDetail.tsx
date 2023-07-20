@@ -7,8 +7,8 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
-import { ButtonHeader, ContentContainer, PortfolioContainer, HtmlWrapper, UserCard, UserContainer } from './PortfolioDetail.styled';
-import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
+import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
@@ -16,10 +16,9 @@ import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
+import PortfolioTag from '@/commons/molecules/tag/Tag';
 import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
 import { BsArrowReturnLeft } from 'react-icons/bs';
-import PortfolioTag from '@/commons/molecules/tag/Tag';
-
 
 export default function PortfolioDetail() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -61,7 +60,7 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {portfolio &&
-            <HtmlWrapper dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></HtmlWrapper>
+            <div dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></div>
           }
         </PortfolioContainer>
 
@@ -88,13 +87,13 @@ export default function PortfolioDetail() {
               <>
                 <HeadingText color='white'>{portfolio.title}</HeadingText>
                 <SmallText color="white">{createdAt}</SmallText>
-                <BodyText color='white'>{portfolio.explains}</BodyText>
+                <BodyText color='white'>{portfolio.explain}</BodyText>
               </>
             }
             {portfolio?.isMine &&
-              <FlexWrapper className='justify-end'>
-                <ReviseBtn onClick={onReviseButtonClick} /> | <RemoveBtn onClick={openDeleteModal} />
-              </FlexWrapper>
+              <FlexEndWrapper>
+                <ReviseBtn onClick={onReviseButtonClick} />ㅤ|<RemoveBtn onClick={openDeleteModal} />
+              </FlexEndWrapper>
             }
           </UserCard>
 

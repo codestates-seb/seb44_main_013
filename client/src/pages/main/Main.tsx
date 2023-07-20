@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { category } from '@/modules/categorySlice';
+import { category } from '@/store/categorySlice';
 import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';

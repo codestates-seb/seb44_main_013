@@ -1,16 +1,14 @@
 import tw from 'twin.macro';
 import styled from 'styled-components';
 
-export const ModalContainer = styled.div`
-  ${tw`
-    bg-neutral-700/50
-    w-full
-    h-full
-    absolute
-    top-0
-    left-0
-    z-20
-  `}
+export const ModalContainer = tw.div`
+  bg-neutral-700/50
+  w-full
+  h-full
+  absolute
+  top-0
+  left-0
+  z-20
 `;
 
 export const ModalContent = styled.div`

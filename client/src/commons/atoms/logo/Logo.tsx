@@ -1,15 +1,15 @@
-import { MouseEventHandler } from 'react';
+import { FormEventHandler, MouseEventHandler } from 'react';
 
 import { LogoContainer, LogoImg } from './Logo.styled';
 import logo from '../../../assets/logo.png';
 
 interface LogoProps {
-  onClickHandler?: MouseEventHandler<HTMLDivElement>;
+  onClickHandler?: FormEventHandler<HTMLFormElement>;
 }
 
 export default function Logo({ onClickHandler }: LogoProps) {
   return (
-    <LogoContainer onClick={onClickHandler}>
+    <LogoContainer onSubmit={onClickHandler}>
       <LogoImg src={logo} alt="Logo" />
     </LogoContainer>
   );

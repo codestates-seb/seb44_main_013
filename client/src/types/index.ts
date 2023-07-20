@@ -1,13 +1,13 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import { Member, Tag, Portfolio, PortfolioContent, CATEGORY_TYPE, CategoryTags, Picture } from '@/types/portfolio';
-import { Quill, TitleForm } from './form';
-import { TagSlice, CategorySlice } from './reduxState';
+import { Quill, TitleFormProps } from '@/types/form';
+import { CategorySlice, PortfolioSlice } from '@/types/slice';
 
 // 다함 전용 타입
 export type { Member, Tag, CATEGORY_TYPE, CategoryTags, Portfolio, PortfolioContent, Picture };
-export type { Quill, TitleForm };
-export type { TagSlice, CategorySlice };
+export type { Quill, TitleFormProps };
+export type { CategorySlice, PortfolioSlice };
 
 //하위 chilrdern string 인터페이스 + 0705 혜진 mypage 아이템
 export interface childrenProps {
