@@ -11,6 +11,7 @@ import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
+import { RootState } from '@/modules';
 
 const categoryMap = {
   웹: 'web',
@@ -32,17 +33,15 @@ export default function Main() {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+  console.log(loginState);
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
     const fetchData = async () => {
       try {
         // const categoryParam = categoryMap[selectedCategory] || 'web';
-        const res = await call(
-          `portfolios?category=${categoryParam}`,
-          'GET',
-          null
-        );
+        const res = await call(`portfolios?category=${categoryParam}`, 'GET', null);
         setItems(res[0].data);
         setFilteredItems(res[0].data);
       } catch (error) {
@@ -69,25 +68,15 @@ export default function Main() {
   const renderItems = () => {
     switch (selectedCategory) {
       case '웹':
-        return filteredItems.map((element, index) => (
-          <WebItem item={element} key={index} />
-        ));
+        return filteredItems.map((element, index) => <WebItem item={element} key={index} />);
       case '앱':
-        return filteredItems.map((element, index) => (
-          <AppItem item={element} key={index} />
-        ));
+        return filteredItems.map((element, index) => <AppItem item={element} key={index} />);
       case '3D/애니메이션':
-        return filteredItems.map((element, index) => (
-          <ThreeDItem item={element} key={index} />
-        ));
+        return filteredItems.map((element, index) => <ThreeDItem item={element} key={index} />);
       case '그래픽디자인':
-        return filteredItems.map((element, index) => (
-          <GraphicItem item={element} key={index} />
-        ));
+        return filteredItems.map((element, index) => <GraphicItem item={element} key={index} />);
       case '사진/영상':
-        return filteredItems.map((element, index) => (
-          <PhotoItem item={element} key={index} />
-        ));
+        return filteredItems.map((element, index) => <PhotoItem item={element} key={index} />);
       default:
         return null;
     }
@@ -131,12 +120,7 @@ export default function Main() {
 
   return (
     <>
-      <Search
-        setSearchValue={setSearchTerm}
-        currentSearch={searchTerm}
-        data={items}
-        setSearchs={setSearchs}
-      />
+      <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
       <WebItemsContainer>
         {
@@ -144,23 +128,23 @@ export default function Main() {
           // renderItems() :
           searchs.map((searchedItem: any, index: any) => {
             if (categoryParam === 'web') {
-              return (<WebItem item={searchedItem} key={index} />)
+              return <WebItem item={searchedItem} key={index} />;
             }
             if (categoryParam === 'app') {
-              return (<AppItem item={searchedItem} key={index} />)
+              return <AppItem item={searchedItem} key={index} />;
             }
             if (categoryParam === '3danimation') {
-              return (<ThreeDItem item={searchedItem} key={index} />)
+              return <ThreeDItem item={searchedItem} key={index} />;
             }
             if (categoryParam === 'graphicdesign') {
-              return (<GraphicItem item={searchedItem} key={index} />)
+              return <GraphicItem item={searchedItem} key={index} />;
             }
             if (categoryParam === 'photo') {
-              return (<PhotoItem item={searchedItem} key={index} />)
+              return <PhotoItem item={searchedItem} key={index} />;
             }
-          })}
+          })
+        }
       </WebItemsContainer>
     </>
   );
 }
-

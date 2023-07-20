@@ -11,6 +11,7 @@ import Comment from '@/commons/molecules/comment/Comment';
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import CommentWriteBox from '@/commons/molecules/comment/CommentWriteBox';
 import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
+import noComment from '@/assets/noComment.png';
 
 export default function CommentBox({ comments = [] }: any) {
   const [currentComment, setCurrentComment] = useState('');
@@ -20,39 +21,40 @@ export default function CommentBox({ comments = [] }: any) {
 
   const handleComment = (value: string) => {
     setCurrentComment(value);
-  }
+  };
 
   const saveComment = () => {
-    const addNewComment = () => call(`/comments`, 'POST', {
-      id: boardId,
-      content: currentComment,
-    });
+    const addNewComment = () =>
+      call(`/comments`, 'POST', {
+        id: boardId,
+        content: currentComment,
+      });
     const axiosPost = async () => {
       return addNewComment()
         .then((res) => {
           console.log(res);
         })
-        .catch((err) => console.log('댓글 등록 에러' + err))
-    }
+        .catch((err) => console.log('댓글 등록 에러' + err));
+    };
 
     axiosPost();
     amendComment.push({
       comments_id: comments.length + 1,
       content: currentComment,
       name: 'jhj',
-      createdAt: "2023-06-21T17:34:51.3395597",
-      modifiedAt: "2023-06-21T17:34:51.3395597",
-      status: "POST_ACTIVE"
+      createdAt: '2023-06-21T17:34:51.3395597',
+      modifiedAt: '2023-06-21T17:34:51.3395597',
+      status: 'POST_ACTIVE',
     });
     setCurrentComment('');
   };
 
   useEffect(() => {
-
     const index = amendComment.findIndex((element: any) => element.comments_id === deleteId);
 
-    // 첫번째 댓글 지울 때 
-    if (index === 0) { // 수정합시당 : 과제 
+    // 첫번째 댓글 지울 때
+    if (index === 0) {
+      // 수정합시당 : 과제
       setAmendComment(amendComment.slice(1, amendComment.length));
     }
 
@@ -61,18 +63,29 @@ export default function CommentBox({ comments = [] }: any) {
     }
 
     setDeleteId(null);
+  }, [deleteId]);
 
-  }, [deleteId])
-
+  if (amendComment.length === 0) {
+    return (
+      <Card>
+        <JbWrapper>
+          <FlexColumnContainer gap={0}>
+            <img src={noComment} alt="no comments" />
+          </FlexColumnContainer>
+        </JbWrapper>
+      </Card>
+    );
+  }
 
   return (
     <Card>
-      <JbWrapper >
+      <JbWrapper>
         <FlexColumnContainer gap={0} className="overflow-scroll">
           {/* prettier amendcomment -> ammendComments  ;; element -> amendComment*/}
-          {
-            amendComment.map((element: CommentProps) => {
-              return (<Comment key={element.comments_id}
+          {amendComment.map((element: CommentProps) => {
+            return (
+              <Comment
+                key={element.comments_id}
                 username={element.name}
                 content={element.content}
                 date={element.createdAt}
@@ -80,12 +93,11 @@ export default function CommentBox({ comments = [] }: any) {
                 setDeleteId={setDeleteId}
                 setAmendComment={setAmendComment}
               />
-              )
-            })
-          }
+            );
+          })}
         </FlexColumnContainer>
         <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={currentComment} />
       </JbWrapper>
     </Card>
-  )
-} 
+  );
+}

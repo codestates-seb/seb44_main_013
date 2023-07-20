@@ -19,17 +19,16 @@ export default function Login() {
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
-      
+
       <Link to="/login">
         <BackButton>
           <BsArrowReturnLeft size={30} />
         </BackButton>
       </Link>
-      
+
       <LoginSection>
         <TitleSection>
-          Discover artworks <br /> that tell stories, <br /> not just simple
-          pictures.
+          Discover artworks <br /> that tell stories, <br /> not just simple pictures.
         </TitleSection>
         <ContentSection>
           Experience the artistry and ingenuity of diverse portfolios, <br />
@@ -47,7 +46,6 @@ export default function Login() {
         <Link to="/signup">
           <LoginGoogleForm type={'normal'}> 처음이신가요? 클릭하세요! </LoginGoogleForm>
         </Link>
-
       </LoginSection>
 
       <HorizonLine />

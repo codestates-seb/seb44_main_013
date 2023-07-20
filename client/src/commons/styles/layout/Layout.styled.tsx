@@ -1,29 +1,51 @@
 import tw from 'twin.macro';
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { category } from '@/modules/categorySlice';
 
-import { useState } from 'react';
-import communitymainimg from '../../../assets/communitymainimg.png';
-import mainwebimg from '../../../assets/mainimg.png';
+import webBgimg from '../../../assets/WebBg.png';
+import appBgimg from '../../../assets/AppBg.png';
+import aniBgimg from '../../../assets/AniBg.png';
+import graphicBgimg from '../../../assets/GraphicBg.png';
+import photoBgimg from '../../../assets/PhotoBg.png';
+import defaultBgimg from '../../../assets/defaultBg.png';
+import { ReactNode } from 'react';
 
-export const MainImgWrapper = styled.div`
-  ${tw`
-        w-screen h-fit bg-center bg-no-repeat bg-cover
+export const MainImgWrapper = styled.div<{ backgroundimage: string }>(
+  ({ backgroundimage }) => css`
+    ${tw`
+      w-screen h-fit bg-center bg-no-repeat bg-cover
     `}
-  background-image: url(${mainwebimg});
+    background-image: url(${backgroundimage});
+  `
+);
+
+export const DefaultImgWrapper = styled.div`
+  ${tw`
+    w-screen h-fit bg-center bg-no-repeat bg-cover
+  `}
+  background-image: url(${defaultBgimg});
 `;
 
-export const BackImgWrapper = styled.div`
-  ${tw`
-        w-screen h-fit bg-center bg-no-repeat bg-cover
-    `}
-  background-image: url(${communitymainimg});
-`;
+export function BackImgControl({ children }: { children: ReactNode }) {
+  const selectedCategory = useSelector(category);
 
-export function BackImgControl( ) {
-  const [isCategory, ] = useState('web');
-  //{Page}
+  const getBackgroundImage = (category: string) => {
+    switch (category) {
+      case '웹':
+        return webBgimg;
+      case '앱':
+        return appBgimg;
+      case '3D/애니메이션':
+        return aniBgimg;
+      case '그래픽디자인':
+        return graphicBgimg;
+      case '사진/영상':
+        return photoBgimg;
+      default:
+        return defaultBgimg;
+    }
+  };
 
-  if (isCategory === 'web') {
-    return <BackImgWrapper />;
-  }
+  return <MainImgWrapper backgroundimage={getBackgroundImage(selectedCategory)}>{children}</MainImgWrapper>;
 }

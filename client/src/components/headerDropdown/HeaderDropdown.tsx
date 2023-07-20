@@ -11,17 +11,18 @@ import { login } from '@/store/loginSlice';
 export default function HeaderDropwdown() {
   ///link와 navigate를 혼용해도 되나?
   const dispatch = useDispatch();
-  const [, , removeCookies] = useCookies()
-  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-
+  const [, , removeCookies] = useCookies();
+  const loginState = useSelector(
+    (state: RootState) => state.loginSlice.isLogin
+  );
 
   const handleLogout = () => {
     dispatch(login(false));
-    console.log('로그아웃 실행')
+    console.log('로그아웃 실행');
     console.log(loginState);
-    removeCookies('isLogin', { path: "/" });
-    removeCookies('memberId', { path: "/" });
-  }
+    removeCookies('isLogin', { path: '/' });
+    removeCookies('memberId', { path: '/' });
+  };
 
   return (
     <HDropWrapper>
@@ -38,9 +39,7 @@ export default function HeaderDropwdown() {
         <ModalLink>
           <Link to="/portfolio/edit">New Portfolio</Link>
         </ModalLink>
-        <ModalLink onClick={handleLogout}>
-          Log Out
-        </ModalLink>
+        <ModalLink onClick={handleLogout}>Log Out</ModalLink>
       </HDropSection>
     </HDropWrapper>
   );
