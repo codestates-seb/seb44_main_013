@@ -4,31 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/controller/MemberController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/ServiceConfigureHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/helper/ServiceConfigureHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/config/SecurityConfiguration$CustomFilterConfigurer.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/config/SecurityConfiguration$CustomFilterConfigurer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/security/config/SecurityConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/config/DeleteMemberConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/config/DeleteMemberConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/helper/ServiceConfigureHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/helper/ServiceConfigureHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/mapper/MemberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/mapper/MemberMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/config/PictureConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/config/PictureConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/controller/PictureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/controller/PictureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/config/SecurityConfiguration.java" afterDir="false" />
+    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)">
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/controller/OauthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/security/controller/OauthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/validator/EnumFormatValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/validator/EnumFormatValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,5 +118,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)" />
   </component>
 </project>
