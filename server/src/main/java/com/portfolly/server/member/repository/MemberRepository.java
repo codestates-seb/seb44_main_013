@@ -19,6 +19,8 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 
+    Optional<Member> findByRefreshToken(String refreshToken);
+
     @Query("SELECT p FROM Portfolio p WHERE p.member.id = :memberId")
     List<Portfolio> findPortfoliosByMemberId(@Param("memberId") Long memberId);
 
