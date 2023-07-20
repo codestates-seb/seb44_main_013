@@ -1,5 +1,5 @@
 import tw from 'twin.macro';
-import { styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { category } from '@/modules/categorySlice';
 
@@ -11,12 +11,14 @@ import photoBgimg from '../../../assets/PhotoBg.png';
 import defaultBgimg from '../../../assets/defaultBg.png';
 import { ReactNode } from 'react';
 
-export const MainImgWrapper = styled.div<{ backgroundImage: string }>`
-  ${tw`
-    w-screen h-fit bg-center bg-no-repeat bg-cover
-  `}
-  background-image: url(${(props) => props.backgroundImage});
-`;
+export const MainImgWrapper = styled.div<{ backgroundimage: string }>(
+  ({ backgroundimage }) => css`
+    ${tw`
+      w-screen h-fit bg-center bg-no-repeat bg-cover
+    `}
+    background-image: url(${backgroundimage});
+  `
+);
 
 export const DefaultImgWrapper = styled.div`
   ${tw`
@@ -45,9 +47,5 @@ export function BackImgControl({ children }: { children: ReactNode }) {
     }
   };
 
-  return (
-    <MainImgWrapper backgroundImage={getBackgroundImage(selectedCategory)}>
-      {children}
-    </MainImgWrapper>
-  );
+  return <MainImgWrapper backgroundimage={getBackgroundImage(selectedCategory)}>{children}</MainImgWrapper>;
 }
