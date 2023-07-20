@@ -60,21 +60,21 @@ public interface MemberMapper {
       partner_Response.setSkill( member.getSkill() );
       partner_Response.setMemberStatus( member.getMemberStatus() );
 
-      List<Portfolio> portfolioList = member.getPortfolios();
-      List<Bookmark> bookmarkList = member.getBookmarks();
-      List<Board> boardList = member.getBoards();
+//      List<Portfolio> portfolioList = member.getPortfolios();
+//      List<Bookmark> bookmarkList = member.getBookmarks();
+//      List<Board> boardList = member.getBoards();
 
-      if(portfolioList != null){
-         partner_Response.setPortfolios(portfolioList);
-      }
-
-      if(bookmarkList != null){
-         partner_Response.setBookmarks(bookmarkList);
-      }
-
-      if(boardList != null){
-         partner_Response.setBoards(boardList);
-      }
+//      if(portfolioList != null){
+//         partner_Response.setPortfolios(portfolioList);
+//      }
+//
+//      if(bookmarkList != null){
+//         partner_Response.setBookmarks(bookmarkList);
+//      }
+//
+//      if(boardList != null){
+//         partner_Response.setBoards(boardList);
+//      }
 
       return partner_Response;
    }

@@ -17,7 +17,7 @@ public class LikesService {
 
     //좋아요 등록
     public void selectLikes(Long memberId, Long portfolioId) {
-        Member member = memberService.findMember(1L);
+        Member member = memberService.findMember(memberId);
         //if Likes 있으면 등록하고 없으면 취소
         Optional<Likes> optionalLikes = likesRepository.findByMemberIdAndPortfolioId(memberId, portfolioId);
         if (optionalLikes.isPresent()) {

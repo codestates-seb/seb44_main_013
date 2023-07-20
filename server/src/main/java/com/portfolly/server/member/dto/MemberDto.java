@@ -146,8 +146,8 @@ public class MemberDto {
         private String skill;
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
-        private List<Portfolio> portfolios;
-        private List<Bookmark> bookmarks;
-        private List<Board> boards;
+//        private List<Portfolio> portfolios;
+//        private List<Bookmark> bookmarks;
+//        private List<Board> boards;
     }
 }
