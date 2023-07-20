@@ -25,7 +25,7 @@ public class Member extends Auditable {
     private String name;
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
-//    @Column(nullable = false)
+    @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Member_Role member_role; // 클라이언트 / 파트너
     private String location; // 도 시 군 만 기입
@@ -34,18 +34,17 @@ public class Member extends Auditable {
     private String career;
     private String award;
     private String skill;
-    private Boolean isMember; // 회원이면 true, 아니면 false
     @Column(name = "expired_at")
     private LocalDateTime expired_at; // 삭제 만료 날짜
     private String refreshToken;
     @Enumerated(value = EnumType.STRING)
     private Member_Status memberStatus = Member_Status.MEMBER_ACTIVE;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    private List<Portfolio> portfolio_id;
+    private List<Portfolio> portfolios;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    private List<Bookmark> bookmark_id;
+    private List<Bookmark> bookmarks;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    private List<Board> board_id;
+    private List<Board> boards;
     @OneToOne(mappedBy = "member",cascade = {CascadeType.ALL})
     private ImageData imageData;
 

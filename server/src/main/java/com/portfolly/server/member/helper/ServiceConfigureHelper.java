@@ -7,8 +7,6 @@ import com.portfolly.server.member.entity.Member;
 import java.util.Optional;
 
 public interface ServiceConfigureHelper {
-
-    // 멤버 초기설정
     default Member postMember(Member member){
 
         if(member == null){

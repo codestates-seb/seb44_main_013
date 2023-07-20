@@ -8,6 +8,7 @@ import com.portfolly.server.security.authentication.oauth2.handler.OAuth2MemberS
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
-
+@Slf4j
 @Configuration
 @RestController
 @RequiredArgsConstructor
@@ -43,6 +44,7 @@ public class OauthController {
 
         response.addHeader("AccessToken",accessToken);
         response.addHeader("Member_id",member.getId().toString());
+        log.info("Member Id : " + member.getId() + " AccessToken : " + accessToken);
 
         return "Access_Token Ok";
     }

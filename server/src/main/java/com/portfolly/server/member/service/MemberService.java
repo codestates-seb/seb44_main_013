@@ -1,5 +1,7 @@
 package com.portfolly.server.member.service;
 
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
 import com.portfolly.server.member.config.DeleteMemberConfig;
@@ -7,6 +9,7 @@ import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.helper.DeleteScheduleDateHelper;
 import com.portfolly.server.member.helper.ServiceConfigureHelper;
 import com.portfolly.server.member.repository.MemberRepository;
+import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.utils.DataBaseConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,44 +49,51 @@ public class MemberService implements ServiceConfigureHelper {
 
         return memberRepository.save(patchMember(member,resultMember));
     }
+
     public Member findMember(long memberId){
 
         Member resultMember = findByMember(memberId);
 
-        return memberRepository.save(resultMember);
+        return memberRepository.save(findMemberInfoList(resultMember));
     }
+
     public void deleteMember(long memberId){
 
         Member member = findByMember(memberId);
-        verifiedExistEmail(member.getEmail());
-        member.setMemberStatus(Member.Member_Status.MEMBER_DELETE);
 
-        String username;
-        String password;
-        username = dataBaseConfig.setUsername();
-        password = dataBaseConfig.setPassword();
-
-        if(member.getMemberStatus().equals(Member.Member_Status.MEMBER_DELETE)) {
-
-            deleteScheduleDateHelper.setDataBase(username, password);
-
-            LocalDateTime currentTime = LocalDateTime.now();
-            member.setExpired_at(currentTime.plusYears(DeleteMemberConfig.getYear()));
-
-            deleteScheduleDateHelper.scheduleDateDirection("MEMBER", memberId);
-
-        }
+        memberRepository.deleteById(memberId);
+//        verifiedExistEmail(member.getEmail());
+//        member.setMemberStatus(Member.Member_Status.MEMBER_DELETE);
+//
+//        String username;
+//        String password;
+//        username = dataBaseConfig.setUsername();
+//        password = dataBaseConfig.setPassword();
+//
+//        if(member.getMemberStatus().equals(Member.Member_Status.MEMBER_DELETE)) {
+//
+//            deleteScheduleDateHelper.setDataBase(username, password);
+//
+//            LocalDateTime currentTime = LocalDateTime.now();
+//            member.setExpired_at(currentTime.plusYears(DeleteMemberConfig.getYear()));
+//
+//            deleteScheduleDateHelper.scheduleDateDirection("MEMBER", memberId);
+//
+//        }
     }
+
     private void verifiedExistEmail(String email){
         Optional<Member> findEmail = memberRepository.findByEmail(email);
         if (findEmail.isEmpty()){
             throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_EXIST);
         }
     }
+
     public Member findByMember(long memberId){
         Optional<Member> optionalMember = memberRepository.findById(memberId);
         return optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_EXIST));
     }
+
     private void duplicationVerifiedEmail(String email){
         Optional<Member> findEmail = memberRepository.findByEmail(email);
 
@@ -92,4 +102,16 @@ public class MemberService implements ServiceConfigureHelper {
         }
     }
 
+    public Member findMemberInfoList(Member member){
+
+        List<Portfolio> findPortfolioList = memberRepository.findPortfoliosByMemberId(member.getId());
+        List<Bookmark> findBookmarkList = memberRepository.findBookmarkByMemberId(member.getId());
+        List<Board> findBoardList = memberRepository.findBoardByMemberId(member.getId());
+
+        member.setPortfolios(findPortfolioList);
+        member.setBookmarks(findBookmarkList);
+        member.setBoards(findBoardList);
+
+        return member;
+    }
 }

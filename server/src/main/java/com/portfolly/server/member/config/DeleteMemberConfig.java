@@ -11,5 +11,4 @@ public class DeleteMemberConfig {
      public static int getYear(){
          return year;
      }
-
 }

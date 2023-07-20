@@ -8,6 +8,7 @@ import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -58,7 +59,28 @@ public class SecurityConfiguration {
             .apply(new CustomFilterConfigurer())
             .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
+
+                        // 포트폴리오 관련
+                        .antMatchers(HttpMethod.POST,"/portfolios").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH , "/portfolios/*").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.GET ,"/portfolios/*").permitAll()
+                        .antMatchers(HttpMethod.GET, "/portfolios").permitAll()
+                        .antMatchers(HttpMethod.DELETE, "/portfolios/*").hasAnyRole("USER","ADMIN")
+
+                        // Board 관련
+                        .antMatchers(HttpMethod.POST,"/boards/*").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH , "/boards/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.GET ,"/boards/*").permitAll()
+                        .antMatchers(HttpMethod.DELETE, "/boards/*").hasAnyRole("USER","ADMIN")
+
+                        // comment 관련
+                        .antMatchers(HttpMethod.POST,"/comments/*").hasRole("USER")
+                        .antMatchers(HttpMethod.PATCH , "/comments/**").hasAnyRole("USER","ADMIN")
+                        .antMatchers(HttpMethod.GET ,"/comments/*").permitAll()
+                        .antMatchers(HttpMethod.DELETE, "/comments/*").hasAnyRole("USER","ADMIN")
+
+
+
             )
             .oauth2Login(oauth2 -> oauth2
                     .successHandler(new OAuth2MemberSuccessHandler(jwtTokenizer, authorityUtils, memberService))
@@ -85,7 +107,7 @@ public class SecurityConfiguration {
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 
-            builder.addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class); // (1)
+            builder.addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class);
         }
     }
 }

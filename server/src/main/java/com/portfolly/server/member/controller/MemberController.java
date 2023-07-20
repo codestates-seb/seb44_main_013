@@ -42,7 +42,6 @@ public class MemberController {
     private final MemberMapper mapper;
     private final MemberService memberService;
 
-    // 신규가입시 : Member Role 설정 Post
     @PostMapping
     @Operation(summary = "회원 등록", description = "회원을 등록합니다.")
     @CrossOrigin("*")
@@ -65,8 +64,6 @@ public class MemberController {
         return DeleteStatusMemberToNotAccess(member);
     }
 
-    // 보류 사항 : 멤버 권한에 따라 쿼리문을 작성하여 개인 포트폴리오-게시물(모든 권한) , 북마크(개인 권한) , 게시판(개인 권한) 순
-    // 포트폴리오 및 북마크 기능과 게시판 기능이 얼추 완성되면 추가 구현 예정
     @GetMapping("/{member-id}")
     @CrossOrigin("*")
     @Operation(summary = "회원 조회(마이페이지)", description = "회원을 조회합니다.(처음 회원 등록시 클라이언트/파트너에 따라 응답값이 다릅니다.)")

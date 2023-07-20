@@ -29,55 +29,55 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class PictureService {
-    private PictureRepository pictureRepository;
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucket;
-    private final AmazonS3 amazonS3;
+   private PictureRepository pictureRepository;
+   @Value("${cloud.aws.s3.bucket}")
+   private String bucket;
+   private final AmazonS3 amazonS3;
 
-    public List<String> uploadImage(List<MultipartFile> multipartFile) {
-        List<String> fileNameList = new ArrayList<>();
+   public List<String> uploadImage(List<MultipartFile> multipartFile) {
+       List<String> fileNameList = new ArrayList<>();
 
-        multipartFile.forEach(file -> {
-            String fileName = createFileName(file.getOriginalFilename());
-            ObjectMetadata objectMetadata = new ObjectMetadata();
-            objectMetadata.setContentLength(file.getSize());
-            objectMetadata.setContentType(file.getContentType());
+       multipartFile.forEach(file -> {
+           String fileName = createFileName(file.getOriginalFilename());
+           ObjectMetadata objectMetadata = new ObjectMetadata();
+           objectMetadata.setContentLength(file.getSize());
+           objectMetadata.setContentType(file.getContentType());
 
-            try(InputStream inputStream = file.getInputStream()) {
-                amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
-                        .withCannedAcl(CannedAccessControlList.PublicRead));
-            } catch(IOException e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
-            }
-            String pictureUrl = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/"+fileName;
+           try(InputStream inputStream = file.getInputStream()) {
+               amazonS3.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+                       .withCannedAcl(CannedAccessControlList.PublicRead));
+           } catch(IOException e) {
+               throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+           }
+           String pictureUrl = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/"+fileName;
 
-            fileNameList.add(pictureUrl);
+           fileNameList.add(pictureUrl);
 
-            Picture picture = new Picture();
-            picture.setFileName(fileName);
-            picture.setPictureUrl(pictureUrl);
-            pictureRepository.save(picture);
-        });
+           Picture picture = new Picture();
+           picture.setFileName(fileName);
+           picture.setPictureUrl(pictureUrl);
+           pictureRepository.save(picture);
+       });
 
 
-        return fileNameList;
-    }
+       return fileNameList;
+   }
 
-    public void deleteImage(String fileName) {
-        amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
-    }
+   public void deleteImage(String fileName) {
+       amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+   }
 
-    private String createFileName(String fileName) {
-        return UUID.randomUUID().toString().concat(getFileExtension(fileName));
-    }
+   private String createFileName(String fileName) {
+       return UUID.randomUUID().toString().concat(getFileExtension(fileName));
+   }
 
-    private String getFileExtension(String fileName) {
-        try {
-            return fileName.substring(fileName.lastIndexOf("."));
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
-        }
-    }
+   private String getFileExtension(String fileName) {
+       try {
+           return fileName.substring(fileName.lastIndexOf("."));
+       } catch (StringIndexOutOfBoundsException e) {
+           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
+       }
+   }
 
 
 }

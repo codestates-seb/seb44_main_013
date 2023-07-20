@@ -13,18 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/s3")
 public class PictureController {
-    private final PictureService pictureService;
+   private final PictureService pictureService;
 
 
-    @PostMapping("/picture")
-    public ResponseEntity<List<String>> uploadImage(@RequestParam(value = "file", required = true)
-                                                    @RequestPart List<MultipartFile> file) {
-        return new ResponseEntity<>(pictureService.uploadImage(file), HttpStatus.CREATED);
-    }
+   @PostMapping("/picture")
+   public ResponseEntity<List<String>> uploadImage(@RequestParam(value = "file", required = true)
+                                                   @RequestPart List<MultipartFile> file) {
+       return new ResponseEntity<>(pictureService.uploadImage(file), HttpStatus.CREATED);
+   }
 
-    @DeleteMapping("/picture")
-    public ResponseEntity<Void> deleteImage(@RequestParam String fileName) {
-        pictureService.deleteImage(fileName);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+   @DeleteMapping("/picture")
+   public ResponseEntity<Void> deleteImage(@RequestParam String fileName) {
+       pictureService.deleteImage(fileName);
+       return new ResponseEntity<>(HttpStatus.OK);
+   }
 }

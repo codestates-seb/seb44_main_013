@@ -1,8 +1,11 @@
 package com.portfolly.server.member.dto;
 
 import com.portfolly.server.audit.Auditable;
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.image.entity.ImageData;
+import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.validator.EnumFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -14,6 +17,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MemberDto {
 
@@ -39,11 +43,12 @@ public class MemberDto {
     @AllArgsConstructor
     @Schema(title = "사용자 등록 정보")
     public static class Post {
+        @Schema(title = "사용자 id", example = "1")
         private Long id;
+        @Schema(title = "클라이언트/파트너", example = "Client")
+        @EnumFormat(enumClass = Member.Member_Role.class)
         private Member.Member_Role member_role;
     }
-
-
 
     @Getter
     @Setter
@@ -92,6 +97,8 @@ public class MemberDto {
         private String comInfo;
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
+        private List<Bookmark> bookmarks; // 클라이언트의 경우는 포트폴리오를 올리지 않기때문에 마이페이지 조회시 해당사항없음
+        private List<Board> boards;
     }
 
     @Getter
@@ -121,5 +128,9 @@ public class MemberDto {
         private String skill;
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
+        private List<Portfolio> portfolios;
+        private List<Bookmark> bookmarks;
+        private List<Board> boards;
+
     }
 }
