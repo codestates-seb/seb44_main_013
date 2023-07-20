@@ -6,6 +6,8 @@ import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.mapper.MemberMapper;
 import com.portfolly.server.member.service.MemberService;
+import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
+import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import com.portfolly.server.utils.UriCreator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,9 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.net.http.HttpHeaders;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Validated
@@ -33,12 +41,32 @@ public class MemberController {
     private final String MEMBER_DEFAULT_URI = "/members";
     private final MemberMapper mapper;
     private final MemberService memberService;
+    private final JwtTokenizer jwtTokenizer;
+    private final CustomAuthorityUtils authorityUtils;
 
-    @PostMapping
+    // 추가사항
+    @PostMapping("/oauth")
+    public String OauthLogin(@RequestHeader("Authorization") String googleAccessToken,
+                                     @Valid @RequestBody MemberDto.Auth auth,
+                                     HttpServletResponse response) {
+
+        Member member = memberService.createMember(mapper.AuthToMember(auth));
+        List<String> authorities = authorityUtils.createRoles(member.getEmail());
+        String accessToken = delegateAccessToken(member.getEmail(),authorities);
+
+        response.addHeader("AccessToken",accessToken);
+        response.addHeader("Member_id",member.getId().toString());
+
+        return "Access_Token Ok";
+    }
+
+    @PostMapping("/{member-id}")
     @Operation(summary = "회원 등록", description = "회원을 등록합니다.")
     @CrossOrigin("*")
-    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post postDto){
+    public ResponseEntity postMember(@Positive @PathVariable("member-id") long memberId,
+                                     @Valid @RequestBody MemberDto.Post postDto){
 
+        postDto.setMemberId(memberId);
         Member member = memberService.createMember(mapper.PostToMember(postDto));
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URI,member.getId());
 
@@ -102,4 +130,30 @@ public class MemberController {
         }
     }
 
+    // 추가 사항 : 토큰 생성
+    private String delegateAccessToken(String username, List<String> authorities) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", username);
+        claims.put("roles", authorities);
+
+        String subject = username;
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
+
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+
+        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+
+        return accessToken;
+    }
+
+    private String delegateRefreshToken(String username) {
+        String subject = username;
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+
+        String refreshToken = jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
+
+
+        return refreshToken;
+    }
 }
