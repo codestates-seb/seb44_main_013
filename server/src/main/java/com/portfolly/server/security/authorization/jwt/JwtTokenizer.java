@@ -91,8 +91,19 @@ public class JwtTokenizer {
 
     private Key getKeyFromBase64EncodedKey(String base64EncodedSecretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(base64EncodedSecretKey);
-        Key key = Keys.hmacShaKeyFor(keyBytes);
+        Key key = Keys.hmacShaKeyFor(keyBytes); //HMAC 알고리즘 적용 Key 객체
 
         return key;
+    }
+
+    // 이메일로 회원이 맞는지 검증
+    public String extractEmailFromToken(String accessToken,String base64EncodedSecretKey){
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getKeyFromBase64EncodedKey(base64EncodedSecretKey))
+                .build()
+                .parseClaimsJws(accessToken)
+                .getBody();
+
+        return claims.get("username", String.class);
     }
 }
