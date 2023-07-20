@@ -5,9 +5,9 @@ import { CSSProperties } from 'react';
 interface NeonProps {
   style?: CSSProperties | undefined;
 }
-interface StyledElementProps {
-  '--clr': string;
-}
+// interface StyledElementProps {
+//   '--clr': string;
+// }
 
 const Gradient = styled.div`
   background: linear-gradient(45deg, #ff357a, #fff172);
@@ -45,18 +45,18 @@ const ContainerLogin = styled.div`
   gap: 20px;
 `;
 
-const StyledElement = styled.i<StyledElementProps>`
-  display: inline-block;
-  width: 4rem;
-  height: 4rem;
-  background-color: ${(props) => props['--clr']};
-`;
+// const StyledElement = styled.i<StyledElementProps>`
+//   display: inline-block;
+//   width: 4rem;
+//   height: 4rem;
+//   background-color: ${(props) => props['--clr']};
+// `;
 
 export default function Neon({}: NeonProps) {
-  const customColor = '#00ff0a'; // 원하는 색상 값
-  const styledElementStyle: StyledElementProps = {
-    '--clr': customColor,
-  };
+  // const customColor = '#00ff0a'; // 원하는 색상 값
+  // const styledElementStyle: StyledElementProps = {
+  //   '--clr': customColor,
+  // };
 
   return (
     <div className="p-auto m-0 flex h-screen w-screen justify-center bg-black">

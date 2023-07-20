@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 import { portfolios, commuDetail, pictures } from './data';
 import {
-  commu,
+  // commu,
   WebCategoryDatas,
   AppCategoryDatas,
   AnimationCategoryDatas,
@@ -11,7 +11,7 @@ import {
   PhotoCategoryDatas,
 } from './infiniteScrollData';
 
-import { CommuProps, Portfolio } from '@/types';
+import { Portfolio } from '@/types';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -118,28 +118,28 @@ const DaHamHandlers = [
 
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
-import { User, userData } from './data';
+// import { User, userData } from './data';
 // import { Portfolio } from '@/types';
 
-const UserRequestHandlers = [
-  rest.put<User>('/members', (req, res, ctx) => {
-    Object.assign(userData, req.body);
+// const UserRequestHandlers = [
+//   rest.put<User>('/members', (req, res, ctx) => {
+//     Object.assign(userData, req.body);
 
-    return res(ctx.json(userData));
-  }),
-  rest.get<User>('/members', (_, res, ctx) => {
-    return res(ctx.json(userData));
-  }),
-  rest.delete<User>('/members', (_, res, ctx) => {
-    // userData를 초기 상태로 재설정합니다.
-    userData.name = 'Your Name';
-    userData.job = 'What is your job?';
-    userData.career = 'Career 1';
-    userData.award = 'Awards 1';
+//     return res(ctx.json(userData));
+//   }),
+//   rest.get<User>('/members', (_, res, ctx) => {
+//     return res(ctx.json(userData));
+//   }),
+//   rest.delete<User>('/members', (_, res, ctx) => {
+//     // userData를 초기 상태로 재설정합니다.
+//     userData.name = 'Your Name';
+//     userData.job = 'What is your job?';
+//     userData.career = 'Career 1';
+//     userData.award = 'Awards 1';
 
-    return res(ctx.status(200), ctx.json({ message: '삭제 성공' }));
-  }),
-];
+//     return res(ctx.status(200), ctx.json({ message: '삭제 성공' }));
+//   }),
+// ];
 
 //혜진 게시판 파트
 const HJHandlers = [
@@ -286,27 +286,27 @@ const HJHandlers = [
 ];
 
 // 게시판 등록 - 효정
-const HyoHandler = [
-  rest.post('/boards/write', async (req, res, ctx) => {
-    const currentReq = await req.json();
-    console.log(currentReq.body);
+// const HyoHandler = [
+//   rest.post('/boards/write', async (req, res, ctx) => {
+//     const currentReq = await req.json();
+//     console.log(currentReq.body);
 
-    const newCommunity: CommuProps = {
-      id: 10,
-      title: currentReq.body.title,
-      content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
-      view: 0,
-      division: 'recruitment',
-      name: 'phy',
-      created_at: '2023-06-21T17:34:51.3395597',
-      modifiedAt: '2023-06-21T17:34:51.3395597',
-      memberId: 1,
-      status: 'POST_ACTIVE',
-    };
-    commu.unshift(newCommunity);
-    return res(ctx.status(201), ctx.json(newCommunity));
-  }),
-];
+//     const newCommunity: CommuProps = {
+//       id: 10,
+//       title: currentReq.body.title,
+//       content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
+//       view: 0,
+//       division: 'recruitment',
+//       name: 'phy',
+//       created_at: '2023-06-21T17:34:51.3395597',
+//       modifiedAt: '2023-06-21T17:34:51.3395597',
+//       memberId: 1,
+//       status: 'POST_ACTIVE',
+//     };
+//     commu.unshift(newCommunity);
+//     return res(ctx.status(201), ctx.json(newCommunity));
+//   }),
+// ];
 
 export const handlers = DaHamHandlers
   // .concat(UserRequestHandlers)
