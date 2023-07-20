@@ -1,6 +1,11 @@
 import tw from 'twin.macro';
 import { styled } from 'styled-components';
 
+type ButtonProps = {
+  color?: string;
+  isActive?: boolean;
+};
+
 export const HeaderContainer = tw.div`
   flex
   items-center
@@ -9,16 +14,16 @@ export const HeaderContainer = tw.div`
   py-3
   bg-transparent
   z-50
-  text-white
-  
+
 `;
 
 export const BtnContainer = tw.div`
   flex
   items-center
+
 `;
 
-export const RecuitBtn = styled.button<{ color?: string }>`
+export const RecuitBtn = styled.button<ButtonProps>`
   ${tw`
     cursor-pointer
     ml-2.5
@@ -26,18 +31,35 @@ export const RecuitBtn = styled.button<{ color?: string }>`
     hover:underline
     text-sm
     whitespace-nowrap
-  ` }
-  color: ${(props) => props.color ? props.color : 'white'};
+    py-1
+    px-2
+    transition-colors
+    text-white
+  `}
+  color: ${(props) =>
+    props.isActive ? '#8580e1' : props.color ? props.color : '#d2d1d1'};
 
   &:hover {
-    color: #8580E1;
+    color: #8580e1;
   }
-
 `;
 
-export const CooperBtn = tw.button`
-  ml-3
-  mr-3
-  hover:underline
+export const CooperBtn = styled.button<ButtonProps>`
+  ${tw`
+    cursor-pointer
+    ml-3
+    mr-3
+    hover:underline
+    text-sm
+    whitespace-nowrap
+    py-1
+    px-2
+    transition-colors
+  `}
+  color: ${(props) =>
+    props.isActive ? '#8580e1' : props.color ? props.color : '#d2d1d1'};
 
+  &:hover {
+    color: #8580e1;
+  }
 `;

@@ -1,14 +1,14 @@
 import CHeader from '../../../components/header/CHeader';
 import Footer from '../../../components/footer/Footer';
 import { Outlet } from 'react-router-dom';
-import { BackImgWrapper } from './Layout.styled';
+import { DefaultImgWrapper } from './Layout.styled';
 
 export default function CHeaderLayout() {
   return (
-    <BackImgWrapper>
+    <DefaultImgWrapper>
       <CHeader />
       <Outlet />
       <Footer />
-    </BackImgWrapper>
+    </DefaultImgWrapper>
   );
 }

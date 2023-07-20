@@ -1,10 +1,10 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 import {
-  SignBtn,
-  ButtonContainer,
+  // SignBtn,
+  // ButtonContainer,
   ContentBox,
   SignUpWrapper,
   SingupSection,
@@ -16,12 +16,12 @@ import { ContentSection, TitleSection } from '../login/Login.styled';
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
 
 export default function SignUp() {
-  const [ role, setRole ] = useState('');
+  // const [ role, setRole ] = useState('');
 
-    const selectRole = (res:string) => {
-      console.log(res);
-      setRole(res);
-    }
+  //   const selectRole = (res:string) => {
+  //     console.log(res);
+  //     setRole(res);
+  // }
   
  return (
     <SignUpWrapper>
@@ -39,12 +39,12 @@ export default function SignUp() {
           Experience the artistry and ingenuity of diverse portfolios, curated
           for web
         </ContentSection>
-        <ButtonContainer>
+        {/* <ButtonContainer>
           <SignBtn onClick={ () => selectRole("CLIENT") } >Client</SignBtn>
           <SignBtn onClick={ () => selectRole("PARTNER") } >Partner</SignBtn>
-        </ButtonContainer>
+        </ButtonContainer> */}
 
-          <LoginGoogleForm type={'google'} role={role}>Sign up with Google</LoginGoogleForm>
+          <LoginGoogleForm type={'google'} >Sign up with Google</LoginGoogleForm>
 
       </SingupSection>
       <HorizonLine />

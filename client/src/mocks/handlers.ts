@@ -4,7 +4,7 @@ import { rest } from 'msw';
 import { portfolios, commuDetail, pictures } from './data';
 import { commu, WebCategoryDatas, AppCategoryDatas, AnimationCategoryDatas, GraphicCategoryDatas,PhotoCategoryDatas } from './infiniteScrollData'
 
-import { CommuProps } from '@/types';
+import { CommuProps, Portfolio } from '@/types';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -116,7 +116,7 @@ const DaHamHandlers = [
 /**0710 정연 Mypage 사용자 정보 수정 */
 // mocks/handlers.ts
 import { User, userData } from './data';
-import { Portfolio } from '@/types';
+// import { Portfolio } from '@/types';
 
 const UserRequestHandlers = [
   rest.put<User>('/members', (req, res, ctx) => {
@@ -147,25 +147,26 @@ const UserRequestHandlers = [
 const HJHandlers = [
   //1. 게시판 목록 조회 GET : community-main page
   //url-> http://localhost:8080/boards?division=COOPERATION
-  rest.get('/boards', (req, res, ctx) => {
-    const division = req.url.searchParams.get('division');
+  // rest.get('/boards', (req, res, ctx) => {
+  //   const division = req.url.searchParams.get('division');
 
-    if (division === 'COOPERATION') {
-      const filteredData = commu.filter((element) => element.division === 'COOPERATION');
-      return res(ctx.status(200), ctx.json(filteredData));
-    }
+  //   if (division === 'COOPERATION') {
+  //     const filteredData = commu.filter((element) => element.division === 'COOPERATION');
+  //     return res(ctx.status(200), ctx.json(filteredData));
+  //   }
 
-    if (division === 'RECRUITMENT') {
-      const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
-      return res(ctx.status(200), ctx.json(filteredData));
-    }
-  }),
+  //   if (division === 'RECRUITMENT') {
+  //     const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
+  //     return res(ctx.status(200), ctx.json(filteredData));
+  //   }
+  // }),
+
   //2. 게시한 상세 페이지 조회 GET : community-detail page
-  rest.get('/boards/:id', (req, res, ctx) => {
-    const id = Number(req.params.id);
-    const filteredData = commuDetail.filter(e => e.id === id);
-    return (res(ctx.status(200), ctx.json(filteredData)))
-  }),
+  // rest.get('/boards/:id', (req, res, ctx) => {
+  //   const id = Number(req.params.id);
+  //   const filteredData = commuDetail.filter(e => e.id === id);
+  //   return (res(ctx.status(200), ctx.json(filteredData)))
+  // }),
   //3. 댓글 수정
   rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
     const { comments_id, memberId, content, name } = await req.json();
@@ -229,29 +230,36 @@ const HJHandlers = [
   }),
 
 
-  //로그인1 : get google
-  rest.get('/login/oauth2/code/google', async (_, res, ctx) => {
-    const credential = 'dummy-credential-code';
-    return res(ctx.status(200), ctx.set('credential', credential))
-  }),
+  // //로그인1 : get google
+  // rest.get('/oauth2/authorization/google ', async (_, res, ctx) => {
+  //   const credential = 'dummy-credential-code';
+  //   return res(ctx.status(200), ctx.json('handler에서 성공 GET '))
+  // }),
 
+  // //로그인 temp : accesstoken 처리 
+  // rest.post('/members/temp', async(req, res, ctx) => {
+  //   const { code } = await req.json();
+  //   console.log(code);
+  //   const accesToken = 'dummy-access-token';
+  //   return res(ctx.status(200), ctx.set('accessToken', accesToken));
+  // }),
 
   //로그인2 : post server
-  rest.post('/members', async (req, res, ctx) => {
-    const accessToken = 'dummy-access-token';
-    const { role } = await req.json();
+  // rest.post('/members', async (req, res, ctx) => {
+  //   const accessToken = 'dummy-access-token';
+  //   const { role } = await req.json();
 
 
-    return res(
-      ctx.status(200),
-      ctx.json('로그인 성공'),
-      //응답 객체 헤더 설정 accesstoken 전달 
-      ctx.set('authorization', `Bearer ${accessToken}`),
-      ctx.set('accessToken', accessToken),
-      ctx.set('isLogin', 'true'),
-      ctx.set('memberRole', role)
-    )
-  }),
+  //   return res(
+  //     ctx.status(200),
+  //     ctx.json('로그인 성공'),
+  //     //응답 객체 헤더 설정 accesstoken 전달 
+  //     ctx.set('authorization', `Bearer ${accessToken}`),
+  //     ctx.set('accessToken', accessToken),
+  //     ctx.set('isLogin', 'true'),
+  //     ctx.set('memberRole', role)
+  //   )
+  // }),
   //로그아웃
   rest.get('/members/logout', async (_, res, ctx) => {
     return res(ctx.status(200), ctx.json('logout 성공'))
@@ -274,7 +282,14 @@ const HJHandlers = [
     }
 
 
-  })
+  }),
+
+  //0719 새로운 로그인
+  // rest.post('/members', async(req, res, ctx) => {
+  //   const {memberRole} = await req.json();
+
+  //   return res((ctx.status(200)), ctx.json(`당신은 ${memberRole} 입니다.! `))
+  // })
 
 
 
@@ -304,7 +319,7 @@ const HyoHandler = [
 ]
 
 export const handlers = DaHamHandlers
-  .concat(UserRequestHandlers)
-  .concat(HJHandlers)
-  .concat(HyoHandler);
+  // .concat(UserRequestHandlers)
+  .concat(HJHandlers);
+  // .concat(HyoHandler);
 
