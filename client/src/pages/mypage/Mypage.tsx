@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/modules';
 import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
 import Header from '@/components/header/Header';
+import Footer from '@/components/footer/Footer';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -162,6 +163,7 @@ export default function MyPage() {
           ) : null}
         </MyItemsWrapper>
       </MainWrapper>
+      <Footer />
     </DefaultImgWrapper>
   );
 }
