@@ -18,7 +18,7 @@ public class EnumFormatValidator implements ConstraintValidator<EnumFormat, Memb
     public boolean isValid(Member.Member_Role value, ConstraintValidatorContext context) {
 
         if(value != null){
-            return value == Member.Member_Role.CLIENT || value == Member.Member_Role.PARTNER;
+            return value == Member.Member_Role.CLIENT || value == Member.Member_Role.PARTNER ;
         }
         else {
             throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER_ROLE);
