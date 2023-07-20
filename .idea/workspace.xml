@@ -4,11 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="" />
+    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/server/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/category/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/category/entity/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/category/entity/Tag.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/category/entity/Tag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/likes/entity/Likes.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/likes/entity/Likes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/portfolio/entity/Portfolio.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/portfolio/entity/Portfolio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/board/mapper/BoardMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/board/mapper/BoardMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/bookmark/mapper/BookmarkMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/bookmark/mapper/BookmarkMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/category/mapper/CategoryMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/category/mapper/CategoryMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/comment/mapper/CommentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/comment/mapper/CommentMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/portfolio/mapper/PortfolioMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/portfolio/mapper/PortfolioMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/server">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -44,12 +67,8 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="be-feat/Security" />
-                    <option name="lastUsedInstant" value="1689231181" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="be-feat/member-controller" />
-                    <option name="lastUsedInstant" value="1689231180" />
+                    <option name="branchName" value="be/feat-MemberAdditionalConfig" />
+                    <option name="lastUsedInstant" value="1689730544" />
                   </RecentBranch>
                 </list>
               </option>
@@ -93,7 +112,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4e97aca9-3b77-4b55-89b9-74682aca65f9" name="Changes" comment="" />
+      <changelist id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="" />
       <created>1688431290255</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

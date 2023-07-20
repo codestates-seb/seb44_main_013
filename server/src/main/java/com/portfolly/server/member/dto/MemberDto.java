@@ -5,10 +5,7 @@ import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.image.entity.ImageData;
 import com.portfolly.server.validator.EnumFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -19,12 +16,12 @@ import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 public class MemberDto {
+
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(title = "사용자 등록 정보")
-    public static class Post {
+    public static class Auth {
         @Schema(title = "사용자 이름", example = "홍길동")
         @NotEmpty(message = "[필수 입력 항목 입니다] Name")
         @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
@@ -33,10 +30,20 @@ public class MemberDto {
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
-//        @Schema(title = "클라이언트/파트너", example = "PARTNER")
-//        @EnumFormat(enumClass = Member.Member_Role.class)
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Schema(title = "사용자 등록 정보")
+    public static class Post {
+        private Long id;
         private Member.Member_Role member_role;
     }
+
+
 
     @Getter
     @Setter

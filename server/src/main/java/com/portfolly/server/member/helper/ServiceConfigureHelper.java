@@ -21,14 +21,15 @@ public interface ServiceConfigureHelper {
                 .name(member.getName())
                 .email(member.getEmail())
                 .refreshToken(member.getRefreshToken())
-                .member_role(member.getMember_role())
-                .location("장소를 입력하세요.")
+                .member_role(Member.Member_Role.NOT_ROLE)
+                .location("거주지를 입력하세요.")
                 .comInfo("[클라이언트] 회사정보를 입력하세요.")
                 .job("[파트너] 직업을 입력하세요")
                 .career("[파트너] 경력을 작성하세요")
                 .award("[파트너] 수상경력을 작성하세요.")
                 .skill("[파트너] 스킬을 작성하세요")
                 .memberStatus(Member.Member_Status.MEMBER_ACTIVE)
+                .refreshToken(member.getRefreshToken())
                 .build();
     }
 
@@ -50,6 +51,14 @@ public interface ServiceConfigureHelper {
                 .ifPresent(resultMember::setSkill);
         Optional.ofNullable(member.getMemberStatus())
                 .ifPresent(resultMember::setMemberStatus);
+
+        return resultMember;
+    }
+
+    default Member RolePatchMember(Member member,Member resultMember) {
+
+        Optional.ofNullable(member.getMember_role())
+                .ifPresent(resultMember::setMember_role);
 
         return resultMember;
     }

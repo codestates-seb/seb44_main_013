@@ -30,8 +30,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PictureService {
     private PictureRepository pictureRepository;
-
-
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
     private final AmazonS3 amazonS3;
@@ -64,7 +62,6 @@ public class PictureService {
 
         return fileNameList;
     }
-
 
     public void deleteImage(String fileName) {
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));

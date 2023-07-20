@@ -6,6 +6,8 @@ import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.mapper.MemberMapper;
 import com.portfolly.server.member.service.MemberService;
+import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
+import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import com.portfolly.server.utils.UriCreator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,9 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
+import java.net.http.HttpHeaders;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Validated
@@ -34,12 +42,13 @@ public class MemberController {
     private final MemberMapper mapper;
     private final MemberService memberService;
 
+    // 신규가입시 : Member Role 설정 Post
     @PostMapping
     @Operation(summary = "회원 등록", description = "회원을 등록합니다.")
     @CrossOrigin("*")
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post postDto){
 
-        Member member = memberService.createMember(mapper.PostToMember(postDto));
+        Member member = memberService.roleCreateMember(mapper.PostToMember(postDto));
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URI,member.getId());
 
         return ResponseEntity.created(location).body("회원가입 완료");
