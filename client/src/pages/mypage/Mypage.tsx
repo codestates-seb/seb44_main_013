@@ -20,6 +20,7 @@ import {
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/modules';
+import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);

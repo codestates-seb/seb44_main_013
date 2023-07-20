@@ -21,36 +21,37 @@ import SelectRole from './components/login/SelectRole';
 const App = () => {
   //희재님 363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com
   //내꺼 614000395362-h7u67qqcd1tcfnfae6cocbhj99680ru5.apps.googleusercontent.com
-  const clientId = '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
+  const clientId =
+    '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
   return (
     <GoogleOAuthProvider clientId={clientId}>
-    <CookiesProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/home" element={<LandingPage />}></Route>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Main />} />
-            <Route path="/members" element={<MyPage />} />
-          </Route>
-          <Route element={<CHeaderLayout />}>
-            <Route path="/boards" element={<CommunityMain />} />
-            <Route path="/boards/:id" element={<CommunityDetail />} />
-            <Route path="/boards/edit/:id" element={<AddCommunity />} />
-            <Route path="/boards/edit" element={<AddCommunity />} />
-          </Route>
-          <Route
-            path="/portfolios/:portfolio_id"
-            element={<PortfolioDetail />}
-          />
-          <Route path="/portfolio/edit" element={<PortfolioEdit />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/singup/role" element={<SelectRole/>}/>
-        </Routes>
-      </BrowserRouter>
-    </Provider>
-    </CookiesProvider>
+      <CookiesProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/home" element={<LandingPage />}></Route>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Main />} />
+              </Route>
+              <Route element={<CHeaderLayout />}>
+                <Route path="/members" element={<MyPage />} />
+                <Route path="/boards" element={<CommunityMain />} />
+                <Route path="/boards/:id" element={<CommunityDetail />} />
+                <Route path="/boards/edit/:id" element={<AddCommunity />} />
+                <Route path="/boards/edit" element={<AddCommunity />} />
+              </Route>
+              <Route
+                path="/portfolios/:portfolio_id"
+                element={<PortfolioDetail />}
+              />
+              <Route path="/portfolio/edit" element={<PortfolioEdit />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/singup/role" element={<SelectRole />} />
+            </Routes>
+          </BrowserRouter>
+        </Provider>
+      </CookiesProvider>
     </GoogleOAuthProvider>
   );
 };
