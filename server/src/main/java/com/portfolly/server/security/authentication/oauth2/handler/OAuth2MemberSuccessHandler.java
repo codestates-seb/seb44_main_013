@@ -4,6 +4,7 @@ import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -21,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 // 로그인 성공 시 작동 됨
+
+@Configuration
 public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
@@ -68,7 +71,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         memberService.createMember(member);
     }
 
-    private String delegateAccessToken(String username, List<String> authorities) {
+    public String delegateAccessToken(String username, List<String> authorities) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("username", username);
         claims.put("roles", authorities);
@@ -83,7 +86,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         return accessToken;
     }
 
-    private String delegateRefreshToken(String username) {
+    public String delegateRefreshToken(String username) {
         String subject = username;
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());

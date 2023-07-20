@@ -29,6 +29,7 @@ public interface ServiceConfigureHelper {
                 .award("[파트너] 수상경력을 작성하세요.")
                 .skill("[파트너] 스킬을 작성하세요")
                 .memberStatus(Member.Member_Status.MEMBER_ACTIVE)
+                .refreshToken(member.getRefreshToken())
                 .build();
     }
 
@@ -50,6 +51,14 @@ public interface ServiceConfigureHelper {
                 .ifPresent(resultMember::setSkill);
         Optional.ofNullable(member.getMemberStatus())
                 .ifPresent(resultMember::setMemberStatus);
+
+        return resultMember;
+    }
+
+    default Member RolePatchMember(Member member,Member resultMember) {
+
+        Optional.ofNullable(member.getMember_role())
+                .ifPresent(resultMember::setMember_role);
 
         return resultMember;
     }

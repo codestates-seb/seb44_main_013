@@ -41,33 +41,14 @@ public class MemberController {
     private final String MEMBER_DEFAULT_URI = "/members";
     private final MemberMapper mapper;
     private final MemberService memberService;
-    private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils;
 
-    // 추가사항
-    @PostMapping("/oauth")
-    public String OauthLogin(@RequestHeader("Authorization") String googleAccessToken,
-                                     @Valid @RequestBody MemberDto.Auth auth,
-                                     HttpServletResponse response) {
-
-        Member member = memberService.createMember(mapper.AuthToMember(auth));
-        List<String> authorities = authorityUtils.createRoles(member.getEmail());
-        String accessToken = delegateAccessToken(member.getEmail(),authorities);
-
-        response.addHeader("AccessToken",accessToken);
-        response.addHeader("Member_id",member.getId().toString());
-
-        return "Access_Token Ok";
-    }
-
-    @PostMapping("/{member-id}")
+    // 신규가입시 : Member Role 설정 Post
+    @PostMapping
     @Operation(summary = "회원 등록", description = "회원을 등록합니다.")
     @CrossOrigin("*")
-    public ResponseEntity postMember(@Positive @PathVariable("member-id") long memberId,
-                                     @Valid @RequestBody MemberDto.Post postDto){
+    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post postDto){
 
-        postDto.setMemberId(memberId);
-        Member member = memberService.createMember(mapper.PostToMember(postDto));
+        Member member = memberService.roleCreateMember(mapper.PostToMember(postDto));
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URI,member.getId());
 
         return ResponseEntity.created(location).body("회원가입 완료");
@@ -130,30 +111,4 @@ public class MemberController {
         }
     }
 
-    // 추가 사항 : 토큰 생성
-    private String delegateAccessToken(String username, List<String> authorities) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", username);
-        claims.put("roles", authorities);
-
-        String subject = username;
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
-
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-
-        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
-
-        return accessToken;
-    }
-
-    private String delegateRefreshToken(String username) {
-        String subject = username;
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-
-        String refreshToken = jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
-
-
-        return refreshToken;
-    }
 }

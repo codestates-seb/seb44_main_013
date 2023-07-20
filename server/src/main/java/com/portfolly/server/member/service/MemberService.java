@@ -30,6 +30,14 @@ public class MemberService implements ServiceConfigureHelper {
 
         return memberRepository.save(postMember(member));
     }
+
+    public Member roleCreateMember(Member member){
+
+        Member resultMember = findByMember(member.getId());
+
+        return memberRepository.save(RolePatchMember(member,resultMember));
+    }
+
     public Member updateMember(Member member){
         // 멤버 찾기
         Member resultMember = findByMember(member.getId());
