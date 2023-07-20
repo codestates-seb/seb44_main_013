@@ -17,7 +17,7 @@ import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
-import LikeBtn from '@/commons/atoms/buttons/LikeBtn';
+import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
@@ -69,7 +69,7 @@ export default function PortfolioDetail() {
             <FlexBetweenWrapper>
               {portfolio &&
                 <>
-                  <LikeBtn portfolioId={portfolio.portfolioId} currentLikes={portfolio.likes} isToggled={portfolio.isLiked} />
+                  <LikeButton portfolioId={portfolio.portfolioId} currentLikes={portfolio.likes} isToggled={portfolio.isLiked} />
                   <FlexWrapper gap={20}>
                     <SmallText color='white'>views · {portfolio.views}</SmallText>
                     <Bookmark portfolioId={portfolio.portfolioId} isToggled={portfolio.isMarked} />

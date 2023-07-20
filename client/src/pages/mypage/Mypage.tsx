@@ -19,7 +19,7 @@ import {
 
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/modules';
+import { RootState } from '@/store';
 import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
