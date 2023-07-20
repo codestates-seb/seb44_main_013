@@ -122,7 +122,7 @@ public class PortfolioService {
         Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()-> new RuntimeException());
         Member member = memberService.findMember(memberId);
 
-        return bookmarkRepository.findByMemberAndPortfolio(member, portfolio).isPresent() ? true : false;
+        return bookmarkRepository.findByMemberIdAndPortfolioId(memberId, portfolioId).isPresent() ? true : false;
     }
 
     //isLiked
