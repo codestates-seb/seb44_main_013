@@ -28,9 +28,9 @@ const App = () => {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path="/home" element={<LandingPage />}></Route>
+            <Route path="/" element={<LandingPage />}></Route>
             <Route element={<MainLayout />}>
-              <Route path="/" element={<Main />} />
+              <Route path="/main" element={<Main />} />
               <Route path="/members" element={<MyPage />} />
             </Route>
             <Route element={<CHeaderLayout />}>
@@ -39,7 +39,10 @@ const App = () => {
               <Route path="/boards/edit/:id" element={<AddCommunity />} />
               <Route path="/boards/edit" element={<AddCommunity />} />
             </Route>
-            <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />
+            <Route
+              path="/portfolios/:portfolio_id"
+              element={<PortfolioDetail />}
+            />
             <Route path="/portfolio/edit" element={<PortfolioEdit />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
