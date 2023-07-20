@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 const glow = keyframes`
@@ -54,6 +55,7 @@ const Cursor = styled.div`
 export default function PortfollyBtn() {
   const [isClicked, setIsClicked] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const addEventListeners = () => {
@@ -76,7 +78,10 @@ export default function PortfollyBtn() {
     <CenteredDiv>
       <StyledButton
         isClicked={isClicked}
-        onClick={() => setIsClicked(!isClicked)}
+        onClick={() => {
+          setIsClicked(!isClicked);
+          navigate('/main');
+        }}
       >
         Portfolly
       </StyledButton>

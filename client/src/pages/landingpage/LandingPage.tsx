@@ -7,7 +7,6 @@ import AnimationSection from '@/components/home-section/animation-section/Animat
 import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
 import PortfollyBtn from '@/commons/atoms/portfolly/PortfollyBtn';
-import { MouseEffect } from '@/commons/atoms/portfolly/MouseEffect';
 
 export default function LandingPage() {
   useEffect(() => {

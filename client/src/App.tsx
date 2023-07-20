@@ -29,9 +29,9 @@ const App = () => {
         <Provider store={store}>
           <BrowserRouter>
             <Routes>
-              <Route path="/home" element={<LandingPage />}></Route>
+              <Route path="/" element={<LandingPage />}></Route>
               <Route element={<MainLayout />}>
-                <Route path="/" element={<Main />} />
+                <Route path="/main" element={<Main />} />
               </Route>
               <Route path="/members" element={<MyPage />} />
               <Route element={<CHeaderLayout />}>
