@@ -9,11 +9,17 @@ import CategoryButton from '@/commons/atoms/buttons/category/CategoryButton';
 import { FlexContainer } from '@/commons/styles/Containers.styled';
 
 export default function CategoryNavBar() {
-  const Categories: Array<CATEGORY_TYPE> = ['웹', '앱', '3D/애니메이션', '그래픽디자인', '사진/영상'];
+  const Categories: Array<CATEGORY_TYPE> = [
+    '웹',
+    '앱',
+    '3D/애니메이션',
+    '그래픽디자인',
+    '사진/영상',
+  ];
   const dispatch = useDispatch();
 
   return (
-    <FlexContainer gap={20}>
+    <FlexContainer gap={20} bg="transparent">
       {Categories.map((category, index) => {
         return (
           <CategoryButton
