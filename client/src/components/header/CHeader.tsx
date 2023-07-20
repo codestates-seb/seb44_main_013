@@ -26,7 +26,7 @@ export default function CHeader() {
   console.log(loginState);
   return (
     <HeaderContainer>
-      <Link to="/">
+      <Link to="/main">
         <Logo />
       </Link>
       <BtnContainer>

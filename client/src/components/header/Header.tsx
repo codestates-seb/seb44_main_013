@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <Link to="/">
+      <Link to="/main">
         <Logo />
       </Link>
       {/* <Search /> */}
