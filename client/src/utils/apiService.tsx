@@ -30,9 +30,10 @@ export async function call(api: string, method: string, data?: any) {
     options.data = JSON.stringify(data);
 
   // 에러처리고려
-  return await axios.request(options)
-    .then((res) => res.data)
-    .catch(error => {
-      console.log(error);
-    })
+  try {
+    const response = await axios.request(options)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
