@@ -59,12 +59,19 @@ public class MemberDto {
         @Schema(title = "사용자 id", example = "1")
         private Long id;
         @Schema(title = "사용자 이름", example = "홍길동")
+        @NotEmpty(message = "[필수 입력 항목 입니다] Name")
+        @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
+        @Pattern(regexp = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", message = "이름에는 특수 문자가 포함될 수 없습니다.")
         private String name;
-        @Schema(title = "지역", example = "서울")
+        @Schema(title = "지역", example = "서울특별시")
+        @Pattern(regexp = "^(?:서울특별시|부산광역시|대구광역시|인천광역시|광주광역시|대전광역시|울산광역시|세종특별자치시|"
+                + "경기도|강원도|충청북도|충청남도|전라북도|전라남도|경상북도|경상남도|제주특별자치도)$",
+                message = "올바른 '도' 형식이 아닙니다.")
         private String location;
         @Schema(title = "회사 정보", example = "[회사 소개]")
         private String comInfo;
         @Schema(title = "직업", example = "개발자")
+        @Pattern(regexp = "^[가-힣a-zA-Z\\s]+$", message = "올바른 형식이 아닙니다.")
         private String job;
         @Schema(title = "경력", example = "3년")
         private String career;
@@ -85,13 +92,18 @@ public class MemberDto {
         @Schema(title = "사용자 id", example = "1")
         private Long id;
         @Schema(title = "사용자 이름", example = "홍길동")
+        @NotEmpty(message = "[필수 입력 항목 입니다] Name")
+        @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
+        @Pattern(regexp = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", message = "이름에는 특수 문자가 포함될 수 없습니다.")
         private String name;
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
         @Schema(title = "클라이언트/파트너", example = "Client")
+        @EnumFormat(enumClass = Member.Member_Role.class)
         private Member.Member_Role member_role;
         @Schema(title = "지역", example = "서울")
+        @Pattern(regexp = "^[가-힣a-zA-Z\\s]+$", message = "올바른 형식이 아닙니다.")
         private String location;
         @Schema(title = "회사 정보", example = "[회사 소개]")
         private String comInfo;
@@ -110,15 +122,21 @@ public class MemberDto {
         @Schema(title = "사용자 id", example = "1")
         private Long id;
         @Schema(title = "사용자 이름", example = "홍길동")
+        @NotEmpty(message = "[필수 입력 항목 입니다] Name")
+        @Size(min = 1, max = 20, message = "이름은 1글자 이상 20글자 이하로 작성되어야 합니다.")
+        @Pattern(regexp = "^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", message = "이름에는 특수 문자가 포함될 수 없습니다.")
         private String name;
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
         @Schema(title = "클라이언트/파트너", example = "Partner")
+        @EnumFormat(enumClass = Member.Member_Role.class)
         private Member.Member_Role member_role;
         @Schema(title = "지역", example = "서울")
+        @Pattern(regexp = "^[가-힣a-zA-Z\\s]+$", message = "올바른 형식이 아닙니다.")
         private String location;
         @Schema(title = "직업", example = "개발자")
+        @Pattern(regexp = "^[가-힣a-zA-Z\\s]+$", message = "올바른 형식이 아닙니다.")
         private String job;
         @Schema(title = "경력", example = "3년")
         private String career;
@@ -131,6 +149,5 @@ public class MemberDto {
         private List<Portfolio> portfolios;
         private List<Bookmark> bookmarks;
         private List<Board> boards;
-
     }
 }

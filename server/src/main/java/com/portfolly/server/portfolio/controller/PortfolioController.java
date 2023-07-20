@@ -6,10 +6,14 @@ import com.portfolly.server.dto.MultiResponseDto;
 import com.portfolly.server.dto.SingleResponseDto;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
+import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.mapper.PortfolioMapper;
 import com.portfolly.server.portfolio.service.PortfolioService;
+import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
+import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import com.portfolly.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,15 +38,23 @@ public class PortfolioController {
     private final PortfolioMapper portfolioMapper;
     private final PortfolioService portfolioService;
     private final static String PORTFOLIO_DEFAULT_URL = "/portfolios";
+    private final JwtTokenizer jwtTokenizer;
+    private final CustomAuthorityUtils authorityUtils;
+    private final MemberService memberService;
 
     //포트폴리오 등록
     @PostMapping
     public ResponseEntity postPortfolio(
-//            @RequestHeader(name = "Refresh") String token,
+            @RequestHeader("AccessToken") String accessToken,
                                         @Valid @RequestBody PortfolioDto.Post postDto){
         //authentication or token통해서 memberId 받아와야함
 //        Long memberId = findmemberId(token);
         Long memberId = 1L;
+
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey);
+        Member member = memberService.findByMember(email);
+
         Portfolio portfolio = portfolioService.postPortfolio(postDto, memberId);
         URI location = UriCreator.createUri(PORTFOLIO_DEFAULT_URL, portfolio.getId());
         return ResponseEntity.created(location).build();

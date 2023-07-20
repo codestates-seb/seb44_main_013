@@ -58,29 +58,26 @@ public class SecurityConfiguration {
             .and()
             .apply(new CustomFilterConfigurer())
             .and()
-                .authorizeHttpRequests(authorize -> authorize
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()
 
-                        // 포트폴리오 관련
-                        .antMatchers(HttpMethod.POST,"/portfolios").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH , "/portfolios/*").hasAnyRole("USER","ADMIN")
-                        .antMatchers(HttpMethod.GET ,"/portfolios/*").permitAll()
-                        .antMatchers(HttpMethod.GET, "/portfolios").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "/portfolios/*").hasAnyRole("USER","ADMIN")
-
-                        // Board 관련
-                        .antMatchers(HttpMethod.POST,"/boards/*").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH , "/boards/**").hasAnyRole("USER","ADMIN")
-                        .antMatchers(HttpMethod.GET ,"/boards/*").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "/boards/*").hasAnyRole("USER","ADMIN")
-
-                        // comment 관련
-                        .antMatchers(HttpMethod.POST,"/comments/*").hasRole("USER")
-                        .antMatchers(HttpMethod.PATCH , "/comments/**").hasAnyRole("USER","ADMIN")
-                        .antMatchers(HttpMethod.GET ,"/comments/*").permitAll()
-                        .antMatchers(HttpMethod.DELETE, "/comments/*").hasAnyRole("USER","ADMIN")
-
-
-
+//                        // 포트폴리오 관련
+//                        .antMatchers(HttpMethod.POST,"/portfolios").hasRole("USER")
+//                        .antMatchers(HttpMethod.PATCH , "/portfolios/*").hasAnyRole("USER","ADMIN")
+//                        .antMatchers(HttpMethod.GET ,"/portfolios/*").permitAll()
+//                        .antMatchers(HttpMethod.GET, "/portfolios").permitAll()
+//                        .antMatchers(HttpMethod.DELETE, "/portfolios/*").hasAnyRole("USER","ADMIN")
+//
+//                        // Board 관련
+//                        .antMatchers(HttpMethod.POST,"/boards/*").hasRole("USER")
+//                        .antMatchers(HttpMethod.PATCH , "/boards/**").hasAnyRole("USER","ADMIN")
+//                        .antMatchers(HttpMethod.GET ,"/boards/*").permitAll()
+//                        .antMatchers(HttpMethod.DELETE, "/boards/*").hasAnyRole("USER","ADMIN")
+//
+//                        // comment 관련
+//                        .antMatchers(HttpMethod.POST,"/comments/*").hasRole("USER")
+//                        .antMatchers(HttpMethod.PATCH , "/comments/**").hasAnyRole("USER","ADMIN")
+//                        .antMatchers(HttpMethod.GET ,"/comments/*").permitAll()
+//                        .antMatchers(HttpMethod.DELETE, "/comments/*").hasAnyRole("USER","ADMIN")
             )
             .oauth2Login(oauth2 -> oauth2
                     .successHandler(new OAuth2MemberSuccessHandler(jwtTokenizer, authorityUtils, memberService))

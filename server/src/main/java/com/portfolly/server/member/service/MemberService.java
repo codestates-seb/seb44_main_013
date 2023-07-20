@@ -82,6 +82,12 @@ public class MemberService implements ServiceConfigureHelper {
 //        }
     }
 
+    public Member findByMember(String email){
+
+        verifiedExistEmail(email);
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        return optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_EXIST));
+    }
     private void verifiedExistEmail(String email){
         Optional<Member> findEmail = memberRepository.findByEmail(email);
         if (findEmail.isEmpty()){
@@ -113,5 +119,10 @@ public class MemberService implements ServiceConfigureHelper {
         member.setBoards(findBoardList);
 
         return member;
+    }
+
+    public Member findMemberRefreshToken(String refreshToken){
+        Optional<Member> optionalMember = memberRepository.findByRefreshToken(refreshToken);
+        return optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_EXIST));
     }
 }

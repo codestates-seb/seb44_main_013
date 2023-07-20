@@ -106,4 +106,15 @@ public class JwtTokenizer {
 
         return claims.get("username", String.class);
     }
+
+    //
+    public String extractEmailFromRefreshToken(String refreshToken,String base64EncodedSecretKey){
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getKeyFromBase64EncodedKey(base64EncodedSecretKey))
+                .build()
+                .parseClaimsJws(refreshToken)
+                .getBody();
+
+        return claims.get("username", String.class);
+    }
 }

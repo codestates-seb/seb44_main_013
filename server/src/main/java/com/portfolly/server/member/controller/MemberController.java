@@ -50,7 +50,7 @@ public class MemberController {
         Member member = memberService.roleCreateMember(mapper.PostToMember(postDto));
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URI,member.getId());
 
-        return ResponseEntity.created(location).body("회원가입 완료");
+        return ResponseEntity.created(location).body("[회원가입] : 최종 회원 가입 완료");
     }
 
     @PatchMapping("/{member-id}")
