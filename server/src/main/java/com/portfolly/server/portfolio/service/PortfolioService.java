@@ -86,7 +86,7 @@ public class PortfolioService {
             String firstImage = pictures.get(0).getPictureUrl();
             return firstImage;
         }
-        //else default image 추가해주어야 함
+        //else default image 추가해주어야 함(프론트에서 처리)
         else return null;
     }
 

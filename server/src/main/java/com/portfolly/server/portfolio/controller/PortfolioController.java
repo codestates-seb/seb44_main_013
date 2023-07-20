@@ -38,7 +38,7 @@ public class PortfolioController {
     //포트폴리오 등록
     @PostMapping
     public ResponseEntity postPortfolio(
-//            @RequestHeader(name = "Refresh") String token,
+//            @RequestHeader(name = "Access") String token,
                                         @Valid @RequestBody PortfolioDto.Post postDto){
         //authentication or token통해서 memberId 받아와야함
 //        Long memberId = findmemberId(token);
@@ -69,7 +69,6 @@ public class PortfolioController {
         response.setLiked(portfolioService.isLiked(response.getId()));
         response.setWriter(portfolioService.isWriter(response.getId()));
         response.setCountLikes(portfolioService.countLikes(response.getId()));
-        response.setFirstImage(portfolioService.firstImageUrl(response.getId()));
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
