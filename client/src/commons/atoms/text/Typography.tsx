@@ -9,7 +9,7 @@ const H = styled.h4<{ color?: string }>`
 `
 
 const Span = styled.span<{ color?: string }>`
-  ${tw`align-middle`}
+  text-align: middle;
   color: ${(props) => props.color};
 `
 

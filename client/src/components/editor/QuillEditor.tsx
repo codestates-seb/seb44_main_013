@@ -1,16 +1,20 @@
 /* 2023-07-06 React Quill Editor - 김다함 */
 import { memo, useMemo, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from 'react-quill';
 
+import { Quill } from '@/types';
+import { portfolio, setHtmlContent } from '@/store/portfolioSlice';
 import useImageHandler from '@/hooks/useImageHandler';
 
 import { QuillWrapper } from '@/components/editor/Editor.styled';
-import { Quill } from '@/types';
 
-const QuillEditor = memo(({ htmlContent, setContentHandler, isTitleFormOpen }: Quill) => {
+const QuillEditor = memo(({ isTitleFormOpen }: Quill) => {
   const [imageUrlHandler, imageHandler] = useImageHandler();
+  const savedPortfolio = useSelector(portfolio);
   const quillRef = useRef<ReactQuill>();
+  const dispatch = useDispatch();
 
   const modules = useMemo(
     () => ({
@@ -45,8 +49,8 @@ const QuillEditor = memo(({ htmlContent, setContentHandler, isTitleFormOpen }: Q
             quillRef.current = element;
           }
         }}
-        value={htmlContent}
-        onChange={(content) => setContentHandler(content)}
+        value={savedPortfolio.content}
+        onChange={(content) => dispatch(setHtmlContent(content))}
         modules={modules}
         theme="snow"
         style={{ height: '100%', marginBottom: '0' }}

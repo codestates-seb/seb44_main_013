@@ -1,7 +1,7 @@
 /* 2023-07-12 태그 스토어 - 김다함 */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '@/modules/index';
+import { RootState } from '@/store/index';
 import { Tag, TagSlice } from '@/types';
 
 export const SET_TAG = 'SET_TAG' as const;
@@ -9,11 +9,10 @@ export const SELECT_TAG = 'SELECT_TAG' as const;
 export const DELETE_TAG = 'DELETE_TAG' as const;
 
 export const setTag = (tags: Array<Tag>) => ({ type: SET_TAG, tags });
-export const selectTag = (isSelected: boolean, tag: Tag) => ({ type: SELECT_TAG, isSelected, tag });
+export const selectTag = (tag: Tag) => ({ type: SELECT_TAG, tag });
 export const deleteTag = () => ({ type: DELETE_TAG })
 
 const initialState: TagSlice = {
-  isSelected: false,
   selectedTags: [],
 }
 
@@ -26,8 +25,7 @@ const { reducer: tagReducer } = createSlice({
       state.selectedTags = action.tags;
     },
     SELECT_TAG: (state, action) => {
-      state.isSelected = action.isSelected;
-      if (action.isSelected) state.selectedTags = [...state.selectedTags, action.tag];
+      if (action.tag.isSelected) state.selectedTags = [...state.selectedTags, action.tag];
       else state.selectedTags = state.selectedTags.filter((tag: Tag) => tag.name !== action.tag.name);
     },
     DELETE_TAG: (state) => {

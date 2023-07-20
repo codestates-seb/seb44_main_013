@@ -12,9 +12,7 @@ export const ButtonHeader = tw.div`
 const RoundedBox = tw.div`
   rounded-xl
   w-full 
-  break-words 
-  overflow-hidden 
-  break-keep 
+  break-words
   text-white
 `
 
@@ -22,7 +20,6 @@ export const PortfolioContainer = styled(RoundedBox)`
   ${tw`
     w-3/4
     bg-black
-    break-keep
     text-white
     py-10
     px-14
@@ -36,13 +33,12 @@ ${tw`
   flex flex-col
   w-1/4
   h-full
-  gap-6
   overflow-y-auto
 `}
-  max-height: calc(100vh - 70px);
+  height: calc(100vh - 70px);
 `;
 
 export const UserCard = styled(RoundedBox)`
-  ${tw`flex flex-col p-8 gap-6`}
+  ${tw`flex flex-col p-8 gap-6 mb-5 h-fit overflow-visible`}
   background-color: rgba(32, 32, 36, 1);
 `

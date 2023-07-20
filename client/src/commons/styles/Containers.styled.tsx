@@ -12,16 +12,16 @@ export const Center = tw.div`
   flex justify-center items-center 
 `;
 
-export const FlexContainer = styled(Container)`
-  ${tw`items-center justify-center mt-10`}
+export const FlexContainer = tw(Container)`
+  items-center justify-center mt-10
 `;
 //categorypart 같음
-export const FlexColumnContainer = styled(Container)`
-  ${tw`flex-col items-center justify-center`}
+export const FlexColumnContainer = tw(Container)`
+  flex-col items-center justify-center
 `;
 
-export const FlexStartContainer = styled(Container)`
-  ${tw`items-center justify-start`}
+export const FlexStartContainer = tw(Container)`
+  items-center justify-start
 `;
 
 export const FlexWrapper = styled.div<{ gap?: number }>`
@@ -29,10 +29,14 @@ export const FlexWrapper = styled.div<{ gap?: number }>`
   gap: ${(props) => props.gap}px;
 `;
 
-export const FlexBetweenWrapper = styled(FlexWrapper)`
-  ${tw`justify-between`}
+export const FlexBetweenWrapper = tw(FlexWrapper)`
+  justify-between
 `;
 
-export const FlexColumnWrapper = styled(FlexWrapper)`
-  ${tw`flex-col`}
+export const FlexEndWrapper = tw(FlexWrapper)`
+  justify-end
+`
+
+export const FlexColumnWrapper = tw(FlexWrapper)`
+  flex-col
 `;

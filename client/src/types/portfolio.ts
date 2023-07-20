@@ -10,6 +10,7 @@ export interface Member {
 export interface Tag {
   tagId?: number;
   name: string;
+  isSelected: boolean;
 }
 
 export type CategoryTags = {
@@ -22,7 +23,7 @@ export interface Portfolio {
   portfolioId: number;
   title: string;
   content: string;
-  explains: string;
+  explain: string;
   views: number;
   modifiedAt: string;
   createdAt: string;
@@ -36,11 +37,12 @@ export interface Portfolio {
 }
 
 export interface PortfolioContent {
+  portfolioId?: string | null;
   title: string;
-  content?: string;
+  content: string;
   category: CATEGORY_TYPE;
   tags: Array<Tag>;
-  explains: string;
+  explain: string;
   createdAt?: string;
 }
 

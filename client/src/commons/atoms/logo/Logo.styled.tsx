@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-export const LogoContainer = tw.div`
+export const LogoContainer = tw.form`
   flex
   cursor-pointer
 `;

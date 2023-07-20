@@ -32,6 +32,6 @@ export const PortfolioEditButton = styled.button<{ color: 'light' | 'dark' | 'bl
   }
 `
 
-export const PortfolioCheckButton = styled(PortfolioEditButton)`
-  ${tw`absolute bottom-10 right-16`};
+export const PortfolioCheckButton = tw(PortfolioEditButton)`
+  absolute bottom-10 right-16
 `

@@ -14,8 +14,9 @@ export default function LogoHeader() {
   const navigate = useNavigate();
 
   const gotoMain = () => {
-    if (confirm('작성한 내용이 저장되지 않습니다. 정말 나가시겠습니까?') === true)
-      navigate('/');
+    // if (confirm('작성한 내용이 저장되지 않습니다. 정말 나가시겠습니까?') === true)
+    // window.open('/', '_self');
+    navigate('/');
   }
 
   return (

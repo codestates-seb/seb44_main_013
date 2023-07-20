@@ -6,7 +6,7 @@ import Logo from '../../commons/atoms/logo/Logo';
 // import Search from '@/components/search/Search';
 import { RecuitBtn } from './CHeader.styled';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/modules';
+import { RootState } from '@/store';
 
 export default function Header() {
   const loginState = useSelector(
