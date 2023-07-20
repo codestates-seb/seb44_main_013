@@ -29,7 +29,7 @@ const DaHamHandlers = [
       portfolioId: portfolioId,
       title: String(body.title),
       content: String(body.content),
-      explains: body.explains,
+      explain: body.explains,
       views: 0,
       modifiedAt: String(new Date()),
       createdAt: String(new Date()),
