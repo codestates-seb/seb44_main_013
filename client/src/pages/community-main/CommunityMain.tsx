@@ -22,7 +22,7 @@ export default function CommunityMain() {
   const division = searchParams.get('division');
 
   useEffect(() => {
-    const axiosCommu = async () => {
+    const showWholeCommu = async () => {
       return call(`/api/boards?division=${division}`, 'GET', {
         params: { division: division },
       })
@@ -32,7 +32,7 @@ export default function CommunityMain() {
         .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
     };
 
-    axiosCommu();
+    showWholeCommu();
   }, [division]);
 
   // 검색 - 07.11 효정

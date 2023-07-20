@@ -1,24 +1,21 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-import axios, { RawAxiosRequestConfig, AxiosHeaders } from 'axios';
-import { API_BASE_URL } from '@/app-config';
-// import { getCookie } from './cookie';
-//ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
-const ACCESS_TOKEN = '';
-// const REFRESH_TOKEN = getCookie('refereshtoken');
-// console.log(ACCESS_TOKEN, REFRESH_TOKEN);
+// import { API_BASE_URL } from '@/app-config';
+// import { RootState } from '@/modules';
+import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
+// import { useSelector } from 'react-redux';
+// axios.defaults.baseURL = API_BASE_URL;
 
-axios.defaults.baseURL = API_BASE_URL;
+//ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
+// const ACCESS_TOKEN = useSelector((state: RootState) => state.loginSlice.accesstoken);
+const ACCESS_TOKEN = '';
+export const API_BASE_URL = '';
 
 export async function call(api: string, method: string, data?: any) {
+  // const dispatch = useDispatch();
   const headers = new AxiosHeaders({
-    "Content-Type": "application/json",
-    "withCredentials": true,
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${ACCESS_TOKEN}`,
   });
-
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
-  if (accessToken) {
-    headers.append("Authorization", "Bearer " + accessToken);
-  }
 
   const options: RawAxiosRequestConfig = {
     headers: headers,
@@ -26,13 +23,27 @@ export async function call(api: string, method: string, data?: any) {
     url: API_BASE_URL + api,
   };
 
-  if (data)
+  if (data) {
     options.data = JSON.stringify(data);
+  }
 
   // 에러처리고려
-  return await axios.request(options)
+  return await axios
+    .request(options)
     .then((res) => res.data)
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
-    })
+      if (axios.isAxiosError(error)) {
+        //axios 에러 객체인 경우,
+        const axiosError = error as AxiosError;
+        //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
+        //응답 데이터로 판별
+        console.log(axiosError.message);
+        console.log(axiosError.status);
+
+        // if(axiosError.message === 'Token Expired' && axiosError.status === 409){
+        //   console.log('에러 제대로 핸들링 중 : TEST');
+        // }
+      }
+    });
 }

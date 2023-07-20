@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { store } from '@/modules/index';
 import { Provider } from 'react-redux';
-import { CookiesProvider } from 'react-cookie';
 
 import Main from './pages/main/Main';
 import CommunityDetail from './pages/community-detail/CommunityDetail';
@@ -17,6 +16,7 @@ import AddCommunity from './pages/community-add/AddCommunity';
 import LandingPage from './pages/landingpage/LandingPage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import SelectRole from './components/login/SelectRole';
+import Neon from './pages/gisun/Neon';
 
 const App = () => {
   //희재님 363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com
@@ -25,33 +25,29 @@ const App = () => {
     '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <CookiesProvider>
-        <Provider store={store}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<LandingPage />}></Route>
-              <Route element={<MainLayout />}>
-                <Route path="/main" element={<Main />} />
-              </Route>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/home" element={<LandingPage />}></Route>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Main />} />
               <Route path="/members" element={<MyPage />} />
-              <Route element={<CHeaderLayout />}>
-                <Route path="/boards" element={<CommunityMain />} />
-                <Route path="/boards/:id" element={<CommunityDetail />} />
-                <Route path="/boards/edit/:id" element={<AddCommunity />} />
-                <Route path="/boards/edit" element={<AddCommunity />} />
-              </Route>
-              <Route
-                path="/portfolios/:portfolio_id"
-                element={<PortfolioDetail />}
-              />
-              <Route path="/portfolio/edit" element={<PortfolioEdit />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/singup/role" element={<SelectRole />} />
-            </Routes>
-          </BrowserRouter>
-        </Provider>
-      </CookiesProvider>
+            </Route>
+            <Route element={<CHeaderLayout />}>
+              <Route path="/boards" element={<CommunityMain />} />
+              <Route path="/boards/:id" element={<CommunityDetail />} />
+              <Route path="/boards/edit/:id" element={<AddCommunity />} />
+              <Route path="/boards/edit" element={<AddCommunity />} />
+            </Route>
+            <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />
+            <Route path="/portfolio/edit" element={<PortfolioEdit />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signup/role" element={<SelectRole />} />
+            <Route path="/neon" element={<Neon />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </GoogleOAuthProvider>
   );
 };
