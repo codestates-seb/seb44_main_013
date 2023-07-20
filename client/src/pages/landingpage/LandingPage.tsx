@@ -6,6 +6,7 @@ import AppSection from '@/components/home-section/app-section/AppSection';
 import AnimationSection from '@/components/home-section/animation-section/AnimationSection';
 import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
+import PortfollyBtn from '@/commons/atoms/portfolly/PortfollyBtn';
 
 export default function LandingPage() {
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function LandingPage() {
       <AnimationSection />
       <GraphicDesignSection />
       <PhotographySection />
+      <PortfollyBtn />
     </div>
   );
 }

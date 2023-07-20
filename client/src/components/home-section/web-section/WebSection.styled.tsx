@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const SectionWrapper = styled.div``;
+export const SectionWrapper = styled.div`
+  background-color: black;
+`;
 
 export const ImageWrapper = styled.div`
   position: relative;
@@ -31,7 +33,7 @@ export const TextOverlay = styled.div`
 
 export const Title = styled.h1`
   font-size: calc(25vw - 10px);
-  color: #6c47ff;
+  color: #ffffff;
   font-weight: 500;
   opacity: 0;
   position: relative;
@@ -39,7 +41,7 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled(Title)`
-  color: #6c47ff57;
+  color: #ffffff56;
   opacity: 0;
   z-index: 1;
   position: absolute;

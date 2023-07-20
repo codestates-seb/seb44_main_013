@@ -21,7 +21,8 @@ import Neon from './pages/gisun/Neon';
 const App = () => {
   //희재님 363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com
   //내꺼 614000395362-h7u67qqcd1tcfnfae6cocbhj99680ru5.apps.googleusercontent.com
-  const clientId = '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
+  const clientId =
+    '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
