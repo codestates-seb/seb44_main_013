@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { category } from '@/modules/categorySlice';
+import { category } from '@/store/categorySlice';
 import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
@@ -117,7 +117,7 @@ export default function Main() {
   const [searchs, setSearchs] = useState([] as any);
 
   useEffect(() => {
-    if(searchTerm === ''){
+    if (searchTerm === '') {
       setSearchs(renderItems());
     }
 
@@ -125,10 +125,10 @@ export default function Main() {
   }, [items]);
 
   console.log(searchs);
-  
+
   // searchs 가 추가될 때 그때 렌더링이 되게 해야함
   // searchterm이 없을때 리렌더링X
-  
+
   return (
     <>
       <Search
@@ -143,22 +143,22 @@ export default function Main() {
           // searchTerm === '' ?
           // renderItems() :
           searchs.map((searchedItem: any, index: any) => {
-            if(categoryParam === 'web') {
+            if (categoryParam === 'web') {
               return (<WebItem item={searchedItem} key={index} />)
             }
-            if(categoryParam === 'app') {
+            if (categoryParam === 'app') {
               return (<AppItem item={searchedItem} key={index} />)
             }
-            if(categoryParam === '3danimation') {
+            if (categoryParam === '3danimation') {
               return (<ThreeDItem item={searchedItem} key={index} />)
             }
-            if(categoryParam === 'graphicdesign') {
+            if (categoryParam === 'graphicdesign') {
               return (<GraphicItem item={searchedItem} key={index} />)
             }
-            if(categoryParam === 'photo') {
+            if (categoryParam === 'photo') {
               return (<PhotoItem item={searchedItem} key={index} />)
             }
-        })}
+          })}
       </WebItemsContainer>
     </>
   );

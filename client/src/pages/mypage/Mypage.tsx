@@ -19,7 +19,7 @@ import {
 
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { RootState } from '@/modules';
+import { RootState } from '@/store';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);

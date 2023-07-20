@@ -1,10 +1,9 @@
 import ReactQuill from 'react-quill';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEventHandler } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import 'react-quill/dist/quill.snow.css';
 
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
+import PurpleButton from '@/commons/atoms/buttons/PurpleBtn';
 
 import {
   EditorContainer,
@@ -14,6 +13,8 @@ import {
   TextEditor,
   TitleAdd,
 } from './AddCommunity.styled';
+
+import 'react-quill/dist/quill.snow.css';
 
 export default function AddCommunity() {
   const modules = {
@@ -35,14 +36,14 @@ export default function AddCommunity() {
   };
 
   // 상수로 빼는 방법도 있음!
-  
+
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleTitle = (e: any) => {
-    setTitle(e.target.value);
+  const handleTitle: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setTitle(event.target.value);
   };
   //새 등록인지 수정인지 한 페이지에서 관리 
   // post 요청 body
@@ -53,28 +54,16 @@ export default function AddCommunity() {
 
 
   //새 글 작성 함수
-  const postCommunity = () => {
-    // axios.post('/api/boards/write', {
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: {
-    //       title: title,
-    //       content: post.replace(/<\/?p[^>]*>/g, ''),
-    //       division: 'RECRUITMENT'
-    //       // division 임시
-    //     }
-    //   }
-    // )
-    axios.post('/api/boards/write', {
-        title: title,
-        content: post.replace(/<\/?p[^>]*>/g, ''),
-        division: 'RECRUITMENT'
-        // division 임시
-      })
-        .then((res) => console.log('갔어요! ' + res))
-        .catch((err) => console.log('안갔어요!' + err));
-        navigate('/boards?division=RECRUITMENT');
+  const postCommunity = async () => {
+    const res = await axios.post('/api/boards/write', {
+      title: title,
+      content: post.replace(/<\/?p[^>]*>/g, ''),
+      division: 'RECRUITMENT'
+      // division 임시
+    });
+
+    console.log('갔어요! ' + res);
+    navigate('/boards?division=RECRUITMENT');
   }
 
   const { id: communityNum } = useParams();
@@ -91,38 +80,38 @@ export default function AddCommunity() {
   //     .catch((err) => console.log(err));
   //   }
 
-    // if(location.pathname === `/boards/edit`) {
-    //   axios.post(`/api/boards/write`,  {
-    //     headers: {
-    //       widthCredentials: true,
-    //     },
-    //     body: postInformation,
-    //   })
-    //   .then(() => console.log('새글 등록 성공'))
-    //   .catch((err) => console.log(err))
+  // if(location.pathname === `/boards/edit`) {
+  //   axios.post(`/api/boards/write`,  {
+  //     headers: {
+  //       widthCredentials: true,
+  //     },
+  //     body: postInformation,
+  //   })
+  //   .then(() => console.log('새글 등록 성공'))
+  //   .catch((err) => console.log(err))
 
-    //   navigate(`/boards/`)
-    // }
+  //   navigate(`/boards/`)
+  // }
 
   // }, [])
-  if(location.pathname === `/boards/edit/${communityNum}`) {
+  if (location.pathname === `/boards/edit/${communityNum}`) {
     useEffect(() => {
       axios.get(`/api/boards/${communityNum}`)
-      .then((res) => {
-        setTitle(res.data.title);
-        setPost(res.data.content);
-      })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          setTitle(res.data.title);
+          setPost(res.data.content);
+        })
+        .catch((err) => console.log(err));
     }, [])
   }
 
-  const saveNewCommuData = () =>  {
+  const saveNewCommuData = () => {
     axios.patch(`/api/boards/edit/${communityNum}`, {
       title: title,
       content: post.replace(/<\/?p[^>]*>/g, '')
     })
-    .then(() => navigate(`/boards/${communityNum}`))
-    .catch((err) => console.log(err));
+      .then(() => navigate(`/boards/${communityNum}`))
+      .catch((err) => console.log(err));
   }
   return (
     <>
@@ -138,21 +127,22 @@ export default function AddCommunity() {
               modules={modules}
               className='reactQuillContainer'
               value={post}
-              onChange={(event)=> setPost(event)}
+              onChange={(event) => setPost(event)}
             />
+            {/* KISS 원칙 Keep It Simple */}
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
             {
-              location.pathname === '/boards/edit' ? 
-              <>
-                <SaveBtnContainer onClick={postCommunity}>
-                <PurpleBtn >Save</PurpleBtn>
-                </SaveBtnContainer>
-              </> :
-              <>
-                <SaveBtnContainer onClick={saveNewCommuData}>
-                <PurpleBtn >Save</PurpleBtn>
-                </SaveBtnContainer>
-              </>
+              location.pathname === '/boards/edit' ?
+                <>
+                  <SaveBtnContainer onClick={postCommunity}>
+                    <PurpleBtn >Save</PurpleBtn>
+                  </SaveBtnContainer>
+                </> :
+                <>
+                  <SaveBtnContainer onClick={saveNewCommuData}>
+                    <PurpleBtn >Save</PurpleBtn>
+                  </SaveBtnContainer>
+                </>
             }
           </TextEditor>
         </TextEditorContainer>

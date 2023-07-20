@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { CATEGORY_TYPE } from '@/types';
 
-import { setCategory } from '@/modules/categorySlice';
+import { setCategory } from '@/store/categorySlice';
 
 import CategoryButton from '@/commons/atoms/buttons/category/CategoryButton';
 import { FlexContainer } from '@/commons/styles/Containers.styled';
