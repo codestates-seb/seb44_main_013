@@ -12,7 +12,9 @@ import { RootState } from '@/modules';
 import LoginBtn from '../../commons/atoms/buttons/login/LoginBtn';
 
 export default function CHeader() {
-  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+  const loginState = useSelector(
+    (state: RootState) => state.loginSlice.isLogin
+  );
   console.log(loginState);
   return (
     <HeaderContainer>
@@ -22,7 +24,8 @@ export default function CHeader() {
       <BtnContainer>
         <Link to="/boards?division=RECRUITMENT">
           <RecuitBtn>Recruitment</RecuitBtn>
-        </Link>&nbsp;&nbsp;|
+        </Link>
+        &nbsp;&nbsp;|
         <Link to="/boards?division=COOPERATION">
           <CooperBtn>Cooperation</CooperBtn>
         </Link>
