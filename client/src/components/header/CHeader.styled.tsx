@@ -9,12 +9,13 @@ export const HeaderContainer = tw.div`
   py-3
   bg-transparent
   z-50
-  text-white
+
 `;
 
 export const BtnContainer = tw.div`
   flex
   items-center
+
 `;
 
 export const RecuitBtn = styled.button<{ color?: string }>`
@@ -28,6 +29,7 @@ export const RecuitBtn = styled.button<{ color?: string }>`
     py-1
     px-2
     transition-colors
+    text-white
   `}
   color: ${(props) => (props.color ? props.color : '#d2d1d1')};
 

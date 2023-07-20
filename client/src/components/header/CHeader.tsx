@@ -25,7 +25,7 @@ export default function CHeader() {
         <Link to="/boards?division=RECRUITMENT">
           <RecuitBtn>Recruitment</RecuitBtn>
         </Link>
-        &nbsp;&nbsp;|
+        <span style={{ color: 'white' }}>&nbsp;&nbsp;|</span>
         <Link to="/boards?division=COOPERATION">
           <CooperBtn>Cooperation</CooperBtn>
         </Link>
