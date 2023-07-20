@@ -1,7 +1,6 @@
 import tw from 'twin.macro';
 
 export const FooterContainer = tw.div`
-  bg-BASIC_GRAY 
   w-screen 
   flex 
   justify-center 
