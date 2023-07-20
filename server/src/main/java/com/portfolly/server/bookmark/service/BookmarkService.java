@@ -16,15 +16,15 @@ public class BookmarkService {
     private final MemberService memberService;
 
     //북마크 등록 or 취소
-    public void bookmarks(Long memberId, Long portfolioId) {
+    public void selectBookmark(Long memberId, Long portfolioId) {
         Member member = memberService.findMember(1L);
-        Optional<Bookmark> optionalBookmark = bookmarkRepository.findByMemberAndPortfolio(memberId, portfolioId);
+        Optional<Bookmark> optionalBookmark = bookmarkRepository.findByMemberIdAndPortfolioId(memberId, portfolioId);
         if (optionalBookmark.isPresent()) {
             bookmarkRepository.delete(optionalBookmark.orElseThrow(()->new RuntimeException()));
         }
         else {
-            Bookmark bookmark = new bookmark();
-            bookmark(memberId, portfolioId);
+            Bookmark bookmark = new Bookmark();
+            selectBookmark(memberId, portfolioId);
             bookmarkRepository.save(bookmark);
         }
     }
