@@ -1,3 +1,4 @@
+import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
 export const HeaderContainer = tw.div`
@@ -19,4 +20,13 @@ export const CLink = tw.a`
   cursor-pointer
   whitespace-nowrap
   mt-3
+`;
+
+export const LoginContainer = styled.div`
+  ${tw`
+    flex
+    items-center
+    ml-2.5
+    mt-1
+  `}
 `;

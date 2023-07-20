@@ -26,13 +26,12 @@ export const RecuitBtn = styled.button<{ color?: string }>`
     hover:underline
     text-sm
     whitespace-nowrap
-  ` }
-  color: ${(props) => props.color ? props.color : 'white'};
+  `}
+  color: ${(props) => (props.color ? props.color : '#d2d1d1')};
 
   &:hover {
-    color: #8580E1;
+    color: #8580e1;
   }
-
 `;
 
 export const CooperBtn = tw.button`

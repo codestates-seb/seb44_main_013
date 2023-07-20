@@ -26,7 +26,7 @@ export const SearchBox = styled.input`
     
     w-full
     rounded-full	
-    bg-[#ececec]
+    bg-[#ecececda]
   `}
 
   &:focus {
