@@ -25,7 +25,7 @@ public class Portfolio extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Column(length = 2000)
+    @Column(length = 5000)
     private String content;
     private String explains;
     private Long view = 0L;
