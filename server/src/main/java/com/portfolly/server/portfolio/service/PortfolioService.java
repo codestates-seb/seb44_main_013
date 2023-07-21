@@ -182,7 +182,8 @@ public class PortfolioService {
 
 
     //token에서 memberId 받기
-    public Long findMemberId(String accessToken){
+    public Long findMemberId(String token){
+        String accessToken = token.substring(7);
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey);
         Long memberId = memberService.findByMember(email).getId();

@@ -1,5 +1,8 @@
 package com.portfolly.server.portfolio.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.likes.entity.Likes;

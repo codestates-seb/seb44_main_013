@@ -66,7 +66,7 @@ public class PortfolioController {
     //포트폴리오 상세 조회
     @GetMapping("/{portfolio-id}")
     public ResponseEntity getPortfolio(@PathVariable("portfolio-id") Long portfolioId,
-                                       @RequestHeader(name = "AccessToken") String accessToken){
+                                       @RequestHeader(name = "AccessToken", required = false) String accessToken){
         PortfolioDto.Response response = portfolioService.selectPortfolio(portfolioId, accessToken);
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
@@ -77,7 +77,7 @@ public class PortfolioController {
     public ResponseEntity getPortfolios(@RequestParam("page") int page,
                                         @RequestParam("size") int size,
                                         @RequestParam String category,
-                                        @RequestHeader(name = "AccessToken") String accessToken) {
+                                        @RequestHeader(name = "AccessToken",required = false) String accessToken) {
         Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
         List<Portfolio> portfolios = pagePortfolios.getContent();
         List<PortfolioDto.Response> responses = portfolioMapper.portfoliosToResponseDto(portfolios);

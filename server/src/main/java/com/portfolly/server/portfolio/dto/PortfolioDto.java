@@ -30,6 +30,7 @@ public class PortfolioDto {
         @Size(min = 1, max = 300, message = "요약 설명은 최대 300자까지 작성할 수 있습니다.")
         private String explains;
         private String category;
+        //태그 json 배열
     }
 
     @Getter

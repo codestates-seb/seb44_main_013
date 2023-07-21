@@ -18,7 +18,8 @@ public interface PortfolioMapper {
     List<PortfolioDto.Response> portfoliosToResponseDto(List<Portfolio> portfolios);
     PortfolioDto.Response portfolioToResponseDto(Portfolio portfolio);
 
-    List<MemberDto.Client_Response> memberToMemberPartnerResponse(List<Member> members);
+//    List<MemberDto.Client_Response> memberToMemberPartnerResponse(List<Member> members);
+    MemberDto.Client_Response memberToMemberPartnerResponse(Member member);
 
 
 }
