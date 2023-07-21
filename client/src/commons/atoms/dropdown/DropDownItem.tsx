@@ -6,9 +6,5 @@ interface DropDownItemProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 export default function DropDownItem({ item, ...assignment }: DropDownItemProps) {
-  return (
-    <DropDownItemContainer {...assignment}>
-      {item}
-    </DropDownItemContainer>
-  )
+  return <DropDownItemContainer {...assignment}>{item}</DropDownItemContainer>;
 }
