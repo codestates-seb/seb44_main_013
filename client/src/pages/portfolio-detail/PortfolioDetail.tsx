@@ -33,7 +33,7 @@ export default function PortfolioDetail() {
   const deletePortfolio = () => call(`/portfolios/${portfolioId}`, 'DELETE');
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
-  const onReviseButtonClick = () => navigate(`/portfolio/edit?portfolioId=${portfolioId}`);
+  const onReviseButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
     deletePortfolio();

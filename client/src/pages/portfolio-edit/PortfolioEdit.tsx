@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { setPortfolio } from '@/store/portfolioSlice';
 import usePreventRefresh from '@/hooks/usePreventRefresh';
+import usePreventGoBack from '@/hooks/usePreventGoBack';
 import { changeDateFormat } from '@/utils/changeDateFormat';
 import { call } from '@/utils/apiService';
 
@@ -24,6 +25,7 @@ export default function PortfolioEdit() {
   const getPortfolio = (portfolioId: string | null) => call(`/portfolios/${portfolioId}`, 'GET')
 
   usePreventRefresh();
+  usePreventGoBack();
 
   useEffect(() => {
     const isModified = portfolioId ? true : false;
