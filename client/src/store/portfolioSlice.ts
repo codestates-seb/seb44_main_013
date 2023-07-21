@@ -50,13 +50,14 @@ const { reducer: portfolioReducer } = createSlice({
       else state.portfolio.tags = state.portfolio.tags.filter((tag: Tag) => tag.name !== action.tag.name);
     },
     SET_EXPLAIN: (state, action) => {
-      state.portfolio.explain = action.explain;
+      state.portfolio.explains = action.explain;
     },
     INITIALIZE_TAG: (state) => {
       state.portfolio.tags = [];
     },
     SET_PICTURES: (state, action) => {
-      state.pictures = [...state.pictures, action.url];
+      if (!state.pictures.indexOf(action.url))
+        state.pictures = [...state.pictures, action.url];
     }
   },
 });

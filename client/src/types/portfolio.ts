@@ -1,10 +1,18 @@
 /* 2023-07-12 포트폴리오 요청 데이터 관련 타입 모음 - 김다함 */
-export type CATEGORY_TYPE = "웹" | "앱" | "3D/애니메이션" | "그래픽디자인" | "사진/영상";
+export type CATEGORY_TYPE = "web" | "app" | "3danimation" | "graphicdesign" | "photo";
 
 export interface Member {
-  memberId: number;
-  name: string;
-  picture: string;
+  id: number,
+  name: string,
+  email?: string,
+  member_role?: string,
+  location?: string,
+  job?: string,
+  career?: string,
+  award?: string,
+  skill?: string,
+  memberStatus?: string,
+  imageUrl: string,
 }
 
 export interface Tag {
@@ -13,36 +21,45 @@ export interface Tag {
   isSelected: boolean;
 }
 
+export interface Category {
+  id: number;
+  name: CATEGORY_TYPE;
+}
+
 export type CategoryTags = {
   [key in CATEGORY_TYPE]: {
     tags: Array<Tag>;
   };
 };
 
+export type CategoryMapper = {
+  [key: string]: CATEGORY_TYPE
+}
+
 export interface Portfolio {
-  portfolioId: number;
+  id: number;
   title: string;
   content: string;
-  explain: string;
-  views: number;
+  explains: string;
+  view: number;
   modifiedAt: string;
   createdAt: string;
-  category: CATEGORY_TYPE;
+  category: Category;
   member: Member;
   tags: Array<Tag>;
-  likes: number;
-  isLiked: boolean;
-  isMarked: boolean;
-  isMine: boolean;
+  countLikes: number;
+  marked: boolean;
+  liked: boolean;
+  writer: boolean;
 }
 
 export interface PortfolioContent {
-  portfolioId?: string | null;
+  id?: string | null;
   title: string;
   content: string;
-  category: CATEGORY_TYPE;
+  category: string;
   tags: Array<Tag>;
-  explain: string;
+  explains: string;
   createdAt?: string;
 }
 
