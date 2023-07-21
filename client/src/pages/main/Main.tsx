@@ -5,13 +5,14 @@ import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
-import { WebItemsContainer } from './Main.styled';
+import { WebItemsContainer, NodataImage } from './Main.styled';
 import AppItem from '@/components/appItem/AppItem';
 import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import { RootState } from '@/store';
+import datano from '@/assets/datano.png';
 
 const categoryMap = {
   웹: 'web',
@@ -40,7 +41,6 @@ export default function Main() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const categoryParam = categoryMap[selectedCategory] || 'web';
         const res = await call(`portfolios?category=${categoryParam}`, 'GET', null);
         setItems(res[0].data);
         setFilteredItems(res[0].data);
@@ -51,19 +51,6 @@ export default function Main() {
 
     fetchData();
   }, [selectedCategory]);
-
-  // useEffect(() => {
-  //   if (searchTerm === '') {
-  //     setFilteredItems(items);
-  //   } else {
-  //     const results = items.filter(
-  //       (item) =>
-  //         item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         item.data.membername.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //     setFilteredItems(results);
-  //   }
-  // }, [searchTerm, items]);
 
   const renderItems = () => {
     switch (selectedCategory) {
@@ -82,27 +69,6 @@ export default function Main() {
     }
   };
 
-  // const handleSearch = (value: string) => {
-  //   setSearchTerm(value);
-  // };
-
-  // const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (event.key === 'Enter') {
-  //     if (searchTerm === '') {
-  //       setFilteredItems(items);
-  //     } else {
-  //       const results = items.filter(
-  //         (item) =>
-  //           item.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //           item.data.membername
-  //             .toLowerCase()
-  //             .includes(searchTerm.toLowerCase())
-  //       );
-  //       setFilteredItems(results);
-  //     }
-  //   }
-  // };
-
   const [searchs, setSearchs] = useState([] as any);
 
   useEffect(() => {
@@ -115,17 +81,13 @@ export default function Main() {
 
   console.log(searchs);
 
-  // searchs 가 추가될 때 그때 렌더링이 되게 해야함
-  // searchterm이 없을때 리렌더링X
-
   return (
     <>
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
       <WebItemsContainer>
         {
-          // searchTerm === '' ?
-          // renderItems() :
+          searchs.length > 0 ?
           searchs.map((searchedItem: any, index: any) => {
             if (categoryParam === 'web') {
               return <WebItem item={searchedItem} key={index} />;
@@ -142,7 +104,8 @@ export default function Main() {
             if (categoryParam === 'photo') {
               return <PhotoItem item={searchedItem} key={index} />;
             }
-          })
+          }) :
+          <NodataImage src={datano} alt='no data' />
         }
       </WebItemsContainer>
     </>
