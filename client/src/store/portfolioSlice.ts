@@ -12,6 +12,7 @@ export const SET_CATEGORY = 'SET_CATEGORY' as const;
 export const SET_TAG = 'SET_TAG' as const;
 export const SET_EXPLAIN = 'SET_EXPLAIN' as const;
 export const INITIALIZE_TAG = 'INITIALIZE_TAG' as const;
+export const SET_PICTURES = 'SET_PICTURES' as const;
 
 export const setPortfolio = (portfolio: PortfolioContent) => ({ type: SET_PORTFOLIO, portfolio });
 export const setTitle = (title: string) => ({ type: SET_TITLE, title });
@@ -20,9 +21,11 @@ export const setCategory = (category: CATEGORY_TYPE) => ({ type: SET_CATEGORY, c
 export const setTag = (tag: Tag) => ({ type: SET_TAG, tag });
 export const setExplain = (explain: string) => ({ type: SET_EXPLAIN, explain });
 export const initializeTag = () => ({ type: INITIALIZE_TAG });
+export const setPictures = (url: string) => ({ type: SET_PICTURES, url });
 
 const initialState: PortfolioSlice = {
   portfolio: INITIAL_PORTFOLIO,
+  pictures: [],
 }
 
 const { reducer: portfolioReducer } = createSlice({
@@ -52,9 +55,13 @@ const { reducer: portfolioReducer } = createSlice({
     INITIALIZE_TAG: (state) => {
       state.portfolio.tags = [];
     },
+    SET_PICTURES: (state, action) => {
+      state.pictures = [...state.pictures, action.url];
+    }
   },
 });
 
 export const portfolio = (state: RootState) => state.portfolioSlice.portfolio;
+export const pictures = (state: RootState) => state.portfolioSlice.pictures;
 
 export default portfolioReducer;
