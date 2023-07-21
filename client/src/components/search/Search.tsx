@@ -9,11 +9,10 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchValue(event.target.value);
   };
-  console.log(data);
+  // console.log(data);
 
   const 엔터치면검색 = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const isEmpty = (search: string) => search === '';
     const isEmptyCurrentSearch = isEmpty(currentSearch);
 

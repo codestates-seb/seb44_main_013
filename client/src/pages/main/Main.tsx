@@ -14,6 +14,7 @@ import Search from '@/components/search/Search';
 import { RootState } from '@/store';
 import datano from '@/assets/datano.png';
 
+
 const categoryMap = {
   웹: 'web',
   앱: 'app',
@@ -34,8 +35,8 @@ export default function Main() {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-  console.log(loginState);
+  // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+  // console.log(loginState);
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
@@ -79,7 +80,7 @@ export default function Main() {
     setSearchs(items);
   }, [items]);
 
-  console.log(searchs);
+  // console.log(searchs);
 
   return (
     <>
