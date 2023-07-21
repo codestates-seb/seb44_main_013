@@ -5,7 +5,7 @@ import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 
 export const CommunityWrapper = styled.div`
   ${tw`
-    w-screen h-full flex flex-col justify-between
+    w-screen h-screen flex flex-col
     pb-20 bg-center bg-no-repeat bg-cover px-14
   `}/* background-image: url(${communitymainimg}) */
 `;
@@ -36,4 +36,15 @@ export const ListsWrapper = tw.div`
   flex-wrap
   justify-evenly
   gap-4
+`;
+
+export const NodataImage = styled.img`
+  ${tw`
+    flex
+    justify-center
+    items-center
+  `}
+  width: 350px;
+  height: 350px;
+  margin: 60px auto 0;
 `;
