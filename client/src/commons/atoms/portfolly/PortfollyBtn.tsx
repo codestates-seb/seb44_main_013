@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import { Element } from 'react-scroll';
+import 'aos/dist/aos.css';
 
 const glow = keyframes`
   0% {
@@ -26,18 +28,32 @@ const StyledButton = styled.button<{ isClicked: boolean }>`
   transition: background 0.3s, transform 0.3s;
   animation: ${glow} 2s infinite alternate;
 
+  // 효정 추가 07.21
+  position: absolute;
+  top: 45%;
+  left: 45%;
+
   &:hover {
     background: #ff69b4;
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
   }
 `;
 
+const WrapperOpacity = styled.div`
+  background-color: rgb(0, 0, 0, 0.4);
+  z-index:2 ;
+  width: 96vw;
+  height: 100vh;
+  position: relative;
+`;
+
+
 const CenteredDiv = styled.div`
-  background-color: black;
+  /* background-color: black; */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  
 `;
 
 const Cursor = styled.div`
@@ -74,18 +90,23 @@ export default function PortfollyBtn() {
     return () => removeEventListeners();
   }, []);
 
+  
   return (
-    <CenteredDiv>
-      <StyledButton
-        isClicked={isClicked}
-        onClick={() => {
-          setIsClicked(!isClicked);
-          navigate('/main');
-        }}
-      >
-        Portfolly
-      </StyledButton>
-      <Cursor style={{ left: `${position.x}px`, top: `${position.y}px` }} />
-    </CenteredDiv>
+    <Element name='portfollyButton'>
+      <CenteredDiv>
+        <WrapperOpacity>
+          <StyledButton
+            isClicked={isClicked}
+            onClick={() => {
+              setIsClicked(!isClicked);
+              navigate('/main');
+            }}
+          >
+            Portfolly
+          </StyledButton>
+        </WrapperOpacity>
+        <Cursor style={{ left: `${position.x}px`, top: `${position.y}px` }} />
+      </CenteredDiv>
+    </Element>
   );
 }
