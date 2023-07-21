@@ -29,7 +29,7 @@ const DaHamHandlers = [
       portfolioId: portfolioId,
       title: String(body.title),
       content: String(body.content),
-      explains: body.explains,
+      explain: body.explains,
       views: 0,
       modifiedAt: String(new Date()),
       createdAt: String(new Date()),
@@ -109,9 +109,9 @@ const DaHamHandlers = [
   }),
   // 이미지 업로드
   rest.post('/pictures', async (_, res, ctx) => {
-    const imageUrl =
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png';
-    pictures.push({ portfolioId: 0, filename: imageUrl });
+    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }));
   }),
 ];

@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { PortfolioContent } from '@/types';
+import { Picture, PortfolioContent } from '@/types';
 
-import { portfolio } from '@/store/portfolioSlice';
+import { pictures, portfolio } from '@/store/portfolioSlice';
 
 import { call } from '@/utils/apiService';
 
@@ -13,6 +13,7 @@ export default function useTitleForm() {
 
   const postPortfolio = (body: PortfolioContent) => call('/portfolios', 'POST', body);
   const modifyPortfolio = (body: PortfolioContent) => call(`/portfolios/${savedPortfolio.portfolioId}`, 'PATCH', body);
+  const deletePicture = (body: Picture) => call(`portfolios/s3/picture`, 'DELETE', body);
 
   const alertValidation = (message: string) => { alert(message); return false };
 
@@ -24,9 +25,18 @@ export default function useTitleForm() {
     return true;
   }
 
+  const deleteImageUrls = () => {
+    const savedImageUrl = useSelector(pictures);
+    savedImageUrl.forEach((url: string) => {
+      const isImageUrlRemoved = !savedPortfolio.content.includes(url);
+      if (isImageUrlRemoved) deletePicture({ fileName: url })
+    })
+  }
+
   const submitPortfolio = () => {
     const isModified = savedPortfolio.portfolioId ? true : false;
     const isValid = checkValidation(savedPortfolio);
+    deleteImageUrls();
     if (isValid) {
       const copiedPortfolio = JSON.parse(JSON.stringify(savedPortfolio));
       delete copiedPortfolio.portfolioId;

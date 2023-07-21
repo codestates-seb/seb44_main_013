@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 //useSelector
 import axios from 'axios';
 // import { RootState } from '@/modules';
-import { login } from '@/modules/loginSlice';
+import { login } from '@/store/loginSlice';
 
 export default function SelectRole() {
   const [role, setRole] = useState('');

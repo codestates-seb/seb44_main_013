@@ -1,6 +1,6 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
 // import { API_BASE_URL } from '@/app-config';
-// import { RootState } from '@/modules';
+// import { RootState } from '@/store';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 // import { useSelector } from 'react-redux';
 // axios.defaults.baseURL = API_BASE_URL;

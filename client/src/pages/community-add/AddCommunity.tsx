@@ -135,12 +135,12 @@ export default function AddCommunity() {
               location.pathname === '/boards/edit' ?
                 <>
                   <SaveBtnContainer onClick={postCommunity}>
-                    <PurpleBtn >Save</PurpleBtn>
+                    <PurpleButton >Save</PurpleButton>
                   </SaveBtnContainer>
                 </> :
                 <>
                   <SaveBtnContainer onClick={saveNewCommuData}>
-                    <PurpleBtn >Save</PurpleBtn>
+                    <PurpleButton >Save</PurpleButton>
                   </SaveBtnContainer>
                 </>
             }

@@ -11,7 +11,7 @@ import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
-import { RootState } from '@/modules';
+import { RootState } from '@/store';
 
 const categoryMap = {
   웹: 'web',

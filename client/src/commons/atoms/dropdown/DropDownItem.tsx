@@ -1,6 +1,4 @@
 /* 2023.07.05 드롭다운 아이템(펼쳤을 때 나오는 옵션들) - 김다함 */
-import { useDispatch, useSelector } from 'react-redux';
-
 import { DropDownItemContainer } from '@/commons/atoms/dropdown/DropDown.styled';
 import { ComponentPropsWithoutRef } from 'react';
 interface DropDownItemProps extends ComponentPropsWithoutRef<'div'> {

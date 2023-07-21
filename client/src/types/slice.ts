@@ -9,4 +9,5 @@ export interface CategorySlice {
 
 export interface PortfolioSlice {
   portfolio: PortfolioContent;
+  pictures: Array<string>;
 }

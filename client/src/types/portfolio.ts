@@ -47,6 +47,6 @@ export interface PortfolioContent {
 }
 
 export interface Picture {
-  portfolioId: number;
-  filename: string;
+  portfolioId?: number;
+  fileName: string;
 }

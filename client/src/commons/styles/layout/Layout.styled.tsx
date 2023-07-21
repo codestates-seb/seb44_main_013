@@ -1,7 +1,7 @@
 import tw from 'twin.macro';
 import { css, styled } from 'styled-components';
 import { useSelector } from 'react-redux';
-import { category } from '@/modules/categorySlice';
+import { category } from '@/store/categorySlice';
 
 import webBgimg from '../../../assets/WebBg.png';
 import appBgimg from '../../../assets/AppBg.png';

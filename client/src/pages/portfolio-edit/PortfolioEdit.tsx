@@ -1,6 +1,7 @@
 /* 2023-07-06 포트폴리오 작성/수정 페이지 - 김다함 */
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { setPortfolio } from '@/store/portfolioSlice';
 import usePreventRefresh from '@/hooks/usePreventRefresh';
@@ -13,7 +14,6 @@ import QuillEditor from '@/components/editor/QuillEditor';
 import TitleForm from '@/components/titleForm/TitleForm';
 import LogoHeader from '@/components/header/LogoHeader';
 import { BsCheck2 } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
 
 export default function PortfolioEdit() {
   const [isTitleFormOpen, setIsTitleFormOpen] = useState(false);

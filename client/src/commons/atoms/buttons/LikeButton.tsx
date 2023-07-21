@@ -9,7 +9,7 @@ export interface LikeButton extends Toggle {
   currentLikes: number;
 }
 
-export default function LikeBtn({ portfolioId, currentLikes, isToggled }: LikeButton) {
+export default function LikeButton({ portfolioId, currentLikes, isToggled }: LikeButton) {
   const [buttonColor, onClick, likes] = useToggle({
     portfolioId: portfolioId,
     isToggled: isToggled,
