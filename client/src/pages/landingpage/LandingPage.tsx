@@ -50,30 +50,27 @@ export default function LandingPage() {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    const initializeAOS = () => {
-      AOS.init({
-        offset: 200,
-        duration: 800,
-        easing: 'ease-in-out',
-        delay: 300,
-      });
-    };
-
     const handleAnimationEnd = () => {
       setAnimationComplete(true);
     };
 
     const textElement = document.getElementById('portfolly-text');
-    textElement &&
+    if (textElement) {
       textElement.addEventListener('animationend', handleAnimationEnd);
 
-    window.addEventListener('load', initializeAOS);
-
-    return () => {
-      window.removeEventListener('load', initializeAOS);
-      textElement &&
+      return () => {
         textElement.removeEventListener('animationend', handleAnimationEnd);
-    };
+      };
+    }
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      offset: 200,
+      duration: 800,
+      easing: 'ease-in-out',
+      delay: 300,
+    });
   }, []);
 
   return (
