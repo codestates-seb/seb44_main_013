@@ -1,6 +1,5 @@
 package com.portfolly.server.portfolio.controller;
 
-//import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import com.portfolly.server.dto.MultiResponseDto;
 import com.portfolly.server.dto.SingleResponseDto;
@@ -38,24 +37,17 @@ public class PortfolioController {
     private final PortfolioMapper portfolioMapper;
     private final PortfolioService portfolioService;
     private final static String PORTFOLIO_DEFAULT_URL = "/portfolios";
-    private final JwtTokenizer jwtTokenizer;
-    private final CustomAuthorityUtils authorityUtils;
-    private final MemberService memberService;
 
     //포트폴리오 등록
     @PostMapping
-    public ResponseEntity postPortfolio(
-            @RequestHeader("AccessToken") String accessToken,
+    public ResponseEntity postPortfolio(@RequestHeader (name = "AccessToken") String accessToken,
                                         @Valid @RequestBody PortfolioDto.Post postDto){
         //authentication or token통해서 memberId 받아와야함
-//        Long memberId = findmemberId(token);
-        Long memberId = 1L;
-
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-        String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey);
-        Member member = memberService.findByMember(email);
-
-        Portfolio portfolio = portfolioService.postPortfolio(postDto, memberId);
+//        Long memberId = portfolioService.findMemberId(accessToken);
+        //포트폴리오 내용 등록
+        Portfolio portfolio = portfolioService.postPortfolio(postDto, accessToken);
+        //포트폴리오 이미지 등록
+        portfolioService.addPicture(portfolio);
         URI location = UriCreator.createUri(PORTFOLIO_DEFAULT_URL, portfolio.getId());
         return ResponseEntity.created(location).build();
     }
@@ -63,25 +55,19 @@ public class PortfolioController {
     //포트폴리오 수정
     @PatchMapping("/{portfolio-id}")
     public ResponseEntity patchPortfolio(@PathVariable("portfolio-id") Long portfolioId,
-//                                         @RequestHeader(name = "Refresh") String token,
+                                         @RequestHeader(name = "AccessToken") String accessToken,
                                          @Valid @RequestBody PortfolioDto.Patch patchDto){
-//        Long memberId = findmemberId(token);
+        Long memberId = portfolioService.findMemberId(accessToken);
         patchDto.setId(portfolioId);
-        portfolioService.updatePortfolio(patchDto);
+        portfolioService.updatePortfolio(patchDto, accessToken);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //포트폴리오 상세 조회
     @GetMapping("/{portfolio-id}")
-    public ResponseEntity getPortfolio(@PathVariable("portfolio-id") Long portfolioId){
-        Portfolio portfolio = portfolioService.selectPortfolio(portfolioId);
-        portfolioService.increaseViews(portfolio);
-        PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
-        response.setMarked(portfolioService.isMarked(response.getId()));
-        response.setLiked(portfolioService.isLiked(response.getId()));
-        response.setWriter(portfolioService.isWriter(response.getId()));
-        response.setCountLikes(portfolioService.countLikes(response.getId()));
-        response.setFirstImage(portfolioService.firstImageUrl(response.getId()));
+    public ResponseEntity getPortfolio(@PathVariable("portfolio-id") Long portfolioId,
+                                       @RequestHeader(name = "AccessToken") String accessToken){
+        PortfolioDto.Response response = portfolioService.selectPortfolio(portfolioId, accessToken);
         return new ResponseEntity<>(new SingleResponseDto<>(response), HttpStatus.OK);
     }
 
@@ -90,34 +76,23 @@ public class PortfolioController {
     @GetMapping
     public ResponseEntity getPortfolios(@RequestParam("page") int page,
                                         @RequestParam("size") int size,
-                                        @RequestParam String category) {
+                                        @RequestParam String category,
+                                        @RequestHeader(name = "AccessToken") String accessToken) {
         Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
         List<Portfolio> portfolios = pagePortfolios.getContent();
-        for (int i = 0; i < portfolios.size(); i++) {
-            System.out.println(portfolios.get(i).toString());
-        }
         List<PortfolioDto.Response> responses = portfolioMapper.portfoliosToResponseDto(portfolios);
-        for (PortfolioDto.Response response : responses) {
-            response.setFirstImage(portfolioService.firstImageUrl(response.getId()));
-            response.setMarked(portfolioService.isMarked(response.getId()));
-        }
+        portfolioService.setResponse(responses,accessToken);
         return new ResponseEntity<>(new MultiResponseDto<>(responses, pagePortfolios), HttpStatus.OK);
     }
 
     //포트폴리오 삭제
     @DeleteMapping("/{portfolio-id}")
-    public ResponseEntity deletePortfolio(@Positive @PathVariable("portfolio-id") Long portfolioId
-//                                          @RequestHeader(name = "Refresh") String token
-    ) {
-//        Long memberId = findmemberId(token);
-        portfolioService.deletePortfolio(portfolioId);
+    public ResponseEntity deletePortfolio(@Positive @PathVariable("portfolio-id") Long portfolioId,
+                                          @RequestHeader(name = "AccessToken") String accessToken) {
+        portfolioService.deletePortfolio(portfolioId,accessToken);
         return ResponseEntity.noContent().build();
     }
 
-//    public Long findmemberId(String token) {
-//        Optional<RefreshToken> refreshToken = refreshTokenRepository.findByValue(token);
-//        RefreshToken findtoken = refreshToken.orElseThrow(()->new BusinessLogicException(ExceptionCode.PORTFOLIO_NOT_FOUND));
-//    }
 
 
 }

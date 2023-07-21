@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PortfolioRepository extends JpaRepository<Portfolio,Long> {
     //    @Query("SELECT b from Portfolio b WHERE b.status = :status")
-    Page<Portfolio> findByStatusAndCategoryId(Pageable pageable, Long categoryId, Portfolio.Status status);
+    Page<Portfolio> findByStatusAndCategoryId(Pageable pageable, Portfolio.Status status, Long categoryId);
 }
