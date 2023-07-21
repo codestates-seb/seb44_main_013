@@ -11,7 +11,6 @@ import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
-import { RootState } from '@/store';
 import datano from '@/assets/datano.png';
 
 const categoryMap = {
@@ -34,8 +33,6 @@ export default function Main() {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-  console.log(loginState);
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
