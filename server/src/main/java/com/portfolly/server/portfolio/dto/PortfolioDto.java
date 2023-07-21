@@ -23,6 +23,7 @@ public class PortfolioDto {
         @Size(min = 1, max = 30, message = "제목은 최대 30자까지 작성할 수 있습니다.")
         private String title;
         @NotBlank(message = "내용을 입력하세요")
+        @Size(min = 1, max = 5000)
         private String content;
         @NotBlank(message = "설명을 입력하세요")
         @Size(min = 1, max = 300, message = "요약 설명은 최대 300자까지 작성할 수 있습니다.")
@@ -44,6 +45,7 @@ public class PortfolioDto {
         @NotBlank(message = "설명을 입력하세요")
         @Size(min = 1, max = 300, message = "요약 설명은 최대 300자까지 작성할 수 있습니다.")
         private String explains;
+        private String category;
     }
 
     @Getter

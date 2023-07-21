@@ -5,17 +5,17 @@ import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@Setter
 public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private boolean status;
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
@@ -23,10 +23,4 @@ public class Bookmark {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Builder
-    public Bookmark(Long id, Portfolio portfolio, Member member) {
-        this.id = id;
-        this.portfolio = portfolio;
-        this.member = member;
-    }
 }
