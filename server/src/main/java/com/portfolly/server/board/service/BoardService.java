@@ -34,9 +34,7 @@ public class BoardService {
 
 
     @Transactional
-    public Board createBoard(Board board
-                             //, Long memberId
-                             ) {
+    public Board createBoard(Board board, Long memberId) {
         // Member verifiedmember = memberService.findMember(memberId);
         return boardRepository.save(board);
     }
@@ -46,7 +44,11 @@ public class BoardService {
     public Board updateBoard(Board board
                              //, Long memberId
                              ) {
-        // Member verifiedmember = memberService.findMember(memberId);
+
+        // 1차검증 : 게시글존재여부
+        // 2차검증 : 회원존재여부
+        // 3차검증 : 게시글작성자확인
+
         Board verifiedBoard = verifyBoard(board.getId());
 
         Optional.ofNullable(board.getTitle())
