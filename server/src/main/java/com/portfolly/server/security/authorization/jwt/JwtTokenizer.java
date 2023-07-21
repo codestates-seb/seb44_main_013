@@ -71,7 +71,6 @@ public class JwtTokenizer {
         return claims;
     }
 
-    // 단순히 검증만 하는 용도로 쓰일 경우
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -89,6 +88,7 @@ public class JwtTokenizer {
         return expiration;
     }
 
+    // Todo : 서명 키 객체 셍성(알고리즘 : HMAC-SHA 256)
     private Key getKeyFromBase64EncodedKey(String base64EncodedSecretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(base64EncodedSecretKey);
         Key key = Keys.hmacShaKeyFor(keyBytes); //HMAC 알고리즘 적용 Key 객체
@@ -96,23 +96,12 @@ public class JwtTokenizer {
         return key;
     }
 
-    // 이메일로 회원이 맞는지 검증
+    // Todo : 회원 검증용 email 추출
     public String extractEmailFromToken(String accessToken,String base64EncodedSecretKey){
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getKeyFromBase64EncodedKey(base64EncodedSecretKey))
                 .build()
                 .parseClaimsJws(accessToken)
-                .getBody();
-
-        return claims.get("username", String.class);
-    }
-
-    //
-    public String extractEmailFromRefreshToken(String refreshToken,String base64EncodedSecretKey){
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getKeyFromBase64EncodedKey(base64EncodedSecretKey))
-                .build()
-                .parseClaimsJws(refreshToken)
                 .getBody();
 
         return claims.get("username", String.class);
