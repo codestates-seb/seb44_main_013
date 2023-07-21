@@ -13,7 +13,6 @@ import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
 
-
 const categoryMap = {
   웹: 'web',
   앱: 'app',
@@ -34,11 +33,6 @@ export default function Main() {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-<<<<<<< HEAD
-=======
-  // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-  // console.log(loginState);
->>>>>>> d2556ec32e8e2ae0befa3c2102dc5c48717ad68a
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
@@ -89,8 +83,7 @@ export default function Main() {
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
       <WebItemsContainer>
-        {
-          searchs.length > 0 ?
+        {searchs.length > 0 ? (
           searchs.map((searchedItem: any, index: any) => {
             if (categoryParam === 'web') {
               return <WebItem item={searchedItem} key={index} />;
@@ -107,9 +100,10 @@ export default function Main() {
             if (categoryParam === 'photo') {
               return <PhotoItem item={searchedItem} key={index} />;
             }
-          }) :
-          <NodataImage src={datano} alt='no data' />
-        }
+          })
+        ) : (
+          <NodataImage src={datano} alt="no data" />
+        )}
       </WebItemsContainer>
     </>
   );
