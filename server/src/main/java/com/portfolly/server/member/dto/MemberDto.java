@@ -34,6 +34,7 @@ public class MemberDto {
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
+        private String imageUrl;
     }
 
     @Getter

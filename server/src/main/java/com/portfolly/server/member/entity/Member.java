@@ -25,6 +25,7 @@ public class Member extends Auditable {
     private String name;
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
+    private String imageUrl;
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Member_Role member_role; // 클라이언트 / 파트너

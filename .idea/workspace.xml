@@ -4,34 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)">
-      <change afterPath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/comment/controller/CommentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/board/controller/BoardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/board/controller/BoardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/category/repository/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/category/repository/CategoryRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/portfolio/repository/PortfolioRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/build/classes/java/main/com/portfolly/server/portfolio/repository/PortfolioRepository.class" afterDir="false" />
+    <list default="true" id="355302b0-b936-4113-8a17-79ed657bf9d7" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/server/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/exception/businessLogicException/ExceptionCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/exception/businessLogicException/ExceptionCode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/bookmark/mapper/BookmarkMapperImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/board/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/board/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/controller/BookmarkController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/dto/BookmarkDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/dto/BookmarkDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/entity/Bookmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/entity/Bookmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/mapper/BookmarkMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/repository/BookmarkRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/repository/BookmarkRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/service/BookmarkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/bookmark/service/BookmarkService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/exception/businessLogicException/ExceptionCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/exception/businessLogicException/ExceptionCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/jasypt/JasyptConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/jasypt/JasyptConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/likes/repository/LikesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/likes/repository/LikesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/likes/service/LikesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/likes/service/LikesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/entity/Picture.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/entity/Picture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/repository/PictureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/repository/PictureRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Client_Response.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Partner_Response.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Patch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/dto/MemberDto$Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$MemberBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$MemberBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member$Member_Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/entity/Member.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/mapper/MemberMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/member/mapper/MemberMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/portfolio/entity/Portfolio.class" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/classes/com/portfolly/server/portfolio/entity/Portfolio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/resources/application-jwt.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/resources/application-jwt.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/out/production/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/out/production/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/board/mapper/BoardMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/board/mapper/BoardMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/category/mapper/CategoryMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/category/mapper/CategoryMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/comment/mapper/CommentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/comment/mapper/CommentMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/member/mapper/MemberMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/portfolio/mapper/PortfolioMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/generated/com/portfolly/server/portfolio/mapper/PortfolioMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/config/PictureConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/config/PictureConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/controller/PictureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/controller/PictureController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/picture/service/PictureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/controller/PortfolioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/controller/PortfolioController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/dto/PortfolioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/dto/PortfolioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/entity/Portfolio.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/entity/Portfolio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/entity/PortfolioTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/entity/PortfolioTag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/repository/PortfolioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/repository/PortfolioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/service/PortfolioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/portfolio/service/PortfolioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +49,12 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="server" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -123,7 +129,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="" />
+      <changelist id="355302b0-b936-4113-8a17-79ed657bf9d7" name="변경" comment="" />
       <created>1688431290255</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
