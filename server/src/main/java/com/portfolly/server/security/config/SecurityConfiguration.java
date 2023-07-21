@@ -60,6 +60,14 @@ public class SecurityConfiguration {
             .and()
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()
 
+                        // 회원 관련 : Oauth 라 필요없음
+//                                .antMatchers(HttpMethod.POST,"/members").hasRole("USER")
+//                        .antMatchers(HttpMethod.PATCH , "/members/*").hasAnyRole("USER","ADMIN")
+//                        .antMatchers(HttpMethod.GET ,"/members/*").permitAll()
+//                        .antMatchers(HttpMethod.GET, "/members").permitAll()
+//                        .antMatchers(HttpMethod.DELETE, "/members/*").hasAnyRole("USER","ADMIN")
+
+
 //                        // 포트폴리오 관련
 //                        .antMatchers(HttpMethod.POST,"/portfolios").hasRole("USER")
 //                        .antMatchers(HttpMethod.PATCH , "/portfolios/*").hasAnyRole("USER","ADMIN")

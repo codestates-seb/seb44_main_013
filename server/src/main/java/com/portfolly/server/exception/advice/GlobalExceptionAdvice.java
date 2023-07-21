@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
+import java.security.SignatureException;
 
 @Slf4j
 @RestControllerAdvice
@@ -63,5 +64,13 @@ public class GlobalExceptionAdvice {
         log.error("INTERNAL_SERVER_ERROR : " + e.getMessage());
         return HttpErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
     }
+
+//    @ExceptionHandler(SignatureException.class)
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    public ErrorResponse handleSignatureException(SignatureException e) {
+//
+//        log.error("SignatureException : "  + e.getMessage());
+//        return new ErrorResponse("Unauthorized", "Invalid Signature");
+//    }
 
 }

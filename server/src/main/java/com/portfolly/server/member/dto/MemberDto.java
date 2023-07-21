@@ -129,7 +129,7 @@ public class MemberDto {
         @Schema(title = "사용자 email", example = "hong@gmail.com")
         @Email
         private String email;
-        @Schema(title = "클라이언트/파트너", example = "Partner")
+        @Schema(title = "클라이언트/파트너", example = "Partner
         @EnumFormat(enumClass = Member.Member_Role.class)
         private Member.Member_Role member_role;
         @Schema(title = "지역", example = "서울")
