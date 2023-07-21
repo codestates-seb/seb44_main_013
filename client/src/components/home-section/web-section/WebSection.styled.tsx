@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const SectionWrapper = styled.div`
   background-color: black;
+  margin: 50px 0;
 `;
 
 export const ImageWrapper = styled.div`
@@ -32,7 +33,8 @@ export const TextOverlay = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: calc(25vw - 10px);
+  /* font-size: calc(25vw - 10px);  원래 값*/
+  font-size: calc(23vw - 10px);
   color: #ffffff;
   font-weight: 500;
   opacity: 0;
