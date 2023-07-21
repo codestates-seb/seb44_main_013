@@ -6,7 +6,10 @@ import AppSection from '@/components/home-section/app-section/AppSection';
 import AnimationSection from '@/components/home-section/animation-section/AnimationSection';
 import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
-import PortfollyBtn from '@/commons/atoms/portfolly/PortfollyBtn';
+import DisplaySection from '@/components/home-section/display-section/DisplaySection';
+
+import { LandingPageWrapper } from './LandingPage.styled';
+
 
 export default function LandingPage() {
   useEffect(() => {
@@ -27,13 +30,13 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div>
+    <LandingPageWrapper>
       <WebSection />
       <AppSection />
       <AnimationSection />
       <GraphicDesignSection />
       <PhotographySection />
-      <PortfollyBtn />
-    </div>
+      <DisplaySection />
+    </LandingPageWrapper>
   );
 }
