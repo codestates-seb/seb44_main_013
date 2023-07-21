@@ -1,7 +1,7 @@
 /* 2023-07-12 카테고리 스토어 - 김다함 */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { RootState } from '@/store/index';
+import { RootState } from '.';
 import { CATEGORY_TYPE, CategorySlice } from '@/types';
 
 export const SET_CATEGORY = 'SET_CATEGORY' as const;
@@ -14,7 +14,7 @@ const initialState: CategorySlice = {
   category: '웹',
   isOpened: false,
   tags: [],
-}
+};
 
 const { reducer: categoryReducer } = createSlice({
   name: 'category',

@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios';
 
 import { GoogleWrapper, TextSection } from './LoginGoogleForm.styled';
 import GoogleLogo from '@/commons/atoms/logo/GoogleLogo';
-import { setCredentials } from '@/store/loginSlice';
+import { setCredentials } from '../../store/loginSlice';
 //login
 
 interface LoginForm {
