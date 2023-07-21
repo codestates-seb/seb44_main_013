@@ -3,13 +3,16 @@ import { useSelector } from 'react-redux';
 
 import { PortfolioContent } from '@/types';
 
+import useImageHandler from '@/hooks/useImageHandler';
 import { portfolio } from '@/store/portfolioSlice';
-
 import { call } from '@/utils/apiService';
+
 
 export default function useTitleForm() {
   const savedPortfolio = useSelector(portfolio);
   const navigate = useNavigate();
+
+  const [deleteImageUrls] = useImageHandler();
 
   const postPortfolio = (body: PortfolioContent) => call('/portfolios', 'POST', body);
   const modifyPortfolio = (body: PortfolioContent) => call(`/portfolios/${savedPortfolio.portfolioId}`, 'PATCH', body);
@@ -27,6 +30,7 @@ export default function useTitleForm() {
   const submitPortfolio = () => {
     const isModified = savedPortfolio.portfolioId ? true : false;
     const isValid = checkValidation(savedPortfolio);
+    deleteImageUrls(savedPortfolio.content);
     if (isValid) {
       const copiedPortfolio = JSON.parse(JSON.stringify(savedPortfolio));
       delete copiedPortfolio.portfolioId;

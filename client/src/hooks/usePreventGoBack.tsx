@@ -7,7 +7,6 @@ export default function usePreventGoBack() {
   };
 
   useEffect(() => {
-    history.pushState(null, "", location.href);
     window.addEventListener("popstate", preventGoBack);
 
     return () => {
