@@ -9,18 +9,16 @@ import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.security.authentication.oauth2.handler.OAuth2MemberSuccessHandler;
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
-import io.jsonwebtoken.Jwt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.util.List;
 @Slf4j
 @Configuration
@@ -35,11 +33,15 @@ public class OauthController {
     private final CustomAuthorityUtils authorityUtils;
     private final OAuth2MemberSuccessHandler oAuth2MemberSuccessHandler;
 
-    // 추가사항
+    public String base64EncodedSecretKey(){
+        return jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+    }
+
+    // Todo: 회원가입시 Access Token 및 Refresh Token 발급 및 응답헤더로 전달
     @PostMapping("/signup")
-    public String OauthSignUp(@RequestHeader("Authorization") String googleAccessToken,
-                             @Valid @RequestBody MemberDto.Auth auth,
-                             HttpServletResponse response) {
+    public String OauthSignUp(HttpServletRequest request,
+                              @Valid @RequestBody MemberDto.Auth auth,
+                              HttpServletResponse response) {
 
         List<String> authorities = authorityUtils.createRoles(auth.getEmail());
         String accessToken = oAuth2MemberSuccessHandler.delegateAccessToken(auth.getEmail(),authorities);
@@ -50,17 +52,21 @@ public class OauthController {
 
         Member member = memberService.createMember(Authmember);
 
-        response.addHeader("Authorization",accessToken);
-        response.addHeader("RefreshToken",refreshToken);
+        response.addHeader("Authorization","Bearer " + accessToken);
+        response.addHeader("RefreshToken","Bearer " + refreshToken);
         response.addHeader("id",member.getId().toString());
 
-        return "[회원 가입] : Access_Token Ok";
+        log.info("Access Token & Refresh Token & memberId response ok");
+
+        return "[회원 가입] : Access_Token OK";
     }
 
-    // refresh Token 재생성
+    // Todo : 엑세스 토큰 재생성
     @PostMapping("/regeneration/token")
-    public String RefreshToken(@RequestHeader("RefreshToken") String refreshToken,
+    public String RefreshToken(@RequestHeader("RefreshToken") String token,
                                HttpServletResponse response){
+
+        String refreshToken = verifyBearerAfterReturnToken(token);
 
         verifyJwtOfReturnSecretKey(refreshToken);
 
@@ -68,21 +74,23 @@ public class OauthController {
         List<String> authorities = authorityUtils.createRoles(member.getEmail());
         String accessToken = oAuth2MemberSuccessHandler.delegateAccessToken(member.getEmail(), authorities);
 
-        response.addHeader("Authorization", accessToken);
+        response.addHeader("Authorization", "Bearer " + accessToken);
+        log.info("Access Token Regeneration OK");
+
         return "[ ** Regeneration ** ] Access Token";
     }
 
-    // 엑세스 토큰이 만료되면 재로그인을 해서 멤버아이디에 대한 Refresh 토큰을 발급 받아 다시 AccessToken을 만들고 전달
+    // Todo : 로그인
     @GetMapping("/login")
-    public ResponseEntity OauthLogin(@RequestHeader("Authorization") String accessToken,
+    public ResponseEntity OauthLogin(@RequestHeader("Authorization") String token,
                                      @RequestHeader("id") long memberId,
                                      HttpServletResponse response){
 
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String accessToken =  verifyBearerAfterReturnToken(token);
+
         verifyJwtOfReturnSecretKey(accessToken);
 
-        String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey); // Access Token 으로 이메일 추출
-
+        String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey()); // Access Token 으로 이메일 추출
         Member member = memberService.findByMember(memberId);
 
         if(member.getEmail().equals(email)){
@@ -93,11 +101,19 @@ public class OauthController {
         }
     }
 
-    private void verifyJwtOfReturnSecretKey(String Token){
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
-        jwtTokenizer.verifySignature(Token,base64EncodedSecretKey); // jws 위변조 검증
+    public void verifyJwtOfReturnSecretKey(String token) {
+
+        jwtTokenizer.verifySignature(token, base64EncodedSecretKey());
 
     }
 
+    // Todo : "Bearer 검증 후 Bearer 제거 토큰 전달
+    public String verifyBearerAfterReturnToken(String token){
 
+        if(token == null || !token.startsWith("Bearer")){
+            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_BEARER_TOKEN);
+        }
+
+        return token.substring(7);
+    }
 }

@@ -11,6 +11,7 @@ import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import com.portfolly.server.utils.UriCreator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javassist.bytecode.annotation.MemberValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -41,48 +42,79 @@ public class MemberController {
     private final String MEMBER_DEFAULT_URI = "/members";
     private final MemberMapper mapper;
     private final MemberService memberService;
+    private final JwtTokenizer jwtTokenizer;
 
     @PostMapping
     @Operation(summary = "회원 등록", description = "회원을 등록합니다.")
     @CrossOrigin("*")
-    public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post postDto){
+    public ResponseEntity postMember(@RequestHeader("Authorization") String accessToken,
+                                     @Valid @RequestBody MemberDto.Post postDto){
+
+        Member verifyMember = verifyAccessTokenAndMember(accessToken);
 
         Member member = memberService.roleCreateMember(mapper.PostToMember(postDto));
         URI location = UriCreator.createUri(MEMBER_DEFAULT_URI,member.getId());
 
-        return ResponseEntity.created(location).body("[회원가입] : 최종 회원 가입 완료");
+        if(verifyMember.equals(member)) {
+            return ResponseEntity.created(location).body("[회원가입] : 최종 회원 가입 완료");
+        } else {
+            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER);
+        }
     }
 
     @PatchMapping("/{member-id}")
     @Operation(summary = "회원 수정", description = "회원을 수정합니다.")
     @CrossOrigin("*")
-    public ResponseEntity patchMember(@Positive @PathVariable("member-id") long memberId,
+    public ResponseEntity patchMember(@RequestHeader("Authorization") String accessToken,
+                                      @Positive @PathVariable("member-id") long memberId,
                                       @Valid @RequestBody MemberDto.Patch patchDto){
         patchDto.setId(memberId);
+
+        Member verifyMember = verifyAccessTokenAndMember(accessToken);
+
         Member member = memberService.updateMember(mapper.PatchToMember(patchDto));
 
-        return DeleteStatusMemberToNotAccess(member);
+        if(verifyMember.equals(member)) {
+            return DeleteStatusMemberToNotAccess(member);
+        } else {
+            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER);
+        }
     }
 
     @GetMapping("/{member-id}")
     @CrossOrigin("*")
     @Operation(summary = "회원 조회(마이페이지)", description = "회원을 조회합니다.(처음 회원 등록시 클라이언트/파트너에 따라 응답값이 다릅니다.)")
-    public ResponseEntity getMember(@Positive @PathVariable("member-id") long memberId){
+    public ResponseEntity getMember(@RequestHeader("Authorization") String accessToken,
+                                    @Positive @PathVariable("member-id") long memberId){
+
+        Member verifyMember = verifyAccessTokenAndMember(accessToken);
 
         Member member = memberService.findMember(memberId);
 
-        return DeleteStatusMemberToNotAccess(member);
+        if(verifyMember.equals(member)) {
+            return DeleteStatusMemberToNotAccess(member);
+        } else {
+            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER);
+        }
     }
 
 
     @DeleteMapping("/{member-id}")
     @CrossOrigin("*")
     @Operation(summary = "회원 삭제", description = "회원을 삭제합니다.(회원 삭제 시 바로 삭제되는것이 아니라 상태값이 바뀌며 일정 기간뒤에 삭제됩니다.)")
-    public ResponseEntity deleteMember(@Positive @PathVariable("member-id") long memberId){
+    public ResponseEntity deleteMember(@RequestHeader("Authorization") String accessToken,
+                                       @Positive @PathVariable("member-id") long memberId){
+
+        Member verifyMember = verifyAccessTokenAndMember(accessToken);
+        Member member = memberService.findMember(memberId);
 
         memberService.deleteMember(memberId);
 
-        return ResponseEntity.noContent().build();
+        if(verifyMember.equals(member)) {
+            return ResponseEntity.noContent().build();
+        } else {
+            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER);
+        }
     }
 
     public ResponseEntity DeleteStatusMemberToNotAccess(Member member){
@@ -106,6 +138,17 @@ public class MemberController {
         else {
             throw new BusinessLogicException(ExceptionCode.MEMBER_ROLE_NOT_EXIST);
         }
+    }
+
+    public Member verifyAccessTokenAndMember(String token){
+
+        String accessToken = token.substring(7);
+
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey);
+        Member member = memberService.findByMember(email);
+
+        return member;
     }
 
 }

@@ -33,7 +33,8 @@ public class ImageController {
 
     //Todo: 이미지 업로드
     @PostMapping("/{member-id}")
-    public ResponseEntity<?> uploadImage(@RequestParam("image")MultipartFile file,
+    public ResponseEntity<?> uploadImage(@RequestHeader("Authorization") String accessToken,
+                                         @RequestParam("image")MultipartFile file,
                                          @Positive @PathVariable("member-id") long memberId) throws IOException {
 
         Member member = memberService.findByMember(memberId);
@@ -44,7 +45,8 @@ public class ImageController {
 
     //Todo : 이미지 수정
     @PatchMapping("/{member-id}")
-    public ResponseEntity<?> UpdateImage(@RequestParam("image")MultipartFile file,
+    public ResponseEntity<?> UpdateImage(@RequestHeader("Authorization") String accessToken,
+                                         @RequestParam("image")MultipartFile file,
                                          @Positive @PathVariable("member-id") long memberId) throws IOException {
 
         String changeImage = service.changeImage(file, memberId);
@@ -54,7 +56,8 @@ public class ImageController {
 
     //Todo : 이미지 조회
     @GetMapping("/{member-id}")
-    public ResponseEntity<?> downloadImage(@Positive @PathVariable("member-id") long memberId){
+    public ResponseEntity<?> downloadImage(@RequestHeader("Authorization") String accessToken,
+                                           @Positive @PathVariable("member-id") long memberId){
 
         byte[] imageData = service.downloadImage(service.findImageData(memberId));
         return ResponseEntity.status(HttpStatus.OK)
