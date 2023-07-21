@@ -11,7 +11,7 @@ import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
-import { RootState } from '@/store';
+// import { RootState } from '@/store';
 
 const categoryMap = {
   웹: 'web',
@@ -33,8 +33,8 @@ export default function Main() {
   const [items, setItems] = useState<Item[]>([]);
   const [filteredItems, setFilteredItems] = useState<Item[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
-  console.log(loginState);
+  // const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
+  // console.log(loginState);
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
@@ -113,7 +113,7 @@ export default function Main() {
     setSearchs(items);
   }, [items]);
 
-  console.log(searchs);
+  // console.log(searchs);
 
   // searchs 가 추가될 때 그때 렌더링이 되게 해야함
   // searchterm이 없을때 리렌더링X
