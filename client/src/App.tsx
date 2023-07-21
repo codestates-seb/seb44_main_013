@@ -21,7 +21,8 @@ import Neon from './pages/gisun/Neon';
 const App = () => {
   //희재님 363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com
   //내꺼 614000395362-h7u67qqcd1tcfnfae6cocbhj99680ru5.apps.googleusercontent.com
-  const clientId = '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
+  const clientId =
+    '363137911116-hddsgl4il78hg3mfmssf0vanicga1vu4.apps.googleusercontent.com';
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <Provider store={store}>
@@ -30,15 +31,18 @@ const App = () => {
             <Route path="/" element={<LandingPage />}></Route>
             <Route element={<MainLayout />}>
               <Route path="/main" element={<Main />} />
-              <Route path="/members" element={<MyPage />} />
             </Route>
+            <Route path="/members" element={<MyPage />} />
             <Route element={<CHeaderLayout />}>
               <Route path="/boards" element={<CommunityMain />} />
               <Route path="/boards/:id" element={<CommunityDetail />} />
               <Route path="/boards/edit/:id" element={<AddCommunity />} />
               <Route path="/boards/edit" element={<AddCommunity />} />
             </Route>
-            <Route path="/portfolios/:portfolio_id" element={<PortfolioDetail />} />
+            <Route
+              path="/portfolios/:portfolio_id"
+              element={<PortfolioDetail />}
+            />
             <Route path="/portfolio/edit" element={<PortfolioEdit />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios';
 
 import { GoogleWrapper, TextSection } from './LoginGoogleForm.styled';
 import GoogleLogo from '@/commons/atoms/logo/GoogleLogo';
-import { setCredentials } from '../../store/loginSlice';
+import { login, setCredentials } from '../../store/loginSlice';
 //login
 
 interface LoginForm {
@@ -32,8 +32,8 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     onSuccess: (tokenResponse) => {
       const ACCESS = tokenResponse.access_token;
       // setToken(ACCESS);
-      // console.log(tokenResponse);
-      // console.log(ACCESS);
+      console.log(tokenResponse);
+      console.log(ACCESS);
 
       axios
         .get('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -42,9 +42,10 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
           },
         })
         .then((response) => {
-          // console.log(response);
-          // console.log(response.data.name);
-          // console.log(response.data.email);
+          console.log('구글이랑 토큰 받아옵니다.');
+          console.log(response);
+          console.log(response.data.name);
+          console.log(response.data.email);
 
           sendAccessToken(response.data.name, response.data.email, ACCESS);
         })
@@ -53,45 +54,51 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
   });
 
   //기존 로그인
-  const getAccessToken = () => {
+  const getAccessToken = async () => {
     const accessToken = window.localStorage.getItem('accessToken');
     const memberId = window.localStorage.getItem('memberId');
+    console.log('이메일 중복 기존 회원으로 서버한테 로그인 요청합니다.');
+    //현재 get bearer 이중 중복으로 뻄.
 
-    // axios
-    //   .get('/api/oauth/login', {
-    //     headers: {
-    //       authorization: `Bearer ${accessToken}`,
-    //       id: memberId,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log('로그인 성공', response);
-    //     navigate('/');
-    //     dispatch(login({ isLogin: true }));
-    //   })
-    //   .catch((Err) => console.log('로그인 에러', Err));
-
-    axios({
-      method: 'get',
-      url: '/api/oauth/login',
-      headers: {
-        authorization: `${accessToken}`,
-        id: memberId,
-      },
-    })
-      .then((res) => {
-        console.log('로그인 성공', res);
-      })
-      .catch((err) => {
-        console.log(err, 'refreshToken 새로 발급');
-        //
-        getRefreshToken();
+    try {
+      const res = await axios({
+        method: 'get',
+        url: '/api/oauth/login',
+        headers: {
+          authorization: `${accessToken}`,
+          id: memberId,
+        },
       });
+      console.log('기존 회원 로그인 성공', res);
+      navigate('/main');
+      dispatch(login({ isLogin: true }));
+    } catch (err) {
+      console.log(err, 'refreshToken 새로 발급 필요합니다');
+      console.log('새 발급을 위해 함수 이동합니다.');
+      await getRefreshToken();
+    }
+    // axios({
+    //   method: 'get',
+    //   url: '/api/oauth/login',
+    //   headers: {
+    //     authorization: `${accessToken}`,
+    //     id: memberId,
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log(' 기존 회원 로그인 성공', res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err, 'refreshToken 새로 발급 필요합니다');
+    //     console.log('새 발급을 위해 함수 이동합니다.');
+    //     getRefreshToken();
+    //   });
   };
 
   const getRefreshToken = () => {
     const refresh = window.localStorage.getItem('refreshToken');
-    console.log('getRefreshToken 함수 실행 ');
+    console.log('[주목] getRefreshToken 함수 실행 ');
+    //현재 get bearer 이중 중복으로 뻄.
     axios
       .post(
         '/api/oauth/regeneration/token',
@@ -104,9 +111,10 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
       )
       .then((Res) => {
         console.log(Res, '재발급 성공');
-        // const newAccess = Res.headers.authorization;
-        // console.log(newAccess);
-        // 전역 관리 저장 로직 작성 필요
+        const newAccess = Res.headers.authorization;
+        console.log('기존 accessToken 없애고 새로운 토큰 저장합니다!');
+        window.localStorage.setItem('accessToken', newAccess);
+        getAccessToken();
       })
       .catch((err) => console.log('refreshToken 재발급 실패', err));
   };
@@ -122,12 +130,13 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         },
         {
           headers: {
-            Authorization: `${token01}`,
+            Authorization: `Bearer ${token01}`,
           },
         }
       )
       .then((response) => {
-        // console.log(response);
+        console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
+        console.log(response);
         const accessToken = response.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
@@ -140,8 +149,8 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         //localStorage 에 액세스 토큰 저장
         navigate('/signup/role');
 
-        // console.log(accessToken);
-        // console.log(memberId);
+        console.log(accessToken);
+        console.log(memberId);
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (axios.isAxiosError(error)) {
