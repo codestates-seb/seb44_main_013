@@ -13,6 +13,7 @@ const RoundedBox = tw.div`
   rounded-xl
   w-full 
   break-words
+  overflow-hidden
   text-white
 `
 
