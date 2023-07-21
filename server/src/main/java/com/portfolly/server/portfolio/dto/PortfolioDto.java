@@ -12,6 +12,7 @@ import org.mapstruct.Mapper;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class PortfolioDto {
     @Getter
@@ -66,7 +67,7 @@ public class PortfolioDto {
         private boolean isWriter;
         private int countLikes;
         private String firstImage;
-        private MemberDto.Partner_Response member;
+        private List<MemberDto.Partner_Response> members;
 //        private List<TagDto.Response> tags;
 //        private List<LikesDto.Response> likes;
 //        private List<BookmarkDto.Response> bookmarks;
