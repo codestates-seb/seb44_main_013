@@ -12,6 +12,7 @@ export interface LoginState extends Token {
 
 // const ACCESS_TOKEN = '';
 // const REFRESH_TOKEN = '';
+const ACCESS_TOKEN = window.localStorage.getItem('accessToken');
 
 const initialState: LoginState = {
   // isLogin: ACCESS_TOKEN ? true : false,
@@ -20,7 +21,7 @@ const initialState: LoginState = {
   // refreshtoken: REFRESH_TOKEN || '',
   accesstoken: '',
   refreshtoken: '',
-  isLogin: false,
+  isLogin: ACCESS_TOKEN ? true : false,
 };
 //1. accessToken이 유효(DB 비교)하면 refershToken 재발급
 //2. 로그아웃 시 accessToken과 refereshToken 만료

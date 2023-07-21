@@ -19,5 +19,5 @@ export default function LogoHeader() {
     <HeaderContainer>
       <Logo onClickHandler={gotoMain} />
     </HeaderContainer>
-  )
+  );
 }

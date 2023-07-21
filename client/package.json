@@ -71,5 +71,8 @@
       "config": "tailwind.config.js",
       "hasSuggestions": true
     }
+  },
+  "_mouleAliases": {
+    "@src": "src"
   }
 }

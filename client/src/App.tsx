@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { store } from '@/store/index';
+import { store } from './store';
 import { Provider } from 'react-redux';
 
 import Main from './pages/main/Main';
@@ -31,8 +31,8 @@ const App = () => {
             <Route path="/" element={<LandingPage />}></Route>
             <Route element={<MainLayout />}>
               <Route path="/main" element={<Main />} />
-              <Route path="/members" element={<MyPage />} />
             </Route>
+            <Route path="/members" element={<MyPage />} />
             <Route element={<CHeaderLayout />}>
               <Route path="/boards" element={<CommunityMain />} />
               <Route path="/boards/:id" element={<CommunityDetail />} />

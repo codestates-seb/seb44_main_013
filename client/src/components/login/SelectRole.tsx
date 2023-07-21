@@ -18,6 +18,7 @@ export default function SelectRole() {
   const ACCESS_TOKEN = window.localStorage.getItem('accessToken');
   // console.log(ACCESS_TOKEN);
   // console.log(sliceToken);
+  console.log('파트너/클라이언트 선택 페이지로 이동합니다.');
 
   const selectRole = (res: string) => {
     setRole(res);
@@ -35,15 +36,15 @@ export default function SelectRole() {
         },
         {
           headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`, // 서버에서 받은 token
+            Authorization: `${ACCESS_TOKEN}`, // 서버에서 받은 token
           },
         }
       );
-
-      dispatch(login(true));
+      console.log('선택지가 잘 전달 되었습니다.');
+      dispatch(login({ isLogin: true }));
       window.localStorage.setItem('memberRole', role);
       //부드럽게 WELcome 페이지 만들기
-      navigate('/');
+      navigate('/main');
     } catch (err) {
       console.log(err);
     }
