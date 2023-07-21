@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)" />
+    <list default="true" id="28218386-9467-4069-a19e-93cff74e8c47" name="변경" comment="fix : 회원 즉시 삭제 컨트롤러 수정(테스트용)">
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/portfolly/server/member/dto/MemberDto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
