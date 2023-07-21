@@ -2,7 +2,10 @@ import { ChangeEventHandler } from 'react';
 import { SearchBox, SearchContainer, SearchIcon } from './Search.styled';
 
 interface SearchProps {
-
+  setSearchValue: any,
+  currentSearch: string,
+  data: any,
+  setSearchs: any,
 }
 
 export default function Search({ setSearchValue, currentSearch, data, setSearchs }: SearchProps) {
