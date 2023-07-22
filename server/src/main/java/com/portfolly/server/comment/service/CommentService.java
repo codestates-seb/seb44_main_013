@@ -33,24 +33,27 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment creatComment(Comment comment, Long boardId
-                                //, Long memberId
-                                ) {
-//        Member verifiedMember = memberService.findMember(memberId);\
+    public Comment creatComment(Comment comment, Long boardId, Long memberId) {
+
+        boardService.verifyBoard(boardId);                        // 2차 검증 : 게시글 존재여부
+
+        Member member = memberService.findByMember(memberId);
         comment.setBoard(boardService.findBoard(boardId));
+        comment.setMember(member);
+
         return commentRepository.save(comment);
     }
 
 
     @Transactional
-    public Comment updateComment(Comment comment, Long boardId
-                                 //, Long memberId,
-                                 ) {
-//        Member verifiedMember = memberService.findMember(memberId);
-        Board verifiedBoard = boardService.verifyBoard(boardId);
-        Comment verifiedComment = verifyComment(comment.getId());
+    public Comment updateComment(Comment comment, Long boardId, Long memberId) {
 
-        verifiedComment.setContent(comment.getContent());
+        Board verifiedBoard = boardService.verifyBoard(boardId);   // 2차 검증 : 게시글 존재여부
+        Comment verifiedComment = verifyComment(comment.getId());  // 3차 검증 : 댓글 존재여부
+        verifyWriter(comment, memberId);// 4차 검증 : 댓글 작성자 확인
+
+        Optional.ofNullable(comment.getContent())
+                .ifPresent(verifiedBoard::setContent);
 
         return commentRepository.save(verifiedComment);
     }
@@ -63,11 +66,12 @@ public class CommentService {
 
 
     @Transactional
-    public void deleteComment(Long commentId
-                              //, Long memberId
-                              ) {
-//        Member verifiedMember = memberService.findMember(memberId);
-        Comment verifiedComment = verifyComment(commentId);
+    public void deleteComment(Long commentId, Long memberId) {
+
+//        Board verifiedBoard = boardService.verifyBoard(boardId); // 2차 검증 : 게시글 존재여부
+        Comment verifiedComment = verifyComment(commentId);        // 3차 검증 : 댓글 존재여부
+        verifyWriter(verifiedComment, memberId);                   // 4차 검증 : 댓글 작성자 확인
+
         verifiedComment.setStatus(Comment.Status.COMMENT_INACTIVE);
     }
 
@@ -85,5 +89,12 @@ public class CommentService {
         return findedComment;
     }
 
-
+    // 댓글 작성자 확인
+    @Transactional(readOnly = true)
+    public void verifyWriter(Comment comment, Long memberId) {
+        Comment foundComment = commentRepository.findById(comment.getId()).get();
+        if(!foundComment.getMember().getId().equals(memberId)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
+    }
 }

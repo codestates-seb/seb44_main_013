@@ -40,7 +40,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 public class BoardController {
-
     private final BoardMapper mapper;
     private final BoardService boardService;
     private final MemberService memberService;
@@ -48,6 +47,7 @@ public class BoardController {
     private final CustomAuthorityUtils authorityUtils;
 
 
+// todo : 더미데이터 안만들어짐
 
 //    @PostConstruct
 //    public void postConstruct() {
@@ -95,17 +95,22 @@ public class BoardController {
 //        boardService.createBoard(board20, 1L);
 //    }
 
+
     @PostMapping("/write")
-    public ResponseEntity postBoard(@RequestHeader("AccessToken") String accessToken,
+    public ResponseEntity postBoard(@RequestHeader("AccessToken") String token,
                                     @Valid @RequestBody BoardDto.Post post) {
 
+        String accessToken = token.substring(7);
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         String email = jwtTokenizer.extractEmailFromToken(accessToken, base64EncodedSecretKey);
-        Member member = memberService.findByMember(email); // 1차검증 : 유효한 멤버(이메일 검증)
+        Member member = memberService.findByMember(email);    // 1차 검증 : 유효한 멤버(이메일 검증)
         Long memberId = member.getId();
 
+        // 보드 내용 등록
         Board board = mapper.boardPostToBoard(post);
         Board createdBoard = boardService.createBoard(board, memberId);
+
+        // todo : 프사 가져오기
 
         URI location = UriComponentsBuilder
                 .newInstance()
@@ -119,17 +124,18 @@ public class BoardController {
 
 
     @PatchMapping("/edit/{board-id}")
-    public ResponseEntity patchBoard(@RequestHeader("AccessToken") String accessToken,
+    public ResponseEntity patchBoard(@RequestHeader("AccessToken") String token,
                                      @PathVariable("board-id") @Positive Long boardId,
                                      @Valid @RequestBody BoardDto.Patch patch) {
 
+        String accessToken = token.substring(7);
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         String email = jwtTokenizer.extractEmailFromToken(accessToken, base64EncodedSecretKey);
-        Member member = memberService.findByMember(email); // 1차검증 : 유효한 멤버(이메일 검증)
+        Member member = memberService.findByMember(email);  // 1차 검증 : 유효한 멤버(이메일 검증)
         Long memberId = member.getId();
 
         patch.setId(boardId);
-        Board board = boardService.updateBoard(mapper.bardPatchToBoard(patch));
+        Board board = boardService.updateBoard(mapper.bardPatchToBoard(patch), memberId);
         return new ResponseEntity<>(mapper.boardToBoardResponse(board), HttpStatus.OK);
     }
 
@@ -139,7 +145,7 @@ public class BoardController {
 
         Board board = boardService.verifyBoard(boardId);
         boardService.increaseViews(board);
-       // List<Comment> comments = commentService.getComments();
+//        List<Comment> comments = commentService.getComments();
 
         return new ResponseEntity(mapper.boardToBoardResponse(board), HttpStatus.OK);
        // return new ResponseEntity<>(
@@ -179,19 +185,16 @@ public class BoardController {
 
 
     @DeleteMapping("/{board-id}")
-    public ResponseEntity deleteBoard(@PathVariable("board-id") @Positive Long boardId
-                                      //, @RequestHear(name = "Refresh") String token
-                                      ) {
+    public ResponseEntity deleteBoard(@RequestHeader("AccessToken") String token,
+                                      @PathVariable("board-id") @Positive Long boardId) {
 
-        // Long memberId = boardService.findMemberId(token)
+        String accessToken = token.substring(7);
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        String email = jwtTokenizer.extractEmailFromToken(accessToken, base64EncodedSecretKey);
+        Member member = memberService.findByMember(email); // 1차 검증 : 유효한 멤버(이메일 검증)
+        Long memberId = member.getId();
 
-        // 1차검증 : 게시글존재여부
-        // 2차검증 : 회원존재여부
-        // 3차검증 : 게시글작성자확인
-
-        boardService.deleteBoard(boardId
-                //, memberId
-                );
+        boardService.deleteBoard(boardId, memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

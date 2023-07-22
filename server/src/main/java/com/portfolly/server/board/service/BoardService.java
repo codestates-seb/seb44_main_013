@@ -35,21 +35,17 @@ public class BoardService {
 
     @Transactional
     public Board createBoard(Board board, Long memberId) {
-        // Member verifiedmember = memberService.findMember(memberId);
+        Member member = memberService.findByMember(memberId);
+        board.setMember(member);
         return boardRepository.save(board);
     }
 
 
     @Transactional
-    public Board updateBoard(Board board
-                             //, Long memberId
-                             ) {
+    public Board updateBoard(Board board, Long memberId) {
 
-        // 1차검증 : 게시글존재여부
-        // 2차검증 : 회원존재여부
-        // 3차검증 : 게시글작성자확인
-
-        Board verifiedBoard = verifyBoard(board.getId());
+        Board verifiedBoard = verifyBoard(board.getId()); // 2차 검증 : 게시글 존재여부
+        verifyWriter(board, memberId);                    // 3차 검증 : 게시글 작성자 확인
 
         Optional.ofNullable(board.getTitle())
                 .ifPresent(verifiedBoard::setTitle);
@@ -61,6 +57,7 @@ public class BoardService {
 
 
 
+    // 게시글 상세페이지
     @Transactional(readOnly = true)
     public Board findBoard(Long boardId) {
         Board verifiedBoard = verifyBoard(boardId);
@@ -86,11 +83,10 @@ public class BoardService {
 
 
     @Transactional
-    public void deleteBoard(Long boardId
-                           //, Long memberId,
-                            ) {
-//        Member verifiedMember = memberService.findMember(memberId);
-        Board verifiedBoard = verifyBoard(boardId);
+    public void deleteBoard(Long boardId, Long memberId) {
+        Board verifiedBoard = verifyBoard(boardId);                       // 2차 검증 : 게시글 존재여부
+        verifyWriter(boardRepository.findById(boardId).get(), memberId);  // 3차 검증 : 게시글 작성자 확인
+
         verifiedBoard.setStatus(Board.Status.POST_INACTIVE);
     }
 
@@ -110,7 +106,6 @@ public class BoardService {
     }
 
 
-
     public void increaseViews(Board board) {
         board.setView(board.getView() + 1);
         boardRepository.save(board);
@@ -125,10 +120,21 @@ public class BoardService {
         return foundComments;
     }
 
-    // 7.리프레시 토큰
+    // 게시글 작성자 확인
+    @Transactional(readOnly = true)
+    public void verifyWriter(Board board, Long memberId) {
+        Board foudnBoard = boardRepository.findById(board.getId()).get();
+        Long foundMemberId = foudnBoard.getMember().getId();
+        if(!foundMemberId.equals(memberId)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
+    }
+
+    // 리프레시 토큰
 //        public Long findMemberId(String token) {
 //        Optional<RefreshToken> refreshToken = refreshTokenRepository.findByValue(token);
 //        RefreshToken foundToken = refreshToken.orElseThrow(() -> new BusinessLogicException(ExceptionCode.EMAIL_NOT_EXIST));
 //        return foundToken.getMemberId();
 //    }
+
 }

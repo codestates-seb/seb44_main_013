@@ -1,6 +1,7 @@
 package com.portfolly.server.board.respository;
 
 import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +14,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface BoardRepository extends JpaRepository<Board, Long> {
+
     @Query("SELECT b from Board b WHERE b.division = :division")
     List<Board> findBoardByDivision(@Param("division") Board.Division division);
 }
