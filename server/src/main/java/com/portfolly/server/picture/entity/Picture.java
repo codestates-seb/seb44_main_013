@@ -1,5 +1,6 @@
 package com.portfolly.server.picture.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class Picture {
     private String pictureUrl;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
 

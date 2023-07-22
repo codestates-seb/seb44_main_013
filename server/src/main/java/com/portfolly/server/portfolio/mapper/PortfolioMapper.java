@@ -14,12 +14,14 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {MemberMapper.class, CategoryMapper.class})
 public interface PortfolioMapper {
     @Mapping(target = "category", ignore = true)
+    @Mapping(target = "portfolioTags", ignore = true)
     Portfolio postDtoToPortfolio(PortfolioDto.Post postDto);
     List<PortfolioDto.Response> portfoliosToResponseDto(List<Portfolio> portfolios);
     PortfolioDto.Response portfolioToResponseDto(Portfolio portfolio);
+    //portfoliotag관련 무시하는 어노테이션 추가 해야함
 
-//    List<MemberDto.Client_Response> memberToMemberPartnerResponse(List<Member> members);
-    MemberDto.Client_Response memberToMemberPartnerResponse(Member member);
+//    List<MemberDto.Partner_Response> memberToMemberPartnerResponse(List<Member> members);
+    MemberDto.Partner_Response memberToMemberPartnerResponse(Member member);
 
 
 }

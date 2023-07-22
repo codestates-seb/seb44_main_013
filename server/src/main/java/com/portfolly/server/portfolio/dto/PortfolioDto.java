@@ -1,13 +1,12 @@
 package com.portfolly.server.portfolio.dto;
 
 import com.portfolly.server.category.dto.CategoryDto;
-import com.portfolly.server.likes.entity.Likes;
+import com.portfolly.server.tag.dto.TagDto;
 import com.portfolly.server.member.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.mapstruct.Mapper;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -31,6 +30,8 @@ public class PortfolioDto {
         private String explains;
         private String category;
         //태그 json 배열
+        private String tags;
+//        private List<Map<String,Long>> tagList;
     }
 
     @Getter
@@ -48,6 +49,7 @@ public class PortfolioDto {
         @Size(min = 1, max = 300, message = "요약 설명은 최대 300자까지 작성할 수 있습니다.")
         private String explains;
         private String category;
+        private String tags;
     }
 
     @Getter
@@ -69,7 +71,7 @@ public class PortfolioDto {
         private int countLikes;
         private String firstImage;
         private List<MemberDto.Partner_Response> members;
-//        private List<TagDto.Response> tags;
+        private List<TagDto.Response> tags;
 //        private List<LikesDto.Response> likes;
 //        private List<BookmarkDto.Response> bookmarks;
 

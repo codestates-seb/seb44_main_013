@@ -5,6 +5,7 @@ import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.image.entity.ImageData;
+import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.validator.EnumFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -147,6 +148,7 @@ public class MemberDto {
         private String skill;
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
+//        private List<PortfolioDto.Response> portfolios;
         private List<Portfolio> portfolios;
         private List<Bookmark> bookmarks;
         private List<Board> boards;

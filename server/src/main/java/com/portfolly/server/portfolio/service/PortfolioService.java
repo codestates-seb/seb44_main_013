@@ -1,6 +1,9 @@
 package com.portfolly.server.portfolio.service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.portfolly.server.bookmark.repository.BookmarkRepository;
+import com.portfolly.server.tag.entity.Tag;
 import com.portfolly.server.category.repository.CategoryRepository;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
@@ -12,8 +15,10 @@ import com.portfolly.server.picture.entity.Picture;
 import com.portfolly.server.picture.repository.PictureRepository;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
+import com.portfolly.server.portfolio.entity.PortfolioTag;
 import com.portfolly.server.portfolio.mapper.PortfolioMapper;
 import com.portfolly.server.portfolio.repository.PortfolioRepository;
+import com.portfolly.server.portfolio.repository.PortfolioTagRepository;
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +43,7 @@ public class PortfolioService {
     private final CategoryRepository categoryRepository;
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final PortfolioTagRepository portfolioTagRepository;
 
     //포트폴리오 등록
     public Portfolio postPortfolio(PortfolioDto.Post postDto, String accessToken){
@@ -48,8 +54,38 @@ public class PortfolioService {
         portfolio.setStatus(Portfolio.Status.ACTIVE);
         portfolio.setMember(member);
         portfolio.setCategory(categoryRepository.findByName(postDto.getCategory()).orElseThrow(()->new RuntimeException()));
+
         portfolioRepository.save(portfolio);
+        List<Tag> tags = new Gson().fromJson(postDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
+        createPortfolioTag(tags, portfolio);
         return portfolio;
+    }
+
+    //포트폴리오 태그 테이블 생성
+    public void createPortfolioTag(List<Tag> tags, Portfolio portfolio){
+
+        for(Tag tag : tags) {
+            System.out.println((tag.getName()));
+            System.out.println((tag.getId()));
+        }
+        List<PortfolioTag> portfolioTags = new ArrayList<>();
+        for(Tag tag : tags){
+            PortfolioTag portfolioTag = new PortfolioTag();
+            portfolioTag.setPortfolio(portfolio);
+            portfolioTag.setTag(tag);
+            portfolioTags.add(portfolioTag);
+            portfolioTagRepository.save(portfolioTag);
+        }
+
+        portfolio.setPortfolioTags(portfolioTags);
+    }
+
+    //포트폴리오 태그 테이블 삭제
+    public void deletePortfolioTag(Portfolio portfolio){
+        List<PortfolioTag> portfolioTags = portfolio.getPortfolioTags();
+        for (PortfolioTag portfolioTag : portfolioTags){
+            portfolioTagRepository.delete(portfolioTag);
+        }
     }
 
     //포트폴리오 수정
@@ -63,6 +99,9 @@ public class PortfolioService {
             findedPortfolio.setContent(patchDto.getContent());
             findedPortfolio.setExplains(patchDto.getExplains());
             findedPortfolio.setCategory(categoryRepository.findByName(patchDto.getCategory().trim()).orElseThrow(()->new BusinessLogicException(ExceptionCode.CATEGORY_NOT_FOUND)));
+            deletePortfolioTag(findedPortfolio);
+            List<Tag> tags = new Gson().fromJson(patchDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
+            createPortfolioTag(tags, findedPortfolio);
             portfolioRepository.save(findedPortfolio);
         }else{
             throw new RuntimeException("작성자가 아닙니다");
@@ -143,6 +182,7 @@ public class PortfolioService {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
         portfolio.setStatus(Portfolio.Status.DELETED);
+        deletePortfolioTag(portfolio);
         portfolioRepository.save(portfolio);
     }
 

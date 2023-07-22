@@ -20,8 +20,9 @@ public class Category {
 
 
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Portfolio> portfolios = new ArrayList<>();
-    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
-    private List<Tag> tags = new ArrayList<>();
+//    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
+//    private List<Tag> tags = new ArrayList<>();
 
 }
