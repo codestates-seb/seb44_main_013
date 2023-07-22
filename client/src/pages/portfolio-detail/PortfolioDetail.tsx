@@ -7,8 +7,8 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
+import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from '@/pages/portfolio-detail/PortfolioDetail.styled';
 import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
-import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
@@ -60,7 +60,11 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {portfolio &&
-            <div dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></div>
+            <div dangerouslySetInnerHTML={{
+              __html: sanitizer(portfolio.content,
+                { ALLOWED_TAGS: ["iframe"], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] })
+            }}>
+            </div>
           }
         </PortfolioContainer>
 
@@ -69,10 +73,10 @@ export default function PortfolioDetail() {
             <FlexBetweenWrapper>
               {portfolio &&
                 <>
-                  <LikeButton portfolioId={portfolio.portfolioId} currentLikes={portfolio.likes} isToggled={portfolio.isLiked} />
+                  <LikeButton portfolioId={portfolio.id} currentLikes={portfolio.countLikes} isToggled={portfolio.liked} />
                   <FlexWrapper gap={20}>
-                    <SmallText color='white'>views · {portfolio.views}</SmallText>
-                    <Bookmark portfolioId={portfolio.portfolioId} isToggled={portfolio.isMarked} />
+                    <SmallText color='white'>views · {portfolio.view}</SmallText>
+                    <Bookmark portfolioId={portfolio.id} isToggled={portfolio.marked} />
                   </FlexWrapper>
                 </>
               }
@@ -87,12 +91,12 @@ export default function PortfolioDetail() {
               <>
                 <HeadingText color='white'>{portfolio.title}</HeadingText>
                 <SmallText color="white">{createdAt}</SmallText>
-                <BodyText color='white'>{portfolio.explain}</BodyText>
+                <BodyText color='white'>{portfolio.explains}</BodyText>
               </>
             }
-            {portfolio?.isMine &&
+            {portfolio?.writer &&
               <FlexEndWrapper>
-                <ReviseBtn onClick={onReviseButtonClick} />ㅤ|<RemoveBtn onClick={openDeleteModal} />
+                <ReviseBtn onClick={onReviseButtonClick} /><RemoveBtn onClick={openDeleteModal} />
               </FlexEndWrapper>
             }
           </UserCard>
@@ -101,7 +105,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.tagId} readOnly={true} />)
+                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)
               }
             </FlexWrapper>
           </UserCard>
