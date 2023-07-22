@@ -26,8 +26,6 @@ export const BtnContainer = tw.div`
 export const RecuitBtn = styled.button<ButtonProps>`
   ${tw`
     cursor-pointer
-    ml-2.5
-    mt-1
     hover:underline
     text-sm
     whitespace-nowrap

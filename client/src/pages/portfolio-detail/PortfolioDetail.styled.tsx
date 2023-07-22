@@ -1,3 +1,6 @@
+import { Purpletype } from '@/commons/atoms/buttons/Button.styled';
+import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
+import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
 import { styled } from 'styled-components';
 import tw from 'twin.macro';
 
@@ -13,6 +16,7 @@ const RoundedBox = tw.div`
   rounded-xl
   w-full 
   break-words
+  overflow-hidden
   text-white
 `
 
@@ -42,3 +46,14 @@ export const UserCard = styled(RoundedBox)`
   ${tw`flex flex-col p-8 gap-6 mb-5 h-fit overflow-visible`}
   background-color: rgba(32, 32, 36, 1);
 `
+
+export const EditButton = styled(ReviseBtn)``;
+export const DeleteButton = styled(RemoveBtn)``;
+
+export const AskCommisionBtn = tw(Purpletype)`
+  w-[200px]
+  px-5
+  py-2
+  rounded-md
+  text-base
+`;

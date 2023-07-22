@@ -17,8 +17,8 @@ const DaHamHandlers = [
   // 포트폴리오 정보 조회
   rest.get('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolioId = Number(req.params.portfolio_id);
-    const Portfolio = portfolios.filter((portfolio) => portfolio.portfolioId === portfolioId);
-    portfolios.map((portfolio) => ++portfolio.views);
+    const Portfolio = portfolios.filter((portfolio) => portfolio.id === portfolioId);
+    portfolios.map((portfolio) => ++portfolio.view);
     return res(ctx.status(200), ctx.json({ data: Portfolio[0] }));
   }),
   // 포트폴리오 작성
@@ -26,24 +26,24 @@ const DaHamHandlers = [
     const portfolioId = Math.floor(Math.random() * 100);
     const body = await req.json();
     const newPortfolio: Portfolio = {
-      portfolioId: portfolioId,
+      id: portfolioId,
       title: String(body.title),
       content: String(body.content),
-      explain: body.explains,
-      views: 0,
+      explains: body.explains,
+      view: 0,
       modifiedAt: String(new Date()),
       createdAt: String(new Date()),
       category: body.category,
       member: {
-        memberId: 1,
+        id: 1,
         name: 'noname',
-        picture: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
+        imageUrl: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
       },
       tags: body.tags,
-      likes: 0,
-      isLiked: false,
-      isMarked: false,
-      isMine: true,
+      countLikes: 0,
+      liked: false,
+      marked: false,
+      writer: true,
     };
     portfolios.push(newPortfolio);
     return res(ctx.status(201), ctx.json({ portfolioId: portfolioId }));
@@ -53,7 +53,7 @@ const DaHamHandlers = [
     const portfolioId = Number(req.params.portfolio_id);
     const body = await req.json();
     portfolios.map((portfolio) => {
-      if (portfolio.portfolioId === portfolioId) portfolio = Object.assign(portfolio, body);
+      if (portfolio.id === portfolioId) portfolio = Object.assign(portfolio, body);
     });
     return res(ctx.status(201));
   }),
@@ -61,7 +61,7 @@ const DaHamHandlers = [
   rest.delete('/portfolios/:portfolio_id', (req, res, ctx) => {
     const portfolioId = Number(req.params.portfolio_id);
     portfolios.forEach((portfolio, index) => {
-      if (portfolio.portfolioId === portfolioId) portfolios.splice(index, 1);
+      if (portfolio.id === portfolioId) portfolios.splice(index, 1);
     });
     return res(ctx.status(201));
   }),
@@ -70,9 +70,9 @@ const DaHamHandlers = [
     const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
     portfolios.map((portfolio) => {
-      if (portfolio.portfolioId === portfolioId) {
-        portfolio.isLiked = true;
-        response = { likes: ++portfolio.likes };
+      if (portfolio.id === portfolioId) {
+        portfolio.liked = true;
+        response = { likes: ++portfolio.countLikes };
       }
     });
     return res(ctx.status(200), ctx.json(response));
@@ -81,9 +81,9 @@ const DaHamHandlers = [
     const portfolioId = Number(req.params.portfolio_id);
     let response = { likes: 0 };
     portfolios.map((portfolio) => {
-      if (portfolio.portfolioId === portfolioId) {
-        portfolio.isLiked = false;
-        response = { likes: --portfolio.likes };
+      if (portfolio.id === portfolioId) {
+        portfolio.liked = false;
+        response = { likes: --portfolio.countLikes };
       }
     });
     return res(ctx.status(200), ctx.json(response));
@@ -92,8 +92,8 @@ const DaHamHandlers = [
   rest.post('/bookmarks/:portfolio_id', (req, res, ctx) => {
     const portfolioId = Number(req.params.portfolio_id);
     portfolios.map((portfolio) => {
-      if (portfolio.portfolioId === portfolioId) {
-        portfolio.isMarked = true;
+      if (portfolio.id === portfolioId) {
+        portfolio.marked = true;
       }
     });
     return res(ctx.status(200));
@@ -101,17 +101,15 @@ const DaHamHandlers = [
   rest.delete('/bookmarks/:portfolio_id', (req, res, ctx) => {
     const portfolioId = Number(req.params.portfolio_id);
     portfolios.map((portfolio) => {
-      if (portfolio.portfolioId === portfolioId) {
-        portfolio.isMarked = false;
+      if (portfolio.id === portfolioId) {
+        portfolio.marked = false;
       }
     });
     return res(ctx.status(200));
   }),
   // 이미지 업로드
   rest.post('/pictures', async (_, res, ctx) => {
-    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
+    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }));
   }),
 ];

@@ -1,11 +1,11 @@
 // type 모아두는 곳
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { Member, Tag, Portfolio, PortfolioContent, CATEGORY_TYPE, CategoryTags, Picture } from '@/types/portfolio';
+import { Member, Tag, Portfolio, PortfolioContent, CATEGORY_TYPE, Category, CategoryTags, Picture, CategoryMapper } from '@/types/portfolio';
 import { Quill, TitleFormProps } from '@/types/form';
 import { CategorySlice, PortfolioSlice } from '@/types/slice';
 
 // 다함 전용 타입
-export type { Member, Tag, CATEGORY_TYPE, CategoryTags, Portfolio, PortfolioContent, Picture };
+export type { Member, Tag, CATEGORY_TYPE, Category, CategoryTags, Portfolio, PortfolioContent, Picture, CategoryMapper };
 export type { Quill, TitleFormProps };
 export type { CategorySlice, PortfolioSlice };
 

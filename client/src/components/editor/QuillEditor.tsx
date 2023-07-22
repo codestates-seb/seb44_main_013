@@ -1,6 +1,6 @@
 /* 2023-07-06 React Quill Editor - 김다함 */
-import { memo, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { memo, useMemo, useRef } from 'react';
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from 'react-quill';
 
@@ -22,14 +22,8 @@ const QuillEditor = memo(({ isTitleFormOpen }: Quill) => {
         container: [
           [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
           [{ 'font': [] }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
+          ["bold", "italic", "underline", "strike"],
           [{ color: [] }, { 'background': [] }],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
           ['link'],
           ['image', 'video'],
           ['clean']
@@ -47,6 +41,7 @@ const QuillEditor = memo(({ isTitleFormOpen }: Quill) => {
         ref={(element) => {
           if (element !== null) {
             quillRef.current = element;
+            console.log(savedPortfolio.content)
           }
         }}
         value={savedPortfolio.content}

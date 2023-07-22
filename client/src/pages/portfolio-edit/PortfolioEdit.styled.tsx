@@ -1,5 +1,8 @@
+import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import { styled, css } from 'styled-components';
 import tw from 'twin.macro';
+
+export const EditorContainer = styled(FlexColumnContainer)``
 
 const CircleBtn = css`
     ${tw`rounded-full inline-flex justify-center items-center`}

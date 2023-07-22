@@ -3,14 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setPortfolio } from '@/store/portfolioSlice';
+import { changeDateFormat } from '@/utils/changeDateFormat';
 import usePreventRefresh from '@/hooks/usePreventRefresh';
 import usePreventGoBack from '@/hooks/usePreventGoBack';
-import { changeDateFormat } from '@/utils/changeDateFormat';
+import { setPortfolio } from '@/store/portfolioSlice';
 import { call } from '@/utils/apiService';
 
-import { PortfolioCheckButton } from '@/pages/portfolio-edit/PortfolioEdit.styled';
-import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
+import { EditorContainer, PortfolioCheckButton } from '@/pages/portfolio-edit/PortfolioEdit.styled';
 import QuillEditor from '@/components/editor/QuillEditor';
 import TitleForm from '@/components/titleForm/TitleForm';
 import LogoHeader from '@/components/header/LogoHeader';
@@ -33,12 +32,12 @@ export default function PortfolioEdit() {
       getPortfolio(portfolioId)
         .then((res) => {
           dispatch(setPortfolio({
-            portfolioId: portfolioId,
+            id: portfolioId,
             title: res.data.title,
             content: res.data.content,
-            category: res.data.category,
+            category: res.data.category.name,
             tags: res.data.tags,
-            explain: res.data.explain,
+            explains: res.data.explain,
             createdAt: changeDateFormat(res.data.createdAt),
           }));
         })
@@ -46,7 +45,7 @@ export default function PortfolioEdit() {
   }, []);
 
   return (
-    <FlexColumnContainer>
+    <EditorContainer>
       <LogoHeader />
       <QuillEditor isTitleFormOpen={isTitleFormOpen} />
       {isTitleFormOpen &&
@@ -57,6 +56,6 @@ export default function PortfolioEdit() {
         onClick={() => setIsTitleFormOpen(true)}>
         <BsCheck2 size="25" color="white" />
       </PortfolioCheckButton>
-    </FlexColumnContainer>
+    </EditorContainer>
   );
 }

@@ -1,139 +1,219 @@
-import { CATEGORY_TYPE, CategoryTags } from '@/types';
+import { CategoryTags } from '@/types';
 
-export const categories: Array<CATEGORY_TYPE> = ["웹", "앱", "3D/애니메이션", "그래픽디자인", "사진/영상"];
+export const categories: Array<string> = ["웹", "앱", "3D/애니메이션", "그래픽디자인", "사진/영상"];
 
 export const categoryTags: CategoryTags = {
-  "웹": {
+  "web": {
     tags: [
       {
-        tagId: 1,
-        name: 'javascript',
+        id: 1,
+        name: 'Education',
         isSelected: false,
       },
       {
-        tagId: 2,
-        name: 'react',
+        id: 2,
+        name: 'Jobs & Recruitment',
         isSelected: false,
       },
       {
-        tagId: 3,
-        name: 'SSR',
+        id: 3,
+        name: 'Bank',
         isSelected: false,
       },
       {
-        tagId: 4,
-        name: 'CSR',
+        id: 4,
+        name: 'Shopping',
         isSelected: false,
       },
       {
-        tagId: 5,
-        name: 'vue.js',
+        id: 5,
+        name: 'Medical',
+        isSelected: false,
+      },
+      {
+        id: 6,
+        name: 'Branding',
+        isSelected: false,
+      },
+      {
+        id: 7,
+        name: 'Blog',
+        isSelected: false,
+      },
+      {
+        id: 8,
+        name: 'Magazine',
+        isSelected: false,
+      },
+      {
+        id: 9,
+        name: 'Templates',
+        isSelected: false,
+      },
+      {
+        id: 10,
+        name: 'colorful',
+        isSelected: false,
+      },
+      {
+        id: 11,
+        name: 'simple',
+        isSelected: false,
+      },
+      {
+        id: 12,
+        name: 'Animation',
         isSelected: false,
       }
     ],
   },
-  "앱": {
+  "app": {
     tags: [
       {
-        tagId: 6,
-        name: 'android',
+        id: 13,
+        name: 'Education',
         isSelected: false,
       },
       {
-        tagId: 7,
+        id: 14,
+        name: 'Entertainment',
+        isSelected: false,
+      },
+      {
+        id: 15,
+        name: 'Health & Fitness',
+        isSelected: false,
+      },
+      {
+        id: 16,
+        name: 'Music & Audio',
+        isSelected: false,
+      },
+      {
+        id: 17,
+        name: 'Maps & Navigation',
+        isSelected: false,
+      },
+      {
+        id: 18,
+        name: 'Real Estate',
+        isSelected: false,
+      },
+      {
+        id: 19,
+        name: 'Travel & Transportation',
+        isSelected: false,
+      },
+      {
+        id: 20,
+        name: 'Entertainment',
+        isSelected: false,
+      },
+      {
+        id: 21,
         name: 'iOS',
         isSelected: false,
       },
       {
-        tagId: 8,
-        name: 'react native',
+        id: 22,
+        name: 'Android',
         isSelected: false,
       },
       {
-        tagId: 9,
-        name: 'android studio',
-        isSelected: false,
-      },
-    ],
-  },
-  "3D/애니메이션": {
-    tags: [
-      {
-        tagId: 10,
-        name: '음',
-        isSelected: false,
-      },
-      {
-        tagId: 11,
-        name: '오',
-        isSelected: false,
-      },
-      {
-        tagId: 12,
-        name: '아',
-        isSelected: false,
-      },
-      {
-        tagId: 13,
-        name: '예',
+        id: 23,
+        name: 'Photos & Videos',
         isSelected: false,
       },
     ],
   },
-  "그래픽디자인": {
+  "3danimation": {
     tags: [
       {
-        tagId: 14,
-        name: '훌라',
+        id: 24,
+        name: 'Digital 3D',
         isSelected: false,
       },
       {
-        tagId: 15,
-        name: '훌라',
+        id: 25,
+        name: 'CharacterDesign',
         isSelected: false,
       },
       {
-        tagId: 16,
-        name: '신나고',
+        id: 26,
+        name: 'Concept Art',
         isSelected: false,
       },
       {
-        tagId: 17,
-        name: '즐거운',
+        id: 27,
+        name: 'Game Art',
         isSelected: false,
       },
       {
-        tagId: 18,
-        name: '코딩시간',
+        id: 28,
+        name: 'Realism',
+        isSelected: false,
+      },
+      {
+        id: 29,
+        name: 'Animation',
+        isSelected: false,
+      },
+    ],
+  },
+  "graphicdesign": {
+    tags: [
+      {
+        id: 30,
+        name: 'Digital 2D',
+        isSelected: false,
+      },
+      {
+        id: 31,
+        name: 'Fantasy',
+        isSelected: false,
+      },
+      {
+        id: 32,
+        name: 'Nature',
+        isSelected: false,
+      },
+      {
+        id: 33,
+        name: 'Realism',
+        isSelected: false,
+      },
+      {
+        id: 34,
+        name: 'Games',
         isSelected: false,
       }
     ],
   },
-  "사진/영상": {
+  "photo": {
     tags: [
       {
-        tagId: 19,
-        name: '사실은',
+        id: 35,
+        name: 'Nature',
         isSelected: false,
       },
       {
-        tagId: 20,
-        name: '하나도',
+        id: 36,
+        name: 'Animals',
         isSelected: false,
       },
       {
-        tagId: 21,
-        name: '안 신나',
+        id: 37,
+        name: 'Movie',
         isSelected: false,
       },
       {
-        tagId: 22,
-        name: '목이',
+        id: 38,
+        name: 'Drama',
         isSelected: false,
       },
       {
-        tagId: 23,
-        name: '거북목된다',
+        id: 39,
+        name: 'Documentary',
         isSelected: false,
       }
     ],

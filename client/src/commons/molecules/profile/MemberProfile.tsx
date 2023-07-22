@@ -23,13 +23,13 @@ const ImageSizes: any = {
 const MemberProfile = ({ type, member, date }: MemberProfile) => {
   return (
     <MemberProfileWrapper gap={15}>
-      <Image src={member.picture} url={`/members/${member.memberId}`} shape='circle' size={ImageSizes[type]} />
+      <Image src={member.imageUrl} url={`/members/${member.id}`} shape='circle' size={ImageSizes[type]} />
       {type === 'portfolio' &&
-        <Label text={member.name} type={type} url={`/members/${member.memberId}`} />
+        <Label text={member.name} type={type} url={`/members/${member.id}`} />
       }
       {type !== 'portfolio' &&
         <FlexColumnWrapper>
-          <Label text={member.name} type={type} url={`/members/${member.memberId}`} />
+          <Label text={member.name} type={type} url={`/members/${member.id}`} />
           <SmallText color={type === 'blackboard' ? 'white' : ''}>{date}</SmallText>
         </FlexColumnWrapper>
       }

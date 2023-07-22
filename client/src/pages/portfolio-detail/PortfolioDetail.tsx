@@ -1,23 +1,20 @@
 /* 2023-07-07 포트폴리오 상세보기 페이지 - 김다함 */
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import dompurify from "dompurify";
 
+import useChangeHtmlContent from '@/hooks/useChangeHtmlContent';
 import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
+import { ButtonHeader, ContentContainer, DeleteButton, EditButton, PortfolioContainer, UserCard, UserContainer, AskCommisionBtn } from '@/pages/portfolio-detail/PortfolioDetail.styled';
 import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
-import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from './PortfolioDetail.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
-import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
-import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
-import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
+import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
-import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
@@ -25,8 +22,8 @@ export default function PortfolioDetail() {
   const [portfolio, setPortfolio] = useState<Portfolio>();
   const [createdAt, setCreatedAt] = useState<string>('');
   const [member, setMember] = useState<Member>();
-  const sanitizer = dompurify.sanitize;
 
+  const [sanitize, setElementInlineStyle] = useChangeHtmlContent();
   const { portfolio_id: portfolioId } = useParams();
   const navigate = useNavigate();
 
@@ -60,7 +57,10 @@ export default function PortfolioDetail() {
       <ContentContainer>
         <PortfolioContainer>
           {portfolio &&
-            <div dangerouslySetInnerHTML={{ __html: sanitizer(portfolio.content) }}></div>
+            <div dangerouslySetInnerHTML={{
+              __html: sanitize(setElementInlineStyle(portfolio.content))
+            }}>
+            </div>
           }
         </PortfolioContainer>
 
@@ -69,10 +69,10 @@ export default function PortfolioDetail() {
             <FlexBetweenWrapper>
               {portfolio &&
                 <>
-                  <LikeButton portfolioId={portfolio.portfolioId} currentLikes={portfolio.likes} isToggled={portfolio.isLiked} />
+                  <LikeButton portfolioId={portfolio.id} currentLikes={portfolio.countLikes} isToggled={portfolio.liked} />
                   <FlexWrapper gap={20}>
-                    <SmallText color='white'>views · {portfolio.views}</SmallText>
-                    <Bookmark portfolioId={portfolio.portfolioId} isToggled={portfolio.isMarked} />
+                    <SmallText color='white'>views · {portfolio.view}</SmallText>
+                    <Bookmark portfolioId={portfolio.id} isToggled={portfolio.marked} />
                   </FlexWrapper>
                 </>
               }
@@ -87,12 +87,12 @@ export default function PortfolioDetail() {
               <>
                 <HeadingText color='white'>{portfolio.title}</HeadingText>
                 <SmallText color="white">{createdAt}</SmallText>
-                <BodyText color='white'>{portfolio.explain}</BodyText>
+                <BodyText color='white'>{portfolio.explains}</BodyText>
               </>
             }
-            {portfolio?.isMine &&
+            {portfolio?.writer &&
               <FlexEndWrapper>
-                <ReviseBtn onClick={onReviseButtonClick} />ㅤ|<RemoveBtn onClick={openDeleteModal} />
+                <EditButton onClick={onReviseButtonClick} /><DeleteButton onClick={openDeleteModal} />
               </FlexEndWrapper>
             }
           </UserCard>
@@ -101,7 +101,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.tagId} readOnly={true} />)
+                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)
               }
             </FlexWrapper>
           </UserCard>

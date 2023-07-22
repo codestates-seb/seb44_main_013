@@ -11,7 +11,7 @@ export const setCategory = (category: CATEGORY_TYPE) => ({ type: SET_CATEGORY, c
 export const openCategory = (isOpened: boolean) => ({ type: OPEN_CATEGORY, isOpened });
 
 const initialState: CategorySlice = {
-  category: '웹',
+  category: 'web',
   isOpened: false,
   tags: [],
 };

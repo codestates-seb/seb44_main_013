@@ -46,17 +46,6 @@ export const Edittype = styled(Purpletype)`
   `}
 `;
 
-//게시물 상세 페이지의 의뢰 요청 버튼 
-export const AskCommisionBtn = styled(Purpletype)`
-  ${tw`
-    w-[200px]
-    px-5
-    py-2
-    rounded-md
-    text-base
-  `}
-`;
-
 // 삭제 확인 모달 취소 버튼
 export const DeleteCancelButton = styled(Purpletype)`
   ${tw`
