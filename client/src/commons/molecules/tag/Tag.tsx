@@ -26,7 +26,7 @@ export const Tag = ({ tag, readOnly, categoryTags, setCategoryTags }: TagProps) 
     if (isEditMode) {
       const copiedCurrentTags = JSON.parse(JSON.stringify(categoryTags));
       const updateTags = copiedCurrentTags[selectedCategory].tags.map((tagItem: TTag) => {
-        if (tagItem.tagId === tag.tagId) {
+        if (tagItem.id === tag.id) {
           tagItem.isSelected = !tagItem.isSelected;
           dispatch(setTag(tagItem));
         }

@@ -16,7 +16,7 @@ export interface Member {
 }
 
 export interface Tag {
-  tagId?: number;
+  id: number;
   name: string;
   isSelected: boolean;
 }
@@ -33,7 +33,7 @@ export type CategoryTags = {
 };
 
 export type CategoryMapper = {
-  [key: string]: CATEGORY_TYPE
+  [key: string]: CATEGORY_TYPE;
 }
 
 export interface Portfolio {
@@ -57,7 +57,7 @@ export interface PortfolioContent {
   id?: string | null;
   title: string;
   content: string;
-  category: string;
+  category: CATEGORY_TYPE;
   tags: Array<Tag>;
   explains: string;
   createdAt?: string;
