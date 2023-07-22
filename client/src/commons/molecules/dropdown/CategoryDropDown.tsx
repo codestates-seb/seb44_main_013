@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { CATEGORY_TYPE, CategoryMapper } from '@/types';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { initializeTag, setCategory, portfolio } from '@/store/portfolioSlice';
 
@@ -13,24 +12,24 @@ import { DropDownItemContainer } from './CategoryDropdown.styled';
 import DropDownBox from '@/commons/atoms/dropdown/DropDownBox';
 import DropDownItem from '@/commons/atoms/dropdown/DropDownItem';
 
+const catagoryMapper: any = {
+  "web": "웹",
+  "app": "앱",
+  "3danimation": "3D/애니메이션",
+  "graphicdesign": "그래픽디자인",
+  "photo": "사진/영상",
+};
+
 export default function ContegroyDropDown() {
   const dispatch = useDispatch();
   const savedPortfolio = useSelector(portfolio);
   const [isOpen, setIsOpen] = useState(false);
 
-  const catagoryMapper: CategoryMapper = {
-    "웹": "web",
-    "앱": "app",
-    "3D/애니메이션": "3danimation",
-    "그래픽디자인": "graphicdesign",
-    "사진/영상": "photo",
-  };
-
   const onClick = () => {
     setIsOpen(!isOpen);
   }
 
-  const selectCategory = (item: CATEGORY_TYPE) => {
+  const selectCategory = (item: string) => {
     setIsOpen(!isOpen);
     dispatch(setCategory(item));
     dispatch(initializeTag());
@@ -42,12 +41,12 @@ export default function ContegroyDropDown() {
 
   return (
     <FlexColumnWrapper>
-      <DropDownBox dropdownItem={savedPortfolio.category} isOpen={isOpen} onClick={onClick} />
+      <DropDownBox dropdownItem={matchCategory(savedPortfolio.category)} isOpen={isOpen} onClick={onClick} />
       {isOpen &&
         <DropDownItemContainer>
           {
-            categories.map((category: CATEGORY_TYPE) => {
-              return <DropDownItem item={category} onClick={() => selectCategory(matchCategory(category))} />
+            categories.map((category: string) => {
+              return <DropDownItem item={category} onClick={() => selectCategory(category)} />
             })
           }
         </DropDownItemContainer>
