@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { Picture, PortfolioContent } from '@/types';
 
-import { pictures, portfolio } from '@/store/portfolioSlice';
 import { call } from '@/utils/apiService';
+import { pictures, portfolio } from '@/store/portfolioSlice';
 
 
 export default function useTitleForm() {

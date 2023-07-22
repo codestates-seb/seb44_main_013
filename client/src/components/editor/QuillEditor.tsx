@@ -31,7 +31,6 @@ const QuillEditor = memo(({ isTitleFormOpen }: Quill) => {
         handlers: {
           imageUrl: () => imageUrlHandler(quillRef.current?.getEditor()),
           image: () => imageHandler(quillRef.current?.getEditor()),
-          // video: () => videoHandler(quillRef.current?.getEditor()),
         },
       },
     }), []);

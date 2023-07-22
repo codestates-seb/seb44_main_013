@@ -7,17 +7,14 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
-import { ButtonHeader, ContentContainer, PortfolioContainer, UserCard, UserContainer } from '@/pages/portfolio-detail/PortfolioDetail.styled';
+import { ButtonHeader, ContentContainer, DeleteButton, EditButton, PortfolioContainer, UserCard, UserContainer, AskCommisionBtn } from '@/pages/portfolio-detail/PortfolioDetail.styled';
 import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
-import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
-import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
-import { AskCommisionBtn } from '@/commons/atoms/buttons/Button.styled';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
+import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import DeleteModal from '@/components/modal/DeleteModal';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
-import LikeButton from '@/commons/atoms/buttons/LikeButton';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 export default function PortfolioDetail() {
@@ -95,7 +92,7 @@ export default function PortfolioDetail() {
             }
             {portfolio?.writer &&
               <FlexEndWrapper>
-                <ReviseBtn onClick={onReviseButtonClick} /><RemoveBtn onClick={openDeleteModal} />
+                <EditButton onClick={onReviseButtonClick} /><DeleteButton onClick={openDeleteModal} />
               </FlexEndWrapper>
             }
           </UserCard>
