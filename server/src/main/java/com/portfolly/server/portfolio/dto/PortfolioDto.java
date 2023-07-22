@@ -70,8 +70,8 @@ public class PortfolioDto {
         private boolean isWriter;
         private int countLikes;
         private String firstImage;
-        private List<MemberDto.Partner_Response> members;
-        private List<TagDto.Response> tags;
+        private MemberDto.Response member;
+        private List<TagDto.Response> portfolioTags;
 //        private List<LikesDto.Response> likes;
 //        private List<BookmarkDto.Response> bookmarks;
 

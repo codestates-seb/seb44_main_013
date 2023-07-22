@@ -99,12 +99,17 @@ public class PortfolioService {
             findedPortfolio.setContent(patchDto.getContent());
             findedPortfolio.setExplains(patchDto.getExplains());
             findedPortfolio.setCategory(categoryRepository.findByName(patchDto.getCategory().trim()).orElseThrow(()->new BusinessLogicException(ExceptionCode.CATEGORY_NOT_FOUND)));
+
             deletePortfolioTag(findedPortfolio);
             List<Tag> tags = new Gson().fromJson(patchDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
             createPortfolioTag(tags, findedPortfolio);
+            for(Picture picture : findedPortfolio.getPictures()) {
+                pictureRepository.delete(picture);
+            }
+            addPicture(findedPortfolio);
             portfolioRepository.save(findedPortfolio);
         }else{
-            throw new RuntimeException("작성자가 아닙니다");
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
         return findedPortfolio;
     }
@@ -237,7 +242,7 @@ public class PortfolioService {
     }
 
     public void addPicture(Portfolio portfolio){
-        //content안에 있는 링크들을 긁어 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portforioId를 넣어준다.
+        //content안에 있는 링크들을 긁어 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
         String content = portfolio.getContent();
         String domain = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/";
         List<String> pictureUrlList = new ArrayList<>();
@@ -249,22 +254,16 @@ public class PortfolioService {
             pictureUrlList.add(pictureUrl);
             content=content.substring(endIdx);
         }
+        List<Picture> pictures = new ArrayList<>();
         for (String pictureUrl : pictureUrlList) {
 //            Picture picture = pictureRepository.findByPictureUrl(pictureUrl).orElseThrow(()->new BusinessLogicException(ExceptionCode.PICTURE_NOT_FOUND));
             Picture picture = new Picture();
             picture.setPictureUrl(pictureUrl);
             picture.setFileName(pictureUrl.substring(pictureUrl.lastIndexOf("/")+1));
             picture.setPortfolio(portfolio);
-            pictureRepository.save(picture);
+            pictures.add(pictureRepository.save(picture));
         }
-        //+fileName
-        //List<Image> images = new ~
-        //성능이슈 content 안에 저 링크를 가진 이미지들을 가지고 온다 -> ImageRepository를 이용하여 find 한다.
-        //-> pictureRepository.findByPictureUrl(pictureUrl) -> 이미지들을 찾아옴
-        //-> images에 이미지들을 추가
-        //리스트의 사이즈 만큼 for문을 반복하여 해당하는 portfolioId를 넣어준다.
-        //for(int i = 0; i<images.size(); i++) {
-        //images.get(i).setPortfolio}
+        portfolio.setPictures(pictures);
     }
 
 

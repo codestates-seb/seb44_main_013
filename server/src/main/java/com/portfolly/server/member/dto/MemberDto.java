@@ -148,9 +148,19 @@ public class MemberDto {
         private String skill;
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
-//        private List<PortfolioDto.Response> portfolios;
         private List<Portfolio> portfolios;
         private List<Bookmark> bookmarks;
         private List<Board> boards;
+    }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Response{
+        private Long id;
+        private String name;
+        private String email;
+        private Member.Member_Role member_role;
+//        private ImageData imageData;
     }
 }

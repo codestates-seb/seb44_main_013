@@ -59,7 +59,7 @@ public class PortfolioController {
                                          @Valid @RequestBody PortfolioDto.Patch patchDto){
         Long memberId = portfolioService.findMemberId(accessToken);
         patchDto.setId(portfolioId);
-        portfolioService.updatePortfolio(patchDto, accessToken);
+        Portfolio portfolio = portfolioService.updatePortfolio(patchDto, accessToken);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
