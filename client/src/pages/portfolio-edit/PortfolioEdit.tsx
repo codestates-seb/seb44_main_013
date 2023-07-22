@@ -33,12 +33,12 @@ export default function PortfolioEdit() {
       getPortfolio(portfolioId)
         .then((res) => {
           dispatch(setPortfolio({
-            portfolioId: portfolioId,
+            id: portfolioId,
             title: res.data.title,
             content: res.data.content,
-            category: res.data.category,
+            category: res.data.category.name,
             tags: res.data.tags,
-            explain: res.data.explain,
+            explains: res.data.explain,
             createdAt: changeDateFormat(res.data.createdAt),
           }));
         })

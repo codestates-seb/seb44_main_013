@@ -1,8 +1,8 @@
 /* 2023-07-07 포트폴리오 상세보기 페이지 - 김다함 */
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import dompurify from "dompurify";
 
+import useChangeHtmlContent from '@/hooks/useChangeHtmlContent';
 import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
@@ -25,8 +25,8 @@ export default function PortfolioDetail() {
   const [portfolio, setPortfolio] = useState<Portfolio>();
   const [createdAt, setCreatedAt] = useState<string>('');
   const [member, setMember] = useState<Member>();
-  const sanitizer = dompurify.sanitize;
 
+  const [sanitize, setElementInlineStyle] = useChangeHtmlContent();
   const { portfolio_id: portfolioId } = useParams();
   const navigate = useNavigate();
 
@@ -61,8 +61,7 @@ export default function PortfolioDetail() {
         <PortfolioContainer>
           {portfolio &&
             <div dangerouslySetInnerHTML={{
-              __html: sanitizer(portfolio.content,
-                { ALLOWED_TAGS: ["iframe"], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] })
+              __html: sanitize(setElementInlineStyle(portfolio.content))
             }}>
             </div>
           }

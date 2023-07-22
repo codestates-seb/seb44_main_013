@@ -28,7 +28,7 @@ export default function useTitleForm() {
 
   const deleteImageUrls = (htmlContent: string) => {
     savedPictures.forEach((url: string) => {
-      const isImageUrlRemoved = !htmlContent.includes(url);
+      const isImageUrlRemoved = !htmlContent.indexOf(url);
       if (isImageUrlRemoved) deletePicture({ fileName: url })
     })
   };

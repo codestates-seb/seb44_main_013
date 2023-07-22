@@ -7,7 +7,19 @@ import useTitleForm from '@/components/titleForm/useTitleForm';
 import { categoryTags as CategoryTags } from '@/assets/data/category';
 import { portfolio, setExplain, setTitle } from '@/store/portfolioSlice';
 
-import { Row, Form, CreatedAt, InputLabel, TagsContainer, ExplainTextArea, TitleFormContainer, PortfolioTitleInput, BackgroundContainer, GoBackButton, SubmitButton } from '@/components/titleForm/TitleForm.styled';
+import {
+  Row,
+  Form,
+  CreatedAt,
+  InputLabel,
+  GoBackButton,
+  SubmitButton,
+  TagsContainer,
+  ExplainTextArea,
+  TitleFormContainer,
+  PortfolioTitleInput,
+  BackgroundContainer,
+} from '@/components/titleForm/TitleForm.styled';
 import ContegroyDropDown from '@/commons/molecules/dropdown/CategoryDropDown';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
 import { RiArrowGoBackFill } from 'react-icons/ri';
@@ -31,11 +43,11 @@ export default function TitleForm({ setIsTitleFormOpen }: TitleFormProps) {
   useEffect(() => {
     const copiedCurrentTags = JSON.parse(JSON.stringify(categoryTags));
     const originTags = copiedCurrentTags[selectedCategory].tags as Tag[];
-    const selectedTagIds = selectedTags.map((tag: Tag) => tag.tagId);
+    const selectedTagIds = selectedTags.map((tag: Tag) => tag.id);
     const updatedTags = originTags.map((tag: Tag) => {
       return {
         ...tag,
-        isSelected: selectedTagIds.includes(tag.tagId)
+        isSelected: selectedTagIds.includes(tag.id)
       }
     });
     copiedCurrentTags[selectedCategory].tags = updatedTags;
@@ -56,12 +68,12 @@ export default function TitleForm({ setIsTitleFormOpen }: TitleFormProps) {
           <TagsContainer>
             {
               categoryTags[selectedCategory].tags.map((tag: Tag) => {
-                return <PortfolioTag tag={tag} key={tag.tagId} categoryTags={categoryTags} setCategoryTags={setCategoryTags} />
+                return <PortfolioTag tag={tag} key={tag.id} categoryTags={categoryTags} setCategoryTags={setCategoryTags} />
               })
             }
           </TagsContainer>
           <InputLabel color='#c8c9cc'>소개글</InputLabel>
-          <ExplainTextArea value={savedPortfolio.explain} onChange={(e) => dispatch(setExplain(e.target.value))} />
+          <ExplainTextArea value={savedPortfolio.explains} onChange={(e) => dispatch(setExplain(e.target.value))} />
           <Row gap={15}>
             <GoBackButton color='dark' onClick={clickGoBackButton}>
               <RiArrowGoBackFill size='25' color='white' />

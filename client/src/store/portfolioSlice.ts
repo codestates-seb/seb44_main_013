@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/store/index';
 import { INITIAL_PORTFOLIO } from '@/types/initials';
-import { CATEGORY_TYPE, PortfolioContent, PortfolioSlice, Tag } from '@/types';
+import { CATEGORY_TYPE, CategoryMapper, PortfolioContent, PortfolioSlice, Tag } from '@/types';
 
 export const SET_PORTFOLIO = 'SET_PORTFOLIO' as const;
 export const SET_TITLE = 'SET_TITLE' as const;
@@ -17,7 +17,7 @@ export const SET_PICTURES = 'SET_PICTURES' as const;
 export const setPortfolio = (portfolio: PortfolioContent) => ({ type: SET_PORTFOLIO, portfolio });
 export const setTitle = (title: string) => ({ type: SET_TITLE, title });
 export const setHtmlContent = (content: string) => ({ type: SET_HTMLCONTENT, content });
-export const setCategory = (category: CATEGORY_TYPE) => ({ type: SET_CATEGORY, category });
+export const setCategory = (category: string) => ({ type: SET_CATEGORY, category });
 export const setTag = (tag: Tag) => ({ type: SET_TAG, tag });
 export const setExplain = (explain: string) => ({ type: SET_EXPLAIN, explain });
 export const initializeTag = () => ({ type: INITIALIZE_TAG });
@@ -26,6 +26,18 @@ export const setPictures = (url: string) => ({ type: SET_PICTURES, url });
 const initialState: PortfolioSlice = {
   portfolio: INITIAL_PORTFOLIO,
   pictures: [],
+}
+
+const catagoryMapper: CategoryMapper = {
+  "웹": "web",
+  "앱": "app",
+  "3D/애니메이션": "3danimation",
+  "그래픽디자인": "graphicdesign",
+  "사진/영상": "photo",
+};
+
+const matchCategory = (category: string) => {
+  return catagoryMapper[category];
 }
 
 const { reducer: portfolioReducer } = createSlice({
@@ -43,7 +55,7 @@ const { reducer: portfolioReducer } = createSlice({
       state.portfolio.content = action.content;
     },
     SET_CATEGORY: (state, action) => {
-      state.portfolio.category = action.category;
+      state.portfolio.category = matchCategory(action.category);
     },
     SET_TAG: (state, action) => {
       if (action.tag.isSelected) state.portfolio.tags = [...state.portfolio.tags, action.tag];
@@ -56,8 +68,7 @@ const { reducer: portfolioReducer } = createSlice({
       state.portfolio.tags = [];
     },
     SET_PICTURES: (state, action) => {
-      if (!state.pictures.indexOf(action.url))
-        state.pictures = [...state.pictures, action.url];
+      state.pictures = [...state.pictures, action.url];
     }
   },
 });

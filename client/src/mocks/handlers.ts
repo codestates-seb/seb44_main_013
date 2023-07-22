@@ -109,9 +109,7 @@ const DaHamHandlers = [
   }),
   // 이미지 업로드
   rest.post('/pictures', async (_, res, ctx) => {
-    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
+    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }));
   }),
 ];
