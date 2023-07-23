@@ -4,6 +4,7 @@ import com.portfolly.server.likes.entity.Likes;
 import com.portfolly.server.likes.repository.LikesRepository;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.service.MemberService;
+import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.service.PortfolioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,9 @@ public class LikesService {
         }
         else {
             Likes likes = new Likes();
-            selectLikes(portfolioId, accessToken);
+//            selectLikes(portfolioId, accessToken);
+//            likes.setPortfolio(new Portfolio());
+//            likes.setMember(new Member());
             likesRepository.save(likes);
         }
     }
