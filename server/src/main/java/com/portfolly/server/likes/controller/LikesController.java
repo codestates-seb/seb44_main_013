@@ -13,7 +13,7 @@ public class LikesController {
     private final LikesService likesService;
 
     @GetMapping("/{portfolio-id}")
-    public ResponseEntity likes(@PathVariable Long portfolioId,
+    public ResponseEntity likes(@PathVariable("portfolio-id") Long portfolioId,
                                 @RequestHeader(name = "AccessToken") String accessToken){
         likesService.selectLikes(portfolioId, accessToken);
         return new ResponseEntity<>(HttpStatus.OK);
