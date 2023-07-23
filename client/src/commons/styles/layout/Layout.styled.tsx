@@ -8,7 +8,7 @@ import appBgimg from '../../../assets/AppBg.png';
 import aniBgimg from '../../../assets/AniBg.png';
 import graphicBgimg from '../../../assets/GraphicBg.png';
 import photoBgimg from '../../../assets/PhotoBg.png';
-import defaultBgimg from '../../../assets/defaultBg.png';
+import defaultBgimg from '../../../assets/bg2.jpeg';
 import { ReactNode } from 'react';
 
 export const MainImgWrapper = styled.div<{ backgroundimage: string }>(
@@ -47,5 +47,9 @@ export function BackImgControl({ children }: { children: ReactNode }) {
     }
   };
 
-  return <MainImgWrapper backgroundimage={getBackgroundImage(selectedCategory)}>{children}</MainImgWrapper>;
+  return (
+    <MainImgWrapper backgroundimage={getBackgroundImage(selectedCategory)}>
+      {children}
+    </MainImgWrapper>
+  );
 }
