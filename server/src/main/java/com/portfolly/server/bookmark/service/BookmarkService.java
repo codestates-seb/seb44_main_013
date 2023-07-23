@@ -25,7 +25,7 @@ public class BookmarkService {
         }
         else {
             Bookmark bookmark = new Bookmark();
-            selectBookmark(portfolioId, accessToken);
+//            selectBookmark(portfolioId, accessToken);
             bookmarkRepository.save(bookmark);
         }
     }
