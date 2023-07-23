@@ -17,6 +17,7 @@ export default function CommunityDetail({ handleClick }: any) {
   const [clickDeletePost, setClickDeletePost] = useState(false);
   const navigate = useNavigate();
   const { id: boardId } = useParams();
+  console.log(boardId);
 
   useEffect(() => {
     const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
@@ -24,12 +25,14 @@ export default function CommunityDetail({ handleClick }: any) {
       //axiosMember(xxx) 이름에서부터 유추 (한글 직독직 -> 영어)
       return findBoardsById(boardId as string)
         .then((res) => {
-          setMemberData(res);
+          setMemberData(res[0]);
+          console.log(res);
         })
         .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err));
     };
 
     getMember();
+    console.log(memberData);
   }, [boardId]);
 
   if (!memberData)
@@ -57,7 +60,7 @@ export default function CommunityDetail({ handleClick }: any) {
       <MemberProfile
         type={'blackboard'}
         member={{
-          id: memberData.id,
+          id: memberData.memberId,
           name: memberData.name,
           imageUrl: 'https://picsum.photos/200/300',
         }}

@@ -9,6 +9,7 @@ import {
   AnimationCategoryDatas,
   GraphicCategoryDatas,
   PhotoCategoryDatas,
+  commu,
 } from './infiniteScrollData';
 
 import { Portfolio } from '@/types';
@@ -145,34 +146,35 @@ const DaHamHandlers = [
 const HJHandlers = [
   //1. 게시판 목록 조회 GET : community-main page
   //url-> http://localhost:8080/boards?division=COOPERATION
-  // rest.get('/boards', (req, res, ctx) => {
-  //   const division = req.url.searchParams.get('division');
+  rest.get('/boards', (req, res, ctx) => {
+    const division = req.url.searchParams.get('division');
 
-  //   if (division === 'COOPERATION') {
-  //     const filteredData = commu.filter((element) => element.division === 'COOPERATION');
-  //     return res(ctx.status(200), ctx.json(filteredData));
-  //   }
+    if (division === 'COOPERATION') {
+      const filteredData = commu.filter((element) => element.division === 'COOPERATION');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
 
-  //   if (division === 'RECRUITMENT') {
-  //     const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
-  //     return res(ctx.status(200), ctx.json(filteredData));
-  //   }
-  // }),
+    if (division === 'RECRUITMENT') {
+      const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
+  }),
 
-  //2. 게시한 상세 페이지 조회 GET : community-detail page
-  // rest.get('/boards/:id', (req, res, ctx) => {
-  //   const id = Number(req.params.id);
-  //   const filteredData = commuDetail.filter(e => e.id === id);
-  //   return (res(ctx.status(200), ctx.json(filteredData)))
-  // }),
+  // 2. 게시한 상세 페이지 조회 GET : community-detail page
+  rest.get('/boards/:id', (req, res, ctx) => {
+    const id = Number(req.params.id);
+    const filteredData = commuDetail.filter((e) => e.id === id);
+    console.log(filteredData);
+    return res(ctx.status(200), ctx.json(filteredData));
+  }),
   //3. 댓글 수정
-  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
-    const { comments_id, memberId, content, name } = await req.json();
+  rest.patch(`/comments/:id`, async (req, res, ctx) => {
+    const { id, memberId, content, name } = await req.json();
     const filterdData = commuDetail.filter((el) => el.id === 2);
-    const index = filterdData[0].comments.findIndex((el) => el.comments_id === comments_id);
+    const index = filterdData[0].comments.findIndex((el) => el.id === id);
 
     const temp = {
-      comments_id: comments_id,
+      comments_id: id,
       content: content,
       memberId: memberId,
       name: name,
@@ -201,7 +203,7 @@ const HJHandlers = [
     const comments_id = filteredData.comments.length || 0;
 
     const newPostData = {
-      comments_id: comments_id + 1,
+      id: comments_id + 1,
       content: (await req.json()).content,
       memberId: 1,
       name: 'jhj',

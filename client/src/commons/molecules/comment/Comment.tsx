@@ -43,7 +43,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
       const data = {
         comments_id: comments.id,
         content: basicContent,
-        member_id: comments.id,
+        // member_id: comments.memberId,
         name: username,
         createdAt: '2023-06-23T17:34:51.3395597',
         modifiedAt: '2023-06-23T17:34:51.3395597',
@@ -111,6 +111,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
         <BodyText>
           {isEditMode ? (
             <input
+              className="border border-green-500"
               value={basicContent}
               ref={inputEl}
               onBlur={handleBlur}

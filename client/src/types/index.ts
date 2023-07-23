@@ -57,6 +57,7 @@ export interface CommuProps {
   name: string;
   created_at: string;
   modifiedAt: string;
+  memberId: number;
   status: string;
   comments?: CommentProps[];
   pageInfo?: Pagenation;

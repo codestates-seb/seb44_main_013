@@ -18,6 +18,7 @@ export default function CommentBox({ comments = [] }: any) {
   const [amendComment, setAmendComment] = useState(comments);
   const [deleteId, setDeleteId] = useState(null);
   const { id: boardId } = useParams();
+  console.log(amendComment);
 
   const handleComment = (value: string) => {
     setCurrentComment(value);
@@ -39,7 +40,7 @@ export default function CommentBox({ comments = [] }: any) {
 
     axiosPost();
     amendComment.push({
-      comments_id: comments.length + 1,
+      id: comments.length + 1,
       content: currentComment,
       name: 'jhj',
       createdAt: '2023-06-21T17:34:51.3395597',
@@ -50,7 +51,7 @@ export default function CommentBox({ comments = [] }: any) {
   };
 
   useEffect(() => {
-    const index = amendComment.findIndex((element: any) => element.comments_id === deleteId);
+    const index = amendComment.findIndex((element: any) => element.id === deleteId);
 
     // 첫번째 댓글 지울 때
     if (index === 0) {

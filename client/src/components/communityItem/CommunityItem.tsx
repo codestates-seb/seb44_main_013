@@ -10,11 +10,11 @@ import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 export default function CommunityItem({ communityItem }: any) {
   const navigate = useNavigate();
   const eachData = communityItem;
-  //console.log(eachData);
+  console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
-    //console.log(e.id);
+    console.log(e.id);
   };
 
   return (
@@ -26,7 +26,7 @@ export default function CommunityItem({ communityItem }: any) {
       <MemberProfile
         type={'board'}
         member={{
-          id: eachData.member_id,
+          id: eachData.memberId,
           name: eachData.name,
           imageUrl: 'https://picsum.photos/200/300',
         }}
