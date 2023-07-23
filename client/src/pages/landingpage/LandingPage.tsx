@@ -2,6 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import BlackSection from '@/components/home-section/black-section/BlackSection';
 import WebSection from '@/components/home-section/web-section/WebSection';
 import AppSection from '@/components/home-section/app-section/AppSection';
 import AnimationSection from '@/components/home-section/animation-section/AnimationSection';
@@ -80,6 +81,7 @@ export default function LandingPage() {
       </FullPageContainer>
       {animationComplete && (
         <>
+          <BlackSection />
           <WebSection />
           <AppSection />
           <AnimationSection />

@@ -43,8 +43,11 @@ export const NodataImage = styled.img`
     flex
     justify-center
     items-center
+    absolute
   `}
   width: 350px;
   height: 350px;
-  margin: 60px auto 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
