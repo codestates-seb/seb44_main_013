@@ -13,7 +13,7 @@ public class BookmarkController {
     private final BookmarkService bookmarkService;
 
     @GetMapping("/{portfolio-id}")
-    public ResponseEntity bookmark(@PathVariable Long portfolioId,
+    public ResponseEntity bookmark(@PathVariable("portfolio-id") Long portfolioId,
                                    @RequestHeader(name = "AccessToken") String accessToken){
         bookmarkService.selectBookmark(portfolioId, accessToken);
         return new ResponseEntity<>(HttpStatus.OK);
