@@ -27,7 +27,7 @@ export default function SignUp() {
     <SignUpWrapper>
       <BackText>Portfolly</BackText>
 
-      <Link to="/">
+      <Link to="/main">
         <BackButton>
           <BsArrowReturnLeft size={30} />
         </BackButton>

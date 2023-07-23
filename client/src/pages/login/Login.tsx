@@ -44,7 +44,10 @@ export default function Login() {
         </MiddleWrapper>
 
         <Link to="/signup">
-          <LoginGoogleForm type={'normal'}> 처음이신가요? 클릭하세요! </LoginGoogleForm>
+          <LoginGoogleForm type={'normal'}>
+            <p>처음이신가요?</p>
+            <p>클릭하세요!</p>
+          </LoginGoogleForm>
         </Link>
       </LoginSection>
 
