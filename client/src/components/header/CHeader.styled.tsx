@@ -29,18 +29,18 @@ export const RecuitBtn = styled.button<ButtonProps>`
     ml-2.5
     mt-1
     hover:underline
-    text-sm
+    text-base
     whitespace-nowrap
     py-1
     px-2
     transition-colors
-    text-white
+    text-gray-400
   `}
   color: ${(props) =>
-    props.isActive ? '#8580e1' : props.color ? props.color : '#d2d1d1'};
+    props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400'};
 
   &:hover {
-    color: #8580e1;
+    color: #ffffff;
   }
 `;
 
@@ -50,16 +50,17 @@ export const CooperBtn = styled.button<ButtonProps>`
     ml-3
     mr-3
     hover:underline
-    text-sm
+    text-base
     whitespace-nowrap
     py-1
     px-2
     transition-colors
+    text-gray-400
   `}
   color: ${(props) =>
-    props.isActive ? '#8580e1' : props.color ? props.color : '#d2d1d1'};
+    props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400'};
 
   &:hover {
-    color: #8580e1;
+    color: #ffffff;
   }
 `;
