@@ -1,6 +1,6 @@
 package com.portfolly.server.category.service;
 
-import com.portfolly.server.category.entity.Tag;
+import com.portfolly.server.tag.entity.Tag;
 import com.portfolly.server.category.repository.CategoryRepository;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;

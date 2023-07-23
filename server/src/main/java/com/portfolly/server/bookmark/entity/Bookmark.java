@@ -19,10 +19,12 @@ public class Bookmark {
     private Long id;
     @JsonBackReference
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
     @JsonBackReference
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "member_id")
     private Member member;
 

@@ -1,6 +1,9 @@
 package com.portfolly.server.portfolio.service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.portfolly.server.bookmark.repository.BookmarkRepository;
+import com.portfolly.server.tag.entity.Tag;
 import com.portfolly.server.category.repository.CategoryRepository;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
@@ -12,8 +15,10 @@ import com.portfolly.server.picture.entity.Picture;
 import com.portfolly.server.picture.repository.PictureRepository;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
+import com.portfolly.server.portfolio.entity.PortfolioTag;
 import com.portfolly.server.portfolio.mapper.PortfolioMapper;
 import com.portfolly.server.portfolio.repository.PortfolioRepository;
+import com.portfolly.server.portfolio.repository.PortfolioTagRepository;
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
 import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +43,7 @@ public class PortfolioService {
     private final CategoryRepository categoryRepository;
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
+    private final PortfolioTagRepository portfolioTagRepository;
 
     //포트폴리오 등록
     public Portfolio postPortfolio(PortfolioDto.Post postDto, String accessToken){
@@ -48,8 +54,38 @@ public class PortfolioService {
         portfolio.setStatus(Portfolio.Status.ACTIVE);
         portfolio.setMember(member);
         portfolio.setCategory(categoryRepository.findByName(postDto.getCategory()).orElseThrow(()->new RuntimeException()));
+
         portfolioRepository.save(portfolio);
+        List<Tag> tags = new Gson().fromJson(postDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
+        createPortfolioTag(tags, portfolio);
         return portfolio;
+    }
+
+    //포트폴리오 태그 테이블 생성
+    public void createPortfolioTag(List<Tag> tags, Portfolio portfolio){
+
+        for(Tag tag : tags) {
+            System.out.println((tag.getName()));
+            System.out.println((tag.getId()));
+        }
+        List<PortfolioTag> portfolioTags = new ArrayList<>();
+        for(Tag tag : tags){
+            PortfolioTag portfolioTag = new PortfolioTag();
+            portfolioTag.setPortfolio(portfolio);
+            portfolioTag.setTag(tag);
+            portfolioTags.add(portfolioTag);
+            portfolioTagRepository.save(portfolioTag);
+        }
+
+        portfolio.setPortfolioTags(portfolioTags);
+    }
+
+    //포트폴리오 태그 테이블 삭제
+    public void deletePortfolioTag(Portfolio portfolio){
+        List<PortfolioTag> portfolioTags = portfolio.getPortfolioTags();
+        for (PortfolioTag portfolioTag : portfolioTags){
+            portfolioTagRepository.delete(portfolioTag);
+        }
     }
 
     //포트폴리오 수정
@@ -63,9 +99,17 @@ public class PortfolioService {
             findedPortfolio.setContent(patchDto.getContent());
             findedPortfolio.setExplains(patchDto.getExplains());
             findedPortfolio.setCategory(categoryRepository.findByName(patchDto.getCategory().trim()).orElseThrow(()->new BusinessLogicException(ExceptionCode.CATEGORY_NOT_FOUND)));
+
+            deletePortfolioTag(findedPortfolio);
+            List<Tag> tags = new Gson().fromJson(patchDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
+            createPortfolioTag(tags, findedPortfolio);
+            for(Picture picture : findedPortfolio.getPictures()) {
+                pictureRepository.delete(picture);
+            }
+            addPicture(findedPortfolio);
             portfolioRepository.save(findedPortfolio);
         }else{
-            throw new RuntimeException("작성자가 아닙니다");
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
         return findedPortfolio;
     }
@@ -143,6 +187,7 @@ public class PortfolioService {
             throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
         }
         portfolio.setStatus(Portfolio.Status.DELETED);
+        deletePortfolioTag(portfolio);
         portfolioRepository.save(portfolio);
     }
 
@@ -182,7 +227,8 @@ public class PortfolioService {
 
 
     //token에서 memberId 받기
-    public Long findMemberId(String accessToken){
+    public Long findMemberId(String token){
+        String accessToken = token.substring(7);
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
         String email = jwtTokenizer.extractEmailFromToken(accessToken,base64EncodedSecretKey);
         Long memberId = memberService.findByMember(email).getId();
@@ -196,7 +242,7 @@ public class PortfolioService {
     }
 
     public void addPicture(Portfolio portfolio){
-        //content안에 있는 링크들을 긁어 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portforioId를 넣어준다.
+        //content안에 있는 링크들을 긁어 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
         String content = portfolio.getContent();
         String domain = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/";
         List<String> pictureUrlList = new ArrayList<>();
@@ -208,22 +254,16 @@ public class PortfolioService {
             pictureUrlList.add(pictureUrl);
             content=content.substring(endIdx);
         }
+        List<Picture> pictures = new ArrayList<>();
         for (String pictureUrl : pictureUrlList) {
 //            Picture picture = pictureRepository.findByPictureUrl(pictureUrl).orElseThrow(()->new BusinessLogicException(ExceptionCode.PICTURE_NOT_FOUND));
             Picture picture = new Picture();
             picture.setPictureUrl(pictureUrl);
             picture.setFileName(pictureUrl.substring(pictureUrl.lastIndexOf("/")+1));
             picture.setPortfolio(portfolio);
-            pictureRepository.save(picture);
+            pictures.add(pictureRepository.save(picture));
         }
-        //+fileName
-        //List<Image> images = new ~
-        //성능이슈 content 안에 저 링크를 가진 이미지들을 가지고 온다 -> ImageRepository를 이용하여 find 한다.
-        //-> pictureRepository.findByPictureUrl(pictureUrl) -> 이미지들을 찾아옴
-        //-> images에 이미지들을 추가
-        //리스트의 사이즈 만큼 for문을 반복하여 해당하는 portfolioId를 넣어준다.
-        //for(int i = 0; i<images.size(); i++) {
-        //images.get(i).setPortfolio}
+        portfolio.setPictures(pictures);
     }
 
 

@@ -84,18 +84,12 @@ public class MemberController {
     @GetMapping("/{member-id}")
     @CrossOrigin("*")
     @Operation(summary = "회원 조회(마이페이지)", description = "회원을 조회합니다.(처음 회원 등록시 클라이언트/파트너에 따라 응답값이 다릅니다.)")
-    public ResponseEntity getMember(@RequestHeader("Authorization") String accessToken,
-                                    @Positive @PathVariable("member-id") long memberId){
-
-        Member verifyMember = verifyAccessTokenAndMember(accessToken);
+    public ResponseEntity getMember(@Positive @PathVariable("member-id") long memberId){
 
         Member member = memberService.findMember(memberId);
 
-        if(verifyMember.equals(member)) {
-            return DeleteStatusMemberToNotAccess(member);
-        } else {
-            throw new BusinessLogicException(ExceptionCode.NOT_DEFINED_MEMBER);
-        }
+        return DeleteStatusMemberToNotAccess(member);
+
     }
 
 

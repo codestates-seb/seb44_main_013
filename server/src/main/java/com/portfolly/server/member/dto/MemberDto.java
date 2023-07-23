@@ -5,6 +5,7 @@ import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.image.entity.ImageData;
+import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.validator.EnumFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -150,5 +151,16 @@ public class MemberDto {
         private List<Portfolio> portfolios;
         private List<Bookmark> bookmarks;
         private List<Board> boards;
+    }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Response{
+        private Long id;
+        private String name;
+        private String email;
+        private Member.Member_Role member_role;
+//        private ImageData imageData;
     }
 }
