@@ -17,8 +17,8 @@ public class PictureController {
 
 
    @PostMapping("/picture")
-   public ResponseEntity<List<String>> uploadImage(@RequestParam(value = "file", required = true)
-                                                   @RequestPart List<MultipartFile> file) {
+   public ResponseEntity uploadImage(@RequestParam(value = "file", required = true)
+                                                   MultipartFile file) {
        return new ResponseEntity<>(pictureService.uploadImage(file), HttpStatus.CREATED);
    }
 
