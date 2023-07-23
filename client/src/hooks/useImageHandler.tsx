@@ -35,22 +35,26 @@ export default function useImageHandler() {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.setAttribute("name", "file");
-    input.setAttribute("multiple", "");
+    // input.setAttribute("multiple", "");
     input.click();
 
     input.onchange = async (event: any) => {
       const files: FileList = event?.target?.files;
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append("file", files[i]);
-      }
-      const response: any = await uploadPicture({ file: formData });
-      response.imageUrl.forEach((url: string) => {
-        dispatch(setPictures(url));
-        const range = editor.getSelection();
-        editor.insertEmbed(range.index, "image", url);
-        editor.setSelection(range.index + 1);
-      })
+      // for (let i = 0; i < files.length; i++) {
+      //   formData.append("file", files[i]);
+      // }
+      const response: any = await uploadPicture({ file: files[0] });
+      // response.imageUrl.forEach((url: string) => {
+      //   dispatch(setPictures(url));
+      //   const range = editor.getSelection();
+      //   editor.insertEmbed(range.index, "image", url);
+      //   editor.setSelection(range.index + 1);
+      // })
+      dispatch(setPictures(response.data));
+      const range = editor.getSelection();
+      editor.insertEmbed(range.index, "image", response.data);
+      editor.setSelection(range.index + 1);
     }
   }, []);
 

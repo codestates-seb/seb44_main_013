@@ -38,7 +38,7 @@ export default function PortfolioEdit() {
             content: res.data.content,
             category: res.data.category.name,
             tags: res.data.portfolioTags,
-            explains: res.data.explain,
+            explains: res.data.explains,
             createdAt: changeDateFormat(res.data.createdAt),
           }));
         })

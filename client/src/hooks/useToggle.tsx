@@ -22,20 +22,18 @@ export default function useToggle({ portfolioId, buttonType, isToggled: isOn, co
   const onClick = useCallback(() => {
     if (isToggled)
       setToggle()
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           setButtonColor('gray');
-          buttonType === 'likes' && setCount(res.countLikes);
+          buttonType === 'likes' && setCount(count - 1);
         });
     else
       setToggle()
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           setButtonColor(color);
-          buttonType === 'likes' && setCount(res.countLikes);
+          buttonType === 'likes' && setCount(count + 1);
         });
     setIsToggled(!isToggled);
-  }, [isToggled])
+  }, [isToggled, count])
 
   return [buttonColor, onClick, count] as const;
 }

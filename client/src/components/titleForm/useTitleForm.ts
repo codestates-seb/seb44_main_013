@@ -53,9 +53,8 @@ export default function useTitleForm() {
       delete copiedPortfolio.portfolioId;
       delete copiedPortfolio.createdAt;
       const body = copiedPortfolio;
-      console.log(body)
       if (isModified) modifyPortfolio(body).then(() => navigate(`/portfolios/${savedPortfolio.id}`))
-      else postPortfolio(body).then((res) => navigate(`/portfolios/main`));
+      else postPortfolio(body).then((res) => navigate(`/main`));
     }
   };
 
