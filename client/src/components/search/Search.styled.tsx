@@ -10,6 +10,7 @@ export const SearchContainer = tw.form`
   max-w-md
   min-w-min
   mx-auto
+
 `;
 
 export const SearchIcon = tw(BsSearchHeart)`
@@ -23,7 +24,7 @@ export const SearchBox = styled.input`
   ${tw`
     pl-12
     h-12
-    
+    text-white
     w-full
     rounded-full	
     bg-[#ececec96]
