@@ -52,15 +52,12 @@ public class Member extends Auditable {
     private Member_Status memberStatus = Member_Status.MEMBER_ACTIVE;
     @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    @JsonManagedReference
     private List<Portfolio> portfolios;
     @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    @JsonBackReference
     private List<Bookmark> bookmarks;
     @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
-    @JsonBackReference
     private List<Board> boards;
     @OneToOne(mappedBy = "member",cascade = {CascadeType.ALL})
     private ImageData imageData;

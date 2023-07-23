@@ -43,7 +43,6 @@ public class Board extends Auditable {
 
     @JsonBackReference
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "member_id")
     private Member member;
 
