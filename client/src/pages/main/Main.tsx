@@ -36,9 +36,14 @@ export default function Main() {
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        const res = await call(`portfolios?category=${categoryParam}`, 'GET', null);
+        const res = await call(
+          `portfolios?category=${categoryParam}`,
+          'GET',
+          null
+        );
         setItems(res[0].data);
         setFilteredItems(res[0].data);
       } catch (error) {
@@ -52,15 +57,25 @@ export default function Main() {
   const renderItems = () => {
     switch (selectedCategory) {
       case '웹':
-        return filteredItems.map((element, index) => <WebItem item={element} key={index} />);
+        return filteredItems.map((element, index) => (
+          <WebItem item={element} key={index} />
+        ));
       case '앱':
-        return filteredItems.map((element, index) => <AppItem item={element} key={index} />);
+        return filteredItems.map((element, index) => (
+          <AppItem item={element} key={index} />
+        ));
       case '3D/애니메이션':
-        return filteredItems.map((element, index) => <ThreeDItem item={element} key={index} />);
+        return filteredItems.map((element, index) => (
+          <ThreeDItem item={element} key={index} />
+        ));
       case '그래픽디자인':
-        return filteredItems.map((element, index) => <GraphicItem item={element} key={index} />);
+        return filteredItems.map((element, index) => (
+          <GraphicItem item={element} key={index} />
+        ));
       case '사진/영상':
-        return filteredItems.map((element, index) => <PhotoItem item={element} key={index} />);
+        return filteredItems.map((element, index) => (
+          <PhotoItem item={element} key={index} />
+        ));
       default:
         return null;
     }
@@ -80,7 +95,12 @@ export default function Main() {
 
   return (
     <>
-      <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
+      <Search
+        setSearchValue={setSearchTerm}
+        currentSearch={searchTerm}
+        data={items}
+        setSearchs={setSearchs}
+      />
       <CategoryNavBar />
       <WebItemsContainer>
         {searchs.length > 0 ? (
