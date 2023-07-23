@@ -1,5 +1,6 @@
 package com.portfolly.server.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.comment.dto.CommentDto;
@@ -40,7 +41,7 @@ public class Board extends Auditable {
     @Enumerated(value = EnumType.STRING)
     private Status status = Status.POST_ACTIVE;
 
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

@@ -1,5 +1,6 @@
 package com.portfolly.server.category.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.entity.PortfolioTag;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

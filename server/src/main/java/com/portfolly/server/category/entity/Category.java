@@ -18,9 +18,10 @@ public class Category {
     private Long id;
     private String name;
 
-
+    @JsonManagedReference
     @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
     private List<Portfolio> portfolios = new ArrayList<>();
+    @JsonManagedReference
     @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
     private List<Tag> tags = new ArrayList<>();
 

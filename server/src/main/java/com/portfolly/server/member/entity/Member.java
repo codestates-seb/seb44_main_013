@@ -1,5 +1,6 @@
 package com.portfolly.server.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.bookmark.entity.Bookmark;
@@ -47,10 +48,13 @@ public class Member extends Auditable {
     private String refreshToken;
     @Enumerated(value = EnumType.STRING)
     private Member_Status memberStatus = Member_Status.MEMBER_ACTIVE;
+    @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
     private List<Portfolio> portfolios;
+    @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
     private List<Bookmark> bookmarks;
+    @JsonManagedReference
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
     private List<Board> boards;
     @OneToOne(mappedBy = "member",cascade = {CascadeType.ALL})

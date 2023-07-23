@@ -1,5 +1,7 @@
 package com.portfolly.server.portfolio.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.likes.entity.Likes;
@@ -59,10 +61,11 @@ public class Portfolio extends Auditable {
         }
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
