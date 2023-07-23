@@ -16,6 +16,7 @@ import java.util.Optional;
 public class LikesService {
     private final LikesRepository likesRepository;
     private final PortfolioService portfolioService;
+    private final MemberService memberService;
 
     //if Likes 있으면 등록하고 없으면 취소
     public void selectLikes(Long portfolioId, String accessToken) {
@@ -26,10 +27,12 @@ public class LikesService {
             likesRepository.delete(optionalLikes.orElseThrow(()->new RuntimeException()));
         }
         else {
+            Portfolio portfolio = portfolioService.findVerifiedPortfolio(portfolioId);
+            Member member = memberService.findMember(memberId);
             Likes likes = new Likes();
 //            selectLikes(portfolioId, accessToken);
-//            likes.setPortfolio(new Portfolio());
-//            likes.setMember(new Member());
+            likes.setPortfolio(portfolio);
+            likes.setMember(member);
             likesRepository.save(likes);
         }
     }
