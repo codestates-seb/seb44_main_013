@@ -10,7 +10,7 @@ import { FlexContainer } from '@/commons/styles/Containers.styled';
 import { StyleSheetManager } from 'styled-components';
 
 export default function CategoryNavBar() {
-  const Categories: Array<CATEGORY_TYPE> = ['웹', '앱', '3D/애니메이션', '그래픽디자인', '사진/영상'];
+  const Categories: Array<CATEGORY_TYPE> = ['web', 'app', '3danimation', 'graphicdesign', 'photo'];
   const dispatch = useDispatch();
 
   return (

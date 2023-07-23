@@ -26,9 +26,9 @@ export default function CommunityItem({ communityItem }: any) {
       <MemberProfile
         type={'board'}
         member={{
-          memberId: eachData.member_id,
+          id: eachData.member_id,
           name: eachData.name,
-          picture: 'https://picsum.photos/200/300',
+          imageUrl: 'https://picsum.photos/200/300',
         }}
       />
       <h2>{eachData.title}</h2>
