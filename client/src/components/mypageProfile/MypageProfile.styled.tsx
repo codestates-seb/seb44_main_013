@@ -23,7 +23,6 @@ export const MypageProfileContainer = styled.div`
   }
 
   > div {
-    margin: 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
