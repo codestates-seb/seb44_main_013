@@ -8,7 +8,7 @@ import appBgimg from '../../../assets/AppBg.png';
 import aniBgimg from '../../../assets/AniBg.png';
 import graphicBgimg from '../../../assets/GraphicBg.png';
 import photoBgimg from '../../../assets/PhotoBg.png';
-import defaultBgimg from '../../../assets/default.png';
+import defaultBgimg from '../../../assets/bg2.jpeg';
 import { ReactNode } from 'react';
 
 export const MainImgWrapper = styled.div<{ backgroundimage: string }>(
@@ -24,7 +24,7 @@ export const DefaultImgWrapper = styled.div`
   ${tw`
     w-screen h-fit bg-center bg-no-repeat bg-cover
   `}
-  background-image: url(${graphicBgimg});
+  background-image: url(${defaultBgimg});
 `;
 
 export function BackImgControl({ children }: { children: ReactNode }) {
