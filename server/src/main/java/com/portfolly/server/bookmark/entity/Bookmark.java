@@ -17,12 +17,10 @@ public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JsonBackReference
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
-    @JsonBackReference
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "member_id")

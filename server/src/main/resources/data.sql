@@ -1,7 +1,7 @@
 INSERT INTO category(name)
 VALUES ('web'),
        ('app'),
-       ('3da'),
+       ('3danimation'),
        ('graphicdesign'),
        ('photo');
 

@@ -1,6 +1,7 @@
-package com.portfolly.server.category.entity;
+package com.portfolly.server.tag.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.portfolly.server.category.entity.Category;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.entity.PortfolioTag;
 import lombok.AllArgsConstructor;
