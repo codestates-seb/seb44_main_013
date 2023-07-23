@@ -24,22 +24,15 @@ public interface PortfolioMapper {
     Portfolio postDtoToPortfolio(PortfolioDto.Post postDto);
     List<PortfolioDto.Response> portfoliosToResponseDto(List<Portfolio> portfolios);
 
-//    @Mapping(target = "tags", ignore = true)
     @Mapping(target = "portfolioTags", qualifiedByName = "portfolioTagToTagDtoResponses")
     @Mapping(target = "member", qualifiedByName = "memberToMemberResponse")
     PortfolioDto.Response portfolioToResponseDto(Portfolio portfolio);
-    //portfolioDto.Response tags
-    //portfolio portfolioTags
 
     //List<MemberDto.Response> memberToMemberPartnerResponse(List<Member> members);
     @Named("memberToMemberResponse")
     MemberDto.Response memberToMemberResponse(Member member);
 
     //내가 얻고싶은 것 List<tagDto.response> tags
-    //
-    //'해당하는'? portfolioId가 들어있는 List portfoliotags에서 tagId에 해당하는 List tags의 id+name 필요함
-    //portfolioDto response 안에 있는 tagResponseDto로 바로 바꿔주지 못함
-    //portfolioTag entity를 tagDto.response로 바꿔주지 못한다
     default TagDto.Response portfolioTagToTagDtoResponse(PortfolioTag portfolioTag){
         if( portfolioTag == null) return null;
 

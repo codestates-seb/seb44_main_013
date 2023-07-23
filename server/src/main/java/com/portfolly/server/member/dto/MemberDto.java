@@ -149,6 +149,8 @@ public class MemberDto {
         @Schema(title = "회원 상태", example = "활동중")
         private Member.Member_Status memberStatus;
         private List<Portfolio> portfolios;
+        //private List<PortfolioDto.MyPageResponse> portfolios;
+        //이것으로 사용하시면 됩니다! Mapper 수정해야함
         private List<Bookmark> bookmarks;
         private List<Board> boards;
     }
@@ -161,6 +163,6 @@ public class MemberDto {
         private String name;
         private String email;
         private Member.Member_Role member_role;
-//        private ImageData imageData;
+        private String imageData;
     }
 }

@@ -118,7 +118,6 @@ public class PortfolioService {
     //포트폴리오 상세 조회, 조회수 증가
     public PortfolioDto.Response selectPortfolio(Long portfolioId, String accessToken) {
         //1. 로그인 하지 않을 경우//2. 로그인 한 경우 ==> AccessToken의 유무
-        //runtimeException
         Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()->new RuntimeException());
         increaseViews(portfolio);
         PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
@@ -139,9 +138,9 @@ public class PortfolioService {
     }
 
     //포트폴리오 전체 조회
-    //web, app, 3da, graphicDesign, photo
+    //web, app, 3dAnimation, graphicDesign, photo
     public Page<Portfolio> findPortfolios(int page, int size, String category) {
-        //1. 로그인 하지 않을 경우//2. 로그인 한 경우 ==> AccessToken의 유무
+        //1. 로그인 하지 않을 경우 //2. 로그인 한 경우 ==> AccessToken의 유무
         //파라미터를 받은 후 맞는 id를 데려옴
         Long categoryId = matchCategoryId(category);
         return portfolioRepository.findByStatusAndCategoryId(PageRequest.of(page, size, Sort.by("id").descending()), Portfolio.Status.ACTIVE, categoryId);
@@ -161,7 +160,7 @@ public class PortfolioService {
             String firstImage = pictures.get(0).getPictureUrl();
             return firstImage;
         }
-        //else default image 추가해주어야 함(프론트에서 처리)
+        //else default image 추가는 프론트엔드에서 처리
         else return null;
     }
 
@@ -170,10 +169,10 @@ public class PortfolioService {
         switch (category) {
             case "web": return 1L;
             case "app": return 2L;
-            case "3da": return 3L;
+            case "3danimation": return 3L;
             case "graphicdesign": return 4L;
             case "photo": return 5L;
-            default: throw new RuntimeException("해당되는 카테고리가 없습니다.");
+            default: throw new RuntimeException("해당하는 카테고리가 없습니다.");
         }
     }
 
@@ -188,6 +187,7 @@ public class PortfolioService {
         }
         portfolio.setStatus(Portfolio.Status.DELETED);
         deletePortfolioTag(portfolio);
+        portfolio.setPortfolioTags(new ArrayList<>());
         portfolioRepository.save(portfolio);
     }
 
@@ -242,7 +242,7 @@ public class PortfolioService {
     }
 
     public void addPicture(Portfolio portfolio){
-        //content안에 있는 링크들을 긁어 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
+        //content안에 있는 링크들을 가져 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
         String content = portfolio.getContent();
         String domain = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/";
         List<String> pictureUrlList = new ArrayList<>();

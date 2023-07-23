@@ -31,7 +31,6 @@ public class PortfolioDto {
         private String category;
         //태그 json 배열
         private String tags;
-//        private List<Map<String,Long>> tagList;
     }
 
     @Getter
@@ -72,9 +71,17 @@ public class PortfolioDto {
         private String firstImage;
         private MemberDto.Response member;
         private List<TagDto.Response> portfolioTags;
-//        private List<LikesDto.Response> likes;
-//        private List<BookmarkDto.Response> bookmarks;
+    }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyPageResponse{
+        private Long id;
+        private String title;
+        private MemberDto.Response member;
+        private String firstImage;
     }
 
 
