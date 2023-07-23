@@ -96,8 +96,9 @@ public class BoardController {
 //    }
 
 
+
     @PostMapping("/write")
-    public ResponseEntity postBoard(@RequestHeader("AccessToken") String token,
+    public ResponseEntity postBoard(@RequestHeader("Authorization") String token,
                                     @Valid @RequestBody BoardDto.Post post) {
 
         String accessToken = token.substring(7);
@@ -124,7 +125,7 @@ public class BoardController {
 
 
     @PatchMapping("/edit/{board-id}")
-    public ResponseEntity patchBoard(@RequestHeader("AccessToken") String token,
+    public ResponseEntity patchBoard(@RequestHeader("Authorization") String token,
                                      @PathVariable("board-id") @Positive Long boardId,
                                      @Valid @RequestBody BoardDto.Patch patch) {
 
@@ -135,8 +136,9 @@ public class BoardController {
         Long memberId = member.getId();
 
         patch.setId(boardId);
-        Board board = boardService.updateBoard(mapper.bardPatchToBoard(patch), memberId);
-        return new ResponseEntity<>(mapper.boardToBoardResponse(board), HttpStatus.OK);
+        Board board = mapper.boardPatchToBoard(patch);
+        BoardDto.Response response = boardService.updateBoard(board, memberId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -145,47 +147,48 @@ public class BoardController {
 
         Board board = boardService.verifyBoard(boardId);
         boardService.increaseViews(board);
-//        List<Comment> comments = commentService.getComments();
+        BoardDto.Response response = boardService.findBoard(boardId);
+/*
+        mapper.commentsToCommentResponseList(response.getComments());
 
-        return new ResponseEntity(mapper.boardToBoardResponse(board), HttpStatus.OK);
-       // return new ResponseEntity<>(
-       //         new MultiDto(mapper.boardToBoardResponse(board), comments), HttpStatus.OK);
+       return new ResponseEntity<>(
+              new BoardMultiResponseDto<>(mapper.boardsToBoardResponseList(boards), pages), HttpStatus.OK);
+*/
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
 
     @GetMapping
     public ResponseEntity getBoards(@Valid @RequestParam Board.Division division) {
-        List<Board> boards = boardService.findBoards(division);
-        return new ResponseEntity(mapper.boardsToBoardResponseList(boards), HttpStatus.OK);
+        List<BoardDto.ResponseList> boards = boardService.findBoards(division);
+        return new ResponseEntity(boards, HttpStatus.OK);
     }
 
-    // 게시글 페이지 조회
-    // [ ver1 ]
-//    @GetMapping("/pages")
-//    public ResponseEntity getPages(@Positive @RequestParam int page,
-//                                   @Positive @RequestParam int size,
-//                                   @RequestParam Board.Division division) {
-//        Page<Board> pages = boardService.findPages(page-1, size, division);
-//        List<Board> boards = pages.getContent();
-//
-//        return new ResponseEntity((mapper.boardsToBoardResponseList(boards)), HttpStatus.OK);
-//    }
 
-    // [ ver2 ]
+
+
     @GetMapping("/pages")
     public ResponseEntity getPages(@Positive @RequestParam(defaultValue = "1") int page,
                                    @Positive @RequestParam(defaultValue = "8") int size,
                                    @RequestParam Board.Division division) {
-        Page<Board> pages = boardService.findPages(page - 1, size, division);
-        List<Board> boards = pages.getContent();
-
-        return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.boardsToBoardResponseList(boards), pages), HttpStatus.OK);
+        List<BoardDto.ResponseList> pages = boardService.findPages(page - 1, size, division);
+        return new ResponseEntity(pages, HttpStatus.OK);
     }
+
+//    @GetMapping("/pages")
+//    public ResponseEntity getPages(@Positive @RequestParam(defaultValue = "1") int page,
+//                                   @Positive @RequestParam(defaultValue = "8") int size,
+//                                   @RequestParam Board.Division division) {
+//        Page<Board> pages = boardService.findPages(page - 1, size, division);
+//        List<Board> boards = pages.getContent();
+//
+//        return new ResponseEntity<>(
+//                new MultiResponseDto<>(mapper.boardsToBoardResponseList(boards), pages), HttpStatus.OK);
+//    }
 
 
     @DeleteMapping("/{board-id}")
-    public ResponseEntity deleteBoard(@RequestHeader("AccessToken") String token,
+    public ResponseEntity deleteBoard(@RequestHeader("Authorization") String token,
                                       @PathVariable("board-id") @Positive Long boardId) {
 
         String accessToken = token.substring(7);

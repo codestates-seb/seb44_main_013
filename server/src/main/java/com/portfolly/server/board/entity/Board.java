@@ -1,9 +1,11 @@
 package com.portfolly.server.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
+import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,7 +42,7 @@ public class Board extends Auditable {
     @Enumerated(value = EnumType.STRING)
     private Status status = Status.POST_ACTIVE;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;

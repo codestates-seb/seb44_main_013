@@ -11,4 +11,5 @@ public interface CommentMapper {
     Comment postToComment(CommentDto.Post post);
     Comment patchToComment(CommentDto.Patch patch);
     CommentDto.Response commentToResponse(Comment comment);
+    List<CommentDto.Response> commentsToResponseList(List<Comment> comments);
 }

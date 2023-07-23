@@ -1,9 +1,7 @@
 package com.portfolly.server.comment.dto;
 
-import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.comment.entity.Comment;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -45,11 +43,11 @@ public class CommentDto {
     @AllArgsConstructor
     public static class Response {
         private Long id;
-//        private Long boardId;
         private String content;
         private Comment.Status status;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
+        private CommentMemberInfo memberInfo;
     }
 }
 

@@ -42,7 +42,7 @@ public class CommentController {
 
     @PostMapping()
 
-    public ResponseEntity postComment(@RequestHeader("AccessToken") String token,
+    public ResponseEntity postComment(@RequestHeader("Authorization") String token,
                                       @Valid @RequestBody CommentDto.Post post) {
 
         String accessToken = token.substring(7);
@@ -54,7 +54,7 @@ public class CommentController {
 
         // 댓글 내용 등록
         Comment comment = mapper.postToComment(post);
-        Comment createdComment = commentService.creatComment(comment, boardId, memberId);
+        CommentDto.Response createdComment = commentService.creatComment(comment, boardId, memberId);
 
         // todo : 프사 가져오기
 
@@ -64,7 +64,7 @@ public class CommentController {
 
 
     @PatchMapping("/edit/{comment-id}")
-    public ResponseEntity patchComment(@RequestHeader("AccessToken") String token,
+    public ResponseEntity patchComment(@RequestHeader("Authorization") String token,
                                        @Positive @PathVariable("comment-id") Long commentId,
                                        @Valid @RequestBody CommentDto.Patch patch) {
 
@@ -77,21 +77,20 @@ public class CommentController {
         patch.setId(commentId);
         Long boardId = patch.getBoardId();
         Comment comment = mapper.patchToComment(patch);
-        Comment updatedComment = commentService.updateComment(comment, boardId, memberId);
-        return new ResponseEntity<>(mapper.commentToResponse(updatedComment), HttpStatus.OK);
+        CommentDto.Response updatedComment = commentService.updateComment(comment, boardId, memberId);
+        return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }
 
     @GetMapping("/{comment-id}")
     public ResponseEntity getComment(@PathVariable("comment-id") @Positive Long commentId) {
-        Comment comment = commentService.verifyComment(commentId);
-
-        return new ResponseEntity(mapper.commentToResponse(comment), HttpStatus.OK);
+        CommentDto.Response comment = commentService.getComment(commentId);
+        return new ResponseEntity(comment, HttpStatus.OK);
 
     }
 
 
     @DeleteMapping("/{comment-id}")
-    public ResponseEntity deleteComment(@RequestHeader("AccessToken") String token,
+    public ResponseEntity deleteComment(@RequestHeader("Authorization") String token,
                                         @Positive @PathVariable("comment-id") Long commentId) {
 
         String accessToken = token.substring(7);
