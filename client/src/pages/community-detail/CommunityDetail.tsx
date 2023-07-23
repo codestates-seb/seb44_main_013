@@ -57,7 +57,7 @@ export default function CommunityDetail({ handleClick }: any) {
       <MemberProfile
         type={'blackboard'}
         member={{
-          id: memberData.memberId,
+          id: memberData.id,
           name: memberData.name,
           imageUrl: 'https://picsum.photos/200/300',
         }}

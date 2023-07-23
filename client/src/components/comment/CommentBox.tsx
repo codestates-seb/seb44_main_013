@@ -85,7 +85,7 @@ export default function CommentBox({ comments = [] }: any) {
           {amendComment.map((element: CommentProps) => {
             return (
               <Comment
-                key={element.comments_id}
+                key={element.id}
                 username={element.name}
                 content={element.content}
                 date={element.createdAt}
