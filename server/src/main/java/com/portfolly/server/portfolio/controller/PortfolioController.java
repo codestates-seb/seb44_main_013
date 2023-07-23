@@ -1,11 +1,18 @@
 package com.portfolly.server.portfolio.controller;
 
+import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import com.portfolly.server.dto.MultiResponseDto;
 import com.portfolly.server.dto.SingleResponseDto;
+import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
+import com.portfolly.server.exception.businessLogicException.ExceptionCode;
+import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.mapper.PortfolioMapper;
 import com.portfolly.server.portfolio.service.PortfolioService;
+import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
+import com.portfolly.server.security.authorization.utils.CustomAuthorityUtils;
 import com.portfolly.server.utils.UriCreator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +42,8 @@ public class PortfolioController {
     @PostMapping
     public ResponseEntity postPortfolio(@RequestHeader (name = "AccessToken") String accessToken,
                                         @Valid @RequestBody PortfolioDto.Post postDto){
+        //authentication or token통해서 memberId 받아와야함
+//        Long memberId = portfolioService.findMemberId(accessToken);
         //포트폴리오 내용 등록
         Portfolio portfolio = portfolioService.postPortfolio(postDto, accessToken);
         //포트폴리오 이미지 등록
@@ -63,7 +72,7 @@ public class PortfolioController {
     }
 
     //포트폴리오 전체 조회
-    //web, app, 3danimation, graphicDesign, photo
+    //web, app, 3da, graphicDesign, photo
     @GetMapping
     public ResponseEntity getPortfolios(@RequestParam("page") int page,
                                         @RequestParam("size") int size,
