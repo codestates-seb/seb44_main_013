@@ -6,6 +6,8 @@ import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.member.image.entity.ImageData;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -48,10 +50,13 @@ public class Member extends Auditable {
     @Enumerated(value = EnumType.STRING)
     private Member_Status memberStatus = Member_Status.MEMBER_ACTIVE;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
+    @JsonManagedReference
     private List<Portfolio> portfolios;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
+    @JsonBackReference
     private List<Bookmark> bookmarks;
     @OneToMany(mappedBy = "member",cascade = {CascadeType.ALL})
+    @JsonBackReference
     private List<Board> boards;
     @OneToOne(mappedBy = "member",cascade = {CascadeType.ALL})
     private ImageData imageData;

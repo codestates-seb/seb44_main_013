@@ -1,5 +1,6 @@
 package com.portfolly.server.portfolio.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.likes.entity.Likes;
@@ -61,19 +62,25 @@ public class Portfolio extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @JsonBackReference
     private Member member;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @OneToMany(mappedBy = "portfolio")
+    @JsonManagedReference
     private List<Likes> likes = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
+    @JsonManagedReference
     private List<Bookmark> bookmarks = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
+    @JsonManagedReference
     private List<PortfolioTag> portfolioTags = new ArrayList<>();
     @OneToMany(mappedBy = "portfolio")
+    @JsonManagedReference
     private List<Picture> pictures = new ArrayList<>();
 
 

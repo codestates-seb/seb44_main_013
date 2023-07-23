@@ -5,6 +5,12 @@ VALUES ('web'),
        ('graphicdesign'),
        ('photo');
 
+INSERT INTO tag(name)
+VALUES ('react'),
+       ('vue'),
+       ('ssr'),
+       ('csr');
+
 -- INSERT INTO member(name, email, member_role, award, location, job, skill, career, member_status, com_info, refresh_token)
 -- VALUES ('name', 'djWJrn1@gmail.com', 'CLIENT','award','location','job','skill','career','MEMBER_ACTIVE', 'cominfo','refreshtoken');
 --
