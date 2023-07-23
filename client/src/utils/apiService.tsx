@@ -2,20 +2,27 @@
 // import { API_BASE_URL } from '@/app-config';
 // import { RootState } from '@/store';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
+import { useSelector } from 'react-redux';
 // import { useSelector } from 'react-redux';
 // axios.defaults.baseURL = API_BASE_URL;
 
 //ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
 // const ACCESS_TOKEN = useSelector((state: RootState) => state.loginSlice.accesstoken);
-const ACCESS_TOKEN = '';
-export const API_BASE_URL = '';
+const ACCESS_TOKEN = 'accessToken';
+export const API_BASE_URL = '/api';
 
 export async function call(api: string, method: string, data?: any) {
   // const dispatch = useDispatch();
-  const headers = new AxiosHeaders({
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
+  let headers = new AxiosHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${ACCESS_TOKEN}`,
+    'accessToken': accessToken,
   });
+
+  // if (accessToken) {
+  //   headers.append("Authorization", "Bearer " + accessToken);
+  // }
 
   const options: RawAxiosRequestConfig = {
     headers: headers,
@@ -29,7 +36,7 @@ export async function call(api: string, method: string, data?: any) {
 
   // 에러처리고려
   try {
-    const response = await axios.request(options)
+    const response = await axios(options)
     return response.data;
   } catch (error) {
     console.log(error);

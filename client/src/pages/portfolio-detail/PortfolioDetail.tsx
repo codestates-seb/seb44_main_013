@@ -34,11 +34,12 @@ export default function PortfolioDetail() {
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
     deletePortfolio();
-    navigate('/');
+    navigate('/main');
   }
 
   useEffect(() => {
     getPortfolio().then((res) => {
+      console.log(res)
       setPortfolio(res.data);
       setMember(res.data.member);
       setCreatedAt(changeDateFormat(res.data.createdAt));
@@ -101,7 +102,7 @@ export default function PortfolioDetail() {
             <LabelText color='white'>Tags</LabelText>
             <FlexWrapper gap={8}>
               {portfolio &&
-                portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)
+                portfolio.portfolioTags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)
               }
             </FlexWrapper>
           </UserCard>

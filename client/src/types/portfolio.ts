@@ -46,7 +46,7 @@ export interface Portfolio {
   createdAt: string;
   category: Category;
   member: Member;
-  tags: Array<Tag>;
+  portfolioTags: Array<Tag>;
   countLikes: number;
   marked: boolean;
   liked: boolean;
