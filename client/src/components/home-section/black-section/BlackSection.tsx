@@ -1,10 +1,7 @@
-import React from 'react';
 import { BlackSectionWrapper } from './BlackSection.styled';
 
 const BlackSection = () => {
-  return (
-    <BlackSectionWrapper />
-  );
+  return <BlackSectionWrapper />;
 };
 
 export default BlackSection;

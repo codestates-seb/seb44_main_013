@@ -53,9 +53,16 @@ const Category = styled.button`
   }
 `;
 
-export default function CategoryButton({
-  category,
-  onClick,
-}: CategoryBtnProps) {
-  return <Category onClick={onClick}>{category}</Category>;
+export default function CategoryButton({ category, onClick }: CategoryBtnProps) {
+  if (category === 'web') {
+    return <Category onClick={onClick}>웹</Category>;
+  } else if (category === 'app') {
+    return <Category onClick={onClick}>앱</Category>;
+  } else if (category === '3danimation') {
+    return <Category onClick={onClick}>3D/애니메이션</Category>;
+  } else if (category === 'graphicdesign') {
+    return <Category onClick={onClick}>그래픽디자인</Category>;
+  } else if (category === 'photo') {
+    return <Category onClick={onClick}>사진/영상</Category>;
+  }
 }

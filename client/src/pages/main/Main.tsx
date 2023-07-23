@@ -14,11 +14,11 @@ import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
 
 const categoryMap = {
-  웹: 'web',
-  앱: 'app',
-  '3D/애니메이션': '3danimation',
-  그래픽디자인: 'graphicdesign',
-  '사진/영상': 'photo',
+  web: 'web',
+  app: 'app',
+  '3danimation': '3danimation',
+  graphicdesign: 'graphicdesign',
+  photo: 'photo',
 };
 
 type Item = {
@@ -35,15 +35,13 @@ export default function Main() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
+  console.log(`1번 : ${selectedCategory}`);
+  console.log(`2번 ${categoryParam}`);
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        const res = await call(
-          `portfolios?category=${categoryParam}`,
-          'GET',
-          null
-        );
+        const res = await call(`portfolios?category=${categoryParam}`, 'GET', null);
         setItems(res[0].data);
         setFilteredItems(res[0].data);
       } catch (error) {
@@ -56,26 +54,16 @@ export default function Main() {
 
   const renderItems = () => {
     switch (selectedCategory) {
-      case '웹':
-        return filteredItems.map((element, index) => (
-          <WebItem item={element} key={index} />
-        ));
-      case '앱':
-        return filteredItems.map((element, index) => (
-          <AppItem item={element} key={index} />
-        ));
-      case '3D/애니메이션':
-        return filteredItems.map((element, index) => (
-          <ThreeDItem item={element} key={index} />
-        ));
-      case '그래픽디자인':
-        return filteredItems.map((element, index) => (
-          <GraphicItem item={element} key={index} />
-        ));
-      case '사진/영상':
-        return filteredItems.map((element, index) => (
-          <PhotoItem item={element} key={index} />
-        ));
+      case 'web':
+        return filteredItems.map((element, index) => <WebItem item={element} key={index} />);
+      case 'app':
+        return filteredItems.map((element, index) => <AppItem item={element} key={index} />);
+      case '3danimation':
+        return filteredItems.map((element, index) => <ThreeDItem item={element} key={index} />);
+      case 'graphicdesign':
+        return filteredItems.map((element, index) => <GraphicItem item={element} key={index} />);
+      case 'photo':
+        return filteredItems.map((element, index) => <PhotoItem item={element} key={index} />);
       default:
         return null;
     }
@@ -95,12 +83,7 @@ export default function Main() {
 
   return (
     <>
-      <Search
-        setSearchValue={setSearchTerm}
-        currentSearch={searchTerm}
-        data={items}
-        setSearchs={setSearchs}
-      />
+      <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
       <WebItemsContainer>
         {searchs.length > 0 ? (
