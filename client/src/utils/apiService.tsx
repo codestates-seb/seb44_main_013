@@ -11,7 +11,7 @@ export async function call(api: string, method: string, data?: any) {
 
   let headers = new AxiosHeaders({
     'Content-Type': 'application/json',
-    'accessToken': accessToken,
+    'Authorization': accessToken,
   });
 
   const options: RawAxiosRequestConfig = {
