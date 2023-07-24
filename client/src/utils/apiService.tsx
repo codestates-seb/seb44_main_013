@@ -2,8 +2,8 @@
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 const ACCESS_TOKEN = 'accessToken';
 export const API_BASE_URL = '/api';
-export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
-console.log(import.meta.env);
+// export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
+// console.log(import.meta.env);
 
 export async function call(api: string, method: string, data?: any) {
   // const dispatch = useDispatch();
@@ -29,10 +29,21 @@ export async function call(api: string, method: string, data?: any) {
     const response = await axios(options)
     return response.data;
   } catch (error) {
-    console.log(error);
     if (axios.isAxiosError(error)) {
-      //axios 에러 객체인 경우,
       const axiosError = error as AxiosError;
+      switch (axiosError.status) {
+        case 400:
+          break;
+        case 401:
+          break;
+        case 404:
+          break;
+        case 500:
+          break;
+      }
+      if (axiosError.status === 401) {
+        alert('로그인이 필요합니다.');
+      }
       //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
       //응답 데이터로 판별
       console.log(axiosError.message);
