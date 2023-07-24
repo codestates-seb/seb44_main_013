@@ -54,7 +54,7 @@ export default function AddCommunity() {
 
   //새 글 작성 함수
   const postCommunity = async () => {
-    const roleDivision = window.localStorage.getItem('memberRole') === 'CLIENT' ? 'COOPERATION' : 'RECRUITMENT';
+    const roleDivision = window.localStorage.getItem('memberRole') === 'CLIENT' ? 'RECRUITMENT' : 'COOPERATION';
     const res = await netaxios.post('/boards/write', {
       title: title,
       content: post.replace(/<\/?p[^>]*>/g, ''),
