@@ -4,70 +4,84 @@ package com.portfolly.server.comment.service;
 import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.board.respository.BoardRepository;
 import com.portfolly.server.board.service.BoardService;
+import com.portfolly.server.comment.dto.CommentDto;
+import com.portfolly.server.comment.dto.CommentMemberInfo;
 import com.portfolly.server.comment.entity.Comment;
+import com.portfolly.server.comment.mapper.CommentMapper;
 import com.portfolly.server.comment.respository.CommentRepository;
 import com.portfolly.server.exception.businessLogicException.BusinessLogicException;
 import com.portfolly.server.exception.businessLogicException.ExceptionCode;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class CommentService {
 
     private final MemberService memberService;
     private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
+    private final BoardRepository boardRepository;
     private final BoardService boardService;
 
-    @Autowired
-    public CommentService(MemberService memberService, CommentRepository commentRepository, BoardService boardService) {
-        this.memberService = memberService;
-        this.commentRepository = commentRepository;
-        this.boardService = boardService;
+
+    private CommentDto.Response creatResponse(Comment comment) {
+        CommentDto.Response response = commentMapper.commentToResponse(comment);
+        response.setMemberInfo(CommentMemberInfo.builder()
+                .memberId(comment.getMember().getId())
+                .name(comment.getMember().getName())
+                .build());
+        return response;
     }
 
-    @Transactional
-    public Comment creatComment(Comment comment, Long boardId
-                                //, Long memberId
-                                ) {
-//        Member verifiedMember = memberService.findMember(memberId);\
-        comment.setBoard(boardService.findBoard(boardId));
-        return commentRepository.save(comment);
-    }
+    //----------------------------------------------
 
 
     @Transactional
-    public Comment updateComment(Comment comment, Long boardId
-                                 //, Long memberId,
-                                 ) {
-//        Member verifiedMember = memberService.findMember(memberId);
-        Board verifiedBoard = boardService.verifyBoard(boardId);
-        Comment verifiedComment = verifyComment(comment.getId());
+    public CommentDto.Response creatComment(Comment comment, Long boardId, Long memberId) {
 
-        verifiedComment.setContent(comment.getContent());
+        Board verifiedBoard = boardService.verifyBoard(boardId);// 2차 검증 : 게시글 존재여부
 
-        return commentRepository.save(verifiedComment);
+        Member member = memberService.findByMember(memberId);
+        comment.setBoard(verifiedBoard);
+        comment.setMember(member);
+        commentRepository.save(comment);
+
+        return creatResponse(comment);
     }
-
-    // boardId가 n에 속하는 comment 리스트 가져오기
-//    @Transactional(readOnly = true)
-//    public List<Comment> getComments(Long boardId) {
-//        return commentRepository.findCommentsByBoardId(boardId);
-//    }
 
 
     @Transactional
-    public void deleteComment(Long commentId
-                              //, Long memberId
-                              ) {
-//        Member verifiedMember = memberService.findMember(memberId);
+    public CommentDto.Response updateComment(Comment comment, Long boardId, Long memberId) {
+
+        Board verifiedBoard = boardService.verifyBoard(boardId);   // 2차 검증 : 게시글 존재여부
+        Comment verifiedComment = verifyComment(comment.getId());  // 3차 검증 : 댓글 존재여부
+        verifyWriter(comment, memberId);                           // 4차 검증 : 댓글 작성자 확인
+
+        Optional.ofNullable(comment.getContent())
+                .ifPresent(verifiedComment::setContent);
+
+        return creatResponse(verifiedComment);
+    }
+
+    public CommentDto.Response getComment(Long commentId) {
         Comment verifiedComment = verifyComment(commentId);
+       return creatResponse(verifiedComment);
+    }
+
+
+    @Transactional
+    public void deleteComment(Long commentId, Long memberId) {
+
+//        Board verifiedBoard = boardService.verifyBoard(boardId); // 2차 검증 : 게시글 존재여부
+        Comment verifiedComment = verifyComment(commentId);        // 3차 검증 : 댓글 존재여부
+        verifyWriter(verifiedComment, memberId);                   // 4차 검증 : 댓글 작성자 확인
+
         verifiedComment.setStatus(Comment.Status.COMMENT_INACTIVE);
     }
 
@@ -85,5 +99,12 @@ public class CommentService {
         return findedComment;
     }
 
-
+    // 댓글 작성자 확인
+    @Transactional(readOnly = true)
+    public void verifyWriter(Comment comment, Long memberId) {
+        Comment foundComment = commentRepository.findById(comment.getId()).get();
+        if(!foundComment.getMember().getId().equals(memberId)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+        }
+    }
 }
