@@ -74,5 +74,6 @@
   },
   "_mouleAliases": {
     "@src": "src"
-  }
+  },
+  "homepage": "https://portfolly013.netlify.app"
 }
