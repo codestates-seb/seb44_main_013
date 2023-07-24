@@ -86,7 +86,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //현재 get bearer 이중 중복으로 뻄.
     axios
       .post(
-        '/api/oauth/regeneration/token',
+        '/oauth/regeneration/token',
         {},
         {
           headers: {
@@ -108,7 +108,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //최초로그인
     axios
       .post(
-        '/api/oauth/signup ',
+        '/oauth/signup ',
         {
           name: name,
           email: email,
@@ -116,7 +116,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         },
         {
           headers: {
-            Authorization: `${token01}`,
+            Authorization: `Bearer ${token01}`,
           },
         }
       )
