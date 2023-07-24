@@ -108,15 +108,15 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //최초로그인
     axios
       .post(
-        '/oauth/signup ',
+        '/api/oauth/signup ',
         {
           name: name,
           email: email,
-          ImageUrl: picture,
+          imageUrl: picture,
         },
         {
           headers: {
-            Authorization: `Bearer ${token01}`,
+            Authorization: `${token01}`,
           },
         }
       )
