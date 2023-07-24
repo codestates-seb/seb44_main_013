@@ -1,6 +1,5 @@
 import ReactQuill from 'react-quill';
 import { useState, useEffect, ChangeEventHandler } from 'react';
-import axios from 'axios';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import PurpleButton from '@/commons/atoms/buttons/PurpleBtn';
