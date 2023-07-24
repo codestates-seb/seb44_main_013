@@ -3,7 +3,7 @@ import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 
 // export const API_BASE_URL = '/api';
 export const API_BASE_URL =
-  import.meta.env.MODE === 'development' ? '' : 'https://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080';
+  import.meta.env.MODE === 'development' ? '' : 'http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080';
 console.log(import.meta.env.MODE);
 
 export async function call(api: string, method: string, data?: any) {
