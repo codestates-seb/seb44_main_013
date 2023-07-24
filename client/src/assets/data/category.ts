@@ -7,7 +7,7 @@ export const categoryTags: CategoryTags = {
     tags: [
       {
         id: 1,
-        name: 'Education',
+        name: 'react',
         isSelected: false,
       },
       {

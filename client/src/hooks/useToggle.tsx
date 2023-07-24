@@ -14,26 +14,26 @@ export interface Toggle {
 export default function useToggle({ portfolioId, buttonType, isToggled: isOn, color = 'purple', count: cnt = 0 }: Toggle) {
   const [count, setCount] = useState<number>(cnt);
   const [isToggled, setIsToggled] = useState<boolean>(isOn);
-  const [url, ] = useState<string>(`/${buttonType}/${portfolioId}`);
+  const [url] = useState<string>(`/${buttonType}/${portfolioId}`);
   const [buttonColor, setButtonColor] = useState<string>(isOn ? `${color}` : 'gray');
 
-  const setToggle = (method: 'POST' | 'DELETE') => call(url, `${method}`);
+  const setToggle = () => call(url, 'GET');
 
   const onClick = useCallback(() => {
     if (isToggled)
-      setToggle('DELETE')
-        .then((res) => {
+      setToggle()
+        .then(() => {
           setButtonColor('gray');
-          buttonType === 'likes' && setCount(res.likes);
+          buttonType === 'likes' && setCount(count - 1);
         });
     else
-      setToggle('POST')
-        .then((res) => {
+      setToggle()
+        .then(() => {
           setButtonColor(color);
-          buttonType === 'likes' && setCount(res.likes);
+          buttonType === 'likes' && setCount(count + 1);
         });
     setIsToggled(!isToggled);
-  }, [isToggled])
+  }, [isToggled, count])
 
   return [buttonColor, onClick, count] as const;
 }

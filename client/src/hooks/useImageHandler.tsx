@@ -1,13 +1,25 @@
 /* 2023-07-14 이미지 핸들러 커스텀훅 - 김다함 */
 import { useDispatch } from 'react-redux';
 import { useCallback } from 'react';
+import axios from 'axios';
 
 import { setPictures } from '@/store/portfolioSlice';
-import { call } from '@/utils/apiService';
 
 export default function useImageHandler() {
   const dispatch = useDispatch();
-  const uploadPicture = (body: FormData) => call('/pictures', 'POST', body);
+  const accessToken = localStorage.getItem('accessToken');
+
+  const uploadPicture = (body: any) => {
+    return axios({
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'accessToken': accessToken,
+      },
+      method: 'POST',
+      url: '/api/s3/picture',
+      data: body
+    })
+  }
 
   const imageUrlHandler = useCallback((editor: any) => {
     const range = editor.getSelection();
@@ -23,20 +35,26 @@ export default function useImageHandler() {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.setAttribute("name", "file");
-    input.setAttribute("multiple", "");
+    // input.setAttribute("multiple", "");
     input.click();
 
     input.onchange = async (event: any) => {
-      const files: File = event?.target?.files;
+      const files: FileList = event?.target?.files;
       const formData = new FormData();
-      formData.append("multipartFiles", files);
-      const response = await uploadPicture(formData);
-      response.imageUrl.forEach((url: string) => {
-        dispatch(setPictures(url));
-        const range = editor.getSelection();
-        editor.insertEmbed(range.index, "image", url);
-        editor.setSelection(range.index + 1);
-      })
+      // for (let i = 0; i < files.length; i++) {
+      //   formData.append("file", files[i]);
+      // }
+      const response: any = await uploadPicture({ file: files[0] });
+      // response.imageUrl.forEach((url: string) => {
+      //   dispatch(setPictures(url));
+      //   const range = editor.getSelection();
+      //   editor.insertEmbed(range.index, "image", url);
+      //   editor.setSelection(range.index + 1);
+      // })
+      dispatch(setPictures(response.data));
+      const range = editor.getSelection();
+      editor.insertEmbed(range.index, "image", response.data);
+      editor.setSelection(range.index + 1);
     }
   }, []);
 

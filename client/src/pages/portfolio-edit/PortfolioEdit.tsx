@@ -31,13 +31,14 @@ export default function PortfolioEdit() {
     if (isModified) {
       getPortfolio(portfolioId)
         .then((res) => {
+          console.log(res)
           dispatch(setPortfolio({
             id: portfolioId,
             title: res.data.title,
             content: res.data.content,
             category: res.data.category.name,
-            tags: res.data.tags,
-            explains: res.data.explain,
+            tags: res.data.portfolioTags,
+            explains: res.data.explains,
             createdAt: changeDateFormat(res.data.createdAt),
           }));
         })

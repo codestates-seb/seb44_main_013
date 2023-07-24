@@ -1,17 +1,17 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-// import { API_BASE_URL } from '@/app-config';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
-// axios.defaults.baseURL = API_BASE_URL;
-
-//ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
+const ACCESS_TOKEN = 'accessToken';
+export const API_BASE_URL = '/api';
 export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
 console.log(import.meta.env);
 
 export async function call(api: string, method: string, data?: any) {
-  const TOKEN = window.localStorage.getItem('accessToken');
-  const headers = new AxiosHeaders({
+  // const dispatch = useDispatch();
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
+  let headers = new AxiosHeaders({
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${TOKEN}`,
+    'accessToken': accessToken,
   });
 
   const options: RawAxiosRequestConfig = {
@@ -26,7 +26,7 @@ export async function call(api: string, method: string, data?: any) {
 
   // 에러처리고려
   try {
-    const response = await axios.request(options);
+    const response = await axios(options)
     return response.data;
   } catch (error) {
     console.log(error);
