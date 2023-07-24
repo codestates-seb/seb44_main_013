@@ -91,6 +91,7 @@ public class BoardService {
                 .ifPresent(verifiedBoard::setTitle);
         Optional.ofNullable(board.getContent())
                 .ifPresent(verifiedBoard::setContent);
+
         // 댓글의 memberInfo 설정
         List<CommentDto.Response> commentResponses = verifiedBoard.getComments().stream()
                 .map(this::createCommentResponse)
