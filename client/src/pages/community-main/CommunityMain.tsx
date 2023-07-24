@@ -26,6 +26,10 @@ export default function CommunityMain() {
   useEffect(() => {
     const showWholeCommu = async () => {
       return call(`/boards?division=${division}`, 'GET', {
+        headers: {
+          withCredentials: true,
+          'Content-Type': 'application/json',
+        },
         params: { division: division },
       })
         .then((res) => {
@@ -66,7 +70,14 @@ export default function CommunityMain() {
           </ListsWrapper>
         </ItemWrapper>
       ) : (
-        <NodataImage src={datano} alt="no data" />
+        <ItemWrapper>
+          <Link to="/boards/edit">
+            <StyledWritingBtn>
+              <WritingBtn />
+            </StyledWritingBtn>
+          </Link>
+          <NodataImage src={datano} alt="no data" />
+        </ItemWrapper>
       )}
     </CommunityWrapper>
   );
