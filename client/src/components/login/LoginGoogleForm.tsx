@@ -116,7 +116,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         },
         {
           headers: {
-            Authorization: `${token01}`,
+            Authorization: `Bearer ${token01}`,
           },
         }
       )
