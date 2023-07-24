@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/likes")
+@CrossOrigin("*")
 public class LikesController {
     private final LikesService likesService;
 

@@ -26,6 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/portfolios")
+@CrossOrigin("*")
 public class PortfolioController {
     private final PortfolioMapper portfolioMapper;
     private final PortfolioService portfolioService;
