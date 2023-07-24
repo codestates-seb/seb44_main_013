@@ -1,27 +1,30 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 import {
-  // SignBtn,
-  // ButtonContainer,
   ContentBox,
   SignUpWrapper,
   SingupSection,
   HorizonLine,
+  InputWrapper,
+  InputForm,
+  SecreatTag,
 } from './SignUp.styled';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
 import BackText from '@/commons/atoms/backText/BackText';
 import { ContentSection, TitleSection } from '../login/Login.styled';
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
+import AlertModal from '@/components/modal/AlertModal';
 
 export default function SignUp() {
-  // const [ role, setRole ] = useState('');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  const [icClick, setIsClick] = useState(false);
 
-  //   const selectRole = (res:string) => {
-  //     console.log(res);
-  //     setRole(res);
-  // }
+  const infoModal = () => {
+    setIsClick(!icClick);
+  };
 
   return (
     <SignUpWrapper>
@@ -36,12 +39,24 @@ export default function SignUp() {
       <SingupSection>
         <TitleSection>Choose your account.</TitleSection>
         <ContentSection>Experience the artistry and ingenuity of diverse portfolios, curated for web</ContentSection>
-        {/* <ButtonContainer>
-          <SignBtn onClick={ () => selectRole("CLIENT") } >Client</SignBtn>
-          <SignBtn onClick={ () => selectRole("PARTNER") } >Partner</SignBtn>
-        </ButtonContainer> */}
 
-        <LoginGoogleForm type={'google'}>Sign up with Google</LoginGoogleForm>
+        <InputWrapper>
+          <InputForm placeholder="write the guest name" value={'John'}></InputForm>
+          <InputForm placeholder="write the guest email" value={'john@example.com'}></InputForm>
+        </InputWrapper>
+
+        <LoginGoogleForm type={'guest'}>Guest Entrance</LoginGoogleForm>
+        <SecreatTag onClick={infoModal}>It you forgot the gueset info, click here</SecreatTag>
+        {icClick ? (
+          <AlertModal
+            onCancel={infoModal}
+            onConfirm={infoModal}
+            type={'etc'}
+            title={'게스트 로그인 정보'}
+            content={`NAME: John // Email: john@example.com`}
+            clicked={'닫기'}
+          ></AlertModal>
+        ) : null}
       </SingupSection>
       <HorizonLine />
       <div className="flex-1">
