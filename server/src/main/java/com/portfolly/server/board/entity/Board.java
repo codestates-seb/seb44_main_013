@@ -1,10 +1,12 @@
 package com.portfolly.server.board.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
+import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +16,7 @@ import net.bytebuddy.implementation.bytecode.Division;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Data
 @Entity
