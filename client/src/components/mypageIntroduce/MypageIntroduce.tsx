@@ -42,9 +42,9 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleInput =
     (setValue: React.Dispatch<React.SetStateAction<string>>) =>
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
-      };
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value);
+    };
 
   const handleUpdate = () => {
     axios
@@ -74,7 +74,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         setDeleteModalOpen(false);
         //0713 혜진 추가
         dispatch(login(false));
-        navigate('/');
+        navigate('/members');
       })
       .catch((error) => {
         console.error('삭제 실패', error);

@@ -10,7 +10,12 @@ import DeleteModal from '@/components/modal/DeleteModal';
 
 import { CommuProps } from '@/types';
 
-import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
+import {
+  CmDContainer,
+  CommentContainer,
+  MainContainer,
+  PageWrapper,
+} from './CommunityDetail.styled';
 
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
@@ -49,8 +54,10 @@ export default function CommunityDetail({ handleClick }: any) {
     setClickDeletePost(!clickDeletePost);
     //삭제하기 버튼을 클릭해야지만 작동되도록 if문 설정
     if (clickDeletePost) {
-      call(`/api/boards/${boardId}`, 'DELTE', null).then(() => console.log('게시글이 삭제 되었습니다. '));
-      navigate('/'); // 임시로 메인으로 돌아가게 설정했습니다. 사유 : 게시글 전체 목록 조회 불가
+      call(`/api/boards/${boardId}`, 'DELTE', null).then(() =>
+        console.log('게시글이 삭제 되었습니다. ')
+      );
+      navigate('/main'); // 임시로 메인으로 돌아가게 설정했습니다. 사유 : 게시글 전체 목록 조회 불가
       //현재 백 쪽에서 DELTE 기능 수행 안됨
     }
   };
@@ -67,13 +74,24 @@ export default function CommunityDetail({ handleClick }: any) {
       />
       <MainContainer onClick={handleClick}>
         <CmDContainer>
-          <DetailContents data={memberData} handleDeleteModal={handleDeleteModal} id={boardId} />
+          <DetailContents
+            data={memberData}
+            handleDeleteModal={handleDeleteModal}
+            id={boardId}
+          />
         </CmDContainer>
         <CommentContainer>
           <CommentBox comments={memberData.comments} />
         </CommentContainer>
       </MainContainer>
-      {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
+      {clickDeletePost ? (
+        <DeleteModal
+          onConfirm={handleDeleteModal}
+          onCancel={handleDeleteModal}
+        />
+      ) : (
+        ''
+      )}
     </PageWrapper>
   );
 }
