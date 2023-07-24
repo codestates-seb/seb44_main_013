@@ -46,8 +46,9 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
           console.log(response);
           console.log(response.data.name);
           console.log(response.data.email);
+          console.log(response.data.picture);
 
-          sendAccessToken(response.data.name, response.data.email, ACCESS);
+          sendAccessToken(response.data.name, response.data.email, response.data.picture, ACCESS);
         })
         .catch((err) => console.log(err));
     },
@@ -77,22 +78,6 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
       console.log('새 발급을 위해 함수 이동합니다.');
       await getRefreshToken();
     }
-    // axios({
-    //   method: 'get',
-    //   url: '/api/oauth/login',
-    //   headers: {
-    //     authorization: `${accessToken}`,
-    //     id: memberId,
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log(' 기존 회원 로그인 성공', res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err, 'refreshToken 새로 발급 필요합니다');
-    //     console.log('새 발급을 위해 함수 이동합니다.');
-    //     getRefreshToken();
-    //   });
   };
 
   const getRefreshToken = () => {
@@ -119,7 +104,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
       .catch((err) => console.log('refreshToken 재발급 실패', err));
   };
 
-  const sendAccessToken = (name: string, email: string, token01: string) => {
+  const sendAccessToken = (name: string, email: string, picture: string, token01: string) => {
     //최초로그인
     axios
       .post(
@@ -127,6 +112,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         {
           name: name,
           email: email,
+          ImageUrl: picture,
         },
         {
           headers: {
@@ -166,8 +152,6 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
 
               //별도의 로그인 get 요청 처리 - id / 서버 access token (header)
               getAccessToken();
-
-              //
             } else {
               console.log('다른 에러 발생', axiosError.response.data);
             }
@@ -207,6 +191,14 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
   }
 
   if (type === 'normal') {
+    return (
+      <GoogleWrapper>
+        <TextSection>{children}</TextSection>
+      </GoogleWrapper>
+    );
+  }
+
+  if (type === 'guest') {
     return (
       <GoogleWrapper>
         <TextSection>{children}</TextSection>

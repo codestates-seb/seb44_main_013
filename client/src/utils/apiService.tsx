@@ -1,15 +1,9 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
-// import { API_BASE_URL } from '@/app-config';
-// import { RootState } from '@/store';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
-import { useSelector } from 'react-redux';
-// import { useSelector } from 'react-redux';
-// axios.defaults.baseURL = API_BASE_URL;
-
-//ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
-// const ACCESS_TOKEN = useSelector((state: RootState) => state.loginSlice.accesstoken);
 const ACCESS_TOKEN = 'accessToken';
 export const API_BASE_URL = '/api';
+export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
+console.log(import.meta.env);
 
 export async function call(api: string, method: string, data?: any) {
   // const dispatch = useDispatch();
@@ -19,10 +13,6 @@ export async function call(api: string, method: string, data?: any) {
     'Content-Type': 'application/json',
     'accessToken': accessToken,
   });
-
-  // if (accessToken) {
-  //   headers.append("Authorization", "Bearer " + accessToken);
-  // }
 
   const options: RawAxiosRequestConfig = {
     headers: headers,
@@ -47,10 +37,6 @@ export async function call(api: string, method: string, data?: any) {
       //응답 데이터로 판별
       console.log(axiosError.message);
       console.log(axiosError.status);
-
-      // if(axiosError.message === 'Token Expired' && axiosError.status === 409){
-      //   console.log('에러 제대로 핸들링 중 : TEST');
-      // }
     }
   }
 }

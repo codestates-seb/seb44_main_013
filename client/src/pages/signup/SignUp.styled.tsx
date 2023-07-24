@@ -1,4 +1,5 @@
-import tw from 'tailwind-styled-components';
+import tw from 'twin.macro';
+import { styled } from 'styled-components';
 
 export const SignUpWrapper = tw.div`
     bg-BASIC_BLACK
@@ -26,14 +27,15 @@ export const ButtonContainer = tw.div`
   flex
   justify-between
   space-x-16
-  width[100%]
-  max-width[24rem]
+  [width:100%]
+  [max-width:24rem]
   mt-10
   mb-10
   mx-auto
 `;
 
-export const SignBtn = tw.button`
+export const SignBtn = styled.button`
+  ${tw`
   w-16
   h-16
   md:w-32
@@ -43,11 +45,20 @@ export const SignBtn = tw.button`
   transition-all
   duration-200
   ease-in-out
-  hover:bg-slate-300
-  hover:text-black
-  hover:scale-110
-  focus:bg-slate-300
-  focus:text-black
+  `}
+
+  &:hover {
+    background-color: rgb(226 232 240);
+    color: black;
+    transform: scale(1.1);
+    border: 1px solid white;
+  }
+
+  &:focus {
+    background-color: rgb(226 232 240);
+    color: black;
+    border: 1px solid white;
+  }
 `;
 
 export const ContentBox = tw.div`
@@ -68,7 +79,42 @@ export const ContentBox = tw.div`
 `;
 
 export const HorizonLine = tw.div`
-    border-BASIC_WHITE
-    border-l-2
-    h-[500px]
+  mr-10
+  border-BASIC_WHITE
+  border-l-2
+  h-[500px]
+`;
+
+export const InputWrapper = tw.form`
+  mb-10
+`;
+
+export const InputForm = styled.input`
+  ${tw`
+    w-full
+    h-14
+    px-4
+    py-2
+    rounded-lg
+    focus:border-green-500
+    bg-transparent
+    my-4
+    border
+    border-white
+  `}
+`;
+
+export const SecreatTag = styled.span`
+  ${tw`
+    mt-4
+    text-gray-300
+    text-sm
+    underline
+    underline-offset-4
+    cursor-pointer
+  `}
+
+  &:hover {
+    color: #8580e1;
+  }
 `;

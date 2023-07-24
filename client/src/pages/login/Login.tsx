@@ -16,6 +16,7 @@ import BackText from '@/commons/atoms/backText/BackText';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
 
 export default function Login() {
+  const token = window.localStorage.getItem('accessToken');
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
@@ -35,17 +36,28 @@ export default function Login() {
           curated for web, app, and design enthusiasts.
         </ContentSection>
 
-        <LoginGoogleForm type={'google'}> Login with Google</LoginGoogleForm>
-
+        <Link to="/signup">
+          <LoginGoogleForm type={'normal'}> Welcome, Be Guest</LoginGoogleForm>
+        </Link>
         <MiddleWrapper>
           <MiddleLine />
           &nbsp; or &nbsp;
           <MiddleLine />
         </MiddleWrapper>
 
-        <Link to="/signup">
-          <LoginGoogleForm type={'normal'}> 처음이신가요? 클릭하세요! </LoginGoogleForm>
-        </Link>
+        <LoginGoogleForm type={'google'}>
+          {token ? (
+            <>
+              <p>반가워요, 또 뵙는군요!</p>
+              <p>로그인하세요!</p>
+            </>
+          ) : (
+            <>
+              <p>처음이신가요?</p>
+              <p>클릭하세요!</p>
+            </>
+          )}
+        </LoginGoogleForm>
       </LoginSection>
 
       <HorizonLine />

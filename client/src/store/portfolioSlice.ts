@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@/store/index';
 import { INITIAL_PORTFOLIO } from '@/types/initials';
-import { CATEGORY_TYPE, CategoryMapper, PortfolioContent, PortfolioSlice, Tag } from '@/types';
+import { CategoryMapper, PortfolioContent, PortfolioSlice, Tag } from '@/types';
 
 export const SET_PORTFOLIO = 'SET_PORTFOLIO' as const;
 export const SET_TITLE = 'SET_TITLE' as const;
@@ -26,19 +26,19 @@ export const setPictures = (url: string) => ({ type: SET_PICTURES, url });
 const initialState: PortfolioSlice = {
   portfolio: INITIAL_PORTFOLIO,
   pictures: [],
-}
+};
 
 const catagoryMapper: CategoryMapper = {
-  "웹": "web",
-  "앱": "app",
-  "3D/애니메이션": "3danimation",
-  "그래픽디자인": "graphicdesign",
-  "사진/영상": "photo",
+  웹: 'web',
+  앱: 'app',
+  '3D/애니메이션': '3danimation',
+  그래픽디자인: 'graphicdesign',
+  '사진/영상': 'photo',
 };
 
 const matchCategory = (category: string) => {
   return catagoryMapper[category];
-}
+};
 
 const { reducer: portfolioReducer } = createSlice({
   name: 'portfolio',
@@ -46,7 +46,7 @@ const { reducer: portfolioReducer } = createSlice({
   reducers: {},
   extraReducers: {
     SET_PORTFOLIO: (state, action) => {
-      state.portfolio = { ...state.portfolio, ...action.portfolio }
+      state.portfolio = { ...state.portfolio, ...action.portfolio };
     },
     SET_TITLE: (state, action) => {
       state.portfolio.title = action.title;
@@ -69,7 +69,7 @@ const { reducer: portfolioReducer } = createSlice({
     },
     SET_PICTURES: (state, action) => {
       state.pictures = [...state.pictures, action.url];
-    }
+    },
   },
 });
 
