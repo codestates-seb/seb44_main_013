@@ -45,8 +45,8 @@ export const RecuitBtn = styled.button<ButtonProps>`
 export const CooperBtn = styled.button<ButtonProps>`
   ${tw`
     cursor-pointer
-    ml-2.5
-    mt-1
+    ml-2
+    mt-0
     hover:underline
     text-base
     whitespace-nowrap
