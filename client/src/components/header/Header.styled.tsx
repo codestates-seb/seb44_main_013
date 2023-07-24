@@ -16,7 +16,6 @@ export const ItemContainer = tw.div`
 
 export const CLink = tw.a`
   mx-4
-  hover:underline
   cursor-pointer
   whitespace-nowrap
   mt-3

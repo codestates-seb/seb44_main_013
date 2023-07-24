@@ -1,7 +1,7 @@
 // src/mocks/handlers.js
 import { rest } from 'msw';
 
-import { portfolios, commuDetail, pictures } from './data';
+import { portfolios, commuDetail } from './data';
 import {
   // commu,
   WebCategoryDatas,
@@ -9,9 +9,10 @@ import {
   AnimationCategoryDatas,
   GraphicCategoryDatas,
   PhotoCategoryDatas,
+  commu,
 } from './infiniteScrollData';
 
-import { Portfolio } from '@/types';
+import { CommuProps, Portfolio } from '@/types';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -109,7 +110,9 @@ const DaHamHandlers = [
   }),
   // 이미지 업로드
   rest.post('/pictures', async (_, res, ctx) => {
-    const imageUrl = ['https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png'];
+    const imageUrl = [
+      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHigT%2Fbtsh337vdan%2FfeUoGQjbwxsO4jQ8s18b41%2Fimg.png',
+    ];
     return res(ctx.status(200), ctx.json({ imageUrl: imageUrl }));
   }),
 ];
@@ -143,34 +146,35 @@ const DaHamHandlers = [
 const HJHandlers = [
   //1. 게시판 목록 조회 GET : community-main page
   //url-> http://localhost:8080/boards?division=COOPERATION
-  // rest.get('/boards', (req, res, ctx) => {
-  //   const division = req.url.searchParams.get('division');
+  rest.get('/boards', (req, res, ctx) => {
+    const division = req.url.searchParams.get('division');
 
-  //   if (division === 'COOPERATION') {
-  //     const filteredData = commu.filter((element) => element.division === 'COOPERATION');
-  //     return res(ctx.status(200), ctx.json(filteredData));
-  //   }
+    if (division === 'COOPERATION') {
+      const filteredData = commu.filter((element) => element.division === 'COOPERATION');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
 
-  //   if (division === 'RECRUITMENT') {
-  //     const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
-  //     return res(ctx.status(200), ctx.json(filteredData));
-  //   }
-  // }),
+    if (division === 'RECRUITMENT') {
+      const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
+      return res(ctx.status(200), ctx.json(filteredData));
+    }
+  }),
 
-  //2. 게시한 상세 페이지 조회 GET : community-detail page
-  // rest.get('/boards/:id', (req, res, ctx) => {
-  //   const id = Number(req.params.id);
-  //   const filteredData = commuDetail.filter(e => e.id === id);
-  //   return (res(ctx.status(200), ctx.json(filteredData)))
-  // }),
+  // 2. 게시한 상세 페이지 조회 GET : community-detail page
+  rest.get('/boards/:id', (req, res, ctx) => {
+    const id = Number(req.params.id);
+    const filteredData = commuDetail.filter((e) => e.id === id);
+    console.log(filteredData);
+    return res(ctx.status(200), ctx.json(filteredData));
+  }),
   //3. 댓글 수정
-  rest.patch(`/comments/:comments_id`, async (req, res, ctx) => {
-    const { comments_id, memberId, content, name } = await req.json();
+  rest.patch(`/comments/:id`, async (req, res, ctx) => {
+    const { id, memberId, content, name } = await req.json();
     const filterdData = commuDetail.filter((el) => el.id === 2);
-    const index = filterdData[0].comments.findIndex((el) => el.comments_id === comments_id);
+    const index = filterdData[0].comments.findIndex((el) => el.id === id);
 
     const temp = {
-      comments_id: comments_id,
+      comments_id: id,
       content: content,
       memberId: memberId,
       name: name,
@@ -199,7 +203,7 @@ const HJHandlers = [
     const comments_id = filteredData.comments.length || 0;
 
     const newPostData = {
-      comments_id: comments_id + 1,
+      id: comments_id + 1,
       content: (await req.json()).content,
       memberId: 1,
       name: 'jhj',
@@ -284,29 +288,31 @@ const HJHandlers = [
 ];
 
 // 게시판 등록 - 효정
-// const HyoHandler = [
-//   rest.post('/boards/write', async (req, res, ctx) => {
-//     const currentReq = await req.json();
-//     console.log(currentReq.body);
+const HyoHandler = [
+  rest.post('/boards/write', async (req, res, ctx) => {
+    const currentReq = await req.json();
+    const memberId = Number(window.localStorage.getItem('memberId'));
+    console.log(currentReq);
 
-//     const newCommunity: CommuProps = {
-//       id: 10,
-//       title: currentReq.body.title,
-//       content: currentReq.body.content.replace(/<\/?p[^>]*>/g, ''),
-//       view: 0,
-//       division: 'recruitment',
-//       name: 'phy',
-//       created_at: '2023-06-21T17:34:51.3395597',
-//       modifiedAt: '2023-06-21T17:34:51.3395597',
-//       memberId: 1,
-//       status: 'POST_ACTIVE',
-//     };
-//     commu.unshift(newCommunity);
-//     return res(ctx.status(201), ctx.json(newCommunity));
-//   }),
-// ];
+    const newCommunity: CommuProps = {
+      id: memberId,
+      title: currentReq.title,
+      content: currentReq.content.replace(/<\/?p[^>]*>/g, ''),
+      view: 0,
+      division: currentReq.division,
+      name: 'phy',
+      created_at: '2023-06-21T17:34:51.3395597',
+      modifiedAt: '2023-06-21T17:34:51.3395597',
+      memberId: 1,
+      status: 'POST_ACTIVE',
+    };
+    commu.unshift(newCommunity);
+    console.log(commu);
+    return res(ctx.status(201), ctx.json(newCommunity));
+  }),
+];
 
 export const handlers = DaHamHandlers
   // .concat(UserRequestHandlers)
-  .concat(HJHandlers);
-// .concat(HyoHandler);
+  .concat(HJHandlers)
+  .concat(HyoHandler);

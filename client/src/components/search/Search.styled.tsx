@@ -10,26 +10,36 @@ export const SearchContainer = tw.form`
   max-w-md
   min-w-min
   mx-auto
+  text-white
 `;
 
-export const SearchIcon = tw(BsSearchHeart)`
-  absolute
-  ml-5 
-  top-1/2
-  transform -translate-y-1/2
+export const SearchIcon = styled(BsSearchHeart)`
+  ${tw`
+    absolute
+    ml-4 
+    top-1/2
+    text-gray-300
+    transform -translate-y-1/2
+    transition-colors duration-300 ease-in-out
+  `}
 `;
 
 export const SearchBox = styled.input`
   ${tw`
     pl-12
     h-12
-    
+    text-white
     w-full
     rounded-full	
-    bg-[#ecececda]
+    bg-transparent
+    border-2 border-gray-500
   `}
 
   &:focus {
-    ${tw`outline-none`}
+    ${tw`outline-none border-white`}
+  }
+
+  &::placeholder {
+    ${tw`text-gray-300`}
   }
 `;

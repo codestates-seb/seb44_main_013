@@ -1,0 +1,10 @@
+[[redirects]]
+from = "/api/*"
+to = "http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080/*"
+status = 200
+force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Type = "application/json"

@@ -25,7 +25,7 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const showWholeCommu = async () => {
-      return call(`/api/boards?division=${division}`, 'GET', {
+      return call(`/boards?division=${division}`, 'GET', {
         params: { division: division },
       })
         .then((res) => {
@@ -40,6 +40,7 @@ export default function CommunityMain() {
   // 검색 - 07.11 효정
   const [currentSearch, setCurrentSearch] = useState('');
   const [searchs, setSearchs] = useState([] as any);
+  console.log(searchs);
 
   useEffect(() => {
     setSearchs(data);
@@ -48,37 +49,25 @@ export default function CommunityMain() {
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search
-          setSearchValue={setCurrentSearch}
-          currentSearch={currentSearch}
-          data={data}
-          setSearchs={setSearchs}
-        />
+        <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
       </SearchContainer>
 
-      
-          {
-            searchs > 0 ?
-            <ItemWrapper>
-              <Link to="/boards/edit">
-                <StyledWritingBtn>
-                  <WritingBtn />
-                </StyledWritingBtn>
-              </Link>
-              <ListsWrapper>
-                {searchs.map((communityItem: any) => {
-                  return (
-                    <CommunityItem
-                      key={communityItem.id}
-                      communityItem={communityItem}
-                    />
-                  );
-                })}
-              </ListsWrapper>
-            </ItemWrapper> :
-            <NodataImage src={datano} alt='no data' />
-          }
-      
+      {searchs.length > 0 ? (
+        <ItemWrapper>
+          <Link to="/boards/edit">
+            <StyledWritingBtn>
+              <WritingBtn />
+            </StyledWritingBtn>
+          </Link>
+          <ListsWrapper>
+            {searchs.map((communityItem: any) => {
+              return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
+            })}
+          </ListsWrapper>
+        </ItemWrapper>
+      ) : (
+        <NodataImage src={datano} alt="no data" />
+      )}
     </CommunityWrapper>
   );
 }
