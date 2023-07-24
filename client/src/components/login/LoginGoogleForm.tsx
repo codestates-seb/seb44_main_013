@@ -64,7 +64,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     try {
       const res = await axios({
         method: 'get',
-        url: '/api/oauth/login',
+        url: '/oauth/login',
         headers: {
           authorization: `${accessToken}`,
           id: memberId,
@@ -108,7 +108,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //최초로그인
     axios
       .post(
-        '/api/oauth/signup ',
+        '/oauth/signup ',
         {
           name: name,
           email: email,
