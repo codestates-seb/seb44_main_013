@@ -23,6 +23,7 @@ import java.net.URI;
 @RequestMapping("/comments")
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin("*")
 public class CommentController {
     private final CommentService commentService;
     private final MemberService memberService;
