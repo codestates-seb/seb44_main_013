@@ -1,9 +1,8 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 const ACCESS_TOKEN = 'accessToken';
-export const API_BASE_URL = '/api';
-// export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
-// console.log(import.meta.env);
+// export const API_BASE_URL = '/api';
+export const API_BASE_URL = import.meta.env.MODE === 'development' ? '' : '/api';
 
 export async function call(api: string, method: string, data?: any) {
   // const dispatch = useDispatch();
