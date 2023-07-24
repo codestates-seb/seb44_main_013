@@ -10,7 +10,12 @@ import DeleteModal from '@/components/modal/DeleteModal';
 
 import { CommuProps } from '@/types';
 
-import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
+import {
+  CmDContainer,
+  CommentContainer,
+  MainContainer,
+  PageWrapper,
+} from './CommunityDetail.styled';
 
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
@@ -67,13 +72,24 @@ export default function CommunityDetail({ handleClick }: any) {
       />
       <MainContainer onClick={handleClick}>
         <CmDContainer>
-          <DetailContents data={memberData} handleDeleteModal={handleDeleteModal} id={boardId} />
+          <DetailContents
+            data={memberData}
+            handleDeleteModal={handleDeleteModal}
+            id={boardId}
+          />
         </CmDContainer>
         <CommentContainer>
           <CommentBox comments={memberData.comments} />
         </CommentContainer>
       </MainContainer>
-      {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
+      {clickDeletePost ? (
+        <DeleteModal
+          onConfirm={handleDeleteModal}
+          onCancel={handleDeleteModal}
+        />
+      ) : (
+        ''
+      )}
     </PageWrapper>
   );
 }
