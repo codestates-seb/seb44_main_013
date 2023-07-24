@@ -197,6 +197,14 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
       </GoogleWrapper>
     );
   }
+
+  if (type === 'guest') {
+    return (
+      <GoogleWrapper>
+        <TextSection>{children}</TextSection>
+      </GoogleWrapper>
+    );
+  }
 }
 
 // const GoogleLogin = ({ children, loginGoogle }) => (

@@ -35,13 +35,12 @@ export default function Main() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const categoryParam = categoryMap[selectedCategory] || 'web';
-  console.log(`1번 : ${selectedCategory}`);
-  console.log(`2번 ${categoryParam}`);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        const res = await call(`portfolios?category=${categoryParam}`, 'GET', null);
+        const res = await call(`/portfolios?category=${categoryParam}`, 'GET', null);
         setItems(res[0].data);
         setFilteredItems(res[0].data);
       } catch (error) {
@@ -79,7 +78,7 @@ export default function Main() {
     setSearchs(items);
   }, [items]);
 
-  // console.log(searchs);
+  console.log(searchs);
 
   return (
     <>

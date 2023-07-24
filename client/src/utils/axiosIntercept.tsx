@@ -1,22 +1,23 @@
-// import { RootState } from '@/modules';
-// import axios from 'axios';
-// import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { API_BASE_URL } from './apiService';
 
-// const ACCESS_TOKEN = useSelector((state: RootState) => state.loginSlice.accesstoken);
-// const aXios = axios.create({
-//   baseURL: '',
-// });
+const ACCESS_TOKEN = window.localStorage.getItem('accessToken');
+const netaxios = axios.create({
+  baseURL: API_BASE_URL,
+});
 
-// aXios.interceptors.request.use(
-//   (config) => {
-//     const accessToken = '';
-//     if (accessToken) {
-//       config.headers['Content-Type'] = 'application/json';
-//       config.headers['Authorization'] = `Bearer ${ACCESS_TOKEN}`;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+netaxios.interceptors.request.use(
+  (config) => {
+    const accessToken = ACCESS_TOKEN || '';
+    if (accessToken !== '') {
+      config.headers['Content-Type'] = 'application/json';
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default netaxios;
