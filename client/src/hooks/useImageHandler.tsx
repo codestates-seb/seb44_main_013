@@ -13,34 +13,34 @@ export default function useImageHandler() {
     return axios({
       headers: {
         'Content-Type': 'multipart/form-data',
-        'accessToken': accessToken,
+        accessToken: accessToken,
       },
       method: 'POST',
       url: '/api/s3/picture',
-      data: body
-    })
-  }
+      data: body,
+    });
+  };
 
   const imageUrlHandler = useCallback((editor: any) => {
     const range = editor.getSelection();
-    const url = prompt("");
+    const url = prompt('');
     if (url) {
-      editor.insertEmbed(range.index, "image", url);
+      editor.insertEmbed(range.index, 'image', url);
       editor.setSelection(range.index + 1);
     }
   }, []);
 
   const imageHandler = useCallback((editor: any) => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.setAttribute("name", "file");
+    const input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+    input.setAttribute('name', 'file');
     // input.setAttribute("multiple", "");
     input.click();
 
     input.onchange = async (event: any) => {
       const files: FileList = event?.target?.files;
-      const formData = new FormData();
+      // const formData = new FormData();
       // for (let i = 0; i < files.length; i++) {
       //   formData.append("file", files[i]);
       // }
@@ -53,10 +53,10 @@ export default function useImageHandler() {
       // })
       dispatch(setPictures(response.data));
       const range = editor.getSelection();
-      editor.insertEmbed(range.index, "image", response.data);
+      editor.insertEmbed(range.index, 'image', response.data);
       editor.setSelection(range.index + 1);
-    }
+    };
   }, []);
 
   return [imageUrlHandler, imageHandler] as const;
-};
+}
