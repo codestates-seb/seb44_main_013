@@ -7,8 +7,23 @@ import { changeDateFormat } from '@/utils/changeDateFormat';
 import { Portfolio, Member, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 
-import { ButtonHeader, ContentContainer, DeleteButton, EditButton, PortfolioContainer, UserCard, UserContainer, AskCommisionBtn } from '@/pages/portfolio-detail/PortfolioDetail.styled';
-import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper } from '@/commons/styles/Containers.styled';
+import {
+  ButtonHeader,
+  ContentContainer,
+  DeleteButton,
+  EditButton,
+  PortfolioContainer,
+  UserCard,
+  UserContainer,
+  AskCommisionBtn,
+} from '@/pages/portfolio-detail/PortfolioDetail.styled';
+import {
+  Center,
+  FlexBetweenWrapper,
+  FlexColumnContainer,
+  FlexEndWrapper,
+  FlexWrapper,
+} from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 import LikeButton from '@/commons/atoms/buttons/LikeButton';
@@ -30,80 +45,79 @@ export default function PortfolioDetail() {
   const deletePortfolio = () => call(`/portfolios/${portfolioId}`, 'DELETE');
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
-  const onReviseButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
+  const onReviseButtonClick = () => (window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`);
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
     deletePortfolio();
     navigate('/main');
-  }
+  };
 
   useEffect(() => {
     getPortfolio().then((res) => {
-      console.log(res)
+      console.log(res);
       setPortfolio(res.data);
       setMember(res.data.member);
       setCreatedAt(changeDateFormat(res.data.createdAt));
     });
-  }, [])
+  }, []);
 
   return (
-    <FlexColumnContainer bg='rgba(16, 16, 21, 1)'>
+    <FlexColumnContainer bg="rgba(16, 16, 21, 1)">
       <ButtonHeader>
-        <BsArrowReturnLeft
-          size={30} color='white'
-          className='cursor-pointer'
-          onClick={() => navigate(-1)} />
+        <BsArrowReturnLeft size={30} color="white" className="cursor-pointer" onClick={() => navigate(-1)} />
       </ButtonHeader>
 
       <ContentContainer>
         <PortfolioContainer>
-          {portfolio &&
-            <div dangerouslySetInnerHTML={{
-              __html: sanitize(setElementInlineStyle(portfolio.content))
-            }}>
-            </div>
-          }
+          {portfolio && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: sanitize(setElementInlineStyle(portfolio.content)),
+              }}
+            ></div>
+          )}
         </PortfolioContainer>
 
         <UserContainer>
           <UserCard>
             <FlexBetweenWrapper>
-              {portfolio &&
+              {portfolio && (
                 <>
-                  <LikeButton portfolioId={portfolio.id} currentLikes={portfolio.countLikes} isToggled={portfolio.liked} />
+                  <LikeButton
+                    portfolioId={portfolio.id}
+                    currentLikes={portfolio.countLikes}
+                    isToggled={portfolio.liked}
+                  />
                   <FlexWrapper gap={20}>
-                    <SmallText color='white'>views · {portfolio.view}</SmallText>
+                    <SmallText color="white">views · {portfolio.view}</SmallText>
                     <Bookmark portfolioId={portfolio.id} isToggled={portfolio.marked} />
                   </FlexWrapper>
                 </>
-              }
+              )}
             </FlexBetweenWrapper>
-            {member &&
-              <MemberProfile type="portfolio" member={member} />
-            }
+            {member && <MemberProfile type="portfolio" member={member} />}
             <Center>
               <AskCommisionBtn>의뢰 요청</AskCommisionBtn>
             </Center>
-            {portfolio &&
+            {portfolio && (
               <>
-                <HeadingText color='white'>{portfolio.title}</HeadingText>
+                <HeadingText color="white">{portfolio.title}</HeadingText>
                 <SmallText color="white">{createdAt}</SmallText>
-                <BodyText color='white'>{portfolio.explains}</BodyText>
+                <BodyText color="white">{portfolio.explains}</BodyText>
               </>
-            }
-            {portfolio?.writer &&
+            )}
+            {portfolio?.writer && (
               <FlexEndWrapper>
-                <EditButton onClick={onReviseButtonClick} /><DeleteButton onClick={openDeleteModal} />
+                <EditButton onClick={onReviseButtonClick} />
+                <DeleteButton onClick={openDeleteModal} />
               </FlexEndWrapper>
-            }
+            )}
           </UserCard>
 
           <UserCard>
-            <LabelText color='white'>Tags</LabelText>
+            <LabelText color="white">Tags</LabelText>
             <FlexWrapper gap={8}>
-              {portfolio &&
-                portfolio.portfolioTags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)
-              }
+              {portfolio && portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)}
             </FlexWrapper>
           </UserCard>
         </UserContainer>

@@ -9,7 +9,7 @@ export async function call(api: string, method: string, data?: any) {
   // const dispatch = useDispatch();
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-  let headers = new AxiosHeaders({
+  const headers = new AxiosHeaders({
     'Content-Type': 'application/json',
     'Authorization': accessToken,
   });
@@ -26,7 +26,7 @@ export async function call(api: string, method: string, data?: any) {
 
   // 에러처리고려
   try {
-    const response = await axios(options)
+    const response = await axios(options);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

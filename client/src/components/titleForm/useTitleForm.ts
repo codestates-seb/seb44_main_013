@@ -6,7 +6,6 @@ import { Picture, PortfolioContent, Tag } from '@/types';
 import { call } from '@/utils/apiService';
 import { pictures, portfolio } from '@/store/portfolioSlice';
 
-
 export default function useTitleForm() {
   const savedPortfolio = useSelector(portfolio);
   const savedPictures = useSelector(pictures);
@@ -16,32 +15,37 @@ export default function useTitleForm() {
   const modifyPortfolio = (body: PortfolioContent) => call(`/portfolios/${savedPortfolio.id}`, 'PATCH', body);
   const deletePicture = (body: Picture) => call(`portfolios/s3/picture`, 'DELETE', body);
 
-  const alertValidation = (message: string) => { alert(message); return false };
+  const alertValidation = (message: string) => {
+    alert(message);
+    return false;
+  };
 
   const checkValidation = (portfolio: PortfolioContent) => {
     // if (savedPictures.length < 1) return alertValidation('이미지를 1개 이상 첨부해주세요.');
-    if (portfolio.title.length < 1 || portfolio.title.length > 30) return alertValidation('제목은 1자 이상 30자 미만으로 작성해주세요.');
+    if (portfolio.title.length < 1 || portfolio.title.length > 30)
+      return alertValidation('제목은 1자 이상 30자 미만으로 작성해주세요.');
     if (portfolio.tags.length < 1) return alertValidation('태그를 최소 1개 이상 선택해주세요.');
-    if (portfolio.explains.length < 1 || portfolio.explains.length > 300) return alertValidation('소개글은 1자 이상 300자 미만으로 작성해주세요.');
+    if (portfolio.explains.length < 1 || portfolio.explains.length > 300)
+      return alertValidation('소개글은 1자 이상 300자 미만으로 작성해주세요.');
     return true;
-  }
+  };
 
   const deleteImageUrls = (htmlContent: string) => {
     savedPictures.forEach((url: string) => {
       const isImageUrlRemoved = !htmlContent.indexOf(url);
-      if (isImageUrlRemoved) deletePicture({ fileName: url })
-    })
+      if (isImageUrlRemoved) deletePicture({ fileName: url });
+    });
   };
 
   const changeArraytoString = (tags: Array<Tag>) => {
-    let arrayString = "[";
+    let arrayString = '[';
     tags.forEach((tag: Tag) => {
-      arrayString = arrayString.concat("{id:" + tag.id + ", name:'" + tag.name + "'},")
-    })
+      arrayString = arrayString.concat('{id:' + tag.id + ", name:'" + tag.name + "'},");
+    });
     arrayString = arrayString.slice(0, -1);
     arrayString = arrayString + ']';
     return arrayString;
-  }
+  };
 
   const submitPortfolio = () => {
     const isModified = savedPortfolio.id ? true : false;
@@ -53,8 +57,8 @@ export default function useTitleForm() {
       delete copiedPortfolio.portfolioId;
       delete copiedPortfolio.createdAt;
       const body = copiedPortfolio;
-      if (isModified) modifyPortfolio(body).then(() => navigate(`/portfolios/${savedPortfolio.id}`))
-      else postPortfolio(body).then((res) => navigate(`/main`));
+      if (isModified) modifyPortfolio(body).then(() => navigate(`/portfolios/${savedPortfolio.id}`));
+      else postPortfolio(body).then(() => navigate(`/main`));
     }
   };
 
