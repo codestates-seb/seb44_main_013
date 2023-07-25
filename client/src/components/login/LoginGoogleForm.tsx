@@ -33,8 +33,8 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     onSuccess: (tokenResponse) => {
       const ACCESS = tokenResponse.access_token;
       // setToken(ACCESS);
-      console.log(tokenResponse);
-      console.log(ACCESS);
+      // console.log(tokenResponse);
+      // console.log(ACCESS);
 
       axios
         .get('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -44,10 +44,10 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         })
         .then((response) => {
           console.log('구글이랑 토큰 받아옵니다.');
-          console.log(response);
-          console.log(response.data.name);
-          console.log(response.data.email);
-          console.log(response.data.picture);
+          // console.log(response);
+          // console.log(response.data.name);
+          // console.log(response.data.email);
+          // console.log(response.data.picture);
 
           sendAccessToken(response.data.name, response.data.email, response.data.picture, ACCESS);
         })
@@ -123,12 +123,12 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
       )
       .then((response) => {
         console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
-        console.log(response);
+        // console.log(response);
         const accessToken = response.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
         // const refresthToken = response.headers.RefreshToken
-        console.log(response.headers);
+        // console.log(response.headers);
 
         window.localStorage.setItem('memberId', memberId);
         window.localStorage.setItem('accessToken', accessToken);

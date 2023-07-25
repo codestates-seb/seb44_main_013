@@ -12,7 +12,7 @@ export async function call(api: string, method: string, data?: any) {
 
   const headers = new AxiosHeaders({
     'Content-Type': 'application/json',
-    accessToken: `Bearer ${accessToken}`,
+    accessToken: `${accessToken}`,
   });
 
   const options: RawAxiosRequestConfig = {
