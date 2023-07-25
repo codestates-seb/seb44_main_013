@@ -1,15 +1,18 @@
 import { AppItemContainer, Author, Title, TitleOverlay } from './AppItem.stlyed';
-import appImg from '../../assets/appImg.png';
+// import appImg from '../../assets/appImg.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsBatteryFull } from 'react-icons/bs';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
+import circleNoImg from '@/assets/circleNoImg.png';
 
 type AppItemProps = {
   item: any;
 };
 
 export default function AppItem({ item }: AppItemProps) {
+  const itemPic = item.firstImage === null ? circleNoImg : item.firstImage;
+
   return (
     <AppItemContainer>
       <span>10:30</span>
@@ -17,7 +20,7 @@ export default function AppItem({ item }: AppItemProps) {
         <AiOutlineWifi size={20} />
         <BsBatteryFull size={20} />
       </div>
-      <img src={appImg} alt={`appImg-${item.title}`} />
+      <img src={itemPic} alt={`appImg-${item.title}`} />
       <TitleOverlay>
         <Title>{item.title}</Title>
         <Author>{item.name}</Author>

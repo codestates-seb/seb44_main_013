@@ -124,10 +124,11 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
       .then((response) => {
         console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
         console.log(response);
-        const accessToken = response.headers.authorization;
+        const accessToken = response.config.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
         // const refresthToken = response.headers.RefreshToken
+        console.log(response.headers);
 
         window.localStorage.setItem('memberId', memberId);
         window.localStorage.setItem('accessToken', accessToken);
@@ -136,8 +137,8 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         //localStorage 에 액세스 토큰 저장
         navigate('/signup/role');
 
-        console.log(accessToken);
-        console.log(memberId);
+        console.log(`토큰` + accessToken);
+        console.log(`아이디` + memberId);
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (axios.isAxiosError(error)) {
