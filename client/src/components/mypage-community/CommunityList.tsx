@@ -1,4 +1,3 @@
-import { Board } from '@/types';
 import {
   MainTitle,
   Name,
