@@ -1,10 +1,5 @@
 import threeDimg from '../../assets/3DImg.png';
-import {
-  Author,
-  DItemContainer,
-  Title,
-  TitleOverlay,
-} from './ThreeDItem.styled';
+import { Author, DItemContainer, Title, TitleOverlay } from './ThreeDItem.styled';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 
@@ -15,16 +10,13 @@ type AnimationProps = {
 export default function ThreeDItem({ item }: AnimationProps) {
   return (
     <DItemContainer>
-      <img src={threeDimg} alt={`3Dimg-${item.data.title}`} />
+      <img src={threeDimg} alt={`3Dimg-${item.title}`} />
       <TitleOverlay>
-        <Title>{item.data.title}</Title>
-        <Author>{item.data.membername}</Author>
+        <Title>{item.title}</Title>
+        <Author>{item.name}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark
-          portfolioId={item.data.portfolioId}
-          isToggled={item.data.isMarked}
-        />{' '}
+        <Bookmark portfolioId={item.id} isToggled={item.marked} />{' '}
       </BookmarkWrapper>
     </DItemContainer>
   );

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
 import LoginGoogleForm from '@/components/login/LoginGoogleForm';
@@ -14,9 +15,15 @@ import {
 } from './Login.styled';
 import BackText from '@/commons/atoms/backText/BackText';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
+import AlertModal from '@/components/modal/AlertModal';
 
 export default function Login() {
   const token = window.localStorage.getItem('accessToken');
+  const [close, setClose] = useState(false);
+
+  const handleAlert = () => {
+    setClose(!close);
+  };
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
@@ -36,9 +43,22 @@ export default function Login() {
           curated for web, app, and design enthusiasts.
         </ContentSection>
 
-        <Link to="/signup">
-          <LoginGoogleForm type={'normal'}> Welcome, Be Guest</LoginGoogleForm>
-        </Link>
+        {/* <Link to="/signup"> */}
+        <LoginGoogleForm type={'normal'} alert={handleAlert}>
+          {' '}
+          Welcome, Be Guest
+        </LoginGoogleForm>
+        {close ? (
+          <AlertModal
+            onCancel={handleAlert}
+            onConfirm={handleAlert}
+            type={'etc'}
+            title={'Sorry,'}
+            content={'현재 서비스 준비 중입니다.'}
+            clicked={'닫기'}
+          />
+        ) : null}
+        {/* </Link> */}
         <MiddleWrapper>
           <MiddleLine />
           &nbsp; or &nbsp;
