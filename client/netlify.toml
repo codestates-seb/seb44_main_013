@@ -1,10 +1,4 @@
 [[redirects]]
-from = "/*"
-to = "http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080"
-status = 200
-
-
-[[redirects]]
 from = "^/(?!assets|api).*$"
 to = "/index.html"
 status = 200
