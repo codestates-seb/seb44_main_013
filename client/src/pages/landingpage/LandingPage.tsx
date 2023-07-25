@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import BlackSection from '@/components/home-section/black-section/BlackSection';
@@ -22,6 +22,31 @@ const blurOutExpandFwd = keyframes`
     filter: blur(12px) opacity(0%);
     letter-spacing: 5vw;  // This line has been modified
   }
+`;
+
+const scrollDown = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(15px);
+  }
+  60% {
+    transform: translateY(10px);
+  }
+`;
+
+const ScrollDownIndicator = styled.div`
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  color: #fff;
+  font-size: 3em;
+  opacity: 0.7;
+  animation: ${scrollDown} 2s infinite;
 `;
 
 const FullPageContainer = styled.div`
@@ -49,6 +74,7 @@ const PortfollyText = styled.h1`
 
 export default function LandingPage() {
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(true);
 
   useEffect(() => {
     const handleAnimationEnd = () => {
@@ -66,6 +92,18 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollHint(false);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     AOS.init({
       offset: 200,
       duration: 800,
@@ -79,6 +117,9 @@ export default function LandingPage() {
       <FullPageContainer>
         <PortfollyText id="portfolly-text">Portfolly</PortfollyText>
       </FullPageContainer>
+      {animationComplete && showScrollHint && (
+        <ScrollDownIndicator>&#8595;</ScrollDownIndicator>
+      )}
       {animationComplete && (
         <>
           <BlackSection />
