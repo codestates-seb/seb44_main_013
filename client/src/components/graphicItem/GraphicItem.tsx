@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom';
 import { Author, GraphicItemContainer, Title, TitleOverlay } from './GraphicItem.styled';
-// import graphicimg from '../../assets/graphinImg.png';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
@@ -13,14 +13,16 @@ export default function GraphicItem({ item }: GraphicProps) {
 
   return (
     <GraphicItemContainer>
-      <img src={itemPic} alt={`graphic image-${item.title}`} />
-      <TitleOverlay>
-        <Title>{item.title}</Title>
-        <Author>{item.name}</Author>
-      </TitleOverlay>
-      <BookmarkWrapper>
-        <Bookmark portfolioId={item.id} isToggled={item.marked} />
-      </BookmarkWrapper>
+      <Link to={`/portfolios/${item.id}`}>
+        <img src={itemPic} alt={`graphic image-${item.title}`} />
+        <TitleOverlay>
+          <Title>{item.title}</Title>
+          <Author>{item.name}</Author>
+        </TitleOverlay>
+        <BookmarkWrapper>
+          <Bookmark portfolioId={item.id} isToggled={item.marked} />
+        </BookmarkWrapper>
+      </Link>
     </GraphicItemContainer>
   );
 }
