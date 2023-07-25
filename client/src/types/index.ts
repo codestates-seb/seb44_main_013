@@ -49,6 +49,7 @@ export interface Styledprops extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
 
 //0707 혜진 community-main:<data> commu
 export interface CommuProps {
+  member: any;
   id: number;
   title: string;
   content: string;

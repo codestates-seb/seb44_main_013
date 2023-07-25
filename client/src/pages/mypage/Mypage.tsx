@@ -17,26 +17,28 @@ import {
   MyProfileWrapper,
 } from './MyPage.styled';
 
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
+import netaxios from '@/utils/axiosIntercept';
+import { useParams } from 'react-router-dom';
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const dummyArray = Array.from({ length: 10 });
+  const { id: memberId } = useParams();
 
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
   );
 
   useEffect(() => {
-    axios
-      .get('https://api.portfolly.site/members/{member-id}')
+    netaxios
+      .get(`/members/${memberId}`)
       .then((response) => {
         setUser(response.data);
       })
