@@ -102,6 +102,7 @@ public class SecurityConfiguration {
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.addExposedHeader("Authorization");
         configuration.addExposedHeader("AccessToken");
+        configuration.addExposedHeader("RefreshToken");
         configuration.addExposedHeader("id");
         configuration.addExposedHeader("memberId");
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE","OPTIONS"));
