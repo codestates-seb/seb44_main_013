@@ -100,7 +100,10 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.addExposedHeader("Authorization","AccessToken","id");
+        configuration.addExposedHeader("Authorization");
+        configuration.addExposedHeader("AccessToken");
+        configuration.addExposedHeader("id");
+        configuration.addExposedHeader("memberId");
         configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE","OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
