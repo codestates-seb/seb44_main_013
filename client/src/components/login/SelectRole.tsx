@@ -24,7 +24,7 @@ export default function SelectRole() {
     setRole(res);
   };
 
-  console.log(role);
+  // console.log(role);
 
   const sendRole = () => {
     try {
