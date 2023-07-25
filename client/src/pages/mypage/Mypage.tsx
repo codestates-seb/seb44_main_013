@@ -20,7 +20,7 @@ import {
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
+import { BackImgControl } from '@/commons/styles/layout/Layout.styled';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
 
@@ -81,7 +81,7 @@ export default function MyPage() {
   const paginatedCommunityList = dummyArray.slice(startIndex, endIndex);
 
   return (
-    <DefaultImgWrapper>
+    <BackImgControl>
       <Header />
       <MainWrapper>
         {/* 프로필 부분  */}
@@ -164,6 +164,6 @@ export default function MyPage() {
         </MyItemsWrapper>
       </MainWrapper>
       <Footer />
-    </DefaultImgWrapper>
+    </BackImgControl>
   );
 }
