@@ -17,6 +17,7 @@ import {
   StyledWritingBtn,
   NodataImage,
 } from './CommunityMain.styled';
+import axios from 'axios';
 
 export default function CommunityMain() {
   const [data, setDatas] = useState<CommuProps[]>([]);
@@ -25,12 +26,18 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const showWholeCommu = async () => {
-      return call(`boards?division=${division}`, 'GET', { params: { division: division } })
+      await axios
+        .get(`https://api.portfolly.site/boards?division=${division}`, { params: { division: division } })
         .then((res) => {
-          console.log(res);
-          setDatas(res);
-        })
-        .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
+          console.log(res.data);
+          setDatas(res.data);
+        });
+      // return call(`/boards?division=${division}`, 'GET', { params: { division: division } })
+      //   .then((res) => {
+      //     console.log(res);
+      //     setDatas(res);
+      //   })
+      //   .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
     };
 
     showWholeCommu();
