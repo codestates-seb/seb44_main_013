@@ -25,7 +25,7 @@ export default function CommunityMain() {
   const division = searchParams.get('division');
 
   const page = 1;
-  const size = 5;
+  const size = 30;
 
   useEffect(() => {
     const showWholeCommu = async () => {
@@ -60,30 +60,22 @@ export default function CommunityMain() {
       <SearchContainer>
         <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
       </SearchContainer>
-
-      {searchs.length > 0 ? (
         <ItemWrapper>
           <Link to="/boards/edit">
             <StyledWritingBtn>
               <WritingBtn />
             </StyledWritingBtn>
           </Link>
-          <ListsWrapper>
-            {searchs.map((communityItem: any) => {
-              return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
-            })}
-          </ListsWrapper>
+          {searchs.length > 0 ? (
+            <ListsWrapper>
+              {searchs.map((communityItem: any) => {
+                return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
+              })}
+            </ListsWrapper>
+          ) : (
+            <NodataImage src={datano} alt="no data" />
+          )}
         </ItemWrapper>
-      ) : (
-        <ItemWrapper>
-          <Link to="/boards/edit">
-            <StyledWritingBtn>
-              <WritingBtn />
-            </StyledWritingBtn>
-          </Link>
-          <NodataImage src={datano} alt="no data" />
-        </ItemWrapper>
-      )}
     </CommunityWrapper>
   );
 }
