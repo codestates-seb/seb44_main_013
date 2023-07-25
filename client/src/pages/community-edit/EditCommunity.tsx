@@ -1,6 +1,6 @@
 import ReactQuill from 'react-quill';
-import { useState, ChangeEventHandler } from 'react';
-import { useNavigate,} from 'react-router-dom';
+import { useState, useEffect, ChangeEventHandler } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import PurpleButton from '@/commons/atoms/buttons/PurpleBtn';
 
@@ -11,12 +11,12 @@ import {
   SaveBtnContainer,
   TextEditor,
   TitleAdd,
-} from './AddCommunity.styled';
+} from './EditCommunity.styled';
 
 import 'react-quill/dist/quill.snow.css';
 import netaxios from '@/utils/axiosIntercept';
 
-export default function AddCommunity() {
+export default function EditCommunity() {
   const modules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -40,30 +40,61 @@ export default function AddCommunity() {
   const [title, setTitle] = useState('');
   const [post, setPost] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleTitle: ChangeEventHandler<HTMLInputElement> = (event) => {
     setTitle(event.target.value);
   };
-  //새 등록인지 수정인지 한 페이지에서 관리
-  // post 요청 body
-  // const communityContent = {
-  //   title: title,
-  //   content: post.replace(/<\/?p[^>]*>/g, ''),
+
+  const { id: communityNum } = useParams();
+  // console.log(location.pathname);
+  //url에서 boardId 받아옵니다.
+  // 최초 랜더링 시 해당 게시글을 reqct-quill에 뿌립니다.
+  // useEffect(() => {
+  //   if(location.pathname === `/boards/edit/${communityNum}`){
+  //     axios.get(`/api/boards/${communityNum}`)
+  //     .then((res) => {
+  //       setTitle(res.data.title);
+  //       setPost(res.data.content);
+  //     })
+  //     .catch((err) => console.log(err));
+  //   }
+
+  // if(location.pathname === `/boards/edit`) {
+  //   axios.post(`/api/boards/write`,  {
+  //     headers: {
+  //       widthCredentials: true,
+  //     },
+  //     body: postInformation,
+  //   })
+  //   .then(() => console.log('새글 등록 성공'))
+  //   .catch((err) => console.log(err))
+
+  //   navigate(`/boards/`)
   // }
 
-  //새 글 작성 함수
-  const postCommunity = async () => {
-    const roleDivision = window.localStorage.getItem('memberRole') === 'CLIENT' ? 'RECRUITMENT' : 'COOPERATION';
-    const res = await netaxios.post('/boards/write', {
-      title: title,
-      content: post.replace(/<\/?p[^>]*>/g, ''),
-      division: roleDivision,
-    });
+  // }, [])
+  if (location.pathname === `/boards/edit/${communityNum}`) {
+    useEffect(() => {
+      netaxios
+        .get(`/boards/${communityNum}`)
+        .then((res) => {
+          setTitle(res.data.title);
+          setPost(res.data.content);
+        })
+        .catch((err) => console.log(err));
+    }, []);
+  }
 
-    console.log('갔어요! ' + res);
-    navigate(`/boards?division=${roleDivision}`);
+  const saveNewCommuData = () => {
+    netaxios
+      .patch(`/boards/edit/${communityNum}`, {
+        title: title,
+        content: post.replace(/<\/?p[^>]*>/g, ''),
+      })
+      .then(() => navigate(`/boards/${communityNum}`))
+      .catch((err) => console.log(err));
   };
-
   return (
     <>
       {/* <CHeader /> */}
@@ -82,7 +113,7 @@ export default function AddCommunity() {
             />
             {/* KISS 원칙 Keep It Simple */}
             {/* (value: string, delta: DeltaStatic, source: Sources, editor: ReactQuill.UnprivilegedEditor)  */}
-            <SaveBtnContainer onClick={postCommunity}>
+            <SaveBtnContainer onClick={saveNewCommuData}>
               <PurpleButton>Save</PurpleButton>
             </SaveBtnContainer>
           </TextEditor>
