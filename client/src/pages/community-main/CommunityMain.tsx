@@ -25,14 +25,9 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const showWholeCommu = async () => {
-      return call(`/boards?division=${division}`, 'GET', {
-        headers: {
-          withCredentials: true,
-          'Content-Type': 'application/json',
-        },
-        params: { division: division },
-      })
+      return call(`boards?division=${division}`, 'GET', { params: { division: division } })
         .then((res) => {
+          console.log(res);
           setDatas(res);
         })
         .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
