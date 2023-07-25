@@ -12,6 +12,7 @@ import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
+import AlertModal from '@/components/modal/AlertModal';
 
 const categoryMap = {
   web: 'web',
@@ -38,6 +39,7 @@ export default function Main() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setClose(true);
     const fetchData = async () => {
       try {
         const res = await call(`/portfolios?category=${categoryParam}`, 'GET', null);
@@ -80,8 +82,23 @@ export default function Main() {
 
   console.log(searchs);
 
+  const [close, setClose] = useState(false);
+  const handledown = () => {
+    setClose(!close);
+  };
+
   return (
     <>
+      {close === true ? (
+        <AlertModal
+          onCancel={handledown}
+          onConfirm={handledown}
+          type={'etc'}
+          title={'Sorry,'}
+          content={'현재 로그인 오류로 데이터가 없습니다.'}
+          clicked={'닫기'}
+        />
+      ) : null}
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
       <WebItemsContainer>
