@@ -42,9 +42,10 @@ export default function Main() {
     setClose(true);
     const fetchData = async () => {
       try {
-        const res = await call(`/portfolios?category=${categoryParam}`, 'GET', null);
-        setItems(res[0].data);
-        setFilteredItems(res[0].data);
+        const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
+        console.log(res);
+        setItems(res.data);
+        setFilteredItems(res.data);
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
       }
