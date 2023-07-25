@@ -13,6 +13,7 @@ import PortfolioDetail from './pages/portfolio-detail/PortfolioDetail';
 import PortfolioEdit from './pages/portfolio-edit/PortfolioEdit';
 import CHeaderLayout from './commons/styles/layout/CHeaderLayout';
 import AddCommunity from './pages/community-add/AddCommunity';
+import EditCommunity from './pages/community-edit/EditCommunity';
 import LandingPage from './pages/landingpage/LandingPage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import SelectRole from './components/login/SelectRole';
@@ -36,7 +37,7 @@ const App = () => {
             <Route element={<CHeaderLayout />}>
               <Route path="/boards" element={<CommunityMain />} />
               <Route path="/boards/:id" element={<CommunityDetail />} />
-              <Route path="/boards/edit/:id" element={<AddCommunity />} />
+              <Route path="/boards/edit/:id" element={<EditCommunity />} />
               <Route path="/boards/edit" element={<AddCommunity />} />
             </Route>
             <Route
