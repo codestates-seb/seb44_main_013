@@ -24,12 +24,17 @@ export default function CommunityMain() {
   const [searchParams] = useSearchParams();
   const division = searchParams.get('division');
 
+  const page = 1;
+  const size = 5;
+
   useEffect(() => {
     const showWholeCommu = async () => {
-      await axios.get(`https://api.portfolly.site/boards?division=${division}`).then((res) => {
-        console.log(res.data);
-        setDatas(res.data);
-      });
+      await axios
+        .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
+        .then((res) => {
+          console.log(res.data);
+          setDatas(res.data);
+        });
       // return call(`/boards?division=${division}`, 'GET', { params: { division: division } })
       //   .then((res) => {
       //     console.log(res);

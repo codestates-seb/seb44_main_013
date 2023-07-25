@@ -45,19 +45,23 @@ export const SignBtn = styled.button`
   transition-all
   duration-200
   ease-in-out
+  text-black
   `}
 
   &:hover {
-    background-color: rgb(226 232 240);
+    background-color: #8ec5fc;
+    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
     color: black;
     transform: scale(1.1);
     border: 1px solid white;
   }
 
   &:focus {
-    background-color: rgb(226 232 240);
+    background-color: #8ec5fc;
+    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
     color: black;
-    border: 1px solid white;
+    font-weight: bolder;
+    border: 2px solid white;
   }
 `;
 
