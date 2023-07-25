@@ -26,12 +26,10 @@ export default function CommunityMain() {
 
   useEffect(() => {
     const showWholeCommu = async () => {
-      await axios
-        .get(`https://api.portfolly.site/boards?division=${division}`, { params: { division: division } })
-        .then((res) => {
-          console.log(res.data);
-          setDatas(res.data);
-        });
+      await axios.get(`https://api.portfolly.site/boards?division=${division}`).then((res) => {
+        console.log(res.data);
+        setDatas(res.data);
+      });
       // return call(`/boards?division=${division}`, 'GET', { params: { division: division } })
       //   .then((res) => {
       //     console.log(res);
