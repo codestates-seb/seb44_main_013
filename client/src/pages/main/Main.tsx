@@ -13,6 +13,7 @@ import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
 import AlertModal from '@/components/modal/AlertModal';
+import axios from 'axios';
 
 const categoryMap = {
   web: 'web',
@@ -42,10 +43,16 @@ export default function Main() {
     setClose(true);
     const fetchData = async () => {
       try {
-        const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
-        console.log(res);
-        setItems(res.data);
-        setFilteredItems(res.data);
+        // const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
+        // console.log(res);
+        // setItems(res.data);
+        // setFilteredItems(res.data);
+
+        await axios.get(`/portfolios?category=${categoryParam}&page=1&size=5`).then((res) => {
+          console.log(res);
+          setItems(res.data);
+          setFilteredItems(res.data);
+        });
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
       }
