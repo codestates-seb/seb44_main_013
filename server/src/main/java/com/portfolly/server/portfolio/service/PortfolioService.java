@@ -153,6 +153,14 @@ public class PortfolioService {
         }
     }
 
+    //로그인 하지 않았을 시에 marked false
+    public void setOfflindResponse(List<PortfolioDto.Response> responses){
+        for (PortfolioDto.Response response : responses) {
+            response.setFirstImage(firstImageUrl(response.getId()));
+            response.setMarked(false);
+        }
+    }
+
     //picture에서 portfolioId 에 맞는 첫번째 이미지링크를 가져옴
     public String firstImageUrl(Long portfolioId){
         List<Picture> pictures = pictureRepository.findAllByPortfolioId(portfolioId);

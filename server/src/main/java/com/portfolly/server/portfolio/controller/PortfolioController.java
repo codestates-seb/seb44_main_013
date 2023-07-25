@@ -68,12 +68,12 @@ public class PortfolioController {
     @GetMapping
     public ResponseEntity getPortfolios(@RequestParam("page") int page,
                                         @RequestParam("size") int size,
-                                        @RequestParam String category,
-                                        @RequestHeader(name = "AccessToken",required = false) String accessToken) {
+                                        @RequestParam String category) {
         Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
         List<Portfolio> portfolios = pagePortfolios.getContent();
         List<PortfolioDto.Response> responses = portfolioMapper.portfoliosToResponseDto(portfolios);
-        portfolioService.setResponse(responses,accessToken);
+        portfolioService.setOfflindResponse(responses);
+
         return new ResponseEntity<>(new MultiResponseDto<>(responses, pagePortfolios), HttpStatus.OK);
     }
 
