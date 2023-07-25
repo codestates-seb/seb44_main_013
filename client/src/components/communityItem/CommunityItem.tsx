@@ -6,10 +6,12 @@ import { CommunityItemContainer } from './CommunityItem.styled';
 
 import Views from '../views/Views';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
+import circleNoImg from '@/assets/circleNoImg.png';
 
 export default function CommunityItem({ communityItem }: any) {
   const navigate = useNavigate();
   const eachData = communityItem;
+  // const itemPic = eachData.imagUrl === null ? circleNoImg : eachData.imagUrl;
   // console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
@@ -26,9 +28,9 @@ export default function CommunityItem({ communityItem }: any) {
       <MemberProfile
         type={'board'}
         member={{
-          id: eachData.memberId,
-          name: eachData.name,
-          imageUrl: 'https://picsum.photos/200/300',
+          id: eachData.memberInfo.memberId,
+          name: eachData.memberInfo.name,
+          imageUrl: circleNoImg,
         }}
       />
       <h2>{eachData.title}</h2>
