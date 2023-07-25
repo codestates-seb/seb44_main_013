@@ -124,7 +124,7 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
       .then((response) => {
         console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
         console.log(response);
-        const accessToken = response.config.headers.authorization;
+        const accessToken = response.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
         // const refresthToken = response.headers.RefreshToken
