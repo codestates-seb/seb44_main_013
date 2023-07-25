@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// import WebItem1 from '../../assets/WebItem1.png';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 // import circleNoImg from '@/assets/circleNoImg.png';
 import { Author, BookmarkWrapper, Title, TitleOverlay, WebItemContainer, WebItemImg } from './WebItem.styled';
@@ -18,11 +17,13 @@ type WebItemProps = {
 export default function WebItem({ item }: WebItemProps) {
   const tempPic = [temp1, temp2, temp3, temp4, temp5, temp6];
   const selectedImgIndex = item.id % tempPic.length;
+  const itemPic = item.firstImage === null ? tempPic[selectedImgIndex] : item.firstImage;
+
   // console.log(item);
   return (
     <WebItemContainer>
       <Link to={`/portfolios/${item.id}`}>
-        <WebItemImg src={tempPic[selectedImgIndex]} alt={`웹 아이템 이미지 - ${item.title}`} />
+        <WebItemImg src={itemPic} alt={`웹 아이템 이미지 - ${item.title}`} />
       </Link>
       <TitleOverlay>
         <Title>{item.title}</Title>
