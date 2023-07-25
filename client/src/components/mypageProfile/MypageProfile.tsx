@@ -45,7 +45,7 @@ export default function MypageProfile({ user }: MypageProfileProps) {
   const handleNameBlur = async () => {
     if (!name.trim()) return null;
     try {
-      await axios.put('/members', { name });
+      await axios.patch('/members', { name });
       console.log('이름 변경 성공');
     } catch (error) {
       console.error('이름 변경 실패', error);
@@ -91,21 +91,11 @@ export default function MypageProfile({ user }: MypageProfileProps) {
       <img src={userImg} alt="userImage" />
       <div>
         {isEdit ? (
-          <NameEdit
-            type="text"
-            value={name}
-            ref={inputRef}
-            onChange={handleNameChange}
-            onBlur={handleNameBlur}
-          />
+          <NameEdit type="text" value={name} ref={inputRef} onChange={handleNameChange} onBlur={handleNameBlur} />
         ) : (
           <>
             <h1 onClick={handleEditToggle}>{name}</h1>
-            <BsFillPencilFill
-              size={20}
-              className="editBtn"
-              onClick={handleEditToggle}
-            />
+            <BsFillPencilFill size={20} className="editBtn" onClick={handleEditToggle} />
           </>
         )}
       </div>
@@ -114,12 +104,7 @@ export default function MypageProfile({ user }: MypageProfileProps) {
         <p>
           {weatherData.city} / {weatherData.weather}
         </p>
-        {weatherData.icon && (
-          <WeatherIcon
-            src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`}
-            alt="Weather icon"
-          />
-        )}
+        {weatherData.icon && <WeatherIcon src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`} alt="Weather icon" />}
       </div>
     </MypageProfileContainer>
   );

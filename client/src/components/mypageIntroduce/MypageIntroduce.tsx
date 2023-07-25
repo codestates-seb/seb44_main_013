@@ -10,12 +10,7 @@ import { User } from '@/mocks/data';
 
 import { login } from '@/store/loginSlice';
 
-import {
-  MypageIntroWrap,
-  MypageIntroContainer,
-  IntroduceTitle,
-  BtnStyleContainer,
-} from './MypageIntroduce.styled';
+import { MypageIntroWrap, MypageIntroContainer, IntroduceTitle, BtnStyleContainer } from './MypageIntroduce.styled';
 import DeleteModal from '../modal/DeleteModal';
 
 interface MypageIntroduceProps {
@@ -41,14 +36,13 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
   };
 
   const handleInput =
-    (setValue: React.Dispatch<React.SetStateAction<string>>) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    (setValue: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value);
     };
 
   const handleUpdate = () => {
     axios
-      .put('/members', { job, career, awards })
+      .patch('/members', { job, career, awards })
       .then(() => {
         console.log('저장 성공');
         setIsEdit(false);
@@ -96,11 +90,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         <IntroduceTitle>Career</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input
-              type="text"
-              value={career}
-              onChange={handleInput(setCareer)}
-            />
+            <input type="text" value={career} onChange={handleInput(setCareer)} />
           ) : (
             <li className="introContent">{career}</li>
           )}
@@ -111,11 +101,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         <IntroduceTitle>Awards</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input
-              type="text"
-              value={awards}
-              onChange={handleInput(setAwards)}
-            />
+            <input type="text" value={awards} onChange={handleInput(setAwards)} />
           ) : (
             <li className="introContent">{awards}</li>
           )}
@@ -129,12 +115,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
       <BtnStyleContainer>
         <PurpleBtn onClick={handleOpenDeleteModal}>회원 탈퇴</PurpleBtn>
       </BtnStyleContainer>
-      {isDeleteModalOpen && (
-        <DeleteModal
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCloseDeleteModal}
-        />
-      )}
+      {isDeleteModalOpen && <DeleteModal onConfirm={handleConfirmDelete} onCancel={handleCloseDeleteModal} />}
     </MypageIntroWrap>
   );
 }
