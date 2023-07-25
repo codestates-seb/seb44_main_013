@@ -11,6 +11,7 @@ import { login, setCredentials } from '../../store/loginSlice';
 interface LoginForm {
   children: React.ReactNode;
   type: string;
+  alert?: () => void;
 }
 
 interface ErrorResponse {
@@ -20,7 +21,7 @@ interface ErrorResponse {
   Action: string;
 }
 
-export default function LoginGoogleForm({ children, type }: LoginForm) {
+export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -192,7 +193,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
 
   if (type === 'normal') {
     return (
-      <GoogleWrapper>
+      <GoogleWrapper onClick={alert}>
         <TextSection>{children}</TextSection>
       </GoogleWrapper>
     );

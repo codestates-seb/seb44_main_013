@@ -1,9 +1,4 @@
-import {
-  AppItemContainer,
-  Author,
-  Title,
-  TitleOverlay,
-} from './AppItem.stlyed';
+import { AppItemContainer, Author, Title, TitleOverlay } from './AppItem.stlyed';
 import appImg from '../../assets/appImg.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsBatteryFull } from 'react-icons/bs';
@@ -22,16 +17,13 @@ export default function AppItem({ item }: AppItemProps) {
         <AiOutlineWifi size={20} />
         <BsBatteryFull size={20} />
       </div>
-      <img src={appImg} alt={`appImg-${item.data.title}`} />
+      <img src={appImg} alt={`appImg-${item.title}`} />
       <TitleOverlay>
-        <Title>{item.data.title}</Title>
-        <Author>{item.data.membername}</Author>
+        <Title>{item.title}</Title>
+        <Author>{item.name}</Author>
       </TitleOverlay>
       <BookmarkWrapper>
-        <Bookmark
-          portfolioId={item.data.portfolioId}
-          isToggled={item.data.isMarked}
-        />
+        <Bookmark portfolioId={item.id} isToggled={item.marked} />
       </BookmarkWrapper>
     </AppItemContainer>
   );
