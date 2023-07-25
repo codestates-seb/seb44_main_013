@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { category } from '@/store/categorySlice';
-import { call } from '@/utils/apiService';
+// import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
