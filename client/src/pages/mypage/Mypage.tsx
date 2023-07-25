@@ -36,7 +36,7 @@ export default function MyPage() {
 
   useEffect(() => {
     axios
-      .get('/members')
+      .get('https://api.portfolly.site/members/{member-id}')
       .then((response) => {
         setUser(response.data);
       })
