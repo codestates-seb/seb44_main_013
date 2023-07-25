@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import Search from '@/components/search/Search';
-import { call } from '@/utils/apiService';
+// import { call } from '@/utils/apiService';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 import datano from '@/assets/datano.png';
