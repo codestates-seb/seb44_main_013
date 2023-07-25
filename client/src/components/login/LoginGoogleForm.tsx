@@ -65,7 +65,7 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     try {
       const res = await axios({
         method: 'get',
-        url: '/oauth/login',
+        url: 'https://api.portfolly.site/oauth/login',
         headers: {
           authorization: `${accessToken}`,
           id: memberId,
@@ -87,7 +87,7 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     //현재 get bearer 이중 중복으로 뻄.
     axios
       .post(
-        '/oauth/regeneration/token',
+        'https://api.portfolly.site/oauth/regeneration/token',
         {},
         {
           headers: {
@@ -109,7 +109,7 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     //최초로그인
     axios
       .post(
-        '/oauth/signup ',
+        'https://api.portfolly.site/oauth/signup ',
         {
           name: name,
           email: email,
