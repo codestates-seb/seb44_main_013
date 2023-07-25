@@ -10,6 +10,13 @@ const BackImgContainer = styled.div`
   `}
 `;
 
+export const DefaultImgWrapper = styled.div`
+  ${tw`
+    w-screen h-fit bg-center bg-no-repeat bg-cover
+  `}
+  background-image: url(${defaultBgimg});
+`;
+
 const BackgroundImage = styled.div`
   ${tw`
     absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover
