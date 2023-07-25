@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import BlackSection from '@/components/home-section/black-section/BlackSection';
@@ -117,9 +117,7 @@ export default function LandingPage() {
       <FullPageContainer>
         <PortfollyText id="portfolly-text">Portfolly</PortfollyText>
       </FullPageContainer>
-      {animationComplete && showScrollHint && (
-        <ScrollDownIndicator>&#8595;</ScrollDownIndicator>
-      )}
+      {animationComplete && showScrollHint && <ScrollDownIndicator>&#8595;</ScrollDownIndicator>}
       {animationComplete && (
         <>
           <BlackSection />
