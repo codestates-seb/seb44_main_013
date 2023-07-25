@@ -2,13 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { DetailCntContainer, EDBtnContainer } from './DetailContents.styled';
 
-export default function DetailContents({ data, handleDeleteModal, id }: any) {
+export default function DetailContents({ data, handleDeleteModal, id, writerId, viewerId }: any) {
   const navigate = useNavigate();
 
   const moveToEdit = () => {
     navigate(`/boards/edit/${id}`);
   };
   console.log(data);
+  
 
   return (
     <DetailCntContainer>
@@ -16,10 +17,12 @@ export default function DetailContents({ data, handleDeleteModal, id }: any) {
       <hr />
       <p>{data.content}</p>
       <hr />
-      <EDBtnContainer>
-        <PurpleBtn onClick={moveToEdit}>Edit</PurpleBtn>
-        <PurpleBtn onClick={handleDeleteModal}>Delete</PurpleBtn>
-      </EDBtnContainer>
+      {writerId === viewerId ? (
+        <EDBtnContainer>
+          <PurpleBtn onClick={moveToEdit}>Edit</PurpleBtn>
+          <PurpleBtn onClick={handleDeleteModal}>Delete</PurpleBtn>
+        </EDBtnContainer>
+      ) : ''}
     </DetailCntContainer>
   );
 }
