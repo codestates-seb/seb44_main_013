@@ -42,7 +42,7 @@ export default function Main() {
     setClose(true);
     const fetchData = async () => {
       try {
-        const res = await call(`/api/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
+        const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
         console.log(res);
         setItems(res.data);
         setFilteredItems(res.data);
