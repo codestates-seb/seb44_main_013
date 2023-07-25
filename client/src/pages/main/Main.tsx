@@ -49,9 +49,9 @@ export default function Main() {
         // setFilteredItems(res.data);
 
         await axios.get(`https://api.portfolly.site/portfolios?category=${categoryParam}&page=1&size=5`).then((res) => {
-          console.log(res);
-          setItems(res.data);
-          setFilteredItems(res.data);
+          console.log(res.data.data);
+          setItems(res.data.data);
+          setFilteredItems(res.data.data);
         });
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
