@@ -2,10 +2,7 @@
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 
 // export const API_BASE_URL = '/api';
-export const API_BASE_URL =
-  import.meta.env.MODE === 'development'
-    ? '/api'
-    : 'http://api.portfolly.site:8080/portfolios?category=web&page=1&size=50';
+export const API_BASE_URL = import.meta.env.MODE === 'development' ? '/api' : 'https://api.portfolly.site:8080';
 console.log(import.meta.env.MODE);
 //http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
 
