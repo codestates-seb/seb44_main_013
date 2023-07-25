@@ -1,4 +1,4 @@
-// import photoImg from '../../assets/photoImg.png';
+import { Link } from 'react-router-dom';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import { Author, PhotoItemContainer, Title, TitleOverlay } from './PhotoItem.styled';
@@ -13,14 +13,16 @@ export default function PhotoItem({ item }: PhotoItemProps) {
 
   return (
     <PhotoItemContainer>
-      <img src={itemPic} alt={`photo image-${item.title}`} />
-      <TitleOverlay>
-        <Title>{item.title}</Title>
-        <Author>{item.name}</Author>
-      </TitleOverlay>
-      <BookmarkWrapper>
-        <Bookmark portfolioId={item.id} isToggled={item.marked} />
-      </BookmarkWrapper>
+      <Link to={`/portfolios/${item.id}`}>
+        <img src={itemPic} alt={`photo image-${item.title}`} />
+        <TitleOverlay>
+          <Title>{item.title}</Title>
+          <Author>{item.name}</Author>
+        </TitleOverlay>
+        <BookmarkWrapper>
+          <Bookmark portfolioId={item.id} isToggled={item.marked} />
+        </BookmarkWrapper>
+      </Link>
     </PhotoItemContainer>
   );
 }
