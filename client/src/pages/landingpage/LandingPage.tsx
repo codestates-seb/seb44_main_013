@@ -2,14 +2,14 @@ import styled, { keyframes } from 'styled-components';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import BlackSection from '@/components/home-section/black-section/BlackSection';
 import WebSection from '@/components/home-section/web-section/WebSection';
 import AppSection from '@/components/home-section/app-section/AppSection';
 import AnimationSection from '@/components/home-section/animation-section/AnimationSection';
 import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
 import DisplaySection from '@/components/home-section/display-section/DisplaySection';
-import { LandingPageWrapper } from './LandingPage.styled';
+import { LandingPageWrapper, ScrollDownComent } from './LandingPage.styled';
+import SkipButton from '@/commons/atoms/buttons/skip/SkipButton';
 
 const blurOutExpandFwd = keyframes`
   0% {
@@ -38,7 +38,7 @@ const scrollDown = keyframes`
 
 const ScrollDownIndicator = styled.div`
   position: fixed;
-  bottom: 15px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   width: 30px;
@@ -117,11 +117,13 @@ export default function LandingPage() {
       <FullPageContainer>
         <PortfollyText id="portfolly-text">Portfolly</PortfollyText>
       </FullPageContainer>
-      {animationComplete && showScrollHint && <ScrollDownIndicator>&#8595;</ScrollDownIndicator>}
+      
       {animationComplete && (
         <>
-          <BlackSection />
           <WebSection />
+          {animationComplete && showScrollHint && 
+            <ScrollDownIndicator>&#8595;</ScrollDownIndicator>
+          }
           <AppSection />
           <AnimationSection />
           <GraphicDesignSection />
@@ -129,6 +131,7 @@ export default function LandingPage() {
           <DisplaySection />
         </>
       )}
+      <SkipButton />
     </LandingPageWrapper>
   );
 }

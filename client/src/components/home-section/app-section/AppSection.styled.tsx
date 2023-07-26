@@ -51,7 +51,7 @@ export const Subtitle = styled(Title)`
   font-size: calc(23vw - 10px);
   color: #ffffff56;
   position: absolute;
-  top: -40px;
+  top: -20px;
   z-index: 1;
-  margin-left: 30px;
+  left: 20px;
 `;
