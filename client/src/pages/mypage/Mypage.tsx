@@ -73,7 +73,6 @@ export default function MyPage() {
     }
   };
 
-  //pagenation
   const handlePageChange = (page: number): void => {
     setCurrentPage(page);
   };
