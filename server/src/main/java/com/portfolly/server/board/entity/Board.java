@@ -8,6 +8,7 @@ import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
 import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.member.image.entity.ImageData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,13 +54,14 @@ public class Board extends Auditable {
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-
+    @OneToOne(mappedBy = "board",cascade = {CascadeType.ALL})
+    private ImageData imageData;
 
     //----------------
 
 
 
-    // todo : 비활성화시 수정/겟 안 되도록하기, 일정기간후 삭제기능 추가하기
+    // todo : 일정기간후 삭제기능 추가하기
     public enum Status {
         POST_ACTIVE(1, "활성화"),
         POST_INACTIVE(0, "비활성화");
