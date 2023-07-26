@@ -7,6 +7,7 @@ export const PhotoItemContainer = styled.div`
     mx-6
     relative
     shadow-md
+    overflow-hidden
   `}
 
   width: 450px;

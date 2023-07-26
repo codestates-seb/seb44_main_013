@@ -1,12 +1,7 @@
 import { Link } from 'react-router-dom';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
-import {
-  Author,
-  PhotoItemContainer,
-  Title,
-  TitleOverlay,
-} from './PhotoItem.styled';
+import { Author, PhotoItemContainer, Title, TitleOverlay } from './PhotoItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
 
 type PhotoItemProps = {
