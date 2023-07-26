@@ -10,12 +10,7 @@ import DeleteModal from '@/components/modal/DeleteModal';
 
 import { CommuProps } from '@/types';
 
-import {
-  CmDContainer,
-  CommentContainer,
-  MainContainer,
-  PageWrapper,
-} from './CommunityDetail.styled';
+import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
 
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
@@ -47,8 +42,8 @@ export default function CommunityDetail({ handleClick }: any) {
       </PageWrapper>
     );
 
-    const writerId = memberData.memberInfo.memberId;
-    const viewerId = Number(localStorage.getItem("memberId"));
+  const writerId = memberData.memberInfo.memberId;
+  const viewerId = Number(localStorage.getItem('memberId'));
 
   // 게시글 삭제 버튼 클릭 시 - 효정(07.14)
   // DELTE 요청 추가 - 혜진(07.19)
@@ -87,14 +82,7 @@ export default function CommunityDetail({ handleClick }: any) {
           <CommentBox comments={memberData.comments} />
         </CommentContainer>
       </MainContainer>
-      {clickDeletePost ? (
-        <DeleteModal
-          onConfirm={handleDeleteModal}
-          onCancel={handleDeleteModal}
-        />
-      ) : (
-        ''
-      )}
+      {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
     </PageWrapper>
   );
 }
