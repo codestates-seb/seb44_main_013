@@ -32,8 +32,8 @@ export default function CommunityMain() {
       await axios
         .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
         .then((res) => {
-          console.log(res.data);
-          setDatas(res.data);
+          console.log(res.data.data);
+          setDatas(res.data.data);
         });
       // return call(`/boards?division=${division}`, 'GET', { params: { division: division } })
       //   .then((res) => {
@@ -60,22 +60,22 @@ export default function CommunityMain() {
       <SearchContainer>
         <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
       </SearchContainer>
-        <ItemWrapper>
-          <Link to="/boards/edit">
-            <StyledWritingBtn>
-              <WritingBtn />
-            </StyledWritingBtn>
-          </Link>
-          {searchs.length > 0 ? (
-            <ListsWrapper>
-              {searchs.map((communityItem: any) => {
-                return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
-              })}
-            </ListsWrapper>
-          ) : (
-            <NodataImage src={datano} alt="no data" />
-          )}
-        </ItemWrapper>
+      <ItemWrapper>
+        <Link to="/boards/edit">
+          <StyledWritingBtn>
+            <WritingBtn />
+          </StyledWritingBtn>
+        </Link>
+        {searchs.length > 0 ? (
+          <ListsWrapper>
+            {searchs.map((communityItem: any) => {
+              return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
+            })}
+          </ListsWrapper>
+        ) : (
+          <NodataImage src={datano} alt="no data" />
+        )}
+      </ItemWrapper>
     </CommunityWrapper>
   );
 }
