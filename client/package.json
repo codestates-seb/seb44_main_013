@@ -12,14 +12,24 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.19",
+    "@tanstack/react-query-devtools": "^4.29.19",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
+    "babel-plugin-styled-components": "^2.1.4",
+    "quill-plugin-image-upload": "0.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-quill": "^2.0.0",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "styled-components": "^6.0.1"
+    "styled-components": "^6.0.2",
+    "vite-plugin-babel-macros": "^1.0.6"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.22.5",
@@ -48,6 +58,7 @@
     "postcss": "^8.4.24",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.24",
+    "tailwind-styled-components": "^2.2.0",
     "tailwindcss": "^3.3.2",
     "twin.macro": "^3.3.1",
     "typescript": "^5.0.2",
@@ -55,5 +66,12 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "styled-components",
+      "config": "tailwind.config.js",
+      "hasSuggestions": true
+    }
   }
 }

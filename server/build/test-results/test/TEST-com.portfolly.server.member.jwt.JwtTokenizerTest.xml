@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.portfolly.server.member.jwt.JwtTokenizerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-07-26T03:09:42" hostname="DESKTOP-AM87FVN" time="2.017">
+  <properties/>
+  <testcase name="generateRefreshToken()" classname="com.portfolly.server.member.jwt.JwtTokenizerTest" time="0.405"/>
+  <testcase name="generateAccessTokenTest()" classname="com.portfolly.server.member.jwt.JwtTokenizerTest" time="0.007"/>
+  <testcase name="jws 증명 예외 발생 X" classname="com.portfolly.server.member.jwt.JwtTokenizerTest" time="0.081"/>
+  <testcase name="encodedSecretKeyTest()" classname="com.portfolly.server.member.jwt.JwtTokenizerTest" time="0.005"/>
+  <testcase name="jws 증명 예외 발생 O" classname="com.portfolly.server.member.jwt.JwtTokenizerTest" time="1.512"/>
+  <system-out><![CDATA[eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IHJlZnJlc2ggVG9rZW4iLCJpYXQiOjE2OTAzNDA5ODIsImV4cCI6MTY5MDQyNzM4Mn0.K_0xxVbSXHJzooqOY6GaXMP0Vs4Kir9l9nCfne-PIpk
+eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm1lbWJlcklkIjoxLCJzdWIiOiJ0ZXN0IGFjY2VzcyB0b2tlbiIsImlhdCI6MTY5MDM0MDk4MiwiZXhwIjoxNjkwMzQxNTgyfQ.Sducb61HZVkUTZQeObKW6lH-5-fRZAp9qU8wrUMxvOI
+bGVlaGVlamFlMTIzNDEyMzQxMjM0MTIzNDEyMzQxMjM0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
