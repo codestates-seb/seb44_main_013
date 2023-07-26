@@ -3,7 +3,7 @@ import dompurify from "dompurify";
 
 const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 const media = ['iframe', 'img'];
-const inlineElements = ['span', 'u', 'a', 'b', 's', 'em'];
+const inlineElements = ['span', 'u', 'a', 'strong', 's', 'em'];
 const blockElements = ['p', 'br'];
 
 const ALLOWED_TAGS = [...headings, ...media, ...inlineElements, ...blockElements];
