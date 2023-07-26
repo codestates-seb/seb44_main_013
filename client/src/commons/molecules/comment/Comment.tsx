@@ -11,6 +11,9 @@ import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
 import { FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, SmallText } from '@/commons/atoms/text/Typography';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
+import netaxios from '@/utils/axiosIntercept';
+import { AxiosError } from 'axios';
+import AlertModal from '@/components/modal/AlertModal';
 
 interface CommuCommentProps {
   username: string;
@@ -19,14 +22,23 @@ interface CommuCommentProps {
   comments: CommentProps;
   setDeleteId: any;
   setAmendComment?: any;
+  boardId: any;
 }
 
-export default function Comment({ username, content, date, comments, setDeleteId }: CommuCommentProps) {
+interface ErrorResponse {
+  errorCode: number;
+  errorCodeInfo: string;
+  errorMessage: string;
+  Action: string;
+}
+
+export default function Comment({ username, content, date, comments, setDeleteId, boardId }: CommuCommentProps) {
   //setAmendComment
 
   const inputEl = useRef(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [basicContent, setBasicContent] = useState(content);
+  const [closeModal, setCloseModal] = useState(true);
 
   const newDate = new Date(date);
   const convertDate = newDate
@@ -37,17 +49,40 @@ export default function Comment({ username, content, date, comments, setDeleteId
     })
     .replace(/\//g, '.');
 
+  //댓글 수정
   const axiosPatch = async () => {
-    try {
-      console.log('PATCH 성공');
-      const data = {
-        boadId: '',
-        content: basicContent,
-      };
-      await call(`https://portfolly013.netlify.app/comments/${comments.id}`, 'PATCH', data);
-    } catch (err) {
-      console.log('PATCH 실패 ' + err);
-    }
+    const data = {
+      boardId: boardId,
+      content: basicContent,
+    };
+
+    await netaxios
+      .patch(`https://portfolly013.netlify.app/comments/${comments.id}`, data)
+      .then((res) => {
+        console.log('PATCH 성공');
+        console.log(res);
+      })
+      .catch((err: AxiosError<ErrorResponse>) => {
+        const axiosError = err as AxiosError<ErrorResponse>;
+        if (axiosError.response) {
+          const errCode = axiosError.response.data.errorCode;
+          if (errCode === 403) {
+            return closeModal ? (
+              <AlertModal
+                onCancel={closeAlert}
+                onConfirm={closeAlert}
+                type={'etc'}
+                title={'잠깐'}
+                content={'작성자가 아니시군요!'}
+                clicked={'닫기'}
+              />
+            ) : null;
+          } else {
+            console.log(axiosError.response.data);
+          }
+        }
+        console.log(err);
+      });
   };
 
   const handleChangeEditMode = () => {
@@ -75,18 +110,42 @@ export default function Comment({ username, content, date, comments, setDeleteId
     }
   };
 
+  const closeAlert = () => {
+    setCloseModal(!closeModal);
+  };
+
   //댓글 삭제 기능 구현
   const handleDelete = () => {
     const deleteComment = async () => {
-      try {
-        console.log('DELETE 성공');
-        setDeleteId(comments.id);
-        return call(`/comments/${comments.id}`, 'DELETE', null);
-      } catch (err) {
-        console.log('DELETE 실패' + err);
-      }
+      await netaxios
+        .delete(`/comments/${comments.id}`)
+        .then(() => {
+          console.log('DELETE 성공');
+          setDeleteId(comments.id);
+        })
+        .catch((err: AxiosError<ErrorResponse>) => {
+          const axiosError = err as AxiosError<ErrorResponse>;
+          if (axiosError.response) {
+            const errCode = axiosError.response.data.errorCode;
+            if (errCode === 403) {
+              return closeModal ? (
+                <AlertModal
+                  onCancel={closeAlert}
+                  onConfirm={closeAlert}
+                  type={'etc'}
+                  title={'잠깐'}
+                  content={'작성자가 아니시군요!'}
+                  clicked={'닫기'}
+                />
+              ) : null;
+            } else {
+              console.log(axiosError.response.data);
+            }
+          }
+          console.log(err);
+        });
+      deleteComment();
     };
-    deleteComment();
   };
 
   return (

@@ -102,6 +102,7 @@ export default function CommentBox({ comments = [] }: any) {
                 comments={element}
                 setDeleteId={setDeleteId}
                 setAmendComment={setAmendComment}
+                boardId={boardId}
               />
             );
           })}
