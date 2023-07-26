@@ -1,12 +1,12 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
+// import { BASE_URL } from '@/app-config';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
 const ACCESS_TOKEN = 'accessToken';
-// export const API_BASE_URL = '/api';
 export const API_BASE_URL =
-  import.meta.env.MODE === 'development' ? '' : 'https://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080';
+  import.meta.env.MODE === 'development' ? 'https://api.portfolly.site' : 'https://api.portfolly.site';
 
 export async function call(api: string, method: string, data?: any) {
-  // const dispatch = useDispatch();
+
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
   const headers = new AxiosHeaders({
