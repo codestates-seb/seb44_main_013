@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
@@ -10,7 +10,12 @@ import { User } from '@/mocks/data';
 
 import { login } from '@/store/loginSlice';
 
-import { MypageIntroWrap, MypageIntroContainer, IntroduceTitle, BtnStyleContainer } from './MypageIntroduce.styled';
+import {
+  MypageIntroWrap,
+  MypageIntroContainer,
+  IntroduceTitle,
+  BtnStyleContainer,
+} from './MypageIntroduce.styled';
 import DeleteModal from '../modal/DeleteModal';
 
 interface MypageIntroduceProps {
@@ -23,10 +28,11 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
   const initialAwards = user?.award || 'Awards 1';
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { memberId } = useParams<{ memberId: string }>();
 
   const [job, setJob] = useState(initialJob);
   const [career, setCareer] = useState(initialCareer);
-  const [awards, setAwards] = useState(initialAwards);
+  const [award, setAwards] = useState(initialAwards);
 
   const [isEdit, setIsEdit] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -36,13 +42,14 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
   };
 
   const handleInput =
-    (setValue: React.Dispatch<React.SetStateAction<string>>) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (setValue: React.Dispatch<React.SetStateAction<string>>) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value);
     };
 
   const handleUpdate = () => {
     axios
-      .patch('/members', { job, career, awards })
+      .patch(`/members/${memberId}`, { job, career, award })
       .then(() => {
         console.log('저장 성공');
         setIsEdit(false);
@@ -62,13 +69,13 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleConfirmDelete = () => {
     axios
-      .delete('/members')
+      .delete(`/members/${memberId}`)
       .then(() => {
         console.log('삭제 성공');
         setDeleteModalOpen(false);
-        //0713 혜진 추가
+        // 0713 혜진 추가
         dispatch(login(false));
-        navigate('/members');
+        navigate('/members/{memberId}');
       })
       .catch((error) => {
         console.error('삭제 실패', error);
@@ -90,7 +97,11 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         <IntroduceTitle>Career</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input type="text" value={career} onChange={handleInput(setCareer)} />
+            <input
+              type="text"
+              value={career}
+              onChange={handleInput(setCareer)}
+            />
           ) : (
             <li className="introContent">{career}</li>
           )}
@@ -101,9 +112,13 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
         <IntroduceTitle>Awards</IntroduceTitle>
         <ul>
           {isEdit ? (
-            <input type="text" value={awards} onChange={handleInput(setAwards)} />
+            <input
+              type="text"
+              value={award}
+              onChange={handleInput(setAwards)}
+            />
           ) : (
-            <li className="introContent">{awards}</li>
+            <li className="introContent">{award}</li>
           )}
         </ul>
       </MypageIntroContainer>
@@ -115,7 +130,12 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
       <BtnStyleContainer>
         <PurpleBtn onClick={handleOpenDeleteModal}>회원 탈퇴</PurpleBtn>
       </BtnStyleContainer>
-      {isDeleteModalOpen && <DeleteModal onConfirm={handleConfirmDelete} onCancel={handleCloseDeleteModal} />}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
     </MypageIntroWrap>
   );
 }
