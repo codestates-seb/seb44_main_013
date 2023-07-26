@@ -24,12 +24,12 @@ export default function SelectRole() {
     setRole(res);
   };
 
-  console.log(role);
+  // console.log(role);
 
   const sendRole = () => {
     try {
       axios.post(
-        `/api/members`,
+        `https://api.portfolly.site/members`,
         {
           id: MEMBER_ID,
           member_role: role,

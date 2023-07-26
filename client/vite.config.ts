@@ -38,5 +38,5 @@ export default defineConfig({
       },
     },
   },
-  base: 'https://portfolly013.netlify.app/',
+  base: '/',
 });

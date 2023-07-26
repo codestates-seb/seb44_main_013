@@ -11,6 +11,7 @@ import { login, setCredentials } from '../../store/loginSlice';
 interface LoginForm {
   children: React.ReactNode;
   type: string;
+  alert?: () => void;
 }
 
 interface ErrorResponse {
@@ -20,7 +21,7 @@ interface ErrorResponse {
   Action: string;
 }
 
-export default function LoginGoogleForm({ children, type }: LoginForm) {
+export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,8 +33,8 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     onSuccess: (tokenResponse) => {
       const ACCESS = tokenResponse.access_token;
       // setToken(ACCESS);
-      console.log(tokenResponse);
-      console.log(ACCESS);
+      // console.log(tokenResponse);
+      // console.log(ACCESS);
 
       axios
         .get('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -43,10 +44,10 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         })
         .then((response) => {
           console.log('구글이랑 토큰 받아옵니다.');
-          console.log(response);
-          console.log(response.data.name);
-          console.log(response.data.email);
-          console.log(response.data.picture);
+          // console.log(response);
+          // console.log(response.data.name);
+          // console.log(response.data.email);
+          // console.log(response.data.picture);
 
           sendAccessToken(response.data.name, response.data.email, response.data.picture, ACCESS);
         })
@@ -64,7 +65,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     try {
       const res = await axios({
         method: 'get',
-        url: '/oauth/login',
+        url: 'https://api.portfolly.site/oauth/login',
         headers: {
           authorization: `${accessToken}`,
           id: memberId,
@@ -86,7 +87,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //현재 get bearer 이중 중복으로 뻄.
     axios
       .post(
-        '/api/oauth/regeneration/token',
+        'https://api.portfolly.site/oauth/regeneration/token',
         {},
         {
           headers: {
@@ -108,7 +109,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
     //최초로그인
     axios
       .post(
-        '/api/oauth/signup ',
+        'https://api.portfolly.site/oauth/signup ',
         {
           name: name,
           email: email,
@@ -116,17 +117,18 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         },
         {
           headers: {
-            Authorization: `${token01}`,
+            Authorization: `Bearer ${token01}`,
           },
         }
       )
       .then((response) => {
         console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
-        console.log(response);
+        // console.log(response);
         const accessToken = response.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
         // const refresthToken = response.headers.RefreshToken
+        // console.log(response.headers);
 
         window.localStorage.setItem('memberId', memberId);
         window.localStorage.setItem('accessToken', accessToken);
@@ -135,8 +137,8 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
         //localStorage 에 액세스 토큰 저장
         navigate('/signup/role');
 
-        console.log(accessToken);
-        console.log(memberId);
+        console.log(`토큰` + accessToken);
+        console.log(`아이디` + memberId);
       })
       .catch((error: AxiosError<ErrorResponse>) => {
         if (axios.isAxiosError(error)) {
@@ -192,7 +194,7 @@ export default function LoginGoogleForm({ children, type }: LoginForm) {
 
   if (type === 'normal') {
     return (
-      <GoogleWrapper>
+      <GoogleWrapper onClick={alert}>
         <TextSection>{children}</TextSection>
       </GoogleWrapper>
     );

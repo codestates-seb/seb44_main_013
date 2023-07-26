@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { category } from '@/store/categorySlice';
-import { call } from '@/utils/apiService';
+// import { call } from '@/utils/apiService';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
@@ -12,6 +12,7 @@ import PhotoItem from '@/components/photoItem/PhotoItem';
 import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
+import axios from 'axios';
 
 const categoryMap = {
   web: 'web',
@@ -40,9 +41,16 @@ export default function Main() {
     window.scrollTo(0, 0);
     const fetchData = async () => {
       try {
-        const res = await call(`/portfolios?category=${categoryParam}`, 'GET', null);
-        setItems(res[0].data);
-        setFilteredItems(res[0].data);
+        // const res = await call(`/portfolios?category=${categoryParam}&page=1&size=5`, 'GET', null);
+        // console.log(res);
+        // setItems(res.data);
+        // setFilteredItems(res.data);
+
+        await axios.get(`https://api.portfolly.site/portfolios?category=${categoryParam}&page=1&size=5`).then((res) => {
+          console.log(res.data.data);
+          setItems(res.data.data);
+          setFilteredItems(res.data.data);
+        });
       } catch (error) {
         console.error('데이터를 가져올 수 없습니다', error);
       }

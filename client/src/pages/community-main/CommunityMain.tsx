@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import Search from '@/components/search/Search';
-import { call } from '@/utils/apiService';
+// import { call } from '@/utils/apiService';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 import datano from '@/assets/datano.png';
@@ -17,25 +17,30 @@ import {
   StyledWritingBtn,
   NodataImage,
 } from './CommunityMain.styled';
+import axios from 'axios';
 
 export default function CommunityMain() {
   const [data, setDatas] = useState<CommuProps[]>([]);
   const [searchParams] = useSearchParams();
   const division = searchParams.get('division');
 
+  const page = 1;
+  const size = 30;
+
   useEffect(() => {
     const showWholeCommu = async () => {
-      return call(`/boards?division=${division}`, 'GET', {
-        headers: {
-          withCredentials: true,
-          'Content-Type': 'application/json',
-        },
-        params: { division: division },
-      })
+      await axios
+        .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
         .then((res) => {
-          setDatas(res);
-        })
-        .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
+          console.log(res.data);
+          setDatas(res.data);
+        });
+      // return call(`/boards?division=${division}`, 'GET', { params: { division: division } })
+      //   .then((res) => {
+      //     console.log(res);
+      //     setDatas(res);
+      //   })
+      //   .catch((err) => console.log('게시판 목록 조회 에러입니다. ' + err));
     };
 
     showWholeCommu();
@@ -55,30 +60,22 @@ export default function CommunityMain() {
       <SearchContainer>
         <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
       </SearchContainer>
-
-      {searchs.length > 0 ? (
         <ItemWrapper>
           <Link to="/boards/edit">
             <StyledWritingBtn>
               <WritingBtn />
             </StyledWritingBtn>
           </Link>
-          <ListsWrapper>
-            {searchs.map((communityItem: any) => {
-              return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
-            })}
-          </ListsWrapper>
+          {searchs.length > 0 ? (
+            <ListsWrapper>
+              {searchs.map((communityItem: any) => {
+                return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
+              })}
+            </ListsWrapper>
+          ) : (
+            <NodataImage src={datano} alt="no data" />
+          )}
         </ItemWrapper>
-      ) : (
-        <ItemWrapper>
-          <Link to="/boards/edit">
-            <StyledWritingBtn>
-              <WritingBtn />
-            </StyledWritingBtn>
-          </Link>
-          <NodataImage src={datano} alt="no data" />
-        </ItemWrapper>
-      )}
     </CommunityWrapper>
   );
 }

@@ -1,24 +1,14 @@
 import tw from 'twin.macro';
-import { css, styled } from 'styled-components';
-import { useSelector } from 'react-redux';
-import { category } from '@/store/categorySlice';
-
-import webBgimg from '../../../assets/WebBg.png';
-import appBgimg from '../../../assets/AppBg.png';
-import aniBgimg from '../../../assets/AniBg.png';
-import graphicBgimg from '../../../assets/GraphicBg.png';
-import photoBgimg from '../../../assets/PhotoBg.png';
-import defaultBgimg from '../../../assets/bg2.jpeg';
+import styled from 'styled-components';
 import { ReactNode } from 'react';
 
-export const MainImgWrapper = styled.div<{ backgroundimage: string }>(
-  ({ backgroundimage }) => css`
-    ${tw`
-      w-screen h-fit bg-center bg-no-repeat bg-cover
-    `}
-    background-image: url(${backgroundimage});
-  `
-);
+import defaultBgimg from '../../../assets/bg2.jpeg';
+
+const BackImgContainer = styled.div`
+  ${tw`
+    w-screen h-screen relative
+  `}
+`;
 
 export const DefaultImgWrapper = styled.div`
   ${tw`
@@ -27,29 +17,25 @@ export const DefaultImgWrapper = styled.div`
   background-image: url(${defaultBgimg});
 `;
 
+const BackgroundImage = styled.div`
+  ${tw`
+    absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover
+  `}
+  background-image: url(${defaultBgimg});
+  pointer-events: none;
+`;
+
+const ContentWrapper = styled.div`
+  ${tw`
+    relative z-10 h-full overflow-y-auto
+  `}
+`;
+
 export function BackImgControl({ children }: { children: ReactNode }) {
-  const selectedCategory = useSelector(category);
-
-  const getBackgroundImage = (category: string) => {
-    switch (category) {
-      case '웹':
-        return webBgimg;
-      case '앱':
-        return appBgimg;
-      case '3D/애니메이션':
-        return aniBgimg;
-      case '그래픽디자인':
-        return graphicBgimg;
-      case '사진/영상':
-        return photoBgimg;
-      default:
-        return defaultBgimg;
-    }
-  };
-
   return (
-    <MainImgWrapper backgroundimage={getBackgroundImage(selectedCategory)}>
-      {children}
-    </MainImgWrapper>
+    <BackImgContainer>
+      <BackgroundImage />
+      <ContentWrapper>{children}</ContentWrapper>
+    </BackImgContainer>
   );
 }

@@ -11,7 +11,7 @@ export async function call(api: string, method: string, data?: any) {
 
   const headers = new AxiosHeaders({
     'Content-Type': 'application/json',
-    'Authorization': accessToken,
+    accessToken: `${accessToken}`,
   });
 
   const options: RawAxiosRequestConfig = {
@@ -31,20 +31,20 @@ export async function call(api: string, method: string, data?: any) {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      switch (axiosError.status) {
-        case 400:
-          break;
-        case 401:
-          break;
-        case 404:
-          break;
-        case 500:
-          break;
-      }
-      if (axiosError.status === 401) {
-        alert('로그인이 필요합니다.');
-      }
-      //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
+      // switch (axiosError.status) {
+      //   case 400:
+      //     break;
+      //   case 401:
+      //     break;
+      //   case 404:
+      //     break;
+      //   case 500:
+      //     break;
+      // }
+      // if (axiosError.status === 401) {
+      //   alert('로그인이 필요합니다.');
+      // }
+      // //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
       //응답 데이터로 판별
       console.log(axiosError.message);
       console.log(axiosError.status);
