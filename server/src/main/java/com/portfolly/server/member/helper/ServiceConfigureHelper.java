@@ -28,6 +28,7 @@ public interface ServiceConfigureHelper {
                 .skill("[파트너] 스킬을 작성하세요")
                 .memberStatus(Member.Member_Status.MEMBER_ACTIVE)
                 .refreshToken(member.getRefreshToken())
+                .imageUrl(member.getImageUrl())
                 .build();
     }
 
