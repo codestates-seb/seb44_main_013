@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { CommentProps } from '@/types';
 
-import { call } from '@/utils/apiService';
+// import { call } from '@/utils/apiService';
 
 import Card from '@/commons/atoms/card/Card';
 import Comment from '@/commons/molecules/comment/Comment';
@@ -12,6 +12,7 @@ import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
 import CommentWriteBox from '@/commons/molecules/comment/CommentWriteBox';
 import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 import noComment from '@/assets/noComment.png';
+import netaxios from '@/utils/axiosIntercept';
 
 export default function CommentBox({ comments = [] }: any) {
   const [currentComment, setCurrentComment] = useState('');
@@ -28,13 +29,14 @@ export default function CommentBox({ comments = [] }: any) {
   //댓글 등록 작동 버튼
   const saveComment = () => {
     const addNewComment = async () => {
-      await call(`/comments`, 'POST', {
-        boardId: boardId,
-        content: currentComment,
-      })
+      await netaxios
+        .post(`/comments`, {
+          boardId: boardId,
+          content: currentComment,
+        })
         .then((res) => {
           console.log('댓글 등록 완료');
-          console.log(res.data);
+          console.log(res);
         })
         .catch((err) => console.log(err));
     };
@@ -53,14 +55,6 @@ export default function CommentBox({ comments = [] }: any) {
     // };
 
     addNewComment();
-    // amendComment.push({
-    //   id: comments.length + 1,
-    //   content: currentComment,
-    //   name: 'jhj',
-    //   createdAt: '2023-06-21T17:34:51.3395597',
-    //   modifiedAt: '2023-06-21T17:34:51.3395597',
-    //   status: 'POST_ACTIVE',
-    // });
     setCurrentComment('');
   };
 
@@ -78,7 +72,7 @@ export default function CommentBox({ comments = [] }: any) {
     }
 
     setDeleteId(null);
-  }, [deleteId]);
+  }, [deleteId, saveComment]);
 
   if (amendComment.length <= 0) {
     return (
@@ -108,6 +102,7 @@ export default function CommentBox({ comments = [] }: any) {
                 comments={element}
                 setDeleteId={setDeleteId}
                 setAmendComment={setAmendComment}
+                boardId={boardId}
               />
             );
           })}
