@@ -56,7 +56,7 @@ export default function MyPage() {
     netaxios
       .get(`/boards?memberId=${memberId}`)
       .then((response) => {
-        setUserBoards(response.data); // Slice 없이 모든 데이터를 setUserBoards에 저장합니다.
+        setUserBoards(response.data);
       })
       .catch((error) => {
         console.error(error);
