@@ -4,11 +4,13 @@
     "useDefineForClassFields": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "skipLibCheck": true,
     "types": ["node"],
     "allowJs": false,
-    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./src/*"]
@@ -23,7 +25,7 @@
     "jsx": "react-jsx",
 
     /* Linting */
-
+    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
