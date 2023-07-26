@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
-import { Author, PhotoItemContainer, Title, TitleOverlay } from './PhotoItem.styled';
+import {
+  Author,
+  PhotoItemContainer,
+  Title,
+  TitleOverlay,
+} from './PhotoItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
 
 type PhotoItemProps = {
@@ -17,7 +22,7 @@ export default function PhotoItem({ item }: PhotoItemProps) {
         <img src={itemPic} alt={`photo image-${item.title}`} />
         <TitleOverlay>
           <Title>{item.title}</Title>
-          <Author>{item.name}</Author>
+          <Author>{item.member.name}</Author>
         </TitleOverlay>
         <BookmarkWrapper>
           <Bookmark portfolioId={item.id} isToggled={item.marked} />
