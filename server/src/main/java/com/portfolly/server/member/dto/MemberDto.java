@@ -163,6 +163,6 @@ public class MemberDto {
         private String name;
         private String email;
         private Member.Member_Role member_role;
-        //private String imageData;
+//        private String imageData;
     }
 }

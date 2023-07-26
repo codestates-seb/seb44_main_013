@@ -72,7 +72,7 @@ public class PortfolioController {
         Page<Portfolio> pagePortfolios = portfolioService.findPortfolios(page -1, size, category);
         List<Portfolio> portfolios = pagePortfolios.getContent();
         List<PortfolioDto.Response> responses = portfolioMapper.portfoliosToResponseDto(portfolios);
-        portfolioService.setOfflindResponse(responses);
+        portfolioService.setOfflineResponse(responses);
 
         return new ResponseEntity<>(new MultiResponseDto<>(responses, pagePortfolios), HttpStatus.OK);
     }
