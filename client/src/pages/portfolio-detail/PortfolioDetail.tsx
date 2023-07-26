@@ -47,7 +47,7 @@ export default function PortfolioDetail() {
 
   useEffect(() => {
     getPortfolio().then((res) => {
-      setPortfolio(res.data);
+      setPortfolio(res.data.content);
       setMember(res.data.member);
       setCreatedAt(changeDateFormat(res.data.createdAt));
     });
