@@ -26,7 +26,7 @@ interface MypageProfileProps {
 export default function MypageProfile({ user }: MypageProfileProps) {
   const API_KEY = '76e0dc6fc7f77e50fa77bdb26076dbb1';
   const [isEdit, setIsEdit] = useState(false);
-  const [name, setName] = useState(user?.name || 'HOHO');
+  const [name, setName] = useState(user?.name || '');
   const inputRef = useRef<HTMLInputElement>(null);
   const [weatherData, setWeatherData] = useState<{
     city: string;
@@ -45,7 +45,7 @@ export default function MypageProfile({ user }: MypageProfileProps) {
   const handleNameBlur = async () => {
     if (!name.trim()) return null;
     try {
-      await axios.patch('/members', { name });
+      await axios.patch('/members/{memberId}', { name });
       console.log('이름 변경 성공');
     } catch (error) {
       console.error('이름 변경 실패', error);
@@ -91,11 +91,22 @@ export default function MypageProfile({ user }: MypageProfileProps) {
       <img src={userImg} alt="userImage" />
       <div>
         {isEdit ? (
-          <NameEdit type="text" value={name} ref={inputRef} onChange={handleNameChange} onBlur={handleNameBlur} />
+          <NameEdit
+            type="text"
+            value={name}
+            ref={inputRef}
+            onChange={handleNameChange}
+            onBlur={handleNameBlur}
+            readOnly={!isEdit} // isEdit이 false일 때 편집 불가능하도록 설정
+          />
         ) : (
           <>
-            <h1 onClick={handleEditToggle}>{name}</h1>
-            <BsFillPencilFill size={20} className="editBtn" onClick={handleEditToggle} />
+            <h1 onClick={handleEditToggle}>{user?.name}</h1>
+            <BsFillPencilFill
+              size={20}
+              className="editBtn"
+              onClick={handleEditToggle}
+            />
           </>
         )}
       </div>
@@ -104,7 +115,12 @@ export default function MypageProfile({ user }: MypageProfileProps) {
         <p>
           {weatherData.city} / {weatherData.weather}
         </p>
-        {weatherData.icon && <WeatherIcon src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`} alt="Weather icon" />}
+        {weatherData.icon && (
+          <WeatherIcon
+            src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`}
+            alt="Weather icon"
+          />
+        )}
       </div>
     </MypageProfileContainer>
   );

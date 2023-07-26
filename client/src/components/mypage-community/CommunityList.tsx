@@ -6,18 +6,20 @@ import {
   Wrapper,
 } from './CommunityList.styled';
 
-export default function CommunityList() {
+interface CommunityListProps {
+  title: string;
+  name: string | undefined;
+}
+
+export default function CommunityList({ title, name }: CommunityListProps) {
   return (
     <Wrapper>
       <TextContainer>
-        <MainTitle>Title</MainTitle>
+        <MainTitle>{title}</MainTitle>
       </TextContainer>
 
       <TagsContainer>
-        <Name>@wjy</Name>
-
-        {/* <Tags>#tags</Tags> */}
-        {/* <Tags>#tags</Tags> */}
+        <Name>@{name}</Name>
       </TagsContainer>
     </Wrapper>
   );
