@@ -58,7 +58,12 @@ export default function CommunityMain() {
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
+        <Search
+          setSearchValue={setCurrentSearch}
+          currentSearch={currentSearch}
+          data={data}
+          setSearchs={setSearchs}
+        />
       </SearchContainer>
         <ItemWrapper>
           <Link to="/boards/edit">
