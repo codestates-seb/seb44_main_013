@@ -36,7 +36,7 @@ export default function CommunityMain() {
         .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
         .then((res) => {
           console.log(res.data.data);
-          setDatas(res.data.data);
+          setData(res.data.data);
         });
     };
 
