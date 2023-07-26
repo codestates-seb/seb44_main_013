@@ -2,23 +2,16 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useSelector } from 'react-redux/es/hooks/useSelector';
-import { initializeTag, setCategory, portfolio } from '@/store/portfolioSlice';
-
 import { categories } from '@/assets/data/category';
+
+import { initializeTag, setCategory, portfolio } from '@/store/portfolioSlice';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { DropDownItemContainer } from './CategoryDropdown.styled';
-import DropDownBox from '@/commons/atoms/dropdown/DropDownBox';
 import DropDownItem from '@/commons/atoms/dropdown/DropDownItem';
-
-const catagoryMapper: any = {
-  "web": "웹",
-  "app": "앱",
-  "3danimation": "3D/애니메이션",
-  "graphicdesign": "그래픽디자인",
-  "photo": "사진/영상",
-};
+import DropDownBox from '@/commons/atoms/dropdown/DropDownBox';
+import { matchCategory } from '@/utils';
 
 export default function ContegroyDropDown() {
   const dispatch = useDispatch();
@@ -33,10 +26,6 @@ export default function ContegroyDropDown() {
     setIsOpen(!isOpen);
     dispatch(setCategory(item));
     dispatch(initializeTag());
-  }
-
-  const matchCategory = (category: string) => {
-    return catagoryMapper[category];
   }
 
   return (
