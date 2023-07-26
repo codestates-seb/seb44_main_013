@@ -55,7 +55,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
     };
 
     await netaxios
-      .patch(`https://portfolly013.netlify.app/comments/edit/${comments.id}`, data)
+      .patch(`/comments/edit/${comments.id}`, data)
       .then((res) => {
         console.log('PATCH 성공');
         console.log(res);
