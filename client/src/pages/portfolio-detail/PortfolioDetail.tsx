@@ -99,7 +99,7 @@ export default function PortfolioDetail() {
                 <BodyText color="white">{portfolio.explains}</BodyText>
               </>
             )}
-            {portfolio?.writer && (
+            {true && (
               <FlexEndWrapper>
                 <EditButton onClick={onEditButtonClick} />
                 <DeleteButton onClick={openDeleteModal} />
