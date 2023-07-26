@@ -34,6 +34,7 @@ public class CommentService {
         response.setMemberInfo(MemberInfo.builder()
                 .memberId(comment.getMember().getId())
                 .name(comment.getMember().getName())
+                .imageUrl(comment.getMember().getImageUrl())
                 .build());
         return response;
     }
@@ -70,16 +71,19 @@ public class CommentService {
 
     public CommentDto.Response getComment(Long commentId) {
         Comment verifiedComment = verifyComment(commentId);
-       return creatResponse(verifiedComment);
+        Long boardId = verifiedComment.getBoard().getId();
+        Comment foundComment = commentRepository.findCommentByStatusAndBoardId(Comment.Status.COMMENT_ACTIVE, boardId);
+
+        return creatResponse(foundComment);
     }
 
 
     @Transactional
     public void deleteComment(Long commentId, Long memberId) {
 
-//        Board verifiedBoard = boardService.verifyBoard(boardId); // 2차 검증 : 게시글 존재여부
-        Comment verifiedComment = verifyComment(commentId);        // 3차 검증 : 댓글 존재여부
-        verifyWriter(verifiedComment, memberId);                   // 4차 검증 : 댓글 작성자 확인
+        Comment verifiedComment = verifyComment(commentId);           // 2차 검증 : 댓글 존재여부
+        boardService.verifyBoard(verifiedComment.getBoard().getId()); // 3차 검증 : 게시글 존재여부
+        verifyWriter(verifiedComment, memberId);                      // 4차 검증 : 댓글 작성자 확인
 
         verifiedComment.setStatus(Comment.Status.COMMENT_INACTIVE);
     }
@@ -93,9 +97,13 @@ public class CommentService {
     @Transactional(readOnly = true)
     public Comment verifyComment(Long commentId) {
         Optional<Comment> optionalComment = commentRepository.findById(commentId);
-        Comment findedComment =
+        Comment foundComment =
                 optionalComment.orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_NOT_EXIST));
-        return findedComment;
+
+        if (foundComment.getStatus() != Comment.Status.COMMENT_ACTIVE)
+            throw new BusinessLogicException(ExceptionCode.COMMENT_DELETED);
+
+        return foundComment;
     }
 
     // 댓글 작성자 확인

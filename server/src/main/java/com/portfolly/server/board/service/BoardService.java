@@ -156,9 +156,10 @@ public class BoardService {
     }
 
 
+    // 댓글 유뮤 확인
     @Transactional(readOnly = true)
     public List<Comment> verifyComment(Long boardId) {
-        Optional<List<Comment>> optionalComments = commentRepository.findCommentsByBoardId(boardId);
+        Optional<List<Comment>> optionalComments = commentRepository.findCommentsByStatusAndBoardId(Comment.Status.COMMENT_ACTIVE, boardId);
         List<Comment> foundComments =
                 optionalComments.orElseThrow(() -> new BusinessLogicException(ExceptionCode.COMMENT_NOT_EXIST));
         return foundComments;

@@ -14,6 +14,8 @@ import java.util.Optional;
 @Transactional
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query("SELECT c from Comment c JOIN FETCH c.member WHERE c.board.id = :boardId")
-    Optional<List<Comment>> findCommentsByBoardId(@Param("boardId") Long boardId);
+    //    @Query("SELECT c from Comment c JOIN FETCH c.member WHERE c.board.id = :boardId")
+    Optional<List<Comment>> findCommentsByStatusAndBoardId(Comment.Status status, @Param("boardId") Long boardId);
+
+    Comment findCommentByStatusAndBoardId(Comment.Status status, @Param("boardId") Long boardId);
 }
