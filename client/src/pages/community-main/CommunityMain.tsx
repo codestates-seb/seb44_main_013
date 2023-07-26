@@ -27,7 +27,7 @@ export default function CommunityMain() {
   const page = 1;
   const size = 30;
 
-  const state = useSelector((state) => state);
+  const state: any = useSelector((state) => state);
   const currentLoginState = state.loginSlice.isLogin;
 
   useEffect(() => {
