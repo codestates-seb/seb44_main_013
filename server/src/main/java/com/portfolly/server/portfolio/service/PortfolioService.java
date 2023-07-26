@@ -262,7 +262,7 @@ public class PortfolioService {
             int startIdx= 0;
             int endIdx = content.indexOf('>');
             String pictureUrl = content.substring(startIdx,endIdx);
-            pictureUrl = pictureUrl.replace("\"", "");
+            pictureUrl = pictureUrl.replace("'", "");
             pictureUrlList.add(pictureUrl);
             content=content.substring(endIdx);
             System.out.println(pictureUrl);
