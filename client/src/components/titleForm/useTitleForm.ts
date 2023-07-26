@@ -1,15 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Picture, PortfolioContent, Tag } from '@/types';
+import { INITIAL_PORTFOLIO } from '@/types/initials';
 
 import { call } from '@/utils/apiService';
-import { pictures, portfolio } from '@/store/portfolioSlice';
+import { pictures, portfolio, setPortfolio } from '@/store/portfolioSlice';
 
 export default function useTitleForm() {
   const savedPortfolio = useSelector(portfolio);
   const savedPictures = useSelector(pictures);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const postPortfolio = (body: PortfolioContent) => call('/portfolios', 'POST', body);
   const modifyPortfolio = (body: PortfolioContent) => call(`/portfolios/${savedPortfolio.id}`, 'PATCH', body);
@@ -60,6 +62,7 @@ export default function useTitleForm() {
       const body = copiedPortfolio;
       if (isModified) modifyPortfolio(body).then(() => navigate(`/portfolios/${savedPortfolio.id}`));
       else postPortfolio(body).then(() => navigate(`/main`));
+      dispatch(setPortfolio(INITIAL_PORTFOLIO));
     }
   };
 
