@@ -10,11 +10,9 @@ import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 export default function CommunityItem({ communityItem }: any) {
   const navigate = useNavigate();
   const eachData = communityItem;
-  // console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
-    // console.log(e.id);
   };
 
   const TextTruncate = ({ text, maxLength }: any) => {
@@ -42,7 +40,6 @@ export default function CommunityItem({ communityItem }: any) {
       />
       <h2>{eachData.title}</h2>
       <TextTruncate text={eachData.content} maxLength={65} />
-      {/* <p>{eachData.content}</p> */}
       <Views view={eachData.view} />
     </CommunityItemContainer>
   );
