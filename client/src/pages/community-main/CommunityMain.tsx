@@ -35,8 +35,8 @@ export default function CommunityMain() {
       await axios
         .get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`)
         .then((res) => {
-          console.log(res.data);
-          setData(res.data);
+          console.log(res.data.data);
+          setDatas(res.data.data);
         });
     };
 
