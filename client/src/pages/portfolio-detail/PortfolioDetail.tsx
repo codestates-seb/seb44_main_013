@@ -47,7 +47,7 @@ export default function PortfolioDetail() {
 
   useEffect(() => {
     getPortfolio().then((res) => {
-      console.log(res.data.content);
+      console.log(res.data);
       setPortfolio(res.data);
       setMember(res.data.member);
       setCreatedAt(changeDateFormat(res.data.createdAt));
@@ -99,7 +99,7 @@ export default function PortfolioDetail() {
                 <BodyText color="white">{portfolio.explains}</BodyText>
               </>
             )}
-            {true && (
+            {portfolio?.writer && (
               <FlexEndWrapper>
                 <EditButton onClick={onEditButtonClick} />
                 <DeleteButton onClick={openDeleteModal} />
