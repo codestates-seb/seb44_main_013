@@ -41,16 +41,10 @@ export default function Comment({ username, content, date, comments, setDeleteId
     try {
       console.log('PATCH 성공');
       const data = {
-        comments_id: comments.id,
+        boadId: '',
         content: basicContent,
-        // member_id: comments.memberId,
-        name: username,
-        createdAt: '2023-06-23T17:34:51.3395597',
-        modifiedAt: '2023-06-23T17:34:51.3395597',
-        status: 'POST_ACTIVE',
       };
-      await call(`/comments/${comments.id}`, 'PATCH', data);
-      // setAmendComment(data);comments는 [{}.{}]인데 이걸 대체하려 하니 안돼지..
+      await call(`https://portfolly013.netlify.app/comments/${comments.id}`, 'PATCH', data);
     } catch (err) {
       console.log('PATCH 실패 ' + err);
     }
@@ -87,7 +81,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
       try {
         console.log('DELETE 성공');
         setDeleteId(comments.id);
-        return call(`/comments/${comments.id}`, 'DELETE', { comments_id: comments.id });
+        return call(`/comments/${comments.id}`, 'DELETE', null);
       } catch (err) {
         console.log('DELETE 실패' + err);
       }

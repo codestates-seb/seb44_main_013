@@ -18,12 +18,14 @@ export default function CommentBox({ comments = [] }: any) {
   const [amendComment, setAmendComment] = useState(comments);
   const [deleteId, setDeleteId] = useState(null);
   const { id: boardId } = useParams();
+  console.log('CommentBox');
   console.log(amendComment);
 
   const handleComment = (value: string) => {
     setCurrentComment(value);
   };
 
+  //댓글 수정 작동 버튼
   const saveComment = () => {
     const addNewComment = () =>
       call(`/comments`, 'POST', {
@@ -33,20 +35,21 @@ export default function CommentBox({ comments = [] }: any) {
     const axiosPost = async () => {
       return addNewComment()
         .then((res) => {
+          console.log('댓글 수정 완요!');
           console.log(res);
         })
         .catch((err) => console.log('댓글 등록 에러' + err));
     };
 
     axiosPost();
-    amendComment.push({
-      id: comments.length + 1,
-      content: currentComment,
-      name: 'jhj',
-      createdAt: '2023-06-21T17:34:51.3395597',
-      modifiedAt: '2023-06-21T17:34:51.3395597',
-      status: 'POST_ACTIVE',
-    });
+    // amendComment.push({
+    //   id: comments.length + 1,
+    //   content: currentComment,
+    //   name: 'jhj',
+    //   createdAt: '2023-06-21T17:34:51.3395597',
+    //   modifiedAt: '2023-06-21T17:34:51.3395597',
+    //   status: 'POST_ACTIVE',
+    // });
     setCurrentComment('');
   };
 
@@ -66,13 +69,14 @@ export default function CommentBox({ comments = [] }: any) {
     setDeleteId(null);
   }, [deleteId]);
 
-  if (amendComment.length === 0) {
+  if (amendComment.length <= 0) {
     return (
       <Card>
         <JbWrapper>
           <FlexColumnContainer gap={0}>
             <img src={noComment} alt="no comments" />
           </FlexColumnContainer>
+          <CommentWriteBox saveComment={saveComment} handleComment={handleComment} isInput={currentComment} />
         </JbWrapper>
       </Card>
     );
