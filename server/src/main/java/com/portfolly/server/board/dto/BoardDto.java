@@ -74,6 +74,4 @@ public class BoardDto {
         private Long view;
         private MemberInfo memberInfo;
     }
-
-
 }

@@ -1,5 +1,7 @@
 package com.portfolly.server.member.image.entity;
 
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.comment.entity.Comment;
 import com.portfolly.server.member.entity.Member;
 import lombok.*;
 
@@ -25,4 +27,12 @@ public class ImageData {
     @OneToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+    @OneToOne
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 }

@@ -6,26 +6,17 @@ spring:
     password: 1234
 
   profiles:
-    include: oauth
+    include: oauth,mail,jwt,springdoc,jasypt
 
   jpa:
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
         hbm2ddl:
           auto: create
-    show-sql: true
-mail:
-  address:
-    admin: admin@gmail.com
+    defer-datasource-initialization: true
 
-#jwt:
-#  key:
-#    secret: ${JWT_SECRET_KEY}    # 환경변수에 로드
-#  access-token-expiration-minutes: 30
-#  refresh-token-expiration-minutes: 420
-
-#jasypt:
-#  encryptor:
-#    bean: jasyptStringEncryptor
-#    password: ${PASSWORD}
+  sql:
+    init:
+      mode: always

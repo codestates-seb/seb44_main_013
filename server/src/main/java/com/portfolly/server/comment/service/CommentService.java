@@ -1,11 +1,11 @@
 package com.portfolly.server.comment.service;
 
 
+import com.portfolly.server.board.dto.MemberInfo;
 import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.board.respository.BoardRepository;
 import com.portfolly.server.board.service.BoardService;
 import com.portfolly.server.comment.dto.CommentDto;
-import com.portfolly.server.comment.dto.CommentMemberInfo;
 import com.portfolly.server.comment.entity.Comment;
 import com.portfolly.server.comment.mapper.CommentMapper;
 import com.portfolly.server.comment.respository.CommentRepository;
@@ -26,13 +26,12 @@ public class CommentService {
     private final MemberService memberService;
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
-    private final BoardRepository boardRepository;
     private final BoardService boardService;
 
 
     private CommentDto.Response creatResponse(Comment comment) {
         CommentDto.Response response = commentMapper.commentToResponse(comment);
-        response.setMemberInfo(CommentMemberInfo.builder()
+        response.setMemberInfo(MemberInfo.builder()
                 .memberId(comment.getMember().getId())
                 .name(comment.getMember().getName())
                 .build());
@@ -59,7 +58,7 @@ public class CommentService {
     @Transactional
     public CommentDto.Response updateComment(Comment comment, Long boardId, Long memberId) {
 
-        Board verifiedBoard = boardService.verifyBoard(boardId);   // 2차 검증 : 게시글 존재여부
+        boardService.verifyBoard(boardId);                         // 2차 검증 : 게시글 존재여부
         Comment verifiedComment = verifyComment(comment.getId());  // 3차 검증 : 댓글 존재여부
         verifyWriter(comment, memberId);                           // 4차 검증 : 댓글 작성자 확인
 

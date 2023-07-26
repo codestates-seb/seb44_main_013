@@ -2,6 +2,7 @@ package com.portfolly.server.board.mapper;
 
 import com.portfolly.server.board.dto.BoardDto;
 import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.comment.dto.CommentDto;
 import com.portfolly.server.comment.entity.Comment;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-18T18:04:27+0900",
+    date = "2023-07-26T12:10:48+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.1.1.jar, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
@@ -33,7 +34,7 @@ public class BoardMapperImpl implements BoardMapper {
     }
 
     @Override
-    public Board bardPatchToBoard(BoardDto.Patch patch) {
+    public Board boardPatchToBoard(BoardDto.Patch patch) {
         if ( patch == null ) {
             return null;
         }
@@ -43,6 +44,25 @@ public class BoardMapperImpl implements BoardMapper {
         board.setId( patch.getId() );
         board.setTitle( patch.getTitle() );
         board.setContent( patch.getContent() );
+
+        return board;
+    }
+
+    @Override
+    public Board boardResponseToBoard(BoardDto.Response response) {
+        if ( response == null ) {
+            return null;
+        }
+
+        Board board = new Board();
+
+        board.setId( response.getId() );
+        board.setTitle( response.getTitle() );
+        board.setContent( response.getContent() );
+        board.setView( response.getView() );
+        board.setDivision( response.getDivision() );
+        board.setStatus( response.getStatus() );
+        board.setComments( responseListToCommentList( response.getComments() ) );
 
         return board;
     }
@@ -67,10 +87,7 @@ public class BoardMapperImpl implements BoardMapper {
         if ( board.getModifiedAt() != null ) {
             response.setModifiedAt( LocalDateTime.parse( board.getModifiedAt() ) );
         }
-        List<Comment> list = board.getComments();
-        if ( list != null ) {
-            response.setComments( new ArrayList<Comment>( list ) );
-        }
+        response.setComments( commentsToCommentResponseList( board.getComments() ) );
 
         return response;
     }
@@ -89,6 +106,47 @@ public class BoardMapperImpl implements BoardMapper {
         return list;
     }
 
+    @Override
+    public List<CommentDto.Response> commentsToCommentResponseList(List<Comment> comments) {
+        if ( comments == null ) {
+            return null;
+        }
+
+        List<CommentDto.Response> list = new ArrayList<CommentDto.Response>( comments.size() );
+        for ( Comment comment : comments ) {
+            list.add( commentToResponse( comment ) );
+        }
+
+        return list;
+    }
+
+    protected Comment responseToComment(CommentDto.Response response) {
+        if ( response == null ) {
+            return null;
+        }
+
+        Comment comment = new Comment();
+
+        comment.setId( response.getId() );
+        comment.setContent( response.getContent() );
+        comment.setStatus( response.getStatus() );
+
+        return comment;
+    }
+
+    protected List<Comment> responseListToCommentList(List<CommentDto.Response> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Comment> list1 = new ArrayList<Comment>( list.size() );
+        for ( CommentDto.Response response : list ) {
+            list1.add( responseToComment( response ) );
+        }
+
+        return list1;
+    }
+
     protected BoardDto.ResponseList boardToResponseList(Board board) {
         if ( board == null ) {
             return null;
@@ -104,5 +162,25 @@ public class BoardMapperImpl implements BoardMapper {
         responseList.setView( board.getView() );
 
         return responseList;
+    }
+
+    protected CommentDto.Response commentToResponse(Comment comment) {
+        if ( comment == null ) {
+            return null;
+        }
+
+        CommentDto.Response response = new CommentDto.Response();
+
+        response.setId( comment.getId() );
+        response.setContent( comment.getContent() );
+        response.setStatus( comment.getStatus() );
+        if ( comment.getCreatedAt() != null ) {
+            response.setCreatedAt( LocalDateTime.parse( comment.getCreatedAt() ) );
+        }
+        if ( comment.getModifiedAt() != null ) {
+            response.setModifiedAt( LocalDateTime.parse( comment.getModifiedAt() ) );
+        }
+
+        return response;
     }
 }
