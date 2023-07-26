@@ -37,10 +37,7 @@ export default function MyPage() {
   const itemsPerPage = 5;
   const dummyArray = Array.from({ length: 10 });
   const { id: memberId } = useParams<{ id: string }>();
-  const [, setUserPosts] = useState<Post[]>([]);
-  const [paginatedCommunityList, setPaginatedCommunityList] = useState<Post[]>(
-    []
-  );
+  const [, setUserBoards] = useState<Post[]>([]);
 
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
@@ -55,29 +52,16 @@ export default function MyPage() {
       .catch((error) => {
         console.error(error);
       });
-    netaxios
-      .get(`/members/${memberId}`)
-      .then((response) => {
-        setUserPosts(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
 
     netaxios
       .get(`/boards?memberId=${memberId}`)
       .then((response) => {
-        const actualBoardData: Post[] = response.data;
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const paginatedData = actualBoardData.slice(startIndex, endIndex);
-        setPaginatedCommunityList(paginatedData);
+        setUserBoards(response.data); // Slice 없이 모든 데이터를 setUserBoards에 저장합니다.
       })
       .catch((error) => {
         console.error(error);
       });
   }, [memberId, currentPage]);
-
   const addScrollListener = (id: string) => {
     const slider = document.getElementById(id);
     if (slider) {
@@ -154,38 +138,58 @@ export default function MyPage() {
               {/* 게시판 목록 부분  */}
               <BoxTitle>게시판</BoxTitle>
               <BoxWrapper isRow="column">
-                {user?.boards.map((post) => (
-                  <CommunityList
-                    key={post.id}
-                    title={post.title}
-                    name={user?.name}
-                  />
-                ))}
-
+                {user?.boards
+                  .slice(
+                    (currentPage - 1) * itemsPerPage,
+                    currentPage * itemsPerPage
+                  )
+                  .map((post) => (
+                    <CommunityList
+                      key={post.id}
+                      title={post.title}
+                      name={user?.name}
+                    />
+                  ))}
                 <PagenationWrapper>
                   <Pagenation
-                    onClick={() => handlePageChange(currentPage - 1)}
+                    onClick={() =>
+                      handlePageChange(Math.max(1, currentPage - 1))
+                    }
                     isActive={currentPage === 1}
                   >
                     &lt;
                   </Pagenation>
 
-                  {dummyArray.slice(0, 5).map((_, i) => {
-                    const pageNumber = i + 1;
-                    return (
-                      <Pagenation
-                        key={pageNumber}
-                        onClick={() => handlePageChange(pageNumber)}
-                        isActive={pageNumber === currentPage}
-                      >
-                        {pageNumber}
-                      </Pagenation>
-                    );
-                  })}
+                  {Array.from(
+                    {
+                      length: Math.ceil(
+                        (user?.boards?.length || 0) / itemsPerPage
+                      ),
+                    },
+                    (_, i) => i + 1
+                  ).map((pageNumber) => (
+                    <Pagenation
+                      key={pageNumber}
+                      onClick={() => handlePageChange(pageNumber)}
+                      isActive={pageNumber === currentPage}
+                    >
+                      {pageNumber}
+                    </Pagenation>
+                  ))}
 
                   <Pagenation
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    isActive={currentPage === 5}
+                    onClick={() =>
+                      handlePageChange(
+                        Math.min(
+                          currentPage + 1,
+                          Math.ceil((user?.boards?.length || 0) / itemsPerPage)
+                        )
+                      )
+                    }
+                    isActive={
+                      currentPage ===
+                      Math.ceil((user?.boards?.length || 0) / itemsPerPage)
+                    }
                   >
                     &gt;
                   </Pagenation>
