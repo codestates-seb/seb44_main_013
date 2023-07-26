@@ -77,8 +77,8 @@ public class CommentService {
     @Transactional
     public void deleteComment(Long commentId, Long memberId) {
 
-//        Board verifiedBoard = boardService.verifyBoard(boardId); // 2차 검증 : 게시글 존재여부
         Comment verifiedComment = verifyComment(commentId);        // 3차 검증 : 댓글 존재여부
+        boardService.verifyBoard(verifiedComment.getBoard().getId()); // 2차 검증 : 게시글 존재여부
         verifyWriter(verifiedComment, memberId);                   // 4차 검증 : 댓글 작성자 확인
 
         verifiedComment.setStatus(Comment.Status.COMMENT_INACTIVE);
