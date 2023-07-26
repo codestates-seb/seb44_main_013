@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import axios from 'axios';
 
 import { setPictures } from '@/store/portfolioSlice';
+import { API_BASE_URL } from '@/app-config';
 
 export default function useImageHandler() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function useImageHandler() {
         accessToken: accessToken,
       },
       method: 'POST',
-      url: '/api/s3/picture',
+      url: API_BASE_URL + '/s3/picture',
       data: body,
     });
   };

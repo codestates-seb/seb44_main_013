@@ -1,7 +1,8 @@
 /* 2023-07-02 메인(카테고리)페이지 카테고리 navBar의 낱개 버튼 - 김다함*/
-import 'styled-components/macro';
-import tw from 'twin.macro';
 import { styled } from 'styled-components';
+import tw from 'twin.macro';
+
+import { matchCategory } from '@/utils';
 
 export interface CategoryBtnProps {
   category: string;
@@ -54,15 +55,5 @@ const Category = styled.button`
 `;
 
 export default function CategoryButton({ category, onClick }: CategoryBtnProps) {
-  if (category === 'web') {
-    return <Category onClick={onClick}>웹</Category>;
-  } else if (category === 'app') {
-    return <Category onClick={onClick}>앱</Category>;
-  } else if (category === '3danimation') {
-    return <Category onClick={onClick}>3D/애니메이션</Category>;
-  } else if (category === 'graphicdesign') {
-    return <Category onClick={onClick}>그래픽디자인</Category>;
-  } else if (category === 'photo') {
-    return <Category onClick={onClick}>사진/영상</Category>;
-  }
+  return <Category onClick={onClick}>{matchCategory(category)}</Category>
 }

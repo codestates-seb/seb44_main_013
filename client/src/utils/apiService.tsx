@@ -1,14 +1,11 @@
 /* 2023-07-07 axios 요청 함수 - 김다함 */
+import { API_BASE_URL } from '@/app-config';
 import axios, { RawAxiosRequestConfig, AxiosHeaders, AxiosError } from 'axios';
-
-export const API_BASE_URL = 'https://api.portfolly.site';
-// export const API_BASE_URL = import.meta.env.MODE === 'development' ? '/' : 'https://api.portfolly.site';
-console.log(import.meta.env.MODE);
-//http://ec2-13-125-77-46.ap-northeast-2.compute.amazonaws.com:8080
+const ACCESS_TOKEN = 'accessToken';
 
 export async function call(api: string, method: string, data?: any) {
-  // const dispatch = useDispatch();
-  const accessToken = localStorage.getItem('accessToken');
+
+  const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
   const headers = new AxiosHeaders({
     'Content-Type': 'application/json',
@@ -32,20 +29,21 @@ export async function call(api: string, method: string, data?: any) {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError;
-      // switch (axiosError.status) {
-      //   case 400:
-      //     break;
-      //   case 401:
-      //     break;
-      //   case 404:
-      //     break;
-      //   case 500:
-      //     break;
-      // }
-      // if (axiosError.status === 401) {
-      //   alert('로그인이 필요합니다.');
-      // }
-      // //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
+      switch (axiosError.status) {
+        case 400:
+          console.log('유효하지 않은 요청입니다.');
+          break;
+        case 401:
+          alert('로그인 후 이용해 주세요.');
+          break;
+        case 404:
+          return { errorStatus: 404 }
+          break;
+        case 500:
+          return { errorStatus: 500 }
+          break;
+      }
+      //인증 오류 발 생 시 새로운 accessToken 발급 받아야 한다.
       //응답 데이터로 판별
       console.log(axiosError.message);
       console.log(axiosError.status);

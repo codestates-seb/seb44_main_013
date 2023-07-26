@@ -6,19 +6,13 @@ export interface Member {
   name: string;
   email?: string;
   member_role?: string;
-  location?: string;
-  job?: string;
-  career?: string;
-  award?: string;
-  skill?: string;
-  memberStatus?: string;
   imageUrl: string;
 }
 
 export interface Tag {
   id: number;
   name: string;
-  isSelected: boolean;
+  isSelected?: boolean;
 }
 
 export interface Category {
@@ -46,11 +40,12 @@ export interface Portfolio {
   createdAt: string;
   category: Category;
   member: Member;
-  tags: Array<Tag>;
+  portfolioTags: Array<Tag>;
   countLikes: number;
   marked: boolean;
   liked: boolean;
   writer: boolean;
+  firstImage?: any;
 }
 
 export interface PortfolioContent {
