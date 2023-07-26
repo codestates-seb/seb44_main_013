@@ -48,7 +48,6 @@ public class BoardController {
     private final CustomAuthorityUtils authorityUtils;
 
 
-
     @PostMapping("/write")
     public ResponseEntity postBoard(@RequestHeader("Authorization") String token,
                                     @Valid @RequestBody BoardDto.Post post) {
