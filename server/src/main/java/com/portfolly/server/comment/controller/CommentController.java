@@ -32,7 +32,6 @@ public class CommentController {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
-
     // todo : 프로필이미지 가져오기
 
     @PostMapping()
