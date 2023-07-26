@@ -54,6 +54,7 @@ export default function useTitleForm() {
     if (isValid) {
       const copiedPortfolio = JSON.parse(JSON.stringify(savedPortfolio));
       copiedPortfolio.tags = changeArraytoString(copiedPortfolio.tags);
+      copiedPortfolio.content = copiedPortfolio.content.replace(/"/g, "'");
       delete copiedPortfolio.portfolioId;
       delete copiedPortfolio.createdAt;
       const body = copiedPortfolio;
