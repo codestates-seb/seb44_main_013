@@ -39,7 +39,7 @@ const DaHamHandlers = [
         name: 'noname',
         imageUrl: 'https://lh3.google.com/u/0/ogw/AGvuzYbCDcprvYxmksNeswTW8vXMfMcfc9B8PbN4Lyvc=s64-c-mo',
       },
-      tags: body.tags,
+      portfolioTags: body.tags,
       countLikes: 0,
       liked: false,
       marked: false,

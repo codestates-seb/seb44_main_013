@@ -5,7 +5,7 @@ import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 
 export const CommunityWrapper = styled.div`
   ${tw`
-    w-screen h-screen flex flex-col
+    w-screen flex flex-col
     pb-20 bg-center bg-no-repeat bg-cover px-14
   `}/* background-image: url(${communitymainimg}) */
 `;

@@ -17,33 +17,66 @@ import {
   MyProfileWrapper,
 } from './MyPage.styled';
 
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { DefaultImgWrapper } from '@/commons/styles/layout/Layout.styled';
 import Header from '@/components/header/Header';
 import Footer from '@/components/footer/Footer';
+import netaxios from '@/utils/axiosIntercept';
+import { useParams } from 'react-router-dom';
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const dummyArray = Array.from({ length: 10 });
+  const { id: memberId } = useParams<{ id: string }>();
+  const [, setUserPosts] = useState<Post[]>([]);
+  const [paginatedCommunityList, setPaginatedCommunityList] = useState<Post[]>(
+    []
+  );
 
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
   );
 
   useEffect(() => {
-    axios
-      .get('/members')
+    netaxios
+      .get(`/members/${memberId}`)
       .then((response) => {
         setUser(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+    netaxios
+      .get(`/boards?memberId=${memberId}`)
+      .then((response) => {
+        setUserPosts(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    netaxios
+      .get(`/boards?memberId=${memberId}`)
+      .then((response) => {
+        const actualBoardData: Post[] = response.data;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedData = actualBoardData.slice(startIndex, endIndex);
+        setPaginatedCommunityList(paginatedData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [memberId, currentPage]);
 
   const addScrollListener = (id: string) => {
     const slider = document.getElementById(id);
@@ -71,14 +104,9 @@ export default function MyPage() {
     }
   };
 
-  //pagenation
   const handlePageChange = (page: number): void => {
     setCurrentPage(page);
   };
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedCommunityList = dummyArray.slice(startIndex, endIndex);
 
   return (
     <DefaultImgWrapper>
@@ -126,9 +154,13 @@ export default function MyPage() {
               {/* 게시판 목록 부분  */}
               <BoxTitle>게시판</BoxTitle>
               <BoxWrapper isRow="column">
-                {paginatedCommunityList.map((_, index) => {
-                  return <CommunityList key={index} />;
-                })}
+                {paginatedCommunityList.map((post) => (
+                  <CommunityList
+                    key={post.id}
+                    title={post.title}
+                    name={user?.name}
+                  />
+                ))}
 
                 <PagenationWrapper>
                   <Pagenation

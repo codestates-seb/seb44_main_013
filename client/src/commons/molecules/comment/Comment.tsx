@@ -142,8 +142,8 @@ export default function Comment({ username, content, date, comments, setDeleteId
           }
           console.log(err);
         });
-      deleteComment();
     };
+    deleteComment();
   };
 
   return (

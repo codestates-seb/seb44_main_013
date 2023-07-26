@@ -12,9 +12,8 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchValue(event.target.value);
   };
-  // console.log(data);
 
-  const 엔터치면검색 = (event: React.FormEvent<HTMLFormElement>) => {
+  const enterToSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const isEmpty = (search: string) => search === '';
     const isEmptyCurrentSearch = isEmpty(currentSearch);
@@ -30,14 +29,15 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
       return text.toLowerCase();
     };
     const isIncludedCurrentSearchToTitle = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
+    const isIncludedCurrentSearchToContent = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
     const isIncludedCurrentSearchToMembername = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
 
     // early return pattern
-    if ('data' in data[0]) {
+    if (data[0].category) {
       const filteredData = data.filter((element: any) => {
         return (
-          isIncludedCurrentSearchToTitle(element.data.title) ||
-          isIncludedCurrentSearchToMembername(element.data.membername)
+          isIncludedCurrentSearchToTitle(element.title) ||
+          isIncludedCurrentSearchToMembername(element.member.name)
         )
       });
 
@@ -47,36 +47,17 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
     const filteredData = data.filter((element: any) => {
       return (
         isIncludedCurrentSearchToTitle(element.title) ||
-        isIncludedCurrentSearchToMembername(element.name)
+        isIncludedCurrentSearchToMembername(element.memberInfo.name) ||
+        isIncludedCurrentSearchToContent(element.content)
       )
     });
 
     return setSearchs(filteredData);
 
-    // setSearchs(
-    //   data.filter(
-    //     (element: any) => {
-    //       if ('data' in element) {
-    //         return (
-    //           element.data.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-    //           element.data.membername.toLowerCase().includes(currentSearch.toLowerCase())
-    //         )
-    //       } else {
-    //         return (
-    //           element.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
-    //           element.content.toLowerCase().includes(currentSearch.toLowerCase())
-    //           // element.name.toLowerCase().includes(currentSearch.toLowerCase())
-    //           // 이름 받으면 주석 풀고 || 붙여서 처리
-    //         )
-    //       }
-    //     }
-    //   )
-    // );
-
   };
 
   return (
-    <SearchContainer onSubmit={엔터치면검색}>
+    <SearchContainer onSubmit={enterToSearch}>
       <SearchIcon />
       <SearchBox type="text" onChange={handleChange} />
     </SearchContainer>

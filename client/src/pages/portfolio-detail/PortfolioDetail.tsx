@@ -3,9 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import useChangeHtmlContent from '@/hooks/useChangeHtmlContent';
-import { changeDateFormat } from '@/utils/changeDateFormat';
+import { call, changeDateFormat } from '@/utils';
 import { Portfolio, Member, Tag } from '@/types';
-import { call } from '@/utils/apiService';
 
 import {
   ButtonHeader,
@@ -17,13 +16,7 @@ import {
   UserContainer,
   AskCommisionBtn,
 } from '@/pages/portfolio-detail/PortfolioDetail.styled';
-import {
-  Center,
-  FlexBetweenWrapper,
-  FlexColumnContainer,
-  FlexEndWrapper,
-  FlexWrapper,
-} from '@/commons/styles/Containers.styled';
+import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper, } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 import LikeButton from '@/commons/atoms/buttons/LikeButton';
@@ -45,7 +38,7 @@ export default function PortfolioDetail() {
   const deletePortfolio = () => call(`/portfolios/${portfolioId}`, 'DELETE');
   const getPortfolio = () => call(`/portfolios/${portfolioId}`, 'GET');
 
-  const onReviseButtonClick = () => (window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`);
+  const onEditButtonClick = () => window.location.href = `/portfolio/edit?portfolioId=${portfolioId}`;
   const openDeleteModal = () => setIsModalOpen(!isModalOpen);
   const deletePortfolioHandler = () => {
     deletePortfolio();
@@ -54,8 +47,8 @@ export default function PortfolioDetail() {
 
   useEffect(() => {
     getPortfolio().then((res) => {
-      console.log(res);
-      setPortfolio(res.data.data);
+      console.log(res.data);
+      setPortfolio(res.data);
       setMember(res.data.member);
       setCreatedAt(changeDateFormat(res.data.createdAt));
     });
@@ -108,7 +101,7 @@ export default function PortfolioDetail() {
             )}
             {portfolio?.writer && (
               <FlexEndWrapper>
-                <EditButton onClick={onReviseButtonClick} />
+                <EditButton onClick={onEditButtonClick} />
                 <DeleteButton onClick={openDeleteModal} />
               </FlexEndWrapper>
             )}
@@ -117,7 +110,7 @@ export default function PortfolioDetail() {
           <UserCard>
             <LabelText color="white">Tags</LabelText>
             <FlexWrapper gap={8}>
-              {portfolio && portfolio.tags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)}
+              {portfolio && portfolio.portfolioTags.map((tag: Tag) => <PortfolioTag tag={tag} key={tag.id} readOnly={true} />)}
             </FlexWrapper>
           </UserCard>
         </UserContainer>

@@ -2,6 +2,14 @@ import { CategoryTags } from '@/types';
 
 export const categories: Array<string> = ["웹", "앱", "3D/애니메이션", "그래픽디자인", "사진/영상"];
 
+export const catagoryMapper: any = {
+  "web": "웹",
+  "app": "앱",
+  "3danimation": "3D/애니메이션",
+  "graphicdesign": "그래픽디자인",
+  "photo": "사진/영상",
+};
+
 export const categoryTags: CategoryTags = {
   "web": {
     tags: [

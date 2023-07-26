@@ -39,6 +39,15 @@ const StyledButton = styled.button<{ isClicked: boolean }>`
   }
 `;
 
+export const ClickDescription = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  color: #fff;
+  font-size: 15px;
+  margin-top: 15px;
+`;
+
 const WrapperOpacity = styled.div`
   background-color: rgb(0, 0, 0, 0.4);
   z-index:2 ;
@@ -104,6 +113,7 @@ export default function PortfollyBtn() {
           >
             Portfolly
           </StyledButton>
+          <ClickDescription>click here</ClickDescription>
         </WrapperOpacity>
         <Cursor style={{ left: `${position.x}px`, top: `${position.y}px` }} />
       </CenteredDiv>

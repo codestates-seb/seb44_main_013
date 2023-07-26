@@ -22,12 +22,15 @@ export const CommunityItemContainer = styled.div`
   }
 
   > h2 {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 700;
-    margin-top: 10px;
+    margin: 10px 0;
   }
 
   > p {
-    font-size: 20px;
+    ${tw`
+      text-neutral-600
+    `}
+    font-size: 18px;
   }
 `;
