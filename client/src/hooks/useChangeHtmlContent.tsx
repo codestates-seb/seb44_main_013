@@ -24,6 +24,7 @@ export default function useChangeHtmlContent() {
     copiedHtmlContent = copiedHtmlContent.replace(/<img/g, '<img style="width:100%; height:auto;"');
     copiedHtmlContent = copiedHtmlContent.replace(/<iframe/g, '<iframe style="width:100%;" height="696"');
     copiedHtmlContent = copiedHtmlContent.replace(/"/g, "'");
+    console.log(copiedHtmlContent)
     return copiedHtmlContent;
   }
 
