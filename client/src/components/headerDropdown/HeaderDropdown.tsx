@@ -14,12 +14,11 @@ export default function HeaderDropwdown() {
   // const [, , removeCookies] = useCookies();
   const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
   const memberRole = localStorage.getItem('memberRole');
+  const memberId = localStorage.getItem('memberId');
   const handleLogout = () => {
     dispatch(login({ isLogin: false }));
     console.log('로그아웃 실행');
     console.log(loginState);
-    // removeCookies('isLogin', { path: '/' });
-    // removeCookies('memberId', { path: '/' });
   };
 
   return (
@@ -32,13 +31,13 @@ export default function HeaderDropwdown() {
           Alarm
         </ModalLink>
         <ModalLink>
-          <Link to="/members">My Page</Link>
+          <Link to={`/members/${memberId}`}>My Page</Link>
         </ModalLink>
-        {memberRole === 'PARTNER' &&
+        {memberRole === 'PARTNER' && (
           <ModalLink>
             <Link to="/portfolio/edit">New Portfolio</Link>
           </ModalLink>
-        }
+        )}
         <ModalLink onClick={handleLogout}>Log Out</ModalLink>
       </HDropSection>
     </HDropWrapper>
