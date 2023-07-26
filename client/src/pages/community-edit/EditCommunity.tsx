@@ -90,7 +90,7 @@ export default function EditCommunity() {
     netaxios
       .patch(`/boards/edit/${communityNum}`, {
         title: title,
-        content: post.replace(/<\/?p[^>]*>/g, ''),
+        content: post.replace(/<\/?p[^>]*>/g, '').replace(/<br\s*\/?>/gm, '\n'),
       })
       .then(() => navigate(`/boards/${communityNum}`))
       .catch((err) => console.log(err));

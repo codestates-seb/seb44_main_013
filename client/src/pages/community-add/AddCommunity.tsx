@@ -56,7 +56,7 @@ export default function AddCommunity() {
     const roleDivision = window.localStorage.getItem('memberRole') === 'CLIENT' ? 'RECRUITMENT' : 'COOPERATION';
     const res = await netaxios.post('/boards/write', {
       title: title,
-      content: post.replace(/<\/?p[^>]*>/g, ''),
+      content: post.replace(/<\/?p[^>]*>/g, '').replace(/<br\s*\/?>/gm, '\n'),
       division: roleDivision,
     });
 
