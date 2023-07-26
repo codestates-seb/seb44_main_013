@@ -49,6 +49,7 @@ export interface Styledprops extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
 
 //0707 혜진 community-main:<data> commu
 export interface CommuProps {
+  memberInfo: memberInfo;
   member: any;
   id: number;
   title: string;
@@ -86,6 +87,8 @@ export interface MainCategory {
   data: [];
 }
 
-// export interface MainCategoryData {
-//   data
-// }
+export interface memberInfo {
+  memberId: number;
+  name: string;
+  imgUrl?: string;
+}

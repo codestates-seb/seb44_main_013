@@ -9,10 +9,9 @@ import {
   AnimationCategoryDatas,
   GraphicCategoryDatas,
   PhotoCategoryDatas,
-  commu,
 } from './infiniteScrollData';
-
-import { CommuProps, Portfolio } from '@/types';
+//CommuProps,
+import { Portfolio } from '@/types';
 
 const DaHamHandlers = [
   // 포트폴리오 정보 조회
@@ -146,19 +145,19 @@ const DaHamHandlers = [
 const HJHandlers = [
   //1. 게시판 목록 조회 GET : community-main page
   //url-> http://localhost:8080/boards?division=COOPERATION
-  rest.get('/boards', (req, res, ctx) => {
-    const division = req.url.searchParams.get('division');
+  // rest.get('/boards', (req, res, ctx) => {
+  //   const division = req.url.searchParams.get('division');
 
-    if (division === 'COOPERATION') {
-      const filteredData = commu.filter((element) => element.division === 'COOPERATION');
-      return res(ctx.status(200), ctx.json(filteredData));
-    }
+  //   if (division === 'COOPERATION') {
+  //     const filteredData = commu.filter((element) => element.division === 'COOPERATION');
+  //     return res(ctx.status(200), ctx.json(filteredData));
+  //   }
 
-    if (division === 'RECRUITMENT') {
-      const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
-      return res(ctx.status(200), ctx.json(filteredData));
-    }
-  }),
+  //   if (division === 'RECRUITMENT') {
+  //     const filteredData = commu.filter((element) => element.division === 'RECRUITMENT');
+  //     return res(ctx.status(200), ctx.json(filteredData));
+  //   }
+  // }),
 
   // 2. 게시한 상세 페이지 조회 GET : community-detail page
   rest.get('/boards/:id', (req, res, ctx) => {
@@ -288,31 +287,31 @@ const HJHandlers = [
 ];
 
 // 게시판 등록 - 효정
-const HyoHandler = [
-  rest.post('/boards/write', async (req, res, ctx) => {
-    const currentReq = await req.json();
-    const memberId = Number(window.localStorage.getItem('memberId'));
-    console.log(currentReq);
+// const HyoHandler = [
+//   rest.post('/boards/write', async (req, res, ctx) => {
+//     const currentReq = await req.json();
+//     const memberId = Number(window.localStorage.getItem('memberId'));
+//     console.log(currentReq);
 
-    const newCommunity: CommuProps = {
-      id: memberId,
-      title: currentReq.title,
-      content: currentReq.content.replace(/<\/?p[^>]*>/g, ''),
-      view: 0,
-      division: currentReq.division,
-      name: 'phy',
-      created_at: '2023-06-21T17:34:51.3395597',
-      modifiedAt: '2023-06-21T17:34:51.3395597',
-      memberId: 1,
-      status: 'POST_ACTIVE',
-    };
-    commu.unshift(newCommunity);
-    console.log(commu);
-    return res(ctx.status(201), ctx.json(newCommunity));
-  }),
-];
+//     const newCommunity: CommuProps = {
+//       id: memberId,
+//       title: currentReq.title,
+//       content: currentReq.content.replace(/<\/?p[^>]*>/g, ''),
+//       view: 0,
+//       division: currentReq.division,
+//       name: 'phy',
+//       created_at: '2023-06-21T17:34:51.3395597',
+//       modifiedAt: '2023-06-21T17:34:51.3395597',
+//       memberId: 1,
+//       status: 'POST_ACTIVE',
+//     };
+//     commu.unshift(newCommunity);
+//     console.log(commu);
+//     return res(ctx.status(201), ctx.json(newCommunity));
+//   }),
+// ];
 
 export const handlers = DaHamHandlers
   // .concat(UserRequestHandlers)
-  .concat(HJHandlers)
-  .concat(HyoHandler);
+  .concat(HJHandlers);
+// .concat(HyoHandler);

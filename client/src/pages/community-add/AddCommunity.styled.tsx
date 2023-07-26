@@ -13,6 +13,7 @@ export const EditorContainer = styled.div`
   .addTitle {
     ${tw`
       pl-3
+      text-white
     `}
 
     font-size: 20px;

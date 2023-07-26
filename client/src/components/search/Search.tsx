@@ -23,7 +23,12 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
       return setSearchs(data);
     }
 
-    const toLowerCasify = (text: string) => text.toLowerCase();
+    const toLowerCasify = (text: string) => {
+      if(text === undefined || text === null){
+        return ''
+      }
+      return text.toLowerCase();
+    };
     const isIncludedCurrentSearchToTitle = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
     const isIncludedCurrentSearchToMembername = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
 

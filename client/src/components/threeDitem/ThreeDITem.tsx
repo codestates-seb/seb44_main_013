@@ -1,4 +1,4 @@
-// import threeDimg from '../../assets/3DImg.png';
+import { Link } from 'react-router-dom';
 import {
   Author,
   DItemContainer,
@@ -18,14 +18,16 @@ export default function ThreeDItem({ item }: AnimationProps) {
 
   return (
     <DItemContainer>
-      <img src={itemPic} alt={`3Dimg-${item.title}`} />
-      <TitleOverlay>
-        <Title>{item.title}</Title>
-        <Author>{item.member.name}</Author>
-      </TitleOverlay>
-      <BookmarkWrapper>
-        <Bookmark portfolioId={item.id} isToggled={item.marked} />{' '}
-      </BookmarkWrapper>
+      <Link to={`/portfolios/${item.id}`}>
+        <img src={itemPic} alt={`3Dimg-${item.title}`} />
+        <TitleOverlay>
+          <Title>{item.title}</Title>
+          <Author>{item.member.name}</Author>
+        </TitleOverlay>
+        <BookmarkWrapper>
+          <Bookmark portfolioId={item.id} isToggled={item.marked} />{' '}
+        </BookmarkWrapper>
+      </Link>
     </DItemContainer>
   );
 }

@@ -22,7 +22,7 @@ export default function CommunityDetail({ handleClick }: any) {
   const [clickDeletePost, setClickDeletePost] = useState(false);
   const navigate = useNavigate();
   const { id: boardId } = useParams();
-  console.log(boardId);
+  // console.log(boardId);
 
   useEffect(() => {
     const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
@@ -30,7 +30,7 @@ export default function CommunityDetail({ handleClick }: any) {
       //axiosMember(xxx) 이름에서부터 유추 (한글 직독직 -> 영어)
       return findBoardsById(boardId as string)
         .then((res) => {
-          setMemberData(res[0]);
+          setMemberData(res);
           console.log(res);
         })
         .catch((err) => console.log('커뮤니티 상세 페이지 예시' + err));
@@ -46,6 +46,9 @@ export default function CommunityDetail({ handleClick }: any) {
         <Loading />
       </PageWrapper>
     );
+
+    const writerId = memberData.memberInfo.memberId;
+    const viewerId = Number(localStorage.getItem("memberId"));
 
   // 게시글 삭제 버튼 클릭 시 - 효정(07.14)
   // DELTE 요청 추가 - 혜진(07.19)
@@ -76,6 +79,8 @@ export default function CommunityDetail({ handleClick }: any) {
             data={memberData}
             handleDeleteModal={handleDeleteModal}
             id={boardId}
+            writerId={writerId}
+            viewerId={viewerId}
           />
         </CmDContainer>
         <CommentContainer>

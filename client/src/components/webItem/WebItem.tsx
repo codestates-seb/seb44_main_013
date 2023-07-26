@@ -24,14 +24,14 @@ export default function WebItem({ item }: WebItemProps) {
     <WebItemContainer>
       <Link to={`/portfolios/${item.id}`}>
         <WebItemImg src={itemPic} alt={`웹 아이템 이미지 - ${item.title}`} />
+        <TitleOverlay>
+          <Title>{item.title}</Title>
+          <Author>{item.member.name}</Author>
+        </TitleOverlay>
+        <BookmarkWrapper>
+          <Bookmark portfolioId={item.id} isToggled={item.marked} />
+        </BookmarkWrapper>
       </Link>
-      <TitleOverlay>
-        <Title>{item.title}</Title>
-        <Author>{item.member.name}</Author>
-      </TitleOverlay>
-      <BookmarkWrapper>
-        <Bookmark portfolioId={item.id} isToggled={item.marked} />
-      </BookmarkWrapper>
     </WebItemContainer>
   );
 }
