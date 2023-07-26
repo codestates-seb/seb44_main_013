@@ -61,3 +61,11 @@ export const DeleteCancelButton = styled(Purpletype)`
     `}
   }
 `;
+
+export const BackToListButton = styled(Purpletype)`
+  ${tw`
+    absolute
+  `}
+  bottom: 15px;
+  right: 20px;
+`;
