@@ -25,23 +25,34 @@ export default function CommentBox({ comments = [] }: any) {
     setCurrentComment(value);
   };
 
-  //댓글 수정 작동 버튼
+  //댓글 등록 작동 버튼
   const saveComment = () => {
-    const addNewComment = () =>
-      call(`/comments`, 'POST', {
-        id: boardId,
+    const addNewComment = async () => {
+      await call(`/comments`, 'POST', {
+        boardId: boardId,
         content: currentComment,
-      });
-    const axiosPost = async () => {
-      return addNewComment()
+      })
         .then((res) => {
-          console.log('댓글 수정 완요!');
-          console.log(res);
+          console.log('댓글 등록 완료');
+          console.log(res.data);
         })
-        .catch((err) => console.log('댓글 등록 에러' + err));
+        .catch((err) => console.log(err));
     };
+    // const addNewComment = () =>
+    //   call(`/comments`, 'POST', {
+    //     id: boardId,
+    //     content: currentComment,
+    //   });
+    // const axiosPost = async () => {
+    //   return addNewComment()
+    //     .then((res) => {
+    //       console.log('댓글 등록 완요!');
+    //       console.log(res);
+    //     })
+    //     .catch((err) => console.log('댓글 등록 에러' + err));
+    // };
 
-    axiosPost();
+    addNewComment();
     // amendComment.push({
     //   id: comments.length + 1,
     //   content: currentComment,
