@@ -10,6 +10,8 @@ import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 export default function CommunityItem({ communityItem }: any) {
   const navigate = useNavigate();
   const eachData = communityItem;
+  // const itemPic = eachData.imagUrl === null ? circleNoImg : eachData.imagUrl;
+  // console.log(eachData);
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
