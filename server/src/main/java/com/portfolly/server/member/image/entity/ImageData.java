@@ -1,5 +1,7 @@
 package com.portfolly.server.member.image.entity;
 
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.comment.entity.Comment;
 import com.portfolly.server.member.entity.Member;
 import lombok.*;
 

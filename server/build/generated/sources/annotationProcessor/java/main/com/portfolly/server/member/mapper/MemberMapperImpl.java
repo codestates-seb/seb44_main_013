@@ -1,17 +1,37 @@
 package com.portfolly.server.member.mapper;
 
+import com.portfolly.server.board.entity.Board;
+import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.portfolio.entity.Portfolio;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-07-18T15:17:16+0900",
+    date = "2023-07-26T12:10:49+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.1.1.jar, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
+
+    @Override
+    public Member AuthToMember(MemberDto.Auth auth) {
+        if ( auth == null ) {
+            return null;
+        }
+
+        Member.MemberBuilder member = Member.builder();
+
+        member.name( auth.getName() );
+        member.email( auth.getEmail() );
+        member.imageUrl( auth.getImageUrl() );
+
+        return member.build();
+    }
 
     @Override
     public Member PostToMember(MemberDto.Post post) {
@@ -21,8 +41,7 @@ public class MemberMapperImpl implements MemberMapper {
 
         Member.MemberBuilder member = Member.builder();
 
-        member.name( post.getName() );
-        member.email( post.getEmail() );
+        member.id( post.getId() );
         member.member_role( post.getMember_role() );
 
         return member.build();
@@ -59,10 +78,19 @@ public class MemberMapperImpl implements MemberMapper {
 
         client_Response.setId( member.getId() );
         client_Response.setName( member.getName() );
+        client_Response.setEmail( member.getEmail() );
         client_Response.setMember_role( member.getMember_role() );
         client_Response.setLocation( member.getLocation() );
         client_Response.setComInfo( member.getComInfo() );
         client_Response.setMemberStatus( member.getMemberStatus() );
+        List<Bookmark> list = member.getBookmarks();
+        if ( list != null ) {
+            client_Response.setBookmarks( new ArrayList<Bookmark>( list ) );
+        }
+        List<Board> list1 = member.getBoards();
+        if ( list1 != null ) {
+            client_Response.setBoards( new ArrayList<Board>( list1 ) );
+        }
 
         return client_Response;
     }
@@ -77,6 +105,7 @@ public class MemberMapperImpl implements MemberMapper {
 
         partner_Response.setId( member.getId() );
         partner_Response.setName( member.getName() );
+        partner_Response.setEmail( member.getEmail() );
         partner_Response.setMember_role( member.getMember_role() );
         partner_Response.setLocation( member.getLocation() );
         partner_Response.setJob( member.getJob() );
@@ -84,6 +113,18 @@ public class MemberMapperImpl implements MemberMapper {
         partner_Response.setAward( member.getAward() );
         partner_Response.setSkill( member.getSkill() );
         partner_Response.setMemberStatus( member.getMemberStatus() );
+        List<Portfolio> list = member.getPortfolios();
+        if ( list != null ) {
+            partner_Response.setPortfolios( new ArrayList<Portfolio>( list ) );
+        }
+        List<Bookmark> list1 = member.getBookmarks();
+        if ( list1 != null ) {
+            partner_Response.setBookmarks( new ArrayList<Bookmark>( list1 ) );
+        }
+        List<Board> list2 = member.getBoards();
+        if ( list2 != null ) {
+            partner_Response.setBoards( new ArrayList<Board>( list2 ) );
+        }
 
         return partner_Response;
     }

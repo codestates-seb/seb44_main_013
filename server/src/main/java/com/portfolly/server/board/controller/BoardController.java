@@ -48,56 +48,6 @@ public class BoardController {
     private final CustomAuthorityUtils authorityUtils;
 
 
-// todo : 더미데이터 안만들어짐
-
-//    @PostConstruct
-//    public void postConstruct() {
-//
-//        Board board1 = new Board("제목 테스트1", "본문 테스트1", Board.Division.RECRUITMENT);
-//        Board board2 = new Board("제목 테스트2", "본문 테스트2", Board.Division.RECRUITMENT);
-//        Board board3 = new Board("제목 테스트3", "본문 테스트3", Board.Division.RECRUITMENT);
-//        Board board4 = new Board("제목 테스트4", "본문 테스트4", Board.Division.RECRUITMENT);
-//        Board board5 = new Board("제목 테스트5", "본문 테스트5", Board.Division.RECRUITMENT);
-//        Board board6 = new Board("제목 테스트6", "본문 테스트6", Board.Division.RECRUITMENT);
-//        Board board7 = new Board("제목 테스트7", "본문 테스트7", Board.Division.RECRUITMENT);
-//        Board board8 = new Board("제목 테스트8", "본문 테스트8", Board.Division.RECRUITMENT);
-//        Board board9 = new Board("제목 테스트9", "본문 테스트9", Board.Division.RECRUITMENT);
-//        Board board10 = new Board("제목 테스트10", "본문 테스트10", Board.Division.RECRUITMENT);
-//        Board board11 = new Board("제목 테스트11", "본문 테스트11", Board.Division.RECRUITMENT);
-//        Board board12 = new Board("제목 테스트12", "본문 테스트12", Board.Division.RECRUITMENT);
-//        Board board13 = new Board("제목 테스트13", "본문 테스트13", Board.Division.RECRUITMENT);
-//        Board board14 = new Board("제목 테스트14", "본문 테스트14", Board.Division.RECRUITMENT);
-//        Board board15 = new Board("제목 테스트15", "본문 테스트15", Board.Division.RECRUITMENT);
-//        Board board16 = new Board("제목 테스트16", "본문 테스트16", Board.Division.RECRUITMENT);
-//        Board board17 = new Board("제목 테스트17", "본문 테스트17", Board.Division.RECRUITMENT);
-//        Board board18 = new Board("제목 테스트18", "본문 테스트18", Board.Division.RECRUITMENT);
-//        Board board19 = new Board("제목 테스트19", "본문 테스트19", Board.Division.RECRUITMENT);
-//        Board board20 = new Board("제목 테스트20", "본문 테스트20", Board.Division.RECRUITMENT);
-//
-//        boardService.createBoard(board1, 1L);
-//        boardService.createBoard(board2, 1L);
-//        boardService.createBoard(board3,1L);
-//        boardService.createBoard(board4, 1L);
-//        boardService.createBoard(board5, 1L);
-//        boardService.createBoard(board6, 1L);
-//        boardService.createBoard(board7, 1L);
-//        boardService.createBoard(board8, 1L);
-//        boardService.createBoard(board9, 1L);
-//        boardService.createBoard(board10, 1L);
-//        boardService.createBoard(board11, 1L);
-//        boardService.createBoard(board12, 1L);
-//        boardService.createBoard(board13, 1L);
-//        boardService.createBoard(board14, 1L);
-//        boardService.createBoard(board15, 1L);
-//        boardService.createBoard(board16, 1L);
-//        boardService.createBoard(board17, 1L);
-//        boardService.createBoard(board18, 1L);
-//        boardService.createBoard(board19, 1L);
-//        boardService.createBoard(board20, 1L);
-//    }
-
-
-
     @PostMapping("/write")
     public ResponseEntity postBoard(@RequestHeader("Authorization") String token,
                                     @Valid @RequestBody BoardDto.Post post) {
@@ -111,8 +61,6 @@ public class BoardController {
         // 보드 내용 등록
         Board board = mapper.boardPostToBoard(post);
         Board createdBoard = boardService.createBoard(board, memberId);
-
-        // todo : 프사 가져오기
 
         URI location = UriComponentsBuilder
                 .newInstance()
@@ -149,12 +97,7 @@ public class BoardController {
         Board board = boardService.verifyBoard(boardId);
         boardService.increaseViews(board);
         BoardDto.Response response = boardService.findBoard(boardId);
-/*
-        mapper.commentsToCommentResponseList(response.getComments());
 
-       return new ResponseEntity<>(
-              new BoardMultiResponseDto<>(mapper.boardsToBoardResponseList(boards), pages), HttpStatus.OK);
-*/
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -172,8 +115,10 @@ public class BoardController {
     public ResponseEntity getPages(@Positive @RequestParam(defaultValue = "1") int page,
                                    @Positive @RequestParam(defaultValue = "8") int size,
                                    @RequestParam Board.Division division) {
-        List<BoardDto.ResponseList> pages = boardService.findPages(page - 1, size, division);
-        return new ResponseEntity(pages, HttpStatus.OK);
+        Page<BoardDto.ResponseList> pages = boardService.findPages(page - 1, size, division);
+        List<BoardDto.ResponseList> content = pages.getContent();
+//        return new ResponseEntity<>(pages, HttpStatus.OK);
+        return new ResponseEntity<>( new MultiResponseDto<>(content, pages), HttpStatus.OK);
     }
 
 //    @GetMapping("/pages")

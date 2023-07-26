@@ -8,6 +8,7 @@ import com.portfolly.server.comment.entity.Comment;
 import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 

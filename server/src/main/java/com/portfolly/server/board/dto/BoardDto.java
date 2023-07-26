@@ -55,7 +55,7 @@ public class BoardDto {
         private Long view;
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
-        private BoardMemberInfo memberInfo;
+        private MemberInfo memberInfo;
         private List<CommentDto.Response> comments;
 
     }
@@ -72,8 +72,6 @@ public class BoardDto {
         private Board.Division division;
         private Board.Status status;
         private Long view;
-        private BoardMemberInfo memberInfo;
+        private MemberInfo memberInfo;
     }
-
-
 }
