@@ -8,7 +8,7 @@ import AnimationSection from '@/components/home-section/animation-section/Animat
 import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
 import DisplaySection from '@/components/home-section/display-section/DisplaySection';
-import { LandingPageWrapper, ScrollDownComent } from './LandingPage.styled';
+import { LandingPageWrapper } from './LandingPage.styled';
 import SkipButton from '@/commons/atoms/buttons/skip/SkipButton';
 
 const blurOutExpandFwd = keyframes`
