@@ -55,14 +55,6 @@ export default function CommentBox({ comments = [] }: any) {
     // };
 
     addNewComment();
-    // amendComment.push({
-    //   id: comments.length + 1,
-    //   content: currentComment,
-    //   name: 'jhj',
-    //   createdAt: '2023-06-21T17:34:51.3395597',
-    //   modifiedAt: '2023-06-21T17:34:51.3395597',
-    //   status: 'POST_ACTIVE',
-    // });
     setCurrentComment('');
   };
 
@@ -80,7 +72,7 @@ export default function CommentBox({ comments = [] }: any) {
     }
 
     setDeleteId(null);
-  }, [deleteId]);
+  }, [deleteId, saveComment]);
 
   if (amendComment.length <= 0) {
     return (
