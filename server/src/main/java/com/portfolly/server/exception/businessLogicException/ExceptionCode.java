@@ -17,6 +17,7 @@ public enum ExceptionCode {
     POST_NOT_EXIST(HttpStatus.NOT_FOUND, "게시글이 존재하지 않습니다."),
     POST_DELETED(HttpStatus.NOT_FOUND, "게시글이 삭제되었습니다."),
     COMMENT_NOT_EXIST(HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다."),
+    COMMENT_DELETED(HttpStatus.NOT_FOUND, "댓글이 삭제되었습니다."),
     PORTFOLIO_NOT_FOUND(HttpStatus.NOT_FOUND, "포트폴리오를 찾을 수 없습니다"),
     PICTURE_NOT_FOUND(HttpStatus.NOT_FOUND, "이미지를 찾을 수 없습니다"),
     MEMBER_NOT_MATCH(HttpStatus.FORBIDDEN,"작성자와 일치하지 않습니다."),
