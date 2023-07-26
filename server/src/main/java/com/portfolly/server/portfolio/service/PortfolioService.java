@@ -122,10 +122,12 @@ public class PortfolioService {
         increaseViews(portfolio);
         PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
         if(!accessToken.isEmpty()) {
-            Long memberId = findMemberId(accessToken);
-            response.setMarked(isMarked(portfolioId, memberId));
-            response.setLiked(isLiked(portfolioId, memberId));
-            response.setWriter(isWriter(portfolioId, memberId));
+            response.setMarked(false);
+            response.setLiked(false);
+            response.setWriter(false);
+        }
+        if(portfolio.getStatus().equals(Portfolio.Status.INACTIVE)) {
+            throw new BusinessLogicException(ExceptionCode.PORTFOLIO_NOT_FOUND);
         }
         response.setCountLikes(countLikes(response.getId()));
         response.setFirstImage(firstImageUrl(response.getId()));
@@ -154,7 +156,7 @@ public class PortfolioService {
     }
 
     //로그인 하지 않았을 시에 marked false
-    public void setOfflindResponse(List<PortfolioDto.Response> responses){
+    public void setOfflineResponse(List<PortfolioDto.Response> responses){
         for (PortfolioDto.Response response : responses) {
             response.setFirstImage(firstImageUrl(response.getId()));
             response.setMarked(false);
