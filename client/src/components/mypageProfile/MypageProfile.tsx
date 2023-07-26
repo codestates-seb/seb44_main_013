@@ -43,9 +43,18 @@ export default function MypageProfile({ user }: MypageProfileProps) {
   };
 
   const handleNameBlur = async () => {
-    if (!name.trim()) return null;
+    if (!name.trim()) {
+      setIsEdit(false);
+      return;
+    }
+
+    if (!user) {
+      setIsEdit(false);
+      return;
+    }
+
     try {
-      await axios.patch('/members/{memberId}', { name });
+      await axios.patch(`/members/${user.id}`, { name });
       console.log('이름 변경 성공');
     } catch (error) {
       console.error('이름 변경 실패', error);
@@ -88,40 +97,46 @@ export default function MypageProfile({ user }: MypageProfileProps) {
 
   return (
     <MypageProfileContainer>
-      <img src={userImg} alt="userImage" />
-      <div>
-        {isEdit ? (
-          <NameEdit
-            type="text"
-            value={name}
-            ref={inputRef}
-            onChange={handleNameChange}
-            onBlur={handleNameBlur}
-            readOnly={!isEdit} // isEdit이 false일 때 편집 불가능하도록 설정
-          />
-        ) : (
-          <>
-            <h1 onClick={handleEditToggle}>{user?.name}</h1>
-            <BsFillPencilFill
-              size={20}
-              className="editBtn"
-              onClick={handleEditToggle}
-            />
-          </>
-        )}
-      </div>
-      <div>
-        <BiMap size={18} />
-        <p>
-          {weatherData.city} / {weatherData.weather}
-        </p>
-        {weatherData.icon && (
-          <WeatherIcon
-            src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`}
-            alt="Weather icon"
-          />
-        )}
-      </div>
+      {user ? (
+        <>
+          <img src={userImg} alt="userImage" />
+          <div>
+            {isEdit ? (
+              <NameEdit
+                type="text"
+                value={name}
+                ref={inputRef}
+                onChange={handleNameChange}
+                onBlur={handleNameBlur}
+                readOnly={!isEdit} // isEdit이 false일 때 편집 불가능하도록 설정
+              />
+            ) : (
+              <>
+                <h1 onClick={handleEditToggle}>{user.name}</h1>
+                <BsFillPencilFill
+                  size={20}
+                  className="editBtn"
+                  onClick={handleEditToggle}
+                />
+              </>
+            )}
+          </div>
+          <div>
+            <BiMap size={18} />
+            <p>
+              {weatherData.city} / {weatherData.weather}
+            </p>
+            {weatherData.icon && (
+              <WeatherIcon
+                src={`${WEATHER_ICON_URL}${weatherData.icon}@2x.png`}
+                alt="Weather icon"
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        <p>Loading user data...</p>
+      )}
     </MypageProfileContainer>
   );
 }

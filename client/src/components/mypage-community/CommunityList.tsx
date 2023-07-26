@@ -19,7 +19,7 @@ export default function CommunityList({ title, name }: CommunityListProps) {
       </TextContainer>
 
       <TagsContainer>
-        <Name>@{name}</Name>
+        <Name>{name}</Name>
       </TagsContainer>
     </Wrapper>
   );

@@ -23,9 +23,10 @@ interface MypageIntroduceProps {
 }
 
 export default function MypageIntroduce({ user }: MypageIntroduceProps) {
-  const initialJob = user?.job || 'What is your job?';
-  const initialCareer = user?.career || 'Career 1';
-  const initialAwards = user?.award || 'Awards 1';
+  const API_BASE_URL = 'http://localhost:5173'; // Update this with your backend API URL
+  const initialJob = user?.job || '';
+  const initialCareer = user?.career || '';
+  const initialAwards = user?.award || '';
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { memberId } = useParams<{ memberId: string }>();
@@ -49,7 +50,7 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleUpdate = () => {
     axios
-      .patch(`/members/${memberId}`, { job, career, award })
+      .patch(`${API_BASE_URL}/members/${memberId}`, { job, career, award })
       .then(() => {
         console.log('저장 성공');
         setIsEdit(false);
@@ -69,13 +70,13 @@ export default function MypageIntroduce({ user }: MypageIntroduceProps) {
 
   const handleConfirmDelete = () => {
     axios
-      .delete(`/members/${memberId}`)
+      .delete(`${API_BASE_URL}/members/${memberId}`)
       .then(() => {
         console.log('삭제 성공');
         setDeleteModalOpen(false);
         // 0713 혜진 추가
         dispatch(login(false));
-        navigate('/members/{memberId}');
+        navigate('/'); // Navigate to the desired page after successful deletion
       })
       .catch((error) => {
         console.error('삭제 실패', error);

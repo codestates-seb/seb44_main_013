@@ -43,18 +43,28 @@ export const pictures: Array<Picture> = [];
 
 /*2023-07-10 Mypage User Information - 위정연 */
 export interface User {
+
+  id: number;
   name: string;
+  email: string;
+  member_role: string;
+  location: string;
   job: string;
   career: string;
   award: string;
+  skill: string;
+  memberStatus: string;
+  portfolios: any[]; 
+  bookmarks: any[]; 
+  boards: any[];
 }
 
-export const userData: User = {
-  name: 'unknown',
-  job: 'What is your job?',
-  career: 'Career 1',
-  award: 'Awards 1',
-};
+// export const userData: User = {
+//   name: 'unknown',
+//   job: 'What is your job?',
+//   career: 'Career 1',
+//   award: 'Awards 1',
+// };
 
 //혜진 data
 //1,2,3만 상세 페이지 이동 가능 합니다.

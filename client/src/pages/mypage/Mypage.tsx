@@ -56,7 +56,7 @@ export default function MyPage() {
         console.error(error);
       });
     netaxios
-      .get(`/boards?memberId=${memberId}`)
+      .get(`/members/${memberId}`)
       .then((response) => {
         setUserPosts(response.data);
       })
@@ -154,7 +154,7 @@ export default function MyPage() {
               {/* 게시판 목록 부분  */}
               <BoxTitle>게시판</BoxTitle>
               <BoxWrapper isRow="column">
-                {paginatedCommunityList.map((post) => (
+                {user?.boards.map((post) => (
                   <CommunityList
                     key={post.id}
                     title={post.title}
