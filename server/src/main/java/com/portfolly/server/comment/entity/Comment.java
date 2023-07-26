@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.portfolly.server.audit.Auditable;
 import com.portfolly.server.board.entity.Board;
 import com.portfolly.server.member.entity.Member;
+import com.portfolly.server.member.image.entity.ImageData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,8 @@ public class Comment extends Auditable{
     @JoinColumn(name = "member_Id")
     private Member member;
 
+    @OneToOne(mappedBy = "comment",cascade = {CascadeType.ALL})
+    private ImageData imageData;
 
     public enum Status{
         COMMENT_ACTIVE(1, "활성화"),

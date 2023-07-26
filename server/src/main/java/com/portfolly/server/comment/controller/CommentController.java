@@ -51,8 +51,6 @@ public class CommentController {
         Comment comment = mapper.postToComment(post);
         CommentDto.Response createdComment = commentService.creatComment(comment, boardId, memberId);
 
-        // todo : 프사 가져오기
-
         URI location = UriCreator.createUri(COMMENT_DEFAULT_URL, comment.getId());
         return ResponseEntity.created(location).body("댓글 작성 완료");
     }
