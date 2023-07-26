@@ -17,6 +17,15 @@ export default function CommunityItem({ communityItem }: any) {
     // console.log(e.id);
   };
 
+  const TextTruncate = ({ text, maxLength }: any) => {
+    if (text.length <= maxLength) {
+      return <p>{text}</p>;
+    } else {
+      const truncatedText = text.slice(0, maxLength) + '...';
+      return <p>{truncatedText}</p>;
+    }
+  };
+
   return (
     <CommunityItemContainer
       onClick={() => {
@@ -32,7 +41,8 @@ export default function CommunityItem({ communityItem }: any) {
         }}
       />
       <h2>{eachData.title}</h2>
-      <p>{eachData.content}</p>
+      <TextTruncate text={eachData.content} maxLength={65} />
+      {/* <p>{eachData.content}</p> */}
       <Views view={eachData.view} />
     </CommunityItemContainer>
   );
