@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import axios from 'axios';
 
 import { setPictures } from '@/store/portfolioSlice';
-import { API_BASE_URL } from '@/utils/apiService';
+import { API_BASE_URL } from '@/app-config';
 
 export default function useImageHandler() {
   const dispatch = useDispatch();
