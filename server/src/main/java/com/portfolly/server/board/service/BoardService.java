@@ -216,4 +216,5 @@ public class BoardService {
 //        RefreshToken foundToken = refreshToken.orElseThrow(() -> new BusinessLogicException(ExceptionCode.EMAIL_NOT_EXIST));
 //        return foundToken.getMemberId();
 //    }
+
 }

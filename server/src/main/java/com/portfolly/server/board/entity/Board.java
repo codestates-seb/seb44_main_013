@@ -54,6 +54,8 @@ public class Board extends Auditable {
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToOne(mappedBy = "board",cascade = {CascadeType.ALL})
+    private ImageData imageData;
 
     //----------------
 
@@ -81,6 +83,7 @@ public class Board extends Auditable {
             this.description = description;
         }
     }
+
 
 
 
