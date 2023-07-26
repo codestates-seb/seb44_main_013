@@ -1,8 +1,6 @@
 /* 2023-07-05 게시물 댓글(낱개) 컴포넌트 UI - 김다함 */
 import { useEffect, useRef, useState } from 'react';
 
-import { call } from '@/utils/apiService';
-
 import { CommentProps } from '@/types';
 
 import { CommentContainer, CommentWrapper } from '@/commons/molecules/comment/Comment.styled';
