@@ -33,11 +33,11 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
     const isIncludedCurrentSearchToMembername = (text: string) => toLowerCasify(text).includes(toLowerCasify(currentSearch));
 
     // early return pattern
-    if ('data' in data[0]) {
+    if (data[0].category) {
       const filteredData = data.filter((element: any) => {
         return (
-          isIncludedCurrentSearchToTitle(element.data.title) ||
-          isIncludedCurrentSearchToMembername(element.data.membername)
+          isIncludedCurrentSearchToTitle(element.title) ||
+          isIncludedCurrentSearchToMembername(element.member.name)
         )
       });
 
@@ -47,7 +47,7 @@ export default function Search({ setSearchValue, currentSearch, data, setSearchs
     const filteredData = data.filter((element: any) => {
       return (
         isIncludedCurrentSearchToTitle(element.title) ||
-        isIncludedCurrentSearchToMembername(element.name) ||
+        isIncludedCurrentSearchToMembername(element.memberInfo.name) ||
         isIncludedCurrentSearchToContent(element.content)
       )
     });
