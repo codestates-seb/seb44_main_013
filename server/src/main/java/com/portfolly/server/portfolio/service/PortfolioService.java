@@ -122,9 +122,10 @@ public class PortfolioService {
         increaseViews(portfolio);
         PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
         if(!accessToken.isEmpty()) {
-            response.setMarked(false);
-            response.setLiked(false);
-            response.setWriter(false);
+            Long memberId = findMemberId(accessToken);
+            response.setMarked(isMarked(portfolioId, memberId));
+            response.setLiked(isLiked(portfolioId, memberId));
+            response.setWriter(isWriter(portfolioId, memberId));
         }
         if(portfolio.getStatus().equals(Portfolio.Status.INACTIVE)) {
             throw new BusinessLogicException(ExceptionCode.PORTFOLIO_NOT_FOUND);
@@ -261,8 +262,10 @@ public class PortfolioService {
             int startIdx= 0;
             int endIdx = content.indexOf('>');
             String pictureUrl = content.substring(startIdx,endIdx);
+            pictureUrl = pictureUrl.replace("\"", "");
             pictureUrlList.add(pictureUrl);
             content=content.substring(endIdx);
+            System.out.println(pictureUrl);
         }
         List<Picture> pictures = new ArrayList<>();
         for (String pictureUrl : pictureUrlList) {
