@@ -11,7 +11,7 @@ netaxios.interceptors.request.use(
     const accessToken = ACCESS_TOKEN || '';
     if (accessToken !== '') {
       config.headers['Content-Type'] = 'application/json';
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+      config.headers['Authorization'] = `${accessToken}`;
     }
     return config;
   },
