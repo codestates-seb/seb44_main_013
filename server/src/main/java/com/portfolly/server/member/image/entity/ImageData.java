@@ -27,12 +27,4 @@ public class ImageData {
     @OneToOne
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @OneToOne
-    @JoinColumn(name = "board_id")
-    private Board board;
-
-    @OneToOne
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
 }

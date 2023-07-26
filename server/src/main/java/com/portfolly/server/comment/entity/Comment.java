@@ -38,8 +38,6 @@ public class Comment extends Auditable{
     @JoinColumn(name = "member_Id")
     private Member member;
 
-    @OneToOne(mappedBy = "comment",cascade = {CascadeType.ALL})
-    private ImageData imageData;
 
     public enum Status{
         COMMENT_ACTIVE(1, "활성화"),
