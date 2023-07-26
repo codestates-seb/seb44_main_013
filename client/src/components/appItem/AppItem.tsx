@@ -1,11 +1,16 @@
-import { Link } from 'react-router-dom';
-import { AppItemContainer, Author, Title, TitleOverlay } from './AppItem.stlyed';
+import {
+  AppItemContainer,
+  Author,
+  Title,
+  TitleOverlay,
+} from './AppItem.stlyed';
 // import appImg from '../../assets/appImg.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsBatteryFull } from 'react-icons/bs';
 import Bookmark from '../../commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
+import { Link } from 'react-router-dom';
 
 type AppItemProps = {
   item: any;
@@ -25,7 +30,7 @@ export default function AppItem({ item }: AppItemProps) {
         <img src={itemPic} alt={`appImg-${item.title}`} />
         <TitleOverlay>
           <Title>{item.title}</Title>
-          <Author>{item.name}</Author>
+          <Author>{item.member.name}</Author>
         </TitleOverlay>
         <BookmarkWrapper>
           <Bookmark portfolioId={item.id} isToggled={item.marked} />
