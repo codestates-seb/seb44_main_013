@@ -10,7 +10,6 @@ import MypageItem from '@/components/mypageItem/MypageItem';
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from './MyPage.styled';
-import noBookmark from '@/assets/noBookmark.png';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
