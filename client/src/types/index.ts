@@ -38,8 +38,17 @@ export interface childrenProps {
 }
 
 //0705 혜진 mypage 이미지 불러오는 타입
+export interface MyPagePortfolioSlice {
+  pictureUrl: string;
+
+}
+
 export interface MypageItemProps extends childrenProps {
-  src: string;
+  portfolio: {
+    title: string;
+    name: string;
+    pictures: MyPagePortfolioSlice[];
+  };
 }
 
 //0707 혜진 styled props 관련 type

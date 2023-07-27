@@ -30,6 +30,12 @@ interface Post {
   title: string;
   content: string;
 }
+interface Portfolio {
+  bookmarks: any;
+  title: string;
+  name: string;
+  pictures: { pictureUrl: string }[];
+}
 
 export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -38,6 +44,10 @@ export default function MyPage() {
   const dummyArray = Array.from({ length: 10 });
   const { id: memberId } = useParams<{ id: string }>();
   const [, setUserBoards] = useState<Post[]>([]);
+  const [userPortfolios, setUserPortfolios] = useState<Portfolio[]>([]);
+  const [bookmarkedPortfolios, setBookmarkedPortfolios] = useState<Portfolio[]>(
+    []
+  );
 
   const loginState = useSelector(
     (state: RootState) => state.loginSlice.isLogin
@@ -48,6 +58,8 @@ export default function MyPage() {
       .get(`/members/${memberId}`)
       .then((response) => {
         setUser(response.data);
+        setUserPortfolios(response.data.portfolios);
+        setBookmarkedPortfolios(response.data.portfolios);
       })
       .catch((error) => {
         console.error(error);
@@ -106,13 +118,19 @@ export default function MyPage() {
           <FlexColumnWrapper gap={0}>
             <BoxTitle>게시물</BoxTitle>
             <BoxWrapper id="box-wrapper1">
-              {dummyArray.map((_, index) => {
+              {userPortfolios.map((portfolio, index) => {
+                const imageSrc = portfolio.pictures.length
+                  ? portfolio.pictures[0].pictureUrl
+                  : 'defaultImageUrl';
+
                 return (
                   <MypageItem
                     key={index}
-                    title={'Title'}
-                    name={'phy'}
-                    src={''}
+                    portfolio={{
+                      title: portfolio.title,
+                      name: user?.name || '',
+                      pictures: [{ pictureUrl: imageSrc }],
+                    }}
                   />
                 );
               })}
@@ -123,16 +141,24 @@ export default function MyPage() {
             <FlexColumnWrapper gap={0}>
               <BoxTitle>북마크</BoxTitle>
               <BoxWrapper id="box-wrapper2">
-                {dummyArray.map((_, index) => {
-                  return (
-                    <MypageItem
-                      key={index}
-                      title={'Title'}
-                      name={'phj'}
-                      src={''}
-                    />
-                  );
-                })}
+                {bookmarkedPortfolios
+                  .filter((portfolio) => portfolio.bookmarks.length > 0)
+                  .map((portfolio, index) => {
+                    const imageSrc = portfolio.pictures.length
+                      ? portfolio.pictures[0].pictureUrl
+                      : 'defaultImageUrl';
+
+                    return (
+                      <MypageItem
+                        key={index}
+                        portfolio={{
+                          title: portfolio.title,
+                          name: user?.name || '',
+                          pictures: [{ pictureUrl: imageSrc }],
+                        }}
+                      />
+                    );
+                  })}
               </BoxWrapper>
 
               {/* 게시판 목록 부분  */}

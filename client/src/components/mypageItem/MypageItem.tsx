@@ -1,14 +1,18 @@
-
-import { MypageItemProps } from "@/types";
-import { ImgInfoSection, ImgSection, SMportItemWrapper } from "./MypageItem.styled";
-
+import { MypageItemProps } from '@/types';
+import ImgSection, {
+  ImgInfoSection,
+  SMportItemWrapper,
+} from './MypageItem.styled';
 
 //07.05 혜진 마이페이지 내 포폴 관리 아이템
-export default function MypageItem ( {title, name, src}: MypageItemProps ) {
-    return (
-        <SMportItemWrapper>
-            <ImgSection src={ src }/> 
-            <ImgInfoSection title={title} name={name}/>
-        </SMportItemWrapper>
-    )
+export default function MypageItem({ portfolio }: MypageItemProps) {
+  const { title, name, pictures } = portfolio;
+  const imageSrc = pictures.length ? pictures[0].pictureUrl : 'defaultImageUrl';
+
+  return (
+    <SMportItemWrapper>
+      <ImgSection style={{ width: '190px', height: '180px' }} src={imageSrc} />
+      <ImgInfoSection title={title} name={name} />
+    </SMportItemWrapper>
+  );
 }
