@@ -144,6 +144,7 @@ export default function MyPage() {
                           title: portfolio.title,
                           name: user?.name || '',
                           pictures: [{ pictureUrl: imageSrc }],
+                          portfolioId: portfolio.id,
                         }}
                       />
                     );
