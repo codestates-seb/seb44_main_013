@@ -150,7 +150,7 @@ export default function MyPage() {
                     );
                   })}
                 {bookmarkedPortfolios.length <= 0 && (
-                  <img src={noBookmark} alt="no Bookmark" className="h-auto w-full" />
+                  <img src={noBookmark} alt="no Bookmark" className="h-auto w-auto" />
                 )}
               </BoxWrapper>
 
