@@ -14,7 +14,7 @@ import { JbWrapper } from '@/pages/community-detail/CommunityDetail.styled';
 import noComment from '@/assets/noComment.png';
 import netaxios from '@/utils/axiosIntercept';
 
-export default function CommentBox({ comments = [] }: any) {
+export default function CommentBox({ comments = [], handleRender }: any) {
   const [currentComment, setCurrentComment] = useState('');
   const [amendComment, setAmendComment] = useState(comments);
   const [deleteId, setDeleteId] = useState(null);
@@ -37,9 +37,12 @@ export default function CommentBox({ comments = [] }: any) {
         .then((res) => {
           console.log('댓글 등록 완료');
           console.log(res);
+          handleRender();
         })
         .catch((err) => console.log(err));
     };
+
+    useEffect(() => {}, [saveComment]);
     // const addNewComment = () =>
     //   call(`/comments`, 'POST', {
     //     id: boardId,
