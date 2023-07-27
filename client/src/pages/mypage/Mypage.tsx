@@ -41,7 +41,6 @@ export default function MyPage() {
   const [user, setUser] = useState<User | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
-  const dummyArray = Array.from({ length: 10 });
   const { id: memberId } = useParams<{ id: string }>();
   const [, setUserBoards] = useState<Post[]>([]);
   const [userPortfolios, setUserPortfolios] = useState<Portfolio[]>([]);
