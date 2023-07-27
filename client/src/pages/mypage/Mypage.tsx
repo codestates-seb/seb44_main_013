@@ -149,9 +149,6 @@ export default function MyPage() {
                       />
                     );
                   })}
-                {bookmarkedPortfolios.filter((portfolio) => portfolio.bookmarks.length <= 0) && (
-                  <img src={noBookmark} alt="no Bookmark" className="justify-cneter flex h-auto w-auto" />
-                )}
               </BoxWrapper>
 
               {/* 게시판 목록 부분  */}
