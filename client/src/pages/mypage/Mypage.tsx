@@ -10,6 +10,7 @@ import MypageItem from '@/components/mypageItem/MypageItem';
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from './MyPage.styled';
+import noBookmark from '@/assets/noBookmark.png';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -136,7 +137,9 @@ export default function MyPage() {
                   .filter((portfolio) => portfolio.bookmarks.length > 0)
                   .map((portfolio, index) => {
                     const imageSrc = portfolio.pictures.length ? portfolio.pictures[0].pictureUrl : 'defaultImageUrl';
-
+                    if (portfolio.bookmarks.length <= 0) {
+                      return <img src={noBookmark} alt="no Bookmark" />;
+                    }
                     return (
                       <MypageItem
                         key={index}
