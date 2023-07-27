@@ -46,6 +46,8 @@ export default function MyPage() {
     netaxios
       .get(`/members/${memberId}`)
       .then((response) => {
+        console.log('response data ');
+        console.log(response);
         setUser(response.data);
         setUserPortfolios(response.data.portfolios);
         setBookmarkedPortfolios(response.data.portfolios);
