@@ -51,7 +51,7 @@ export default function MyPage() {
         console.log(response);
         setUser(response.data);
         setUserPortfolios(response.data.portfolios);
-        setBookmarkedPortfolios(response.data.bookmarks);
+        setBookmarkedPortfolios(response.data.portfolios);
       })
       .catch((error) => {
         console.error(error);
