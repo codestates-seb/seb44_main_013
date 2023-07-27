@@ -10,6 +10,7 @@ import MypageItem from '@/components/mypageItem/MypageItem';
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
 import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from './MyPage.styled';
+import noBookmark from '@/assets/noBookmark.png';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -149,6 +150,9 @@ export default function MyPage() {
                       />
                     );
                   })}
+                {bookmarkedPortfolios.filter((portfolio) => portfolio.bookmarks.length <= 0) && (
+                  <img src={noBookmark} alt="no bookmark" className="f-auto flex h-auto justify-center" />
+                )}
               </BoxWrapper>
 
               {/* 게시판 목록 부분  */}
