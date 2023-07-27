@@ -15,9 +15,15 @@ import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './Co
 export default function CommunityDetail({ handleClick }: any) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
   const [clickDeletePost, setClickDeletePost] = useState(false);
+  //야매로 트리거
+  const [render, setRender] = useState(true);
   const navigate = useNavigate();
   const { id: boardId } = useParams();
   // console.log(boardId);
+
+  const handleRender = () => {
+    setRender(!render);
+  };
 
   useEffect(() => {
     const findBoardsById = (id: string) => call(`/boards/${id}`, 'GET', null);
@@ -33,7 +39,7 @@ export default function CommunityDetail({ handleClick }: any) {
 
     getMember();
     console.log(memberData);
-  }, [memberData]);
+  }, [boardId, render]);
 
   if (!memberData)
     return (
@@ -79,7 +85,7 @@ export default function CommunityDetail({ handleClick }: any) {
           />
         </CmDContainer>
         <CommentContainer>
-          <CommentBox comments={memberData.comments} />
+          <CommentBox comments={memberData.comments} handleRender={handleRender} />
         </CommentContainer>
       </MainContainer>
       {clickDeletePost ? <DeleteModal onConfirm={handleDeleteModal} onCancel={handleDeleteModal} /> : ''}
