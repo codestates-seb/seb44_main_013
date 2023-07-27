@@ -40,7 +40,6 @@ export interface childrenProps {
 //0705 혜진 mypage 이미지 불러오는 타입
 export interface MyPagePortfolioSlice {
   pictureUrl: string;
-
 }
 
 export interface MypageItemProps extends childrenProps {
@@ -48,6 +47,7 @@ export interface MypageItemProps extends childrenProps {
     title: string;
     name: string;
     pictures: MyPagePortfolioSlice[];
+    portfolioId?: number;
   };
 }
 

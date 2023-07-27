@@ -25,6 +25,7 @@ interface Post {
   content: string;
 }
 interface Portfolio {
+  id: number;
   bookmarks: any;
   title: string;
   name: string;
@@ -119,6 +120,7 @@ export default function MyPage() {
                       title: portfolio.title,
                       name: user?.name || '',
                       pictures: [{ pictureUrl: imageSrc }],
+                      portfolioId: portfolio.id,
                     }}
                   />
                 );
