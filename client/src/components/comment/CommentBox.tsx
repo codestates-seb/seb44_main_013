@@ -41,6 +41,8 @@ export default function CommentBox({ comments = [], handleRender }: any) {
         })
         .catch((err) => console.log(err));
     };
+
+    useEffect(() => {}, [saveComment]);
     // const addNewComment = () =>
     //   call(`/comments`, 'POST', {
     //     id: boardId,

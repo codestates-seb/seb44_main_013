@@ -1,9 +1,4 @@
-import {
-  Author,
-  GraphicItemContainer,
-  Title,
-  TitleOverlay,
-} from './GraphicItem.styled';
+import { Author, GraphicItemContainer, Title, TitleOverlay } from './GraphicItem.styled';
 // import graphicimg from '../../assets/graphinImg.png';
 import Bookmark from '@/commons/atoms/buttons/Bookmark';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
@@ -20,7 +15,7 @@ export default function GraphicItem({ item }: GraphicProps) {
   return (
     <GraphicItemContainer>
       <Link to={`/portfolios/${item.id}`}>
-        <img src={itemPic} alt={`graphic image-${item.title}`} />
+        <img src={itemPic} alt={`graphic image-${item.title}`} className="bg-cover" />
         <TitleOverlay>
           <Title>{item.title}</Title>
           <Author>{item.member.name}</Author>

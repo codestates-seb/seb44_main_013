@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 export const GraphicItemContainer = styled.div`
   ${tw`
-  my-6 
+    my-6 
     mx-6
     shadow-md
     relative
+    overflow-hidden
+    bg-slate-200
   `}
 
   width: 300px;
