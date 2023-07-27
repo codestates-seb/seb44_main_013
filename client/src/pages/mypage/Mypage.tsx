@@ -50,14 +50,12 @@ export default function MyPage() {
         console.log(response);
         setUser(response.data);
         setUserPortfolios(response.data.portfolios);
-        setBookmarkedPortfolios(response.data.portfolios);
+        setBookmarkedPortfolios(response.data.bookmarks);
       })
       .catch((error) => {
         console.error(error);
       });
-    console.log(user);
-    console.log(userPortfolios);
-    console.log(bookmarkedPortfolios);
+
     netaxios
       .get(`/boards?memberId=${memberId}`)
       .then((response) => {
@@ -154,7 +152,7 @@ export default function MyPage() {
               <BoxTitle>게시판</BoxTitle>
               <BoxWrapper isRow="column">
                 {user?.boards.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((post) => (
-                  <CommunityList key={post.id} title={post.title} name={user?.name} />
+                  <CommunityList key={post.id} title={post.title} name={user?.name} communityId={post.id} />
                 ))}
                 <PagenationWrapper>
                   <Pagenation
