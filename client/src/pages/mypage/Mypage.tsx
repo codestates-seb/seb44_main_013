@@ -137,9 +137,7 @@ export default function MyPage() {
                   .filter((portfolio) => portfolio.bookmarks.length > 0)
                   .map((portfolio, index) => {
                     const imageSrc = portfolio.pictures.length ? portfolio.pictures[0].pictureUrl : 'defaultImageUrl';
-                    if (portfolio.bookmarks.length <= 0) {
-                      return <img src={noBookmark} alt="no Bookmark" />;
-                    }
+
                     return (
                       <MypageItem
                         key={index}
@@ -151,6 +149,9 @@ export default function MyPage() {
                       />
                     );
                   })}
+                {bookmarkedPortfolios.length <= 0 && (
+                  <img src={noBookmark} alt="no Bookmark" className="h-auto w-full" />
+                )}
               </BoxWrapper>
 
               {/* 게시판 목록 부분  */}
