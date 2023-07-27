@@ -9,13 +9,7 @@ import MypageItem from '@/components/mypageItem/MypageItem';
 
 import { FlexColumnWrapper } from '@/commons/styles/Containers.styled';
 import { PagenationWrapper } from '@/components/pagenation/Pagenation.styled';
-import {
-  BoxTitle,
-  BoxWrapper,
-  MainWrapper,
-  MyItemsWrapper,
-  MyProfileWrapper,
-} from './MyPage.styled';
+import { BoxTitle, BoxWrapper, MainWrapper, MyItemsWrapper, MyProfileWrapper } from './MyPage.styled';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
@@ -44,13 +38,9 @@ export default function MyPage() {
   const { id: memberId } = useParams<{ id: string }>();
   const [, setUserBoards] = useState<Post[]>([]);
   const [userPortfolios, setUserPortfolios] = useState<Portfolio[]>([]);
-  const [bookmarkedPortfolios, setBookmarkedPortfolios] = useState<Portfolio[]>(
-    []
-  );
+  const [bookmarkedPortfolios, setBookmarkedPortfolios] = useState<Portfolio[]>([]);
 
-  const loginState = useSelector(
-    (state: RootState) => state.loginSlice.isLogin
-  );
+  const loginState = useSelector((state: RootState) => state.loginSlice.isLogin);
 
   useEffect(() => {
     netaxios
@@ -63,7 +53,9 @@ export default function MyPage() {
       .catch((error) => {
         console.error(error);
       });
-
+    console.log(user);
+    console.log(userPortfolios);
+    console.log(bookmarkedPortfolios);
     netaxios
       .get(`/boards?memberId=${memberId}`)
       .then((response) => {
@@ -118,9 +110,7 @@ export default function MyPage() {
             <BoxTitle>게시물</BoxTitle>
             <BoxWrapper id="box-wrapper1">
               {userPortfolios.map((portfolio, index) => {
-                const imageSrc = portfolio.pictures.length
-                  ? portfolio.pictures[0].pictureUrl
-                  : 'defaultImageUrl';
+                const imageSrc = portfolio.pictures.length ? portfolio.pictures[0].pictureUrl : 'defaultImageUrl';
 
                 return (
                   <MypageItem
@@ -143,9 +133,7 @@ export default function MyPage() {
                 {bookmarkedPortfolios
                   .filter((portfolio) => portfolio.bookmarks.length > 0)
                   .map((portfolio, index) => {
-                    const imageSrc = portfolio.pictures.length
-                      ? portfolio.pictures[0].pictureUrl
-                      : 'defaultImageUrl';
+                    const imageSrc = portfolio.pictures.length ? portfolio.pictures[0].pictureUrl : 'defaultImageUrl';
 
                     return (
                       <MypageItem
@@ -163,23 +151,12 @@ export default function MyPage() {
               {/* 게시판 목록 부분  */}
               <BoxTitle>게시판</BoxTitle>
               <BoxWrapper isRow="column">
-                {user?.boards
-                  .slice(
-                    (currentPage - 1) * itemsPerPage,
-                    currentPage * itemsPerPage
-                  )
-                  .map((post) => (
-                    <CommunityList
-                      key={post.id}
-                      title={post.title}
-                      name={user?.name}
-                    />
-                  ))}
+                {user?.boards.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((post) => (
+                  <CommunityList key={post.id} title={post.title} name={user?.name} />
+                ))}
                 <PagenationWrapper>
                   <Pagenation
-                    onClick={() =>
-                      handlePageChange(Math.max(1, currentPage - 1))
-                    }
+                    onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                     isActive={currentPage === 1}
                   >
                     &lt;
@@ -187,9 +164,7 @@ export default function MyPage() {
 
                   {Array.from(
                     {
-                      length: Math.ceil(
-                        (user?.boards?.length || 0) / itemsPerPage
-                      ),
+                      length: Math.ceil((user?.boards?.length || 0) / itemsPerPage),
                     },
                     (_, i) => i + 1
                   ).map((pageNumber) => (
@@ -204,17 +179,9 @@ export default function MyPage() {
 
                   <Pagenation
                     onClick={() =>
-                      handlePageChange(
-                        Math.min(
-                          currentPage + 1,
-                          Math.ceil((user?.boards?.length || 0) / itemsPerPage)
-                        )
-                      )
+                      handlePageChange(Math.min(currentPage + 1, Math.ceil((user?.boards?.length || 0) / itemsPerPage)))
                     }
-                    isActive={
-                      currentPage ===
-                      Math.ceil((user?.boards?.length || 0) / itemsPerPage)
-                    }
+                    isActive={currentPage === Math.ceil((user?.boards?.length || 0) / itemsPerPage)}
                   >
                     &gt;
                   </Pagenation>
