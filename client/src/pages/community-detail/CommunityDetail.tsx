@@ -33,7 +33,7 @@ export default function CommunityDetail({ handleClick }: any) {
 
     getMember();
     console.log(memberData);
-  }, [boardId]);
+  }, [memberData]);
 
   if (!memberData)
     return (
