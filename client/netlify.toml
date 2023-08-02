@@ -1,0 +1,4 @@
+[[redirects]]
+from = "^/(?!assets|api).*$"
+to = "/index.html"
+status = 200
