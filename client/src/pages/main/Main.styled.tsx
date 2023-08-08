@@ -13,8 +13,6 @@ export const WebItemsContainer = styled.div`
     bg-no-repeat
     bg-center
   `}
-
-  height: 80vh;
 `;
 
 export const NodataImage = styled.img`
