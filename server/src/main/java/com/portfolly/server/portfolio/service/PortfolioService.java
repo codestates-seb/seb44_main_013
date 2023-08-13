@@ -11,8 +11,8 @@ import com.portfolly.server.likes.entity.Likes;
 import com.portfolly.server.likes.repository.LikesRepository;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.service.MemberService;
-import com.portfolly.server.picture.entity.Picture;
-import com.portfolly.server.picture.repository.PictureRepository;
+//import com.portfolly.server.picture.entity.Picture;
+//import com.portfolly.server.picture.repository.PictureRepository;
 import com.portfolly.server.portfolio.dto.PortfolioDto;
 import com.portfolly.server.portfolio.entity.Portfolio;
 import com.portfolly.server.portfolio.entity.PortfolioTag;
@@ -39,7 +39,7 @@ public class PortfolioService {
     private final MemberService memberService;
     private final BookmarkRepository bookmarkRepository;
     private final LikesRepository likesRepository;
-    private final PictureRepository pictureRepository;
+//    private final PictureRepository pictureRepository;
     private final CategoryRepository categoryRepository;
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
@@ -89,51 +89,51 @@ public class PortfolioService {
     }
 
     //포트폴리오 수정
-    public Portfolio updatePortfolio(PortfolioDto.Patch patchDto, String accessToken){
-        Portfolio findedPortfolio = findVerifiedPortfolio(patchDto.getId());
-        Long memberId = findMemberId(accessToken);
-//        Member member = memberService.findMember(memberId);
-        //작성자가 맞는지 체크
-        if(memberId == findedPortfolio.getMember().getId()){
-            findedPortfolio.setTitle(patchDto.getTitle());
-            findedPortfolio.setContent(patchDto.getContent());
-            findedPortfolio.setExplains(patchDto.getExplains());
-            findedPortfolio.setCategory(categoryRepository.findByName(patchDto.getCategory().trim()).orElseThrow(()->new BusinessLogicException(ExceptionCode.CATEGORY_NOT_FOUND)));
+//    public Portfolio updatePortfolio(PortfolioDto.Patch patchDto, String accessToken){
+//        Portfolio findedPortfolio = findVerifiedPortfolio(patchDto.getId());
+//        Long memberId = findMemberId(accessToken);
+////        Member member = memberService.findMember(memberId);
+//        //작성자가 맞는지 체크
+//        if(memberId == findedPortfolio.getMember().getId()){
+//            findedPortfolio.setTitle(patchDto.getTitle());
+//            findedPortfolio.setContent(patchDto.getContent());
+//            findedPortfolio.setExplains(patchDto.getExplains());
+//            findedPortfolio.setCategory(categoryRepository.findByName(patchDto.getCategory().trim()).orElseThrow(()->new BusinessLogicException(ExceptionCode.CATEGORY_NOT_FOUND)));
+//
+//            deletePortfolioTag(findedPortfolio);
+//            List<Tag> tags = new Gson().fromJson(patchDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
+//            createPortfolioTag(tags, findedPortfolio);
+//            for(Picture picture : findedPortfolio.getPictures()) {
+//                pictureRepository.delete(picture);
+//            }
+//            addPicture(findedPortfolio);
+//            portfolioRepository.save(findedPortfolio);
+//        }else{
+//            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
+//        }
+//        return findedPortfolio;
+//    }
 
-            deletePortfolioTag(findedPortfolio);
-            List<Tag> tags = new Gson().fromJson(patchDto.getTags(),new TypeToken<List<Tag>>(){}.getType());
-            createPortfolioTag(tags, findedPortfolio);
-            for(Picture picture : findedPortfolio.getPictures()) {
-                pictureRepository.delete(picture);
-            }
-            addPicture(findedPortfolio);
-            portfolioRepository.save(findedPortfolio);
-        }else{
-            throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_MATCH);
-        }
-        return findedPortfolio;
-    }
 
-
-    //포트폴리오 상세 조회, 조회수 증가
-    public PortfolioDto.Response selectPortfolio(Long portfolioId, String accessToken) {
-        //1. 로그인 하지 않을 경우//2. 로그인 한 경우 ==> AccessToken의 유무
-        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()->new RuntimeException());
-        increaseViews(portfolio);
-        PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
-        if(!accessToken.isEmpty()) {
-            Long memberId = findMemberId(accessToken);
-            response.setMarked(isMarked(portfolioId, memberId));
-            response.setLiked(isLiked(portfolioId, memberId));
-            response.setWriter(isWriter(portfolioId, memberId));
-        }
-        if(portfolio.getStatus().equals(Portfolio.Status.INACTIVE)) {
-            throw new BusinessLogicException(ExceptionCode.PORTFOLIO_NOT_FOUND);
-        }
-        response.setCountLikes(countLikes(response.getId()));
-        response.setFirstImage(firstImageUrl(response.getId()));
-        return response;
-    }
+//    //포트폴리오 상세 조회, 조회수 증가
+//    public PortfolioDto.Response selectPortfolio(Long portfolioId, String accessToken) {
+//        //1. 로그인 하지 않을 경우//2. 로그인 한 경우 ==> AccessToken의 유무
+//        Portfolio portfolio = portfolioRepository.findById(portfolioId).orElseThrow(()->new RuntimeException());
+//        increaseViews(portfolio);
+//        PortfolioDto.Response response = portfolioMapper.portfolioToResponseDto(portfolio);
+//        if(!accessToken.isEmpty()) {
+//            Long memberId = findMemberId(accessToken);
+//            response.setMarked(isMarked(portfolioId, memberId));
+//            response.setLiked(isLiked(portfolioId, memberId));
+//            response.setWriter(isWriter(portfolioId, memberId));
+//        }
+//        if(portfolio.getStatus().equals(Portfolio.Status.INACTIVE)) {
+//            throw new BusinessLogicException(ExceptionCode.PORTFOLIO_NOT_FOUND);
+//        }
+//        response.setCountLikes(countLikes(response.getId()));
+//        response.setFirstImage(firstImageUrl(response.getId()));
+//        return response;
+//    }
 
     public void increaseViews(Portfolio portfolio) {
         portfolio.setView(portfolio.getView() + 1);
@@ -149,31 +149,31 @@ public class PortfolioService {
         return portfolioRepository.findByStatusAndCategoryId(PageRequest.of(page, size, Sort.by("id").descending()), Portfolio.Status.ACTIVE, categoryId);
     }
 
-    public void setResponse(List<PortfolioDto.Response> responses,String accessToken){
-        for (PortfolioDto.Response response : responses) {
-            response.setFirstImage(firstImageUrl(response.getId()));
-            response.setMarked(isMarked(response.getId(), findMemberId(accessToken)));
-        }
-    }
+//    public void setResponse(List<PortfolioDto.Response> responses,String accessToken){
+//        for (PortfolioDto.Response response : responses) {
+//            response.setFirstImage(firstImageUrl(response.getId()));
+//            response.setMarked(isMarked(response.getId(), findMemberId(accessToken)));
+//        }
+//    }
 
-    //로그인 하지 않았을 시에 marked false
-    public void setOfflineResponse(List<PortfolioDto.Response> responses){
-        for (PortfolioDto.Response response : responses) {
-            response.setFirstImage(firstImageUrl(response.getId()));
-            response.setMarked(false);
-        }
-    }
+//    //로그인 하지 않았을 시에 marked false
+//    public void setOfflineResponse(List<PortfolioDto.Response> responses){
+//        for (PortfolioDto.Response response : responses) {
+//            response.setFirstImage(firstImageUrl(response.getId()));
+//            response.setMarked(false);
+//        }
+//    }
 
     //picture에서 portfolioId 에 맞는 첫번째 이미지링크를 가져옴
-    public String firstImageUrl(Long portfolioId){
-        List<Picture> pictures = pictureRepository.findAllByPortfolioId(portfolioId);
-        if (pictures.size() != 0) {
-            String firstImage = pictures.get(0).getPictureUrl();
-            return firstImage;
-        }
-        //else default image 추가해주어야 함(프론트에서 처리)
-        else return null;
-    }
+//    public String firstImageUrl(Long portfolioId){
+//        List<Picture> pictures = pictureRepository.findAllByPortfolioId(portfolioId);
+//        if (pictures.size() != 0) {
+//            String firstImage = pictures.get(0).getPictureUrl();
+//            return firstImage;
+//        }
+//        //else default image 추가해주어야 함(프론트에서 처리)
+//        else return null;
+//    }
 
     public Long matchCategoryId(String category){
         category.trim().toLowerCase();
@@ -252,32 +252,32 @@ public class PortfolioService {
         return findPortfolio;
     }
 
-    public void addPicture(Portfolio portfolio){
-        //content안에 있는 링크들을 가져 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
-        String content = portfolio.getContent();
-        String domain = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/";
-        List<String> pictureUrlList = new ArrayList<>();
-        while (content.contains(domain)){
-            content=content.substring(content.indexOf(domain));
-            int startIdx= 0;
-            int endIdx = content.indexOf('>');
-            String pictureUrl = content.substring(startIdx,endIdx);
-            pictureUrl = pictureUrl.replace("'", "");
-            pictureUrlList.add(pictureUrl);
-            content=content.substring(endIdx);
-            System.out.println(pictureUrl);
-        }
-        List<Picture> pictures = new ArrayList<>();
-        for (String pictureUrl : pictureUrlList) {
-//            Picture picture = pictureRepository.findByPictureUrl(pictureUrl).orElseThrow(()->new BusinessLogicException(ExceptionCode.PICTURE_NOT_FOUND));
-            Picture picture = new Picture();
-            picture.setPictureUrl(pictureUrl);
-            picture.setFileName(pictureUrl.substring(pictureUrl.lastIndexOf("/")+1));
-            picture.setPortfolio(portfolio);
-            pictures.add(pictureRepository.save(picture));
-        }
-        portfolio.setPictures(pictures);
-    }
+//    public void addPicture(Portfolio portfolio){
+//        //content안에 있는 링크들을 가져 와서 해당하는 링크의 이미지를 찾아서 연관관계를 맺을 때 portfolioId를 넣어준다.
+//        String content = portfolio.getContent();
+//        String domain = "https://portfolly-picture.s3.ap-northeast-2.amazonaws.com/";
+//        List<String> pictureUrlList = new ArrayList<>();
+//        while (content.contains(domain)){
+//            content=content.substring(content.indexOf(domain));
+//            int startIdx= 0;
+//            int endIdx = content.indexOf('>');
+//            String pictureUrl = content.substring(startIdx,endIdx);
+//            pictureUrl = pictureUrl.replace("'", "");
+//            pictureUrlList.add(pictureUrl);
+//            content=content.substring(endIdx);
+//            System.out.println(pictureUrl);
+//        }
+//        List<Picture> pictures = new ArrayList<>();
+//        for (String pictureUrl : pictureUrlList) {
+////            Picture picture = pictureRepository.findByPictureUrl(pictureUrl).orElseThrow(()->new BusinessLogicException(ExceptionCode.PICTURE_NOT_FOUND));
+//            Picture picture = new Picture();
+//            picture.setPictureUrl(pictureUrl);
+//            picture.setFileName(pictureUrl.substring(pictureUrl.lastIndexOf("/")+1));
+//            picture.setPortfolio(portfolio);
+//            pictures.add(pictureRepository.save(picture));
+//        }
+//        portfolio.setPictures(pictures);
+//    }
 
 
 

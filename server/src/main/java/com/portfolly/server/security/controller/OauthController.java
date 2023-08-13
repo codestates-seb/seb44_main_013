@@ -5,6 +5,7 @@ import com.portfolly.server.exception.businessLogicException.ExceptionCode;
 import com.portfolly.server.member.dto.MemberDto;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.member.mapper.MemberMapper;
+import com.portfolly.server.member.repository.MemberRepository;
 import com.portfolly.server.member.service.MemberService;
 import com.portfolly.server.security.authentication.oauth2.handler.OAuth2MemberSuccessHandler;
 import com.portfolly.server.security.authorization.jwt.JwtTokenizer;
@@ -19,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.util.List;
 @Slf4j
 @Configuration
@@ -62,8 +64,8 @@ public class OauthController {
     }
 
     // Todo : 엑세스 토큰 재생성
-    @PostMapping("/regeneration/token")
-    public String RefreshToken(@RequestHeader("RefreshToken") String token,
+    @PostMapping("/regeneration/accessToken")
+    public void RegenerationAccessToken(@RequestHeader("RefreshToken") String token,
                                HttpServletResponse response){
 
         String refreshToken = verifyBearerAfterReturnToken(token);
@@ -75,9 +77,23 @@ public class OauthController {
         String accessToken = oAuth2MemberSuccessHandler.delegateAccessToken(member.getEmail(), authorities);
 
         response.addHeader("Authorization", "Bearer " + accessToken);
-        log.info("Access Token Regeneration OK");
+        log.info("[ ** Regeneration ** ] Access Token");
+    }
 
-        return "[ ** Regeneration ** ] Access Token";
+    // Todo : 리프레쉬 토큰 재생성
+    @PostMapping("/regeneration/refreshToken/{member-id}")
+    public void RegenerationRefreshToken(@Positive @PathVariable("member-id") long memberId,
+                                         @Valid @RequestBody String email,
+                                           HttpServletResponse response){
+
+        String refreshToken = oAuth2MemberSuccessHandler.delegateRefreshToken(email);
+        Member member = memberService.findMember(memberId);
+        member.setRefreshToken(refreshToken);
+        memberService.updateMember(member);
+
+        response.addHeader("RefreshToken", "Bearer " + refreshToken);
+
+        log.info("[ ** Regeneration ** ] Refresh Token");
     }
 
     // Todo : 로그인

@@ -18,7 +18,6 @@ import java.util.Optional;
 @Transactional
 public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
-
     Optional<Member> findByRefreshToken(String refreshToken);
 
     @Query("SELECT p FROM Portfolio p WHERE p.member.id = :memberId")

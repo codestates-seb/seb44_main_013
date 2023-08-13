@@ -8,7 +8,7 @@ import com.portfolly.server.bookmark.entity.Bookmark;
 import com.portfolly.server.likes.entity.Likes;
 import com.portfolly.server.member.entity.Member;
 import com.portfolly.server.category.entity.Category;
-import com.portfolly.server.picture.entity.Picture;
+//import com.portfolly.server.picture.entity.Picture;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -80,9 +80,9 @@ public class Portfolio extends Auditable {
     @OneToMany(mappedBy = "portfolio")
     @JsonManagedReference
     private List<PortfolioTag> portfolioTags = new ArrayList<>();
-    @OneToMany(mappedBy = "portfolio")
-    @JsonManagedReference
-    private List<Picture> pictures = new ArrayList<>();
+//    @OneToMany(mappedBy = "portfolio")
+//    @JsonManagedReference
+//    private List<Picture> pictures = new ArrayList<>();
 
 
 }

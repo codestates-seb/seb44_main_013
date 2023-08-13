@@ -1,5 +1,6 @@
 jwt:
   key:
-    secret: sdjflsdkjflskdj.flkjsdfkjsdl.kfsdlkjflsdkjfjsdkf    # 환경변수에 로드
-  access-token-expiration-minutes: 60
-  refresh-token-expiration-minutes: 4320
+    secret: ${JWT_SECRET_KEY}    # 환경변수에 로드
+  access-token-expiration-minutes: 1
+  refresh-token-expiration-minutes: 1
+
