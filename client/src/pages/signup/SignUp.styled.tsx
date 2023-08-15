@@ -23,48 +23,6 @@ export const SingupSection = tw.div`
     items-center
 `;
 
-export const ButtonContainer = tw.div`
-  flex
-  justify-between
-  space-x-16
-  [width:100%]
-  [max-width:24rem]
-  mt-10
-  mb-10
-  mx-auto
-`;
-
-export const SignBtn = styled.button`
-  ${tw`
-  w-16
-  h-16
-  md:w-32
-  md:h-32
-  border-2
-  border-slate-200
-  transition-all
-  duration-200
-  ease-in-out
-  text-black
-  `}
-
-  &:hover {
-    background-color: #8ec5fc;
-    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
-    color: black;
-    transform: scale(1.1);
-    border: 1px solid white;
-  }
-
-  &:focus {
-    background-color: #8ec5fc;
-    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
-    color: black;
-    font-weight: bolder;
-    border: 2px solid white;
-  }
-`;
-
 export const ContentBox = tw.div`
   w-[450px]
   text-white
