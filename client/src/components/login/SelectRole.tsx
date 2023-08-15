@@ -1,4 +1,4 @@
-import { ButtonContainer, SignBtn } from '@/pages/signup/SignUp.styled';
+import { ButtonContainer, SignBtn, TitleText } from '@/components/login/SelectRole.styled';
 import { useState } from 'react';
 import { ButtonBox, RoleWrapper } from './SelectRole.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
@@ -49,13 +49,14 @@ export default function SelectRole() {
       console.log(err);
     }
   };
-
+  //onClick={() => selectRole('CLIENT')}
   return (
     <RoleWrapper>
       <ButtonBox>
+        <TitleText>Choose your Role</TitleText>
         <ButtonContainer>
-          <SignBtn onClick={() => selectRole('CLIENT')}>Client</SignBtn>
-          <SignBtn onClick={() => selectRole('PARTNER')}>Partner</SignBtn>
+          <SignBtn type={'client'}>Client</SignBtn>
+          <SignBtn type={'partner'}>Partner</SignBtn>
         </ButtonContainer>
         <PurpleBtn onClick={sendRole}>Next</PurpleBtn>
       </ButtonBox>
