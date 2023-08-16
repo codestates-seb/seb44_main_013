@@ -40,13 +40,20 @@ export const TitleText = tw.div`
     text-BASIC_BLACK
 `;
 
+export const ContentText = tw.div`
+    text-[18px]
+    font-bold
+    text-BASIC_BLACK
+    mt-3
+    w-[250px]
+`;
+
 export const ButtonContainer = tw.div`
   flex
-  bg-white
   justify-between
   w-full
   my-10
-  space-x-8
+  space-x-12
 `;
 
 export const SelectRoleWrapper = styled.button`
@@ -56,29 +63,31 @@ export const SelectRoleWrapper = styled.button`
   flex-col
   items-center
   w-[450px]
-  h-[350px]
+  h-[400px]
   border-2
-  border-blue-800
+  bg-white
   transition-all
   duration-200
   ease-in-out
   text-black
   `}
+  border-radius: 20px;
+  transition: 0.5s;
 
   &:hover {
-    background-color: #8ec5fc;
-    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
+    /* background-color: #8ec5fc;
+    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%); */
     color: black;
     transform: scale(1.1);
-    border: 1px solid white;
+    box-shadow: 0 0 35px #ff1493;
   }
 
   &:focus {
-    background-color: #8ec5fc;
-    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%);
+    /* background-color: #8ec5fc;
+    background-image: linear-gradient(46deg, #8ec5fc 0%, #e0c3fc 100%); */
     color: black;
     font-weight: bolder;
-    border: 2px solid white;
+    border: 2px solid #ff1493;
   }
 `;
 
@@ -99,26 +108,46 @@ const RoleImage = styled.img`
   }
 `;
 
+export const NextButton = styled.button`
+  ${tw`
+bg-transparent
+text-BASIC_BLACK
+font-extrabold
+text-2xl
+`}
+
+  &:hover {
+    color: rgb(106 102 180);
+  }
+
+  &:focus {
+    color: rgb(106 102 180);
+  }
+`;
+
 interface selectRoleType {
   children: React.ReactNode;
   type: string;
+  onClick: (chooseRole: string) => void;
 }
 
-export const SignBtn = ({ children, type }: selectRoleType) => {
+export const SignBtn = ({ children, type, onClick }: selectRoleType) => {
   if (type === 'partner') {
     return (
-      <SelectRoleWrapper>
+      <SelectRoleWrapper onClick={() => onClick('PARTNER')}>
         <RoleImage src={partner} alt="partner image" />
         {children}
+        <ContentText>작업물을 전시하고 좋은 기회, 동료들을 찾고 있나요?</ContentText>
       </SelectRoleWrapper>
     );
   }
 
   if (type === 'client') {
     return (
-      <SelectRoleWrapper>
+      <SelectRoleWrapper onClick={() => onClick('CLIENT')}>
         <RoleImage src={client} alt="client image" />
         {children}
+        <ContentText>원하는 스타일의 작업자들을 찾고 관리하고 싶으신가요?</ContentText>
       </SelectRoleWrapper>
     );
   }

@@ -1,4 +1,4 @@
-import { ButtonContainer, SignBtn, TitleText } from '@/components/login/SelectRole.styled';
+import { ButtonContainer, NextButton, SignBtn, TitleText } from '@/components/login/SelectRole.styled';
 import { useState } from 'react';
 import { ButtonBox, RoleWrapper } from './SelectRole.styled';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
@@ -22,9 +22,8 @@ export default function SelectRole() {
 
   const selectRole = (res: string) => {
     setRole(res);
+    console.log(res);
   };
-
-  // console.log(role);
 
   const sendRole = () => {
     try {
@@ -55,10 +54,14 @@ export default function SelectRole() {
       <ButtonBox>
         <TitleText>Choose your Role</TitleText>
         <ButtonContainer>
-          <SignBtn type={'client'}>Client</SignBtn>
-          <SignBtn type={'partner'}>Partner</SignBtn>
+          <SignBtn type={'client'} onClick={(chooseRole) => selectRole(chooseRole)}>
+            Client
+          </SignBtn>
+          <SignBtn type={'partner'} onClick={(chooseRole) => selectRole(chooseRole)}>
+            Partner
+          </SignBtn>
         </ButtonContainer>
-        <PurpleBtn onClick={sendRole}>Next</PurpleBtn>
+        <NextButton onClick={sendRole}>Next</NextButton>
       </ButtonBox>
     </RoleWrapper>
   );
