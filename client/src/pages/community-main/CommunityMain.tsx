@@ -6,6 +6,7 @@ import Search from '@/components/search/Search';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 import datano from '@/assets/datano.png';
+import LoadingGif from '@/assets/loading.gif';
 
 import { CommuProps } from '@/types';
 
@@ -66,24 +67,30 @@ export default function CommunityMain() {
   // 해당 페이지의 데이터가 8개 미만이면 거기서 작동 종료
   const target = useRef<HTMLDivElement | null>(null);
   const [isEightUnder, setIsEightUnder] = useState(false); // 이전 데이터가 8개 미만인지 상태
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPage(1);
     setIsEightUnder(false);
   }, [division]);
 
-  console.log(target);
+  // console.log(target);
+  const [delay, setDelay] = useState(false);
   useEffect(() => {
     if(isEightUnder){
       return;
     }
+    setTimeout(() => {setDelay(true)}, 1000);
+
     const showPageCommu = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`);
         const currentData = response.data.data;
         console.log(currentData);
         setData([...data, ...currentData]);
+        setIsLoading(false);
+        setDelay(false);
         if (currentData.length < 8) {
           setIsEightUnder(true);
           return;
@@ -92,7 +99,7 @@ export default function CommunityMain() {
         console.error('Error fetching data:', error);
       }
     };
-    if(page > 1){
+    if(page > 1 && delay){
       showPageCommu();
     }
   }, [page]);
@@ -101,7 +108,7 @@ export default function CommunityMain() {
 
   
   // 초기렌더링에 관측 못하는 거 이부분 의존성 배열이 [] 라서 그런듯
-  // -> ㄴㄴ 초기 렌더링에 초기화 하는게 맞고 
+  // -> ㄴㄴ 초기 렌더링에 초기화 하는게 맞고
   // 저장하고 되는건 target이 이미 렌더링이 되어 있어서 인데
   // 그럼 초기 렌더링에 target이 잘 렌더링되고 그 후에 관측하는지 순서 파악이 필요해보임
   // -> 초기렌더링에 target이 Null 로 뜨는 거 확인
@@ -164,7 +171,8 @@ export default function CommunityMain() {
               </ListsWrapper>
               {/* {target.current && (
                 )} */}
-                <div style={{'color':'#fff'}} ref={target}>여기타겟</div>
+                <div ref={target}></div>
+                {isLoading ? <img src={LoadingGif} alt='loading' /> : ''};
             </>
           ) : (
             <NodataImage src={datano} alt="no data" />
