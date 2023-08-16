@@ -1,7 +1,6 @@
 import { ButtonContainer, NextButton, SignBtn, TitleText } from '@/components/login/SelectRole.styled';
 import { useState } from 'react';
 import { ButtonBox, RoleWrapper } from './SelectRole.styled';
-import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //useSelector
