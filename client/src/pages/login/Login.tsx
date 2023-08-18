@@ -7,11 +7,13 @@ import {
   LoginSection,
   LoginWrapper,
   TitleSection,
-  ContentSection,
+  InputWrapper,
+  InputForm,
   MiddleLine,
   MiddleWrapper,
   WriteSection,
   HorizonLine,
+  SecreatTag,
 } from './Login.styled';
 import BackText from '@/commons/atoms/backText/BackText';
 import { BackButton } from '@/commons/atoms/buttons/Button.styled';
@@ -24,6 +26,7 @@ export default function Login() {
   const handleAlert = () => {
     setClose(!close);
   };
+
   return (
     <LoginWrapper>
       <BackText>Portfolly</BackText>
@@ -38,15 +41,13 @@ export default function Login() {
         <TitleSection>
           Discover artworks <br /> that tell stories, <br /> not just simple pictures.
         </TitleSection>
-        <ContentSection>
-          Experience the artistry and ingenuity of diverse portfolios, <br />
-          curated for web, app, and design enthusiasts.
-        </ContentSection>
 
-        {/* <Link to="/signup"> */}
+        <InputWrapper>
+          <InputForm placeholder="Email"></InputForm>
+          <InputForm placeholder="Password"></InputForm>
+        </InputWrapper>
         <LoginGoogleForm type={'normal'} alert={handleAlert}>
-          {' '}
-          Welcome, Be Guest
+          로그인
         </LoginGoogleForm>
         {close ? (
           <AlertModal
@@ -58,7 +59,9 @@ export default function Login() {
             clicked={'닫기'}
           />
         ) : null}
-        {/* </Link> */}
+        <SecreatTag onClick={handleAlert}>If you forgot the info, click here!</SecreatTag>
+        <SecreatTag onClick={handleAlert}>Are you new here? Be our member!</SecreatTag>
+
         <MiddleWrapper>
           <MiddleLine />
           &nbsp; or &nbsp;
