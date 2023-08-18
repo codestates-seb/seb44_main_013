@@ -44,6 +44,8 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         })
         .then((response) => {
           console.log('구글이랑 토큰 받아옵니다.');
+          window.localStorage.setItem('name', response.data.name);
+          window.localStorage.setItem('ImageUrl', response.data.picture);
           // console.log(response);
           // console.log(response.data.name);
           // console.log(response.data.email);
