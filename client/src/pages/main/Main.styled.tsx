@@ -25,3 +25,11 @@ export const NodataImage = styled.img`
   height: 350px;
   margin-top: 60px;
 `;
+
+export const BigTitle = tw.div`
+    text-2xl
+    font-semibold
+    text-BASIC_WHITE
+    ml-10
+    mt-10
+`;
