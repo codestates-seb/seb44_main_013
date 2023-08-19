@@ -27,6 +27,7 @@ export default function CommentWriteBox({ saveComment, handleComment, isInput }:
           },
         })
         .then((res) => {
+          console.log(res);
           setUserName(res.data.name);
           setUserImg('');
         });

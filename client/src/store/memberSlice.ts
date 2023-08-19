@@ -8,13 +8,15 @@ export interface Member {
 }
 
 const getId = Number(window.localStorage.getItem('memberId'));
+const getImage = window.localStorage.getItem('ImageUrl');
+const getname = window.localStorage.getItem('name');
 
 // const tempPic = userImg === '' ? circleNoImg : userImg;
 
 const initialState: Member = {
-  name: '',
+  name: getname || '',
   memberId: getId,
-  imgUrl: '',
+  imgUrl: getImage || '',
 };
 
 export const MemberSlice = createSlice({
@@ -24,7 +26,8 @@ export const MemberSlice = createSlice({
     controlMember: (state, action) => {
       const { name, memberId, imgUrl } = action.payload;
       state.name = name;
-      (state.memberId = memberId), (state.imgUrl = imgUrl);
+      state.memberId = memberId;
+      state.imgUrl = imgUrl;
     },
   },
 });
