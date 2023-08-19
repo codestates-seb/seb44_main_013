@@ -49,11 +49,16 @@ export interface CategoryBtnProps {
 // style3;
 const Category = styled.button`
   ${tw`h-12 px-10 text-base font-semibold text-gray-400 uppercase tracking-wider border border-transparent rounded-md bg-transparent focus:outline-none transition-all duration-300 ease-in-out transform active:scale-95`}
-  &:hover, &:focus {
+  &:hover {
+    color: white;
+  }
+  &:focus {
+    border: 1px solid #d6ace2;
+    border-radius: 70px;
     color: white;
   }
 `;
 
 export default function CategoryButton({ category, onClick }: CategoryBtnProps) {
-  return <Category onClick={onClick}>{matchCategory(category)}</Category>
+  return <Category onClick={onClick}>{matchCategory(category)}</Category>;
 }
