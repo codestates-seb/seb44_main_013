@@ -21,7 +21,7 @@ import {
 } from './CommunityMain.styled';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import Notice from '@/components/notice/Notice';
+// import Notice from '@/components/notice/Notice';
 // import { current, set } from 'immer/dist/internal';
 
 export default function CommunityMain() {
