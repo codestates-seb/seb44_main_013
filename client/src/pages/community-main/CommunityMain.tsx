@@ -16,9 +16,12 @@ import {
   ListsWrapper,
   StyledWritingBtn,
   NodataImage,
+  FilterText,
+  FilterWrapper,
 } from './CommunityMain.styled';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Notice from '@/components/notice/Notice';
 // import { current, set } from 'immer/dist/internal';
 
 export default function CommunityMain() {
@@ -27,7 +30,7 @@ export default function CommunityMain() {
   const division = searchParams.get('division');
   const [page, setPage] = useState(1);
   const size = 8;
-  
+
   const state: any = useSelector((state) => state);
   const currentLoginState = state.loginSlice.isLogin;
 
@@ -44,11 +47,9 @@ export default function CommunityMain() {
           setData(res.data.data);
         });
     };
-    
+
     showWholeCommu();
   }, [division]);
-
-  
 
   // 검색 - 07.11 효정
   const [currentSearch, setCurrentSearch] = useState('');
@@ -75,12 +76,14 @@ export default function CommunityMain() {
 
   console.log(target);
   useEffect(() => {
-    if(isEightUnder){
+    if (isEightUnder) {
       return;
     }
     const showPageCommu = async () => {
       try {
-        const response = await axios.get(`https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`);
+        const response = await axios.get(
+          `https://api.portfolly.site/boards/pages?division=${division}&page=${page}&size=${size}`
+        );
         const currentData = response.data.data;
         console.log(currentData);
         setData([...data, ...currentData]);
@@ -92,39 +95,38 @@ export default function CommunityMain() {
         console.error('Error fetching data:', error);
       }
     };
-    if(page > 1){
+    if (page > 1) {
       showPageCommu();
     }
   }, [page]);
 
   // 페이지 바뀌면 실행시켜~ 페이지는 콜백함수로 바꿀거야~
 
-  
   // 초기렌더링에 관측 못하는 거 이부분 의존성 배열이 [] 라서 그런듯
-  // -> ㄴㄴ 초기 렌더링에 초기화 하는게 맞고 
+  // -> ㄴㄴ 초기 렌더링에 초기화 하는게 맞고
   // 저장하고 되는건 target이 이미 렌더링이 되어 있어서 인데
   // 그럼 초기 렌더링에 target이 잘 렌더링되고 그 후에 관측하는지 순서 파악이 필요해보임
   // -> 초기렌더링에 target이 Null 로 뜨는 거 확인
-  
+
   const options = {
     root: null,
     threshold: 1.0,
   };
-  
+
   // 지금 뷰포트에 들어왔는지 아닌지 분간하는 state 만들어보자
   const callback = (entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     console.log(target.isIntersecting);
-    if(target.isIntersecting){
+    if (target.isIntersecting) {
       console.log('여기 보는 중: ', target.target);
       setPage((prev) => prev + 1);
     }
   };
-  
+
   const observer = new IntersectionObserver(callback, options);
-    
+
   useEffect(() => {
-    if(target.current){
+    if (target.current) {
       observer.observe(target.current);
     }
   }, [target.current]);
@@ -136,40 +138,45 @@ export default function CommunityMain() {
   // 그 함수안에는 바뀐 페이지로 get 요청 보내오고
   // 받은 데이터 개수가 8개 미만이면 IsEightUnder 상태 바꾸기
   // 다음 페이지 요청이 와도 isEightUnder 가 true 면 바로 리턴 때리기
-  
+
   return (
     <CommunityWrapper>
       <SearchContainer>
-        <Search
-          setSearchValue={setCurrentSearch}
-          currentSearch={currentSearch}
-          data={data}
-          setSearchs={setSearchs}
-        />
+        <Search setSearchValue={setCurrentSearch} currentSearch={currentSearch} data={data} setSearchs={setSearchs} />
       </SearchContainer>
-        <ItemWrapper>
-          {currentLoginState ? (
-            <Link to="/boards/edit">
-              <StyledWritingBtn>
-                <WritingBtn />
-              </StyledWritingBtn>
-            </Link>
-          ) : ''}
-          {searchs.length > 0 ? (
-            <>
-              <ListsWrapper>
-                {searchs.map((communityItem: any) => {
-                  return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
-                })}
-              </ListsWrapper>
-              {/* {target.current && (
+      <ItemWrapper>
+        {currentLoginState ? (
+          <Link to="/boards/edit">
+            <StyledWritingBtn>
+              <WritingBtn />
+            </StyledWritingBtn>
+          </Link>
+        ) : (
+          ''
+        )}
+        <Notice title={'[ 클라이언트 게시판 ]'} />
+        <FilterWrapper>
+          <FilterText>최신순</FilterText>
+          <FilterText>조회순</FilterText>
+        </FilterWrapper>
+
+        {searchs.length > 0 ? (
+          <>
+            <ListsWrapper>
+              {searchs.map((communityItem: any) => {
+                return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
+              })}
+            </ListsWrapper>
+            {/* {target.current && (
                 )} */}
-                <div style={{'color':'#fff'}} ref={target}>여기타겟</div>
-            </>
-          ) : (
-            <NodataImage src={datano} alt="no data" />
-          )}
-        </ItemWrapper>
+            <div style={{ color: '#fff' }} ref={target}>
+              여기타겟
+            </div>
+          </>
+        ) : (
+          <NodataImage src={datano} alt="no data" />
+        )}
+      </ItemWrapper>
     </CommunityWrapper>
   );
 }

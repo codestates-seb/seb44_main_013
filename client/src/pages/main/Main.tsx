@@ -89,11 +89,18 @@ export default function Main() {
 
   console.log(searchs);
 
+  const currentTime = new Date(new Date().getTime());
+  const hour = currentTime.getHours();
+  const divisionPeriod = hour > 12 ? '오후' : '오전';
+  const changedHour = hour > 12 ? hour - 12 : hour;
+  const updatedTimeSet = `${divisionPeriod} ${changedHour}시`;
+  console.log(updatedTimeSet);
+
   return (
     <>
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
-      <BigTitle>{`현재 인기 작품 순위`}</BigTitle>
+      <BigTitle>{`현재 인기 작품 순위 [ ${updatedTimeSet} 기준]`}</BigTitle>
       <Ranking items={searchs} key={searchs.id} />
       <WebItemsContainer>
         {searchs.length > 0 ? (

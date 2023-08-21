@@ -51,3 +51,21 @@ export const NodataImage = styled.img`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
+
+export const FilterWrapper = tw.div`
+  flex
+  flex-row
+  pt-5
+`;
+
+export const FilterText = styled.button`
+  ${tw`
+    text-sm
+    text-gray-400
+    ml-3
+  `}
+
+  &:hover, &:focus {
+    color: #8580e1;
+  }
+`;

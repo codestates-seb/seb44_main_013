@@ -27,8 +27,8 @@ export const ItemImg = styled.img`
 `;
 
 export const RankingItem = tw.div`
-    w-80
-    h-72
+    w-56
+    h-48
     relative
     shadow-md
     mx-3
@@ -54,7 +54,7 @@ export const TitleContainer = styled.div`
 `;
 
 export const TitlePart = tw.div`
-    text-3xl
+    text-xl
     font-bold
     text-BASIC_WHITE
     pl-3
@@ -62,6 +62,6 @@ export const TitlePart = tw.div`
 `;
 
 export const ContentPart = tw.div`
-    text-xl
+    text-sm
     pl-3
 `;
