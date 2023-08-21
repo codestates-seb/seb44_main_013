@@ -169,7 +169,7 @@ export default function CommunityMain() {
         ) : (
           ''
         )}
-        <Notice title={'[ 클라이언트 게시판 ]'} />
+        {/* <Notice title={'[ 클라이언트 게시판 ]'} /> */}
         <FilterWrapper>
           <FilterText onClick={() => handleFilter('recent')}>최신순</FilterText>
           <FilterText onClick={() => handleFilter('view')}>조회순</FilterText>
