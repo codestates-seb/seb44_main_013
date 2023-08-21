@@ -139,6 +139,21 @@ export default function CommunityMain() {
   // 받은 데이터 개수가 8개 미만이면 IsEightUnder 상태 바꾸기
   // 다음 페이지 요청이 와도 isEightUnder 가 true 면 바로 리턴 때리기
 
+  //최신순, 조회순 필터링
+  const handleFilter = (filter: string) => {
+    if (filter === 'recent') {
+      setSearchs(data);
+    }
+    if (filter === 'view') {
+      const filteredDatas = [...data].sort((acc: CommuProps, cur: CommuProps) => cur.view - acc.view);
+      setSearchs(filteredDatas);
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log('필터링 버튼으로 리랜더링!');
+  // }, [handleFilter]);
+
   return (
     <CommunityWrapper>
       <SearchContainer>
@@ -156,8 +171,8 @@ export default function CommunityMain() {
         )}
         <Notice title={'[ 클라이언트 게시판 ]'} />
         <FilterWrapper>
-          <FilterText>최신순</FilterText>
-          <FilterText>조회순</FilterText>
+          <FilterText onClick={() => handleFilter('recent')}>최신순</FilterText>
+          <FilterText onClick={() => handleFilter('view')}>조회순</FilterText>
         </FilterWrapper>
 
         {searchs.length > 0 ? (
