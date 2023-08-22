@@ -2,8 +2,8 @@
 // import { useEffect, useState } from 'react';
 // import AOS from 'aos';
 // import 'aos/dist/aos.css';
-import WebSection from '@/components/home-section/web-section/WebSection';
-// import AppSection from '@/components/home-section/app-section/AppSection';
+import PortfolioSection from '@/components/home-section/portfolio-section/PortfolioSection';
+import CommunitySection from '@/components/home-section/community-section/CommunitySection';
 // import AnimationSection from '@/components/home-section/animation-section/AnimationSection';
 // import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 // import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
@@ -72,7 +72,8 @@ export default function LandingPage() {
         </>
       )}
       <SkipButton /> */}
-      <WebSection />
+      <PortfolioSection />
+      <CommunitySection />
     </LandingPageWrapper>
   );
 }
