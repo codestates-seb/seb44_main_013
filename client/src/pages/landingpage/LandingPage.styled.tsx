@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const LandingPageWrapper = styled.div`
-  padding: 100px;
-  border: 1px solid lightpink;
+export const HomeWrapper = styled.div`
+`;
+
+export const HomeContentsWrapper = styled.div`
+  padding: 0 100px 50px;
 `;

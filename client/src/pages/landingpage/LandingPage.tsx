@@ -8,8 +8,9 @@ import CommunitySection from '@/components/home-section/community-section/Commun
 // import GraphicDesignSection from '@/components/home-section/graphic-section/GraphicDesignSection';
 // import PhotographySection from '@/components/home-section/photography-section/PhotographySection';
 // import DisplaySection from '@/components/home-section/display-section/DisplaySection';
-import { LandingPageWrapper } from './LandingPage.styled';
+import { HomeWrapper, HomeContentsWrapper } from './LandingPage.styled';
 // import SkipButton from '@/commons/atoms/buttons/skip/SkipButton';
+import Header from '@/components/header/Header';
 
 
 export default function LandingPage() {
@@ -53,7 +54,7 @@ export default function LandingPage() {
   // }, []);
 
   return (
-    <LandingPageWrapper>
+    <HomeWrapper>
       {/* <FullPageContainer>
         <PortfollyText id="portfolly-text">Portfolly</PortfollyText>
       </FullPageContainer>
@@ -72,8 +73,11 @@ export default function LandingPage() {
         </>
       )}
       <SkipButton /> */}
-      <PortfolioSection />
-      <CommunitySection />
-    </LandingPageWrapper>
+      <Header />
+      <HomeContentsWrapper>
+        <PortfolioSection />
+        <CommunitySection />
+      </HomeContentsWrapper>
+    </HomeWrapper>
   );
 }
