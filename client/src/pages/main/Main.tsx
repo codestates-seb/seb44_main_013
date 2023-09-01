@@ -46,7 +46,7 @@ export default function Main() {
         // setItems(res.data);
         // setFilteredItems(res.data);
 
-        await axios.get(`https://api.portfolly.site/portfolios?category=${categoryParam}&page=1&size=5`).then((res) => {
+        await axios.get(`https://api.portfolly.site/portfolios?category=${categoryParam}&page=1&size=6`).then((res) => {
           console.log(res.data.data);
           setItems(res.data.data);
           setFilteredItems(res.data.data);
