@@ -14,7 +14,8 @@ export const HeaderContainer = tw.div`
   py-3
   bg-transparent
   z-50
-
+  sticky
+  top-0
 `;
 
 export const BtnContainer = tw.div`
@@ -33,8 +34,7 @@ export const RecuitBtn = styled.button<ButtonProps>`
     transition-colors
     text-gray-400
   `}
-  color: ${(props) =>
-    props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400'};
+  color: ${(props) => (props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400')};
 
   &:hover {
     color: #ffffff;
@@ -53,8 +53,7 @@ export const CooperBtn = styled.button<ButtonProps>`
     transition-colors
     text-gray-400
   `}
-  color: ${(props) =>
-    props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400'};
+ color: ${(props) => (props.isActive ? ' #ffff' : props.color ? props.color : ' text-gray-400')};
 
   &:hover {
     color: #ffffff;

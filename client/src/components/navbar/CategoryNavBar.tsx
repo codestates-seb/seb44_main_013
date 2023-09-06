@@ -15,7 +15,7 @@ export default function CategoryNavBar() {
 
   return (
     <StyleSheetManager shouldForwardProp={(prop) => prop !== 'gap'}>
-      <FlexContainer gap={20} bg="transparent">
+      <FlexContainer gap={20} bg="transparent" className="sticky top-0 z-50">
         {Categories.map((category, index) => {
           return <CategoryButton onClick={() => dispatch(setCategory(category))} category={category} key={index} />;
         })}
