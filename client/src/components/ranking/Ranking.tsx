@@ -4,9 +4,12 @@ import { Portfolio } from '@/types';
 import { ContentPart, ItemImg, RankingContainer, RankingItem, TitleContainer, TitlePart } from './Ranking.styled';
 import noPic from '@/assets/noPic.png';
 
-export default function Ranking(items: any) {
+interface RankingItemsTypes {
+  items: [Portfolio];
+}
+
+export default function Ranking(items: RankingItemsTypes) {
   const rankingData = items.items.sort((a: Portfolio, b: Portfolio) => b.view - a.view);
-  console.log(rankingData);
   return (
     <RankingContainer>
       {rankingData.length > 0
