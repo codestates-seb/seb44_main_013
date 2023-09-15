@@ -32,9 +32,6 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
   const getUserData = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       const ACCESS = tokenResponse.access_token;
-      // setToken(ACCESS);
-      // console.log(tokenResponse);
-      // console.log(ACCESS);
 
       axios
         .get('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -44,10 +41,6 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         })
         .then((response) => {
           console.log('구글이랑 토큰 받아옵니다.');
-          // console.log(response);
-          // console.log(response.data.name);
-          // console.log(response.data.email);
-          // console.log(response.data.picture);
 
           sendAccessToken(response.data.name, response.data.email, response.data.picture, ACCESS);
         })
@@ -60,7 +53,6 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     const accessToken = window.localStorage.getItem('accessToken');
     const memberId = window.localStorage.getItem('memberId');
     console.log('이메일 중복 기존 회원으로 서버한테 로그인 요청합니다.');
-    //현재 get bearer 이중 중복으로 뻄.
 
     try {
       const res = await axios({
@@ -84,7 +76,6 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
   const getRefreshToken = () => {
     const refresh = window.localStorage.getItem('refreshToken');
     console.log('[주목] getRefreshToken 함수 실행 ');
-    //현재 get bearer 이중 중복으로 뻄.
     axios
       .post(
         'https://api.portfolly.site/oauth/regeneration/token',
@@ -123,12 +114,9 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
       )
       .then((response) => {
         console.log('서버한테서 토큰과 아이디 리프레시를 받아옵니다.');
-        // console.log(response);
         const accessToken = response.headers.authorization;
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
-        // const refresthToken = response.headers.RefreshToken
-        // console.log(response.headers);
 
         window.localStorage.setItem('memberId', memberId);
         window.localStorage.setItem('accessToken', accessToken);
@@ -164,22 +152,6 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         }
       });
   };
-  // const loginButtonMapper = {
-  //   google: <GoogleLogin loginGoogle={loginGoogle}>{children}</GoogleLogin>,
-  //   normal: <EmailLogin>{children}</EmailLogin>,
-  // };
-
-  // const generateLoginButton = (type: 'google' | 'normal') => loginButtonMapper[type];
-
-  // return generateLoginButton(type as 'google' | 'normal');
-
-  //Object Mapper pattern
-
-  //post
-  // 1. 사진/ 이름/ 이메일 : body / accessToken : header 보내드린다.
-  // 2. localstorage에 받은 token 저장
-  // Promise 란 무엇 인가 !
-  //3. .then/.catch - || async await promise((promise))
 
   if (type === 'google') {
     return (
@@ -208,16 +180,3 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
     );
   }
 }
-
-// const GoogleLogin = ({ children, loginGoogle }) => (
-//   <GoogleWrapper onClick={loginGoogle}>
-//     <GoogleLogo />
-//     <TextSection>{children}</TextSection>
-//   </GoogleWrapper>
-// );
-
-// const EmailLogin = ({ children }) => (
-//   <GoogleWrapper>
-//     <TextSection>{children}</TextSection>
-//   </GoogleWrapper>
-// );
