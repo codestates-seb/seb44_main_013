@@ -19,7 +19,7 @@ export default function useToggle({ portfolioId, buttonType, isToggled: isOn, co
 
   const changeToggleClicks = () => call(url, 'GET');
 
-  const onClick = useCallback(async () => {
+  const onClick = async () => {
     if (isToggled)
       await changeToggleClicks();
       setButtonColor('gray');
@@ -31,7 +31,7 @@ export default function useToggle({ portfolioId, buttonType, isToggled: isOn, co
       buttonType === 'likes' && setCount(count + 1);
 
     setIsToggled(!isToggled);
-  }, [isToggled, count])
+  }
 
   return [buttonColor, onClick, count] as const;
 }
