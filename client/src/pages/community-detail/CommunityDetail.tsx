@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@/store';
 import { call } from '@/utils/apiService';
 import useUserImageHandler from '@/hooks/useUserImageHandler';
 
