@@ -6,7 +6,7 @@ import {
   TitleOverlay,
 } from './ThreeDItem.styled';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
-import Bookmark from '@/commons/atoms/buttons/Bookmark';
+import Bookmark from '@/commons/atoms/buttons/bookmark_like/BookmarkButton';
 import circleNoImg from '@/assets/circleNoImg.png';
 
 type AnimationProps = {

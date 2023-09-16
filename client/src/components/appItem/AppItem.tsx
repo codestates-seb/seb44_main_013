@@ -7,7 +7,7 @@ import {
 // import appImg from '../../assets/appImg.png';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { BsBatteryFull } from 'react-icons/bs';
-import Bookmark from '../../commons/atoms/buttons/Bookmark';
+import Bookmark from '../../commons/atoms/buttons/bookmark_like/BookmarkButton';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
 import { Link } from 'react-router-dom';

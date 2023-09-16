@@ -1,11 +1,13 @@
 /* 2023-07-07 좋아요 버튼 - 김다함 */
-import useToggle, { Toggle } from '@/hooks/useToggle';
+import useToggle from '@/hooks/useToggle';
 
 import { FaHeart } from 'react-icons/fa';
 import { SmallText } from '@/commons/atoms/text/Typography';
 import { FlexWrapper } from '@/commons/styles/Containers.styled';
 
-export interface LikeButton extends Toggle {
+export interface LikeButton {
+  portfolioId: number;
+  isToggled: boolean;
   currentLikes: number;
 }
 
