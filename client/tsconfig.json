@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
     },
@@ -29,7 +30,7 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true
   },
-  "include": ["src"],
+  "include": ["src", "twinTypes"],
   "exclude": ["**/node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

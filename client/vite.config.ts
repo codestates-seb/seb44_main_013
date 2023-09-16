@@ -9,7 +9,7 @@ export default defineConfig({
     macrosPlugin(),
     react({
       babel: {
-        plugins: ['babel-plugin-macros'],
+        plugins: ['babel-plugin-macros', 'babel-plugin-styled-components'],
       },
     }),
   ],
