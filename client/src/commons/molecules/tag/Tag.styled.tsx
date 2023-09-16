@@ -1,5 +1,4 @@
-import { styled, css } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled, css } from 'twin.macro';
 
 export const TagBody = styled.div<{ isSelected?: boolean, readOnly?: boolean }>`
     ${tw`w-fit py-1.5 px-2.5 rounded-full select-none flex`}

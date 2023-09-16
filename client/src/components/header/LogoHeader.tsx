@@ -1,6 +1,5 @@
 /* 2023-07-06 로고만 보이는 헤더 - 김다함 */
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import Logo from '../../commons/atoms/logo/Logo';
 

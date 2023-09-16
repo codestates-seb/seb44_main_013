@@ -1,5 +1,4 @@
-import tw from 'twin.macro';
-import styled from 'styled-components';
+import tw, { styled } from 'twin.macro';
 import { ReactNode } from 'react';
 
 import defaultBgimg from '../../../assets/bg2.jpeg';

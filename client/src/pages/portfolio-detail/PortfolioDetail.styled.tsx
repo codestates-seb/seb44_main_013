@@ -1,8 +1,8 @@
+import tw, { styled } from 'twin.macro';
+
 import { Purpletype } from '@/commons/atoms/buttons/Button.styled';
 import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
 import ReviseBtn from '@/commons/atoms/buttons/revise-remove/ReviseBtn';
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
 
 export const ContentContainer = styled.div`
   ${tw`flex gap-8 px-6 w-full h-fit`}
@@ -14,7 +14,7 @@ export const ButtonHeader = tw.div`
 
 const RoundedBox = tw.div`
   rounded-xl
-  w-full 
+  w-full
   break-words
   overflow-hidden
   text-white
