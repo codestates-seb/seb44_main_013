@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import circleNoImg from '@/assets/circleNoImg.png';
 
 export interface Member {
   name: string;
@@ -8,8 +7,6 @@ export interface Member {
 }
 
 const getId = Number(window.localStorage.getItem('memberId'));
-
-// const tempPic = userImg === '' ? circleNoImg : userImg;
 
 const initialState: Member = {
   name: '',

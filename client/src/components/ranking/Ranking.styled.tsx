@@ -6,8 +6,17 @@ export const RankingContainer = tw.div`
     mx-7
     pb-3
     flex
-    flex-row
+    flex-col
     overflow-x-scroll
+`;
+
+export const RankingItemContainer = tw.div`
+  my-3
+  mx-7
+  pb-3
+  flex
+  flex-row
+  overflow-x-scroll
 `;
 
 export const ItemImg = styled.img`
@@ -64,4 +73,12 @@ export const TitlePart = tw.div`
 export const ContentPart = tw.div`
     text-sm
     pl-3
+`;
+
+export const BigTitle = tw.div`
+    text-2xl
+    font-semibold
+    text-BASIC_WHITE
+    ml-10
+    mt-10
 `;

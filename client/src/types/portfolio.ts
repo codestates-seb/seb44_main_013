@@ -6,7 +6,7 @@ export interface Member {
   name: string;
   email?: string;
   member_role?: string;
-  imageUrl: string;
+  imageUrl: string | JSX.Element;
 }
 
 export interface Tag {

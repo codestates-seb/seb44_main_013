@@ -1,5 +1,7 @@
-/* 2023-07-05 게시물 댓글(낱개) 컴포넌트 UI - 김다함 */
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useMemo, useRef, useState } from 'react';
+import netaxios from '@/utils/axiosIntercept';
+import { AxiosError } from 'axios';
+import useUserImageHandler from '@/hooks/useUserImageHandler';
 
 import { CommentProps } from '@/types';
 
@@ -9,8 +11,6 @@ import RemoveBtn from '@/commons/atoms/buttons/revise-remove/RemoveBtn';
 import { FlexWrapper } from '@/commons/styles/Containers.styled';
 import { BodyText, SmallText } from '@/commons/atoms/text/Typography';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
-import netaxios from '@/utils/axiosIntercept';
-import { AxiosError } from 'axios';
 import AlertModal from '@/components/modal/AlertModal';
 
 interface CommuCommentProps {
@@ -18,9 +18,8 @@ interface CommuCommentProps {
   content: string;
   date: string;
   comments: CommentProps;
-  setDeleteId: any;
-  setAmendComment?: any;
-  boardId: any;
+  setAmendComment: Dispatch<SetStateAction<CommentProps[]>>;
+  boardId: string | undefined;
 }
 
 interface ErrorResponse {
@@ -30,25 +29,25 @@ interface ErrorResponse {
   Action: string;
 }
 
-export default function Comment({ username, content, date, comments, setDeleteId, boardId }: CommuCommentProps) {
-  //setAmendComment
-
+export default function Comment({ username, content, date, comments, boardId }: CommuCommentProps) {
   const inputEl = useRef(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [basicContent, setBasicContent] = useState(content);
-  const [closeModal, setCloseModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [userProfileImage, _] = useState<string | JSX.Element>(useUserImageHandler(comments.memberInfo.memberId));
 
-  const newDate = new Date(date);
-  const convertDate = newDate
-    .toLocaleDateString('en-US', {
+  const newDate = useMemo(() => {
+    const dateObject = new Date(date);
+    return dateObject.toLocaleDateString('en-US', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
-    })
-    .replace(/\//g, '.');
+    }).replace(/\//g, '.');
+  }, [date]);
 
+  
   //댓글 수정
-  const axiosPatch = async () => {
+  const amendCommentAxios = async () => {
     const data = {
       boardId: boardId,
       content: basicContent,
@@ -65,16 +64,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
         if (axiosError.response) {
           const errCode = axiosError.response.data.errorCode;
           if (errCode === 403) {
-            return closeModal ? (
-              <AlertModal
-                onCancel={closeAlert}
-                onConfirm={closeAlert}
-                type={'etc'}
-                title={'잠깐'}
-                content={'작성자가 아니시군요!'}
-                clicked={'닫기'}
-              />
-            ) : null;
+            setShowModal(true);
           } else {
             console.log(axiosError.response.data);
           }
@@ -87,16 +77,8 @@ export default function Comment({ username, content, date, comments, setDeleteId
     setIsEditMode(!isEditMode);
   };
 
-  useEffect(() => {
-    //
-  }, [isEditMode]);
 
   const handleAmend = (value: string) => {
-    // if(value.length === 0 ) {
-    //   // alert('빈 객체입니다. ');
-    //   // setBasicContent(comment.content)
-    //   //유효성 검사  + 글자 수 제한
-    // }
     setBasicContent(value);
   };
 
@@ -104,13 +86,10 @@ export default function Comment({ username, content, date, comments, setDeleteId
     if (isEditMode) {
       handleChangeEditMode();
       setIsEditMode(false);
-      axiosPatch();
+      amendCommentAxios();
     }
   };
 
-  const closeAlert = () => {
-    setCloseModal(!closeModal);
-  };
 
   //댓글 삭제 기능 구현
   const handleDelete = () => {
@@ -119,23 +98,14 @@ export default function Comment({ username, content, date, comments, setDeleteId
         .delete(`/comments/${comments.id}`)
         .then(() => {
           console.log('DELETE 성공');
-          setDeleteId(comments.id);
+          // setDeleteId(comments.id);
         })
         .catch((err: AxiosError<ErrorResponse>) => {
           const axiosError = err as AxiosError<ErrorResponse>;
           if (axiosError.response) {
             const errCode = axiosError.response.data.errorCode;
             if (errCode === 403) {
-              return closeModal ? (
-                <AlertModal
-                  onCancel={closeAlert}
-                  onConfirm={closeAlert}
-                  type={'etc'}
-                  title={'잠깐'}
-                  content={'작성자가 아니시군요!'}
-                  clicked={'닫기'}
-                />
-              ) : null;
+              setShowModal(true);
             } else {
               console.log(axiosError.response.data);
             }
@@ -151,7 +121,7 @@ export default function Comment({ username, content, date, comments, setDeleteId
       <CommentWrapper>
         <MemberProfile
           type="comment"
-          member={{ id: comments.id, name: username, imageUrl: 'https://picsum.photos/200/300' }}
+          member={{ id: comments.id, name: username, imageUrl: userProfileImage}}
         />
         <FlexWrapper>
           <ReviseBtn onClick={handleChangeEditMode} color={'black'} />
@@ -172,8 +142,18 @@ export default function Comment({ username, content, date, comments, setDeleteId
             <span>{basicContent}</span>
           )}
         </BodyText>
-        <SmallText color="gray">{convertDate}</SmallText>
+        <SmallText color="gray">{newDate}</SmallText>
       </CommentWrapper>
+      {showModal && (
+        <AlertModal
+        onCancel={() => setShowModal(false)}
+          onConfirm={() => setShowModal(false)}
+          type={'etc'}
+          title={'잠깐'}
+          content={'작성자가 아니시군요!'}
+          clicked={'닫기'}
+        />
+      )}
     </CommentContainer>
   );
 }
