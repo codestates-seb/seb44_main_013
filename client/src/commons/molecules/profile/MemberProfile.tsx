@@ -50,7 +50,7 @@ const renderProfile = (type: string, name: string, id: number, date: string) => 
   return ComponentFactory[type];
 }
 
-const MemberProfile = ({ type, member, date }: MemberProfile) => {
+export default function MemberProfile ({ type, member, date }: MemberProfile) {
   const itemPic = member.imageUrl === null ? circleNoImg : member.imageUrl;
 
   return (
