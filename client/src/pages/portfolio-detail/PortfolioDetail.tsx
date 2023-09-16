@@ -21,7 +21,7 @@ import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/tex
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
 import LikeButton from '@/commons/atoms/buttons/bookmark_like/LikeButton';
 import DeleteModal from '@/components/modal/DeleteModal';
-import Bookmark from '@/commons/atoms/buttons/bookmark_like/Bookmark';
+import Bookmark from '@/commons/atoms/buttons/bookmark_like/BookmarkButton';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
