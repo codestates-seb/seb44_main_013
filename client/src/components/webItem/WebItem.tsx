@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Bookmark from '../../commons/atoms/buttons/Bookmark';
+import Bookmark from '../../commons/atoms/buttons/bookmark_like/Bookmark';
 // import circleNoImg from '@/assets/circleNoImg.png';
 import { Author, BookmarkWrapper, Title, TitleOverlay, WebItemContainer, WebItemImg } from './WebItem.styled';
 

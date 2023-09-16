@@ -14,7 +14,7 @@ export const ButtonHeader = tw.div`
 
 const RoundedBox = tw.div`
   rounded-xl
-  w-full 
+  w-full
   break-words
   overflow-hidden
   text-white

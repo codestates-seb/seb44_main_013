@@ -19,9 +19,9 @@ import {
 import { Center, FlexBetweenWrapper, FlexColumnContainer, FlexEndWrapper, FlexWrapper, } from '@/commons/styles/Containers.styled';
 import { BodyText, HeadingText, LabelText, SmallText } from '@/commons/atoms/text/Typography';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
-import LikeButton from '@/commons/atoms/buttons/LikeButton';
+import LikeButton from '@/commons/atoms/buttons/bookmark_like/LikeButton';
 import DeleteModal from '@/components/modal/DeleteModal';
-import Bookmark from '@/commons/atoms/buttons/Bookmark';
+import Bookmark from '@/commons/atoms/buttons/bookmark_like/Bookmark';
 import PortfolioTag from '@/commons/molecules/tag/Tag';
 import { BsArrowReturnLeft } from 'react-icons/bs';
 
