@@ -2,7 +2,7 @@
 import { ImageContainer, FeatherImage } from '@/commons/atoms/image/Image.styled';
 
 interface ImageProps {
-  src: string;
+  src: string | undefined;
   url?: string;
   shape?: string;
   size: number;

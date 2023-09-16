@@ -14,7 +14,7 @@ import CommentBox from '@/components/comment/CommentBox';
 import DeleteModal from '@/components/modal/DeleteModal';
 import { CmDContainer, CommentContainer, MainContainer, PageWrapper } from './CommunityDetail.styled';
 
-export default function CommunityDetail( handleClick: () => void ) {
+export default function CommunityDetail( ) {
   const [memberData, setMemberData] = useState<CommuProps | null>(null);
   const [clickDeletePost, setClickDeletePost] = useState(false);
   const [userProfileImage, __] = useState<string | JSX.Element>(useUserImageHandler(memberData?.memberId || 0));
@@ -72,7 +72,7 @@ export default function CommunityDetail( handleClick: () => void ) {
           imageUrl: userProfileImage,
         }}
       />
-      <MainContainer onClick={handleClick}>
+      <MainContainer>
         <CmDContainer>
           <DetailContents
             data={memberData}
