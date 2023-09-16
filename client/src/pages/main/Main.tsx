@@ -5,7 +5,7 @@ import { category } from '@/store/categorySlice';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
-import { WebItemsContainer, NodataImage } from './Main.styled';
+import { WebItemsContainer, NodataImage, BigTitle  } from './Main.styled';
 import AppItem from '@/components/appItem/AppItem';
 import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
@@ -13,6 +13,7 @@ import ThreeDItem from '@/components/threeDitem/ThreeDITem';
 import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
 import axios from 'axios';
+import Ranking from '@/components/ranking/Ranking';
 
 const categoryMap = {
   web: 'web',
@@ -77,21 +78,45 @@ export default function Main() {
   };
 
   const [searchs, setSearchs] = useState([] as any);
+  const [ timeUpdate, setTime ] = useState(`...시`);
 
   useEffect(() => {
+    console.log('페이지 업데이트')
     if (searchTerm === '') {
       setSearchs(renderItems());
     }
 
     setSearchs(items);
-  }, [items]);
+  }, [items, timeUpdate]);
 
   console.log(searchs);
+
+  const handleTime = () => {
+    const currentTime = new Date(new Date().getTime());
+    const hour = currentTime.getHours();
+    const divisionPeriod = hour > 12 ? '오후' : '오전';
+    const changedHour = hour > 12 ? hour - 12 : hour;
+    const updatedTimeSet = `${divisionPeriod} ${changedHour}시`;
+    setTime(updatedTimeSet)
+
+    console.log('업데이트 : ', updatedTimeSet);
+  }
+
+  const intervalTime = () => {
+    //6시간 마다 업데이트 
+    setInterval(handleTime, 21600000);
+    console.log('intervalTime 함수가 실행됩니다.')
+  }
+
+  intervalTime();
+
 
   return (
     <>
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
+      <BigTitle>{`현재 인기 작품 순위 [ ${timeUpdate} 기준]`}</BigTitle>
+      <Ranking items={searchs} key={searchs.id} />
       <WebItemsContainer>
         {searchs.length > 0 ? (
           searchs.map((searchedItem: any, index: any) => {

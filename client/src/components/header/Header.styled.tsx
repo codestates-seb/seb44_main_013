@@ -7,6 +7,8 @@ export const HeaderContainer = tw.div`
   justify-between
   px-10
   py-3
+  sticky
+  top-0
 `;
 
 export const ItemContainer = tw.div`

@@ -17,6 +17,8 @@ import {
   ListsWrapper,
   StyledWritingBtn,
   NodataImage,
+  FilterText,
+  FilterWrapper,
 } from './CommunityMain.styled';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -74,7 +76,6 @@ export default function CommunityMain() {
     setIsEightUnder(false);
   }, [division]);
 
-  // console.log(target);
   const [delay, setDelay] = useState(false);
   useEffect(() => {
     if(isEightUnder){
@@ -143,6 +144,17 @@ export default function CommunityMain() {
   // 그 함수안에는 바뀐 페이지로 get 요청 보내오고
   // 받은 데이터 개수가 8개 미만이면 IsEightUnder 상태 바꾸기
   // 다음 페이지 요청이 와도 isEightUnder 가 true 면 바로 리턴 때리기
+
+  //최신순, 조회순 필터링
+  const handleFilter = (filter: string) => {
+    if (filter === 'recent') {
+      setSearchs(data);
+    }
+    if (filter === 'view') {
+      const filteredDatas = [...data].sort((acc: CommuProps, cur: CommuProps) => cur.view - acc.view);
+      setSearchs(filteredDatas);
+    }
+  };
   
   return (
     <CommunityWrapper>
@@ -162,6 +174,12 @@ export default function CommunityMain() {
               </StyledWritingBtn>
             </Link>
           ) : ''}
+
+        <FilterWrapper>
+          <FilterText onClick={() => handleFilter('recent')}>최신순</FilterText>
+          <FilterText onClick={() => handleFilter('view')}>조회순</FilterText>
+        </FilterWrapper>
+
           {searchs.length > 0 ? (
             <>
               <ListsWrapper>
@@ -169,8 +187,7 @@ export default function CommunityMain() {
                   return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
                 })}
               </ListsWrapper>
-              {/* {target.current && (
-                )} */}
+
                 <div ref={target}></div>
                 {isLoading ? <img src={LoadingGif} alt='loading' /> : ''};
             </>
