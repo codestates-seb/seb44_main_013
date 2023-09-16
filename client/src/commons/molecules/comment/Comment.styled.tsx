@@ -1,5 +1,4 @@
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 import { FlexBetweenWrapper, FlexColumnContainer } from '@/commons/styles/Containers.styled';
 

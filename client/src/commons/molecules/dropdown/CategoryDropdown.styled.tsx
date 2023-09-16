@@ -1,5 +1,4 @@
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 export const DropDownItemContainer = styled.div`
     ${tw`w-28 flex flex-col z-10 absolute`}

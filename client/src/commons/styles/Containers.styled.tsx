@@ -1,6 +1,5 @@
 /* 2023.07.03 모든 컴포넌트, 페이지에 전체적으로 쓰이는 정렬 컨테이너 - 김다함 */
-import { styled } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 const Container = styled.div<{ gap?: number, bg?: string }>`
   ${tw`flex flex-wrap`}
@@ -9,7 +8,7 @@ const Container = styled.div<{ gap?: number, bg?: string }>`
 `
 
 export const Center = tw.div`
-  flex justify-center items-center 
+  flex justify-center items-center
 `;
 
 export const FlexContainer = tw(Container)`

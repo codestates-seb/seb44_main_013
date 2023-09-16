@@ -1,6 +1,5 @@
 import { FlexColumnContainer } from '@/commons/styles/Containers.styled';
-import { styled, css } from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled, css } from 'twin.macro';
 
 export const EditorContainer = styled(FlexColumnContainer)``
 
