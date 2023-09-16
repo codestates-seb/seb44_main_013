@@ -31,7 +31,7 @@ export async function call(api: string, method: string, data?: any) {
       const axiosError = error as AxiosError;
       switch (axiosError.status) {
         case 400:
-          console.log('유효하지 않은 요청입니다.');
+          alert('요청이 실패하였습니다.');
           break;
         case 401:
           alert('로그인 후 이용해 주세요.');
