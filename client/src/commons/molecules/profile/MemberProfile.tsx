@@ -20,20 +20,43 @@ const ImageSizes: any = {
   blackboard: 65,
 };
 
+interface IComponentFactory {
+  [key: string]: JSX.Element;
+}
+
+const renderProfile = (type: string, name: string, id: number, date: string) => {
+  const ComponentFactory:IComponentFactory = {
+    portfolio: <Label text={name} type={type} url={`/members/${id}`} />,
+    blackboard: (
+    <ColumnWrapper>
+      <Label text={name} type={type} url={`/members/${id}`} />
+      <SmallText color='white'>{date}</SmallText>
+    </ColumnWrapper>
+    ),
+    comment: (
+      <ColumnWrapper>
+        <Label text={name} type={type} url={`/members/${id}`} />
+        <SmallText color='white'>{date}</SmallText>
+      </ColumnWrapper>
+    ),
+    board: (
+      <ColumnWrapper>
+        <Label text={name} type={type} url={`/members/${id}`} />
+        <SmallText color='white'>{date}</SmallText>
+      </ColumnWrapper>
+    )
+  }
+
+  return ComponentFactory[type];
+}
+
 const MemberProfile = ({ type, member, date }: MemberProfile) => {
   const itemPic = member.imageUrl === null ? circleNoImg : member.imageUrl;
+
   return (
     <MemberProfileWrapper gap={15}>
       <Image src={itemPic} url={`/members/${member.id}`} shape="circle" size={ImageSizes[type]} />
-      {type === 'portfolio' && <Label text={member.name} type={type} url={`/members/${member.id}`} />}
-      {type !== 'portfolio' && (
-        <ColumnWrapper>
-          <Label text={member.name} type={type} url={`/members/${member.id}`} />
-          <SmallText color={type === 'blackboard' ? 'white' : ''}>{date}</SmallText>
-        </ColumnWrapper>
-      )}
+      {renderProfile(type, member.name, member.id, date as string)}
     </MemberProfileWrapper>
   );
 };
-
-export default MemberProfile;
