@@ -7,7 +7,7 @@ export interface Toggle {
   buttonType?: 'likes' | 'bookmarks';
   portfolioId: number;
   isToggled: boolean;
-  color?: string;
+  color: string;
   count?: number;
 }
 

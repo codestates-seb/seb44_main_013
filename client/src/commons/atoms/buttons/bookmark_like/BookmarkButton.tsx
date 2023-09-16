@@ -1,8 +1,13 @@
-import useToggle, { Toggle } from '@/hooks/useToggle';
+import useToggle from '@/hooks/useToggle';
 
 import { FaBookmark } from 'react-icons/fa';
 
-export default function Bookmark({ portfolioId, isToggled }: Toggle) {
+export interface BookmarkButton {
+  portfolioId: number;
+  isToggled: boolean;
+}
+
+export default function Bookmark({ portfolioId, isToggled }: BookmarkButton) {
   const [buttonColor, onClick] = useToggle({
     portfolioId: portfolioId,
     buttonType: 'bookmarks',
