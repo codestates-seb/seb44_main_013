@@ -2,8 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import PurpleBtn from '@/commons/atoms/buttons/PurpleBtn';
 import {BackToListButton} from '@/commons/atoms/buttons/Button.styled';
 import { DetailCntContainer, EDBtnContainer } from './DetailContents.styled';
+import { CommuProps } from '@/types';
 
-export default function DetailContents({ data, handleDeleteModal, id, writerId, viewerId }: any) {
+interface DetailContentsProps {
+  data: CommuProps;
+  handleDeleteModal: () => void;
+  id: string | undefined;
+  writerId: number;
+  viewerId: number;
+}
+
+export default function DetailContents({ data, handleDeleteModal, id, writerId, viewerId }: DetailContentsProps) {
   const navigate = useNavigate();
 
   const moveToEdit = () => {

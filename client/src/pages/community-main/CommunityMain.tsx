@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+
+import { CommuProps } from '@/types';
 
 import Search from '@/components/search/Search';
-// import { call } from '@/utils/apiService';
 import CommunityItem from '@/components/communityItem/CommunityItem';
 import WritingBtn from '@/commons/atoms/buttons/writing/writingBtn';
 import datano from '@/assets/datano.png';
 import LoadingGif from '@/assets/loading.gif';
-
-import { CommuProps } from '@/types';
-
 import {
   ItemWrapper,
   SearchContainer,
@@ -20,9 +21,6 @@ import {
   FilterText,
   FilterWrapper,
 } from './CommunityMain.styled';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-// import { current, set } from 'immer/dist/internal';
 
 export default function CommunityMain() {
   const [data, setData] = useState<CommuProps[]>([]);
@@ -31,8 +29,7 @@ export default function CommunityMain() {
   const [page, setPage] = useState(1);
   const size = 8;
   
-  const state: any = useSelector((state) => state);
-  const currentLoginState = state.loginSlice.isLogin;
+  const currentLoginState = useSelector((state: RootState) => state.loginSlice.isLogin);
 
   console.log(division);
   console.log(page);
@@ -55,7 +52,7 @@ export default function CommunityMain() {
 
   // 검색 - 07.11 효정
   const [currentSearch, setCurrentSearch] = useState('');
-  const [searchs, setSearchs] = useState([] as any);
+  const [searchs, setSearchs] = useState<CommuProps[]>([]);
 
   useEffect(() => {
     setSearchs(data);
@@ -183,7 +180,7 @@ export default function CommunityMain() {
           {searchs.length > 0 ? (
             <>
               <ListsWrapper>
-                {searchs.map((communityItem: any) => {
+                {searchs.map((communityItem: CommuProps) => {
                   return <CommunityItem key={communityItem.id} communityItem={communityItem} />;
                 })}
               </ListsWrapper>

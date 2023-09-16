@@ -1,10 +1,17 @@
 import { useState } from 'react';
-import userImg from '../../../assets/userImg.jpg';
-import { ImgContainer, UserImage } from './UserImg.styled';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
+import useUserImageHandler from '@/hooks/useUserImageHandler';
+
 import HeaderDropwdown from '@/components/headerDropdown/HeaderDropdown';
+import { ImgContainer, UserImage } from './UserImg.styled';
+
 
 export default function UserImg() {
   const [ isDropdown, setIsDropdown ] = useState(false);
+  const memberInfo = useSelector((state: RootState) => state.memberSlice);
+  const [userProfileImage, _] = useState<string | undefined>(useUserImageHandler(memberInfo.memberId));
+  
 
   const handleMenu = () => {
     setIsDropdown(!isDropdown)
@@ -13,7 +20,7 @@ export default function UserImg() {
   return (
     <>
       <ImgContainer onClick={handleMenu}>
-        <UserImage src={userImg} alt="userimage"></UserImage>
+        <UserImage src={userProfileImage} alt="userimage"></UserImage>
         {
           isDropdown ? 
             (

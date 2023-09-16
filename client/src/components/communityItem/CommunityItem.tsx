@@ -1,24 +1,27 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useUserImageHandler from '@/hooks/useUserImageHandler';
 
 import { CommuProps } from '@/types';
 
 import { CommunityItemContainer } from './CommunityItem.styled';
-
 import Views from '../views/Views';
 import MemberProfile from '@/commons/molecules/profile/MemberProfile';
-import circleNoImg from '@/assets/circleNoImg.png';
 
-export default function CommunityItem({ communityItem }: any) {
+
+export default function CommunityItem( props: { communityItem: CommuProps }) {
+  const communityItem = props.communityItem;
   const navigate = useNavigate();
   const eachData = communityItem;
-  // const itemPic = eachData.imagUrl === null ? circleNoImg : eachData.imagUrl;
-  // console.log(eachData);
+  const [userProfileImage, _] = useState<string | JSX.Element>(useUserImageHandler(communityItem.memberInfo.memberId));
 
   const handleLink = (e: CommuProps) => {
     navigate(`/boards/${e.id}`, { state: e });
   };
 
-  const TextTruncate = ({ text, maxLength }: any) => {
+  const TextTruncate = (props: { text: string; maxLength: number }): JSX.Element => {
+    const { text, maxLength } = props;
+    
     if (text.length <= maxLength) {
       return <p>{text}</p>;
     } else {
@@ -38,7 +41,7 @@ export default function CommunityItem({ communityItem }: any) {
         member={{
           id: eachData.memberInfo.memberId,
           name: eachData.memberInfo.name,
-          imageUrl: circleNoImg,
+          imageUrl: userProfileImage,
         }}
       />
       <h2>{eachData.title}</h2>
