@@ -1,21 +1,26 @@
-/* 2023-07-05 게시물 댓글 작성란 컴포넌트 UI - 김다함 */
 import { useEffect, useState } from 'react';
+import netaxios from '@/utils/axiosIntercept';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import useUserImageHandler from '@/hooks/useUserImageHandler';
+
 
 import SaveBtn from '../../atoms/buttons/writing/SaveBtn';
 import MemberProfile from '../profile/MemberProfile';
 import { CommentContainer, CommentWrapper, CommentInput } from './Comment.styled';
-import netaxios from '@/utils/axiosIntercept';
-// import circleNoImg from '@/assets/circleNoImg.png';
 
-export default function CommentWriteBox({ saveComment, handleComment, isInput }: any) {
+interface CommentWriteBoxProps {
+  saveComment: () => void;
+  handleComment: (value: string) => void;
+  isInput: string;
+}
+
+export default function CommentWriteBox({ saveComment, handleComment, isInput }: CommentWriteBoxProps) {
   const [userName, setUserName] = useState('');
   const [_, setUserImg] = useState('');
   const memberInfo = useSelector((state: RootState) => state.memberSlice);
-  const accessToken = window.localStorage.getItem('accessToken');
-  // const tempPic = userImg === '' ? circleNoImg : userImg;
-  console.log(memberInfo);
+  const accessToken = useSelector((state: RootState)=> state.loginSlice.accesstoken);
+  const [userProfileImage, __] = useState<string | JSX.Element>(useUserImageHandler(memberInfo.memberId));
 
   //유저 정보 GET
   useEffect(() => {
@@ -39,7 +44,7 @@ export default function CommentWriteBox({ saveComment, handleComment, isInput }:
       <CommentWrapper gap={0}>
         <MemberProfile
           type="comment"
-          member={{ id: Number(memberInfo), name: userName, imageUrl: 'https://picsum.photos/233' }}
+          member={{ id: Number(memberInfo), name: userName, imageUrl: userProfileImage }}
         />
         <SaveBtn onClick={saveComment} />
       </CommentWrapper>
@@ -51,6 +56,3 @@ export default function CommentWriteBox({ saveComment, handleComment, isInput }:
     </CommentContainer>
   );
 }
-
-//댓글 등록
-//수정
