@@ -33,6 +33,8 @@
 
 <br/>
 
+### 회고록록
+
 |  Name  | Github                                           | 1차 회고록 |
 | :----: | :-----------------------------------------------: | :----:  |
 | 김샛별 | [@sstar914](https://github.com/sstar914)           | 작성 예정 ❤️‍🩹 |
@@ -77,12 +79,6 @@
 ## ERD
 
 ![ERD_portfolly](https://github.com/codestates-seb/seb44_main_013/assets/110151638/6d9d7944-d3a7-423d-ab06-c55b31eda8d3)
-
-
-## API 명세서
-
-보류띠 >\_0
-작성 예정 ❤️‍🩹
 
 ## 유저 플로우
 <img width="4160" alt="UserFlow" src="https://github.com/codestates-seb/seb44_main_013/assets/124596022/5c7f899d-968a-45f7-9305-7ae00bf7cf28">
