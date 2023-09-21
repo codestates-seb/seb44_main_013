@@ -4,10 +4,10 @@ import { useCallback, useState } from 'react';
 import { call } from '@/utils/apiService';
 
 export interface Toggle {
-  buttonType: 'likes' | 'bookmarks';
+  buttonType?: 'likes' | 'bookmarks';
   portfolioId: number;
   isToggled: boolean;
-  color: string;
+  color?: string;
   count?: number;
 }
 
@@ -15,7 +15,7 @@ export default function useToggle({ portfolioId, buttonType, isToggled: isOn, co
   const [count, setCount] = useState<number>(cnt);
   const [isToggled, setIsToggled] = useState<boolean>(isOn);
   const [url] = useState<string>(`/${buttonType}/${portfolioId}`);
-  const [buttonColor, setButtonColor] = useState<string>(isOn ? `${color}` : 'gray');
+  const [buttonColor, setButtonColor] = useState<string | undefined>(isOn ? `${color}` : 'gray');
 
   const changeToggleClicks = () => call(url, 'GET');
 
