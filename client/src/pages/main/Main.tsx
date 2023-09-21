@@ -13,6 +13,7 @@ import Search from '@/components/search/Search';
 import datano from '@/assets/datano.png';
 import axios from 'axios';
 import Ranking from '@/components/ranking/Ranking';
+import { Portfolio } from '@/types';
 
 const categoryMap = {
   web: 'web',
@@ -22,17 +23,10 @@ const categoryMap = {
   photo: 'photo',
 };
 
-type Item = {
-  data: {
-    title: string;
-    membername: string;
-  };
-};
-
 export default function Main() {
   const selectedCategory = useSelector(category);
-  const [items, setItems] = useState<Item[]>([]);
-  const [filteredItems, setFilteredItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Portfolio[]>([]);
+  const [filteredItems, setFilteredItems] = useState<Portfolio[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const categoryParam = categoryMap[selectedCategory] || 'web';

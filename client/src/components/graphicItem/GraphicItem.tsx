@@ -1,15 +1,14 @@
+import { Link } from 'react-router-dom';
+import { Portfolio } from '@/types';
+
 import { Author, GraphicItemContainer, Title, TitleOverlay } from './GraphicItem.styled';
-// import graphicimg from '../../assets/graphinImg.png';
 import Bookmark from '@/commons/atoms/buttons/bookmark_like/BookmarkButton';
 import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import circleNoImg from '@/assets/circleNoImg.png';
-import { Link } from 'react-router-dom';
 
-type GraphicProps = {
-  item: any;
-};
 
-export default function GraphicItem({ item }: GraphicProps) {
+export default function GraphicItem( props: {item: Portfolio }) {
+  const item = props.item;
   const itemPic = item.firstImage === null ? circleNoImg : item.firstImage;
 
   return (
