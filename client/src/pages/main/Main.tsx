@@ -72,7 +72,26 @@ export default function Main() {
   };
 
   const [searchs, setSearchs] = useState([] as any);
-  const [ timeUpdate, setTime ] = useState(`...시`);
+  const [ timeUpdate, setTime ] = useState(() => {
+    const currentTime = new Date(new Date().getTime());
+    const hour = currentTime.getHours();
+    //const minute = currentTime.getMinutes();
+    const divisionPeriod = hour > 12 ? '오후' : '오전';
+    const changedHour = hour > 12 ? hour - 12 : hour;
+    const updatedTimeSet = `${divisionPeriod} ${changedHour}시`;
+    return updatedTimeSet;
+  });
+
+  const handleTime = () => {
+    const currentTime = new Date(new Date().getTime());
+    const hour = currentTime.getHours();
+    //const minute = currentTime.getMinutes();
+    const divisionPeriod = hour > 12 ? '오후' : '오전';
+    const changedHour = hour > 12 ? hour - 12 : hour;
+    const updatedTimeSet = `${divisionPeriod} ${changedHour}시`;
+    setTime(updatedTimeSet);
+  };
+
 
   useEffect(() => {
     console.log('페이지 업데이트')
@@ -81,7 +100,7 @@ export default function Main() {
     }
 
     setSearchs(items);
-  }, [items, timeUpdate]);
+  }, [items]);
 
   //console.log(searchs);
 
@@ -89,7 +108,7 @@ export default function Main() {
     <>
       <Search setSearchValue={setSearchTerm} currentSearch={searchTerm} data={items} setSearchs={setSearchs} />
       <CategoryNavBar />
-      <Ranking items={searchs} key={searchs.id} setTime={setTime} timeUpdate={timeUpdate}/>
+      <Ranking items={searchs} key={searchs.id} timeUpdate={timeUpdate} handleTime={handleTime}/>
       <WebItemsContainer>
         {searchs.length > 0 ? (
           searchs.map((searchedItem: any, index: any) => {
