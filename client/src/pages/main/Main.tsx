@@ -4,7 +4,7 @@ import { category } from '@/store/categorySlice';
 
 import CategoryNavBar from '@/components/navbar/CategoryNavBar';
 import WebItem from '@/components/webItem/WebItem';
-import { WebItemsContainer, NodataImage, BigTitle } from './Main.styled';
+import { WebItemsContainer, NodataImage } from './Main.styled';
 import AppItem from '@/components/appItem/AppItem';
 import GraphicItem from '@/components/graphicItem/GraphicItem';
 import PhotoItem from '@/components/photoItem/PhotoItem';
