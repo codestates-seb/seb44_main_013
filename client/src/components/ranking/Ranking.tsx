@@ -3,32 +3,29 @@ import { Link } from 'react-router-dom';
 import { Portfolio } from '@/types';
 import { ContentPart, ItemImg, RankingContainer, RankingItem, TitleContainer, TitlePart, BigTitle, RankingItemContainer } from './Ranking.styled';
 import noPic from '@/assets/noPic.png';
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
 
 interface RankingItemsTypes {
   items: Portfolio[];
-  setTime: Dispatch<SetStateAction<string>>;
   timeUpdate: string;
+  handleTime: () => void;
 }
  
-export default function Ranking({items, setTime, timeUpdate}: RankingItemsTypes) {
-  console.log(items);
+export default function Ranking({items, timeUpdate, handleTime}: RankingItemsTypes) {
+  //console.log(items);
   const rankingData = items.sort((a: Portfolio, b: Portfolio) => b.view - a.view);
 
-  const handleTime = () => {
-    setInterval(() => {
-      const currentTime = new Date(new Date().getTime());
-      const hour = currentTime.getHours();
-      const divisionPeriod = hour > 12 ? '오후' : '오전';
-      const changedHour = hour > 12 ? hour - 12 : hour;
-      const updatedTimeSet = `${divisionPeriod} ${changedHour}시`;
-      setTime(updatedTimeSet)
+  useEffect(() => {
+    const handleInterval = setInterval(() => {
+      handleTime();
+      console.log('인터벌 함수 실행합니다.', timeUpdate);
     }, 21600000);
-//21600000
-    console.log('인터벌 함수 실행합니다.', timeUpdate);
-  }
 
-  handleTime();
+    return () => {
+      clearInterval(handleInterval);
+    }
+  }, [timeUpdate]);
+
 
   return (
     <RankingContainer>
