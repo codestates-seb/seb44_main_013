@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom';
+
+import { Portfolio } from '@/types';
+
 import {
   Author,
   DItemContainer,
@@ -9,11 +12,9 @@ import { BookmarkWrapper } from '../webItem/WebItem.styled';
 import Bookmark from '@/commons/atoms/buttons/bookmark_like/BookmarkButton';
 import circleNoImg from '@/assets/circleNoImg.png';
 
-type AnimationProps = {
-  item: any;
-};
 
-export default function ThreeDItem({ item }: AnimationProps) {
+export default function ThreeDItem( props: {item: Portfolio} ) {
+  const item = props.item;
   const itemPic = item.firstImage === null ? circleNoImg : item.firstImage;
 
   return (
