@@ -4,10 +4,10 @@ import { useCallback, useState } from 'react';
 import { call } from '@/utils/apiService';
 
 export interface Toggle {
-  buttonType: 'likes' | 'bookmarks';
+  buttonType?: 'likes' | 'bookmarks';
   portfolioId: number;
   isToggled: boolean;
-  color: string;
+  color?: string;
   count?: number;
 }
 
