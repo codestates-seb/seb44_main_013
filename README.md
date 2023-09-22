@@ -66,7 +66,7 @@
 | :-------: | :-------: | :-------: | :-------: |
 |  <img alt="Html" src ="https://github.com/codestates-seb/seb44_main_013/assets/110151638/3c440b88-c894-4fc8-a535-65dafeeab7b1" width="65" height="65" /> |  <img alt="Html" src ="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/1200px-Tailwind_CSS_Logo.svg.png?20211001194333" width="65" height="65" /> |  <img alt="Html" src ="https://github.com/codestates-seb/seb44_main_013/assets/110151638/47bf4067-3297-433a-881d-7d8e91e50c6c" width="65" height="65" /> |  <img alt="Html" src ="https://github.com/codestates-seb/seb44_main_013/assets/110151638/30b4e709-5854-4792-b371-6df4a02fbc20" width="65" height="65" /> | 
 
-
+<br/>
 
 ### <span style="">🔒 **Back-end** </span>
 
