@@ -118,11 +118,15 @@ export default function LoginGoogleForm({ children, type, alert }: LoginForm) {
         const memberId = response.headers.id;
         const refreshToken = response.headers.refreshtoken;
 
+        //localStorage 에 액세스 토큰 저장
         window.localStorage.setItem('memberId', memberId);
         window.localStorage.setItem('accessToken', accessToken);
         window.localStorage.setItem('refreshToken', refreshToken);
+        //store에 상태 저장
         dispatch(setCredentials({ accessToken: accessToken }));
-        //localStorage 에 액세스 토큰 저장
+        dispatch(setCredentials({ refreshToken: refreshToken}));
+        dispatch(setCredentials({ memberId: memberId }));
+        //역할 선택 페이지로 이동
         navigate('/signup/role');
 
         console.log(`토큰` + accessToken);
